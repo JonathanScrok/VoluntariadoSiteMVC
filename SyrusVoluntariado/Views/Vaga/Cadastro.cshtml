@@ -1,0 +1,51 @@
+﻿@{
+    //Layout = "_Layout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "Cadastrar Vaga";
+}
+
+@if (TempData["Mensagem"] != null) {
+    <div class="alert alert-success mt-md-2" role="alert">
+        @TempData["Mensagem"]
+    </div>
+}
+
+<form method="post">
+    <div class="row g-2 mt-md-2">
+        <div class="col-md">
+            <div class="form-floating">
+                <input type="text" class="form-control" id="titulo">
+                <label for="titulo">Titulo:</label>
+                @Html.ValidationMessage("titulo")
+            </div>
+        </div>
+        <div class="col-md">
+            <div class="form-floating">
+                <input type="text" class="form-control" id="categoria">
+                <label for="categoria">Categoria:</label>
+                @Html.ValidationMessage("categoria")
+            </div>
+        </div>
+    </div>
+    <div class="row g-2 mt-md-2">
+        <div class="col-md">
+            <div class="form-floating">
+                <textarea type="text" class="form-control" id="descricao"></textarea>
+                <label for="descricao">Descrição:</label>
+                @Html.ValidationMessage("mensagem")
+            </div>
+        </div>
+    </div>
+    <div class="row g-2 mt-md-2">
+        <div class="col-md">
+            <div class="form-floating">
+                <input type="text" class="form-control" id="local">
+                <label for="local">Local:</label>
+                @Html.ValidationMessage("local")
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success mt-md-2" style="align-items:center">Cadastrar</button>
+    </div>
+</form>

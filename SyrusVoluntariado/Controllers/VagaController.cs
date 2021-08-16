@@ -9,16 +9,21 @@ using System.Threading.Tasks;
 
 namespace SyrusVoluntariado.Controllers {
     [Login]
-    public class CadastrovagaController : Controller {
+    public class VagaController : Controller {
 
         private DatabaseContext _db;
 
-        public CadastrovagaController(DatabaseContext db) {
+        public VagaController(DatabaseContext db) {
             _db = db;
         }
 
         [HttpGet]
         public IActionResult Index() {
+            //ViewBag.Nivel = niveis;
+            return View(new Vaga());
+        }
+
+        public IActionResult Cadastro() {
             //ViewBag.Nivel = niveis;
             return View(new Vaga());
         }
