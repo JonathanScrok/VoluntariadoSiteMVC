@@ -1,0 +1,46 @@
+﻿@{
+    //Layout = "_Layout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "Login";
+}
+
+@if (TempData["MensagemErro"] != null) {
+    <div class="alert alert-danger mt-md-2" role="alert">
+        @TempData["MensagemErro"]
+    </div>
+}
+
+<link href="/css/login.css" rel="stylesheet" type="text/css" />
+
+
+<form method="post" action="/login">
+
+    <div class="row g-2 mt-md-2">
+        <section class="login-pai">
+            <div class="login__filho">
+                <div class="col-md">
+                    <div class="form-floating">
+                        <input type="text" name="email" class="form-control" id="email" placeholder="Exemplo@exemplo.com">
+                        <label for="email">Email:</label>
+                        @Html.ValidationMessage("email")
+                    </div>
+                    <div class="form-floating mt-md-4">
+                        <input type="text" name="senha" class="form-control" id="senha" placeholder="Senha">
+                        <label for="senha">Senha:</label>
+                        @Html.ValidationMessage("senha")
+                    </div>
+                    <div class="botaologar">
+                        <button type="submit" class="btn btn-success mt-md-2">Logar</button>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </div>
+
+
+</form>
+
+@ViewBag.Mesagem
