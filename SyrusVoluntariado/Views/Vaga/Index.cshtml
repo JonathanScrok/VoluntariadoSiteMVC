@@ -1,0 +1,51 @@
+﻿@model X.PagedList.IPagedList<SyrusVoluntariado.Models.Vaga>
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+
+
+@{
+    //Layout = "_Layout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "Palavras - Listagem";
+}
+
+@if (TempData["Mensagem"] != null) {
+    <div class="alert alert-success" role="alert">
+        @TempData["Mensagem"]
+    </div>
+}
+
+<link href="/css/PagedList.css" rel="stylesheet" type="text/css" />
+
+<a href="/palavra/cadastrar" class="btn btn-primary">Cadastrar</a>
+<br />
+<span> <b>Total de Palavras:</b> @Model.TotalItemCount</span>
+<table class="table">
+    <thead class="table-dark">
+        <tr>
+            <th scope="col">Titulo</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Categoria</th>
+            <th scope="col">Local</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var vaga in Model) {
+            <tr>
+                <th scope="row">@vaga.Titulo</th>
+                <td>@vaga.Descricao</td>
+                <td>@vaga.Categoria</td>
+                <td>
+                    <a href="/palavra/atualizar/@vaga.Id" class="btn">Editar</a>
+                    <a href="/palavra/excluir/@vaga.Id" class="btn">Excluir</a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
+

@@ -23,9 +23,27 @@ namespace SyrusVoluntariado.Controllers {
             return View(new Vaga());
         }
 
-        public IActionResult Cadastro() {
+        public IActionResult Cadastrar() {
             //ViewBag.Nivel = niveis;
             return View(new Vaga());
         }
+
+        [HttpPost]
+        public IActionResult Cadastrar([FromForm] Vaga vaga) {
+
+            //ViewBag.Nivel = niveis;
+
+            if (ModelState.IsValid) {
+                _db.Vagas.Add(vaga);
+                _db.SaveChanges();
+
+                TempData["Mensagem"] = "A vaga foi cadastrada com sucesso!";
+
+                return RedirectToAction("Index");
+            }
+
+            return View(vaga);
+        }
+
     }
 }

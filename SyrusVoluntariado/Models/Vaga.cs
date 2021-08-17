@@ -21,7 +21,7 @@ namespace SyrusVoluntariado.Models {
 
         [Required(ErrorMessage = "O Campo é Obrigatório!")]
         [MaxLength(250, ErrorMessage = "O Campo deve possuir no máximo 250 caracteres!")]
-        public string Descrição { get; set; }
+        public string Descricao { get; set; }
 
         [Required(ErrorMessage = "O Campo é Obrigatório!")]
         [MaxLength(10, ErrorMessage = "O Campo deve possuir no máximo 10 caracteres!")]
