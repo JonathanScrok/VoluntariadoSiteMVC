@@ -18,14 +18,14 @@
     <div class="row g-2 mt-md-2">
         <div class="col-md">
             <div class="form-floating">
-                <input type="text" class="form-control" id="titulo" value="@Model.Titulo">
+                <input type="text" name="titulo" value="@Model.Titulo" class="form-control" id="titulo" placeholder="Titulo da vaga">
                 <label for="titulo">Titulo:</label>
                 @Html.ValidationMessage("titulo")
             </div>
         </div>
         <div class="col-md">
             <div class="form-floating">
-                <input type="text" class="form-control" id="categoria" value="@Model.Categoria">
+                <input type="text" name="categoria" value="@Model.Categoria" class="form-control" id="categoria" placeholder="Categoria">
                 <label for="categoria">Categoria:</label>
                 @Html.ValidationMessage("categoria")
             </div>
@@ -34,20 +34,22 @@
     <div class="row g-2 mt-md-2">
         <div class="col-md">
             <div class="form-floating">
-                <textarea type="text" class="form-control" id="descricao" value="@Model.Descricao"></textarea>
+                <textarea type="text" name="descricao" value="@Model.Descricao" class="form-control" id="descricao" placeholder="Descrição da vaga"></textarea>
                 <label for="descricao">Descrição:</label>
                 @Html.ValidationMessage("descricao")
             </div>
         </div>
     </div>
+
     <div class="row g-2 mt-md-2">
         <div class="col-md">
             <div class="form-floating">
-                <input type="text" class="form-control" id="local" value="@Model.Local">
+                <input type="text" name="local" value="@Model.Local" class="form-control" id="local" placeholder="Digite o local">
                 <label for="local">Local:</label>
                 @Html.ValidationMessage("local")
             </div>
         </div>
+
         <button type="submit" class="btn btn-success mt-md-2" style="align-items:center">Cadastrar</button>
     </div>
 </form>
