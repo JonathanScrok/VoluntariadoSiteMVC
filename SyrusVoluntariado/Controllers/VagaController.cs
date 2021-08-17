@@ -51,5 +51,13 @@ namespace SyrusVoluntariado.Controllers {
             return View(vaga);
         }
 
+        [HttpGet]
+        public IActionResult Visualizar(int Id) {
+
+            Vaga vaga = _db.Vagas.Find(Id);
+
+            return View(vaga);
+        }
+
     }
 }
