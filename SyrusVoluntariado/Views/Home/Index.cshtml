@@ -1,9 +1,56 @@
-﻿@{
+﻿@model X.PagedList.IPagedList<SyrusVoluntariado.Models.Vaga>
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+
+
+@{
     //Layout = "_Layout";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @{
-    ViewBag.Title = "Syrus Voluntariado";
+    ViewBag.Title = "Palavras - Listagem";
 }
 
-<h1>Bem Vindo ao Syrus Voluntariado</h1>
+@if (TempData["Mensagem"] != null) {
+    <div class="alert alert-success" role="alert">
+        @TempData["Mensagem"]
+    </div>
+}
+
+<link href="/css/PagedList.css" rel="stylesheet" type="text/css" />
+
+@*<a href="/vaga/cadastrar" class="btn btn-primary">Cadastrar</a>*@
+<br />
+
+@*@foreach (var vaga in Model) {
+
+    <div class="card" style="width: 18rem; margin: 5px;">
+        <div class="card-body">
+            <h5 class="card-title">@vaga.Titulo</h5>
+            <p class="card-text">@vaga.Descricao</p>
+            <p class="card-text">Local: @vaga.Local</p>
+            <p class="card-text">Data da Vaga: @vaga.DataVaga.ToString("dd/MM/yyyy")</p>
+            <a href="#" class="btn btn-primary">Visualizar</a>
+        </div>
+    </div>
+
+}*@
+
+<div class="row">
+    @foreach (var vaga in Model) {
+        <div class="col-sm-6 mt-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">@vaga.Titulo</h5>
+                    <p class="card-text">@vaga.Descricao</p>
+                    <p class="card-text">@vaga.DataVaga.ToString("dd/MM/yyyy")</p>
+                    <a href="#" class="btn " style="background-color: #62c0a3;"><b>Visualizar</b></a>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
+

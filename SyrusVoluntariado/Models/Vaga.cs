@@ -26,5 +26,6 @@ namespace SyrusVoluntariado.Models {
         [Required(ErrorMessage = "O Campo é Obrigatório!")]
         [MaxLength(10, ErrorMessage = "O Campo deve possuir no máximo 10 caracteres!")]
         public string Local { get; set; }
+        public DateTime DataVaga { get; set; }
     }
 }

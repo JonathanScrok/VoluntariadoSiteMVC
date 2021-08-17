@@ -39,6 +39,7 @@ namespace SyrusVoluntariado.Controllers {
             //ViewBag.Nivel = niveis;
 
             if (ModelState.IsValid) {
+                vaga.DataVaga = DateTime.Now;
                 _db.Vagas.Add(vaga);
                 _db.SaveChanges();
 
