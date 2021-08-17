@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using SyrusVoluntariado.Database;
 using System;
 using System.Collections.Generic;
@@ -19,8 +20,13 @@ namespace SyrusVoluntariado.Controllers {
 
             var palavras = _db.Vagas.ToList();
             var resultadoPaginado = palavras.ToPagedList(pageNumber, 5);
-
             return View(resultadoPaginado);
+        }
+
+        [HttpPost]
+        public IActionResult Cookies() {
+            HttpContext.Session.SetString("Cookies", "true");
+            return Ok();
         }
     }
 }

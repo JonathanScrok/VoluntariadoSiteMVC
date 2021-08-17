@@ -35,6 +35,7 @@ namespace SyrusVoluntariado.Controllers {
                     * Ler Session
                     * string login = HttpContext.Session.GetString("Login");
                     */
+
                     HttpContext.Session.SetString("Login", "true");
 
                     return RedirectToAction("Index", "Home");
