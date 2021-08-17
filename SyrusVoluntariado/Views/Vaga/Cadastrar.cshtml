@@ -14,17 +14,18 @@
 }
 
 <form method="post">
+    <input type="hidden" name="id" value="@Model.Id" />
     <div class="row g-2 mt-md-2">
         <div class="col-md">
             <div class="form-floating">
-                <input type="text" class="form-control" id="titulo">
+                <input type="text" class="form-control" id="titulo" value="@Model.Titulo">
                 <label for="titulo">Titulo:</label>
                 @Html.ValidationMessage("titulo")
             </div>
         </div>
         <div class="col-md">
             <div class="form-floating">
-                <input type="text" class="form-control" id="categoria">
+                <input type="text" class="form-control" id="categoria" value="@Model.Categoria">
                 <label for="categoria">Categoria:</label>
                 @Html.ValidationMessage("categoria")
             </div>
@@ -33,16 +34,16 @@
     <div class="row g-2 mt-md-2">
         <div class="col-md">
             <div class="form-floating">
-                <textarea type="text" class="form-control" id="descricao"></textarea>
+                <textarea type="text" class="form-control" id="descricao" value="@Model.Descricao"></textarea>
                 <label for="descricao">Descrição:</label>
-                @Html.ValidationMessage("mensagem")
+                @Html.ValidationMessage("descricao")
             </div>
         </div>
     </div>
     <div class="row g-2 mt-md-2">
         <div class="col-md">
             <div class="form-floating">
-                <input type="text" class="form-control" id="local">
+                <input type="text" class="form-control" id="local" value="@Model.Local">
                 <label for="local">Local:</label>
                 @Html.ValidationMessage("local")
             </div>

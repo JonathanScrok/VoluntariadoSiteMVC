@@ -19,7 +19,7 @@
 
 <link href="/css/PagedList.css" rel="stylesheet" type="text/css" />
 
-<a href="/palavra/cadastrar" class="btn btn-primary">Cadastrar</a>
+<a href="/vaga/cadastrar" class="btn btn-primary">Cadastrar</a>
 <br />
 <span> <b>Total de Palavras:</b> @Model.TotalItemCount</span>
 <table class="table">
@@ -29,6 +29,7 @@
             <th scope="col">Descrição</th>
             <th scope="col">Categoria</th>
             <th scope="col">Local</th>
+            <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
@@ -37,9 +38,9 @@
                 <th scope="row">@vaga.Titulo</th>
                 <td>@vaga.Descricao</td>
                 <td>@vaga.Categoria</td>
+                <td>@vaga.Local</td>
                 <td>
-                    <a href="/palavra/atualizar/@vaga.Id" class="btn">Editar</a>
-                    <a href="/palavra/excluir/@vaga.Id" class="btn">Excluir</a>
+                    <a href="/vaga/visualizar/@vaga.Id" class="btn">Visualizar</a>
                 </td>
             </tr>
         }

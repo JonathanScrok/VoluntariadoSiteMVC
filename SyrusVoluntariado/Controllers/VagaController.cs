@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace SyrusVoluntariado.Controllers {
     [Login]
@@ -17,12 +18,16 @@ namespace SyrusVoluntariado.Controllers {
             _db = db;
         }
 
-        [HttpGet]
-        public IActionResult Index() {
-            //ViewBag.Nivel = niveis;
-            return View(new Vaga());
+        public IActionResult Index(int? page) {
+            var pageNumber = page ?? 1;
+
+            var palavras = _db.Vagas.ToList();
+            var resultadoPaginado = palavras.ToPagedList(pageNumber, 5);
+
+            return View(resultadoPaginado);
         }
 
+        [HttpGet]
         public IActionResult Cadastrar() {
             //ViewBag.Nivel = niveis;
             return View(new Vaga());
