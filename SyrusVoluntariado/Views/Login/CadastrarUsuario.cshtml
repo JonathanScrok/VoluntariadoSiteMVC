@@ -15,28 +15,38 @@
 <link href="/css/login.css" rel="stylesheet" type="text/css" />
 <link href="/css/FundoPaginas.css" rel="stylesheet" type="text/css" />
 
-<form method="post" action="/login">
+<form method="post" action="/login/cadastrarusuario">
 
     <div class="row g-2 mt-md-2">
         <section class="login-pai">
             <div class="login__filho">
                 <div class="col-md">
                     <div class="form-floating">
+                        <input type="text" name="nome" class="form-control" id="nome" placeholder="Nome">
+                        <label for="nome">Nome Completo:</label>
+                        @Html.ValidationMessage("nome")
+                    </div>
+                    <div class="form-floating mt-md-3">
+                        <input type="text" name="sexo" class="form-control" id="sexo" placeholder="sexo">
+                        <label for="sexo">Sexo:</label>
+                        @Html.ValidationMessage("sexo")
+                    </div>
+                    <div class="form-floating mt-md-3">
                         <input type="text" name="email" class="form-control" id="email" placeholder="Exemplo@exemplo.com">
                         <label for="email">Email:</label>
                         @Html.ValidationMessage("email")
                     </div>
-                    <div class="form-floating mt-md-4">
+                    <div class="form-floating mt-md-3">
                         <input type="text" name="senha" class="form-control" id="senha" placeholder="Senha">
                         <label for="senha">Senha:</label>
                         @Html.ValidationMessage("senha")
                     </div>
                     <div class="botaologar">
-                        <button type="submit" class="btn btn-success mt-md-2">Entrar</button>
+                        <button type="submit" class="btn btn-success mt-md-2">Cadastrar</button>
                     </div>
                 </div>
                 <div class="botaocadastrar">
-                    <a class="btn btn-success mt-md-3" href="/login/cadastrarusuario">Cadastrar-se</a>
+                    <a class="btn btn-success mt-md-3" href="/login">Entrar</a>
                 </div>
             </div>
 
