@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using SyrusVoluntariado.Database;
 using SyrusVoluntariado.Library.Filters;
 using SyrusVoluntariado.Models;
@@ -37,9 +38,15 @@ namespace SyrusVoluntariado.Controllers {
         public IActionResult Cadastrar([FromForm] Vaga vaga) {
 
             //ViewBag.Nivel = niveis;
+            var ValorUsuarioLogado = HttpContext.Session.GetString("IdUsuarioLogado");
+
+            var IdUsuarioLogado = int.Parse(ValorUsuarioLogado);
 
             if (ModelState.IsValid) {
+
                 vaga.DataVaga = DateTime.Now;
+                vaga.IdfUsuario = IdUsuarioLogado;
+
                 _db.Vagas.Add(vaga);
                 _db.SaveChanges();
 

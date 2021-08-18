@@ -36,7 +36,10 @@ namespace SyrusVoluntariado.Controllers {
                     * string login = HttpContext.Session.GetString("Login");
                     */
 
+
                     HttpContext.Session.SetString("Login", "true");
+
+                    HttpContext.Session.SetInt32("IdUsuarioLogado", usuario.Id);
 
                     return RedirectToAction("Index", "Home");
 
@@ -72,6 +75,9 @@ namespace SyrusVoluntariado.Controllers {
                 _db.SaveChanges();
 
                 HttpContext.Session.SetString("Login", "true");
+
+                HttpContext.Session.SetString("UsuarioLogado", usuario.Id.ToString());
+
                 return RedirectToAction("Index", "Home");
             }
             return View(usuario);

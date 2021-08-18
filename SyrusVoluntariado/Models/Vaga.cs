@@ -10,6 +10,8 @@ namespace SyrusVoluntariado.Models {
 
         public int Id { get; set; }
 
+        public int IdfUsuario { get; set; }
+
         [Required(ErrorMessage = "O Campo é Obrigatório!")]
         [MaxLength(20, ErrorMessage = "O Campo deve possuir no máximo 20 caracteres!")]
         [UnicoNomePalavra]
