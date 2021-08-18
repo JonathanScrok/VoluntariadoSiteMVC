@@ -22,36 +22,33 @@ namespace SyrusVoluntariado.Controllers {
         [HttpPost]
         public ActionResult Index([FromForm] Usuario usuario) {
 
-            if (ModelState.IsValid) {
-
-                if (usuario.Email == "jonathanwscrok@gmail.com" && usuario.Senha == "1234") {
-
-                    /*
-                    * Add Session
-                    * HttpContext.Session.SetString("Login", "true");
-                    * HttpContext.Session.SetInt32("UserID", 32);
-                    * HttpContext.Session.SetString("Login", Serializar Object > String);
-                    
-                    * Ler Session
-                    * string login = HttpContext.Session.GetString("Login");
-                    */
+            var ValidaDados = _db.Usuarios.Where(a => a.Email == usuario.Email && a.Senha == usuario.Senha).FirstOrDefault();
 
 
-                    HttpContext.Session.SetString("Login", "true");
+            if (ValidaDados != null) {
 
-                    HttpContext.Session.SetInt32("IdUsuarioLogado", usuario.Id);
+                /*
+                * Add Session
+                * HttpContext.Session.SetString("Login", "true");
+                * HttpContext.Session.SetInt32("UserID", 32);
+                * HttpContext.Session.SetString("Login", Serializar Object > String);
 
-                    return RedirectToAction("Index", "Home");
+                * Ler Session
+                * string login = HttpContext.Session.GetString("Login");
+                */
 
-                } else {
+                HttpContext.Session.SetString("Login", "true");
 
-                    ViewBag.Mensagem = "Os dados informados são inválidos!";
-                    return View();
-                }
+                HttpContext.Session.SetInt32("IdUsuarioLogado", ValidaDados.Id);
+
+                return RedirectToAction("Index", "Home");
+
             } else {
 
+                ViewBag.Mensagem = "Os dados informados são inválidos!";
                 return View();
             }
+
 
         }
 
@@ -69,7 +66,7 @@ namespace SyrusVoluntariado.Controllers {
                 TempData["MensagemErro"] = "O email " + usuario.Email + " já está cadastrado!";
             }
 
-            if (ModelState.IsValid && ExistenciaEmail ==  false) {
+            if (ModelState.IsValid && ExistenciaEmail == false) {
 
                 _db.Usuarios.Add(usuario);
                 _db.SaveChanges();

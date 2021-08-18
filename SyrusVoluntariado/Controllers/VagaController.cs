@@ -38,9 +38,8 @@ namespace SyrusVoluntariado.Controllers {
         public IActionResult Cadastrar([FromForm] Vaga vaga) {
 
             //ViewBag.Nivel = niveis;
-            var ValorUsuarioLogado = HttpContext.Session.GetString("IdUsuarioLogado");
-
-            var IdUsuarioLogado = int.Parse(ValorUsuarioLogado);
+            var ValorUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado");
+            int IdUsuarioLogado = ValorUsuarioLogado.GetValueOrDefault();
 
             if (ModelState.IsValid) {
 

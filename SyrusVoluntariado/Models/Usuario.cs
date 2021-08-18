@@ -10,9 +10,10 @@ namespace SyrusVoluntariado.Models {
 
         public int Id { get; set; }
 
-        //[Required(ErrorMessage = "O Campo é Obrigatório!")]
+        [Required(ErrorMessage = "O Campo é Obrigatório!")]
         public string Nome { get; set; }
 
+        [Required(ErrorMessage = "O Campo é Obrigatório!")]
         public string Sexo { get; set; }
 
         [Required(ErrorMessage = "O Campo é Obrigatório!")]
