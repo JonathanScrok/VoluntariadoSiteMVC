@@ -52,6 +52,19 @@ namespace SyrusVoluntariado.Controllers {
 
         }
 
+        [HttpGet]
+        public IActionResult CadastrarUsuario() {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CadastrarUsuario([FromForm] Usuario usuario) {
+
+            //Implementar cadastro de usuário ao Banco
+            return View();
+        }
+
+
         public ActionResult Logout() {
             HttpContext.Session.Clear();
 
