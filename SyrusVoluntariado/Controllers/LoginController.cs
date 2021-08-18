@@ -45,7 +45,7 @@ namespace SyrusVoluntariado.Controllers {
 
             } else {
 
-                ViewBag.Mensagem = "Os dados informados são inválidos!";
+                TempData["MensagemErro"] = "Email ou senha estão incorretos!";
                 return View();
             }
 

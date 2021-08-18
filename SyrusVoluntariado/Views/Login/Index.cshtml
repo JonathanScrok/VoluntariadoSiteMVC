@@ -6,11 +6,7 @@
     ViewBag.Title = "Login";
 }
 
-@if (TempData["MensagemErro"] != null) {
-    <div class="alert alert-danger mt-md-2" role="alert">
-        @TempData["MensagemErro"]
-    </div>
-}
+
 
 <link href="/css/login.css" rel="stylesheet" type="text/css" />
 <link href="/css/FundoPaginas.css" rel="stylesheet" type="text/css" />
@@ -21,6 +17,11 @@
         <section class="login-pai">
             <div class="login__filho">
                 <div class="col-md">
+                    @if (TempData["MensagemErro"] != null) {
+                        <div class="alert alert-danger alertemail" role="alert">
+                            @TempData["MensagemErro"]
+                        </div>
+                    }
                     <div class="form-floating">
                         <input type="text" name="email" class="form-control" id="email" placeholder="Exemplo@exemplo.com">
                         <label for="email">Email:</label>
