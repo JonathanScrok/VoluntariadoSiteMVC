@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SyrusVoluntariado.Database;
 using SyrusVoluntariado.Models;
 using System;
 using System.Collections.Generic;
@@ -8,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace SyrusVoluntariado.Controllers {
     public class LoginController : Controller {
+        private DatabaseContext _db;
+
+        public LoginController(DatabaseContext db) {
+            _db = db;
+        }
+
         [HttpGet]
         public IActionResult Index() {
             return View();
         }
-
-        //--------------------------------------------------------------------------------------------
-        //[HttpGet]
-        //public ActionResult Login() {
-        //    return View();
-        //}
 
         [HttpPost]
         public ActionResult Index([FromForm] Usuario usuario) {
@@ -54,14 +55,23 @@ namespace SyrusVoluntariado.Controllers {
 
         [HttpGet]
         public IActionResult CadastrarUsuario() {
-            return View();
+            return View(new Usuario());
         }
 
         [HttpPost]
-        public ActionResult CadastrarUsuario([FromForm] Usuario usuario) {
+        public IActionResult CadastrarUsuario([FromForm] Usuario usuario) {
 
             //Implementar cadastro de usuário ao Banco
-            return View();
+
+            if (ModelState.IsValid) {
+
+                _db.Usuarios.Add(usuario);
+                _db.SaveChanges();
+
+                HttpContext.Session.SetString("Login", "true");
+                return RedirectToAction("Index", "Home");
+            }
+            return View(usuario);
         }
 
 

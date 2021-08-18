@@ -19,7 +19,7 @@ namespace SyrusVoluntariado.Controllers {
             var pageNumber = page ?? 1;
 
             var palavras = _db.Vagas.ToList();
-            var resultadoPaginado = palavras.ToPagedList(pageNumber, 5);
+            var resultadoPaginado = palavras.ToPagedList(pageNumber, 6);
             return View(resultadoPaginado);
         }
 
