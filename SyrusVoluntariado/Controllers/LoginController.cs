@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
 namespace SyrusVoluntariado.Controllers {
     public class LoginController : Controller {
         private DatabaseContext _db;
@@ -61,9 +60,13 @@ namespace SyrusVoluntariado.Controllers {
         [HttpPost]
         public IActionResult CadastrarUsuario([FromForm] Usuario usuario) {
 
-            //Implementar cadastro de usuário ao Banco
+            var ExistenciaEmail = ExisteEmail(usuario);
 
-            if (ModelState.IsValid) {
+            if (ExistenciaEmail == true) {
+                TempData["MensagemErro"] = "O email " + usuario.Email + " já está cadastrado!";
+            }
+
+            if (ModelState.IsValid && ExistenciaEmail ==  false) {
 
                 _db.Usuarios.Add(usuario);
                 _db.SaveChanges();
@@ -74,6 +77,16 @@ namespace SyrusVoluntariado.Controllers {
             return View(usuario);
         }
 
+        public bool ExisteEmail(Usuario usuario) {
+
+            var palavraBanco = _db.Usuarios.Where(a => a.Email == usuario.Email && a.Id != usuario.Id).FirstOrDefault();
+
+            if (palavraBanco == null) {
+                return false;
+            } else {
+                return true;
+            }
+        }
 
         public ActionResult Logout() {
             HttpContext.Session.Clear();

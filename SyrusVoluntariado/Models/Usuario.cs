@@ -17,7 +17,6 @@ namespace SyrusVoluntariado.Models {
 
         [Required(ErrorMessage = "O Campo é Obrigatório!")]
         [EmailAddress(ErrorMessage = "O Email é inválido!")]
-        [UnicoCadastro]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "O Campo é Obrigatório!")]

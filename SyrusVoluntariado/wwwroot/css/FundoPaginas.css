@@ -38,3 +38,12 @@
     background-color: #62c0a3;
     border-color: #62c0a3;
 }
+
+.alertemail {
+    position: relative;
+    padding: 2px 12px;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+}
+
