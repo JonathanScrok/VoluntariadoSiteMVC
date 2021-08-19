@@ -9,23 +9,32 @@
 }
 
 <link href="/css/FundoPaginas.css" rel="stylesheet" type="text/css" />
+<div class="perfil-tudo">
+    <div class="perfil-infos">
+        <table class="table table-borderless" id="fontePerfil">
+            <tbody>
+                <tr>
+                    <th scope="row">Nome</th>
+                    <td>@Model.Nome</td>
+                </tr>
+                <tr>
+                    <th scope="row">Email</th>
+                    <td>@Model.Email</td>
+                </tr>
+                <tr>
+                    <th scope="row">Sexo</th>
+                    <td>@Model.Sexo</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
-<div class="perfil-infos">
-    <table class="table table-borderless" id="fontePerfil">
-        <tbody>
-            <tr>
-                <th scope="row">Nome</th>
-                <td>@Model.Nome</td>
-            </tr>
-            <tr>
-                <th scope="row">Email</th>
-                <td>@Model.Email</td>
-            </tr>
-            <tr>
-                <th scope="row">Sexo</th>
-                <td>@Model.Sexo</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="botoes-perfil">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <a class="btn btn-secondary btn-lg" href="/perfil/minhasvagas">Minhas vagas</a>
+        </div>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end ms-2">
+            <a class="btn btn-secondary btn-lg" href="">Vagas Candidatadas</a>
+        </div>
+    </div>
 </div>
-
