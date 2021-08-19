@@ -47,3 +47,29 @@
     border-radius: .25rem;
 }
 
+.perfil-infos {
+    margin: 10px;
+    background-color: dimgrey;
+    border: 5px double #62c0a3;
+}
+
+#fontePerfil {
+    color: wheat;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 18px;
+}
+
+.botoes-entrar {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: nowrap;
+}
+#cadastroLogin {
+    background-color: #4fb961;
+    border-color: #4fb961;
+}
+
+#ativobotao {
+    background-color: #1f4f28;
+    border-color: #1f4f28;
+}

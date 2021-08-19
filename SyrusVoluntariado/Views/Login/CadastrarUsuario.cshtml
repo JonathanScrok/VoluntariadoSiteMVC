@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @{
-    ViewBag.Title = "Login";
+    ViewBag.Title = "Cadastrar-se";
 }
 
 
@@ -14,10 +14,16 @@
 
 <form method="post" action="/login/cadastrarusuario">
 
-    <div class="row g-2 mt-md-2">
+    <div class="row g-2 mt-md-1">
         <section class="login-pai">
             <div class="login__filho">
                 <div class="col-md">
+                    <div class="botoes-entrar">
+                        <div class="btn-group mb-md-3">
+                            <a href="" aria-current="page" class="btn btn-primary active" id="ativobotao">Cadastrar-se</a>
+                            <a href="/login" class="btn btn-primary" id="cadastroLogin">Entrar</a>
+                        </div>
+                    </div>
                     <input type="hidden" name="id" value="@Model.Id" />
                     @if (TempData["MensagemErro"] != null) {
                         <div class="alert alert-danger alertemail" role="alert">
@@ -47,9 +53,6 @@
                     <div class="botaologar">
                         <button type="submit" class="btn btn-success mt-md-2">Cadastrar</button>
                     </div>
-                </div>
-                <div class="botaocadastrar">
-                    <a class="btn btn-success mt-md-3" href="/login">Entrar</a>
                 </div>
             </div>
 

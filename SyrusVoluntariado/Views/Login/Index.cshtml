@@ -3,10 +3,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @{
-    ViewBag.Title = "Login";
+    ViewBag.Title = "Entrar";
 }
-
-
 
 <link href="/css/login.css" rel="stylesheet" type="text/css" />
 <link href="/css/FundoPaginas.css" rel="stylesheet" type="text/css" />
@@ -17,6 +15,12 @@
         <section class="login-pai">
             <div class="login__filho">
                 <div class="col-md">
+                    <div class="botoes-entrar">
+                        <div class="btn-group mb-md-3">
+                            <a href="" aria-current="page" class="btn btn-primary active" id="ativobotao">Entrar</a>
+                            <a href="/login/cadastrarusuario" class="btn btn-primary" id="cadastroLogin">Cadastrar-se</a>
+                        </div>
+                    </div>
                     @if (TempData["MensagemErro"] != null) {
                         <div class="alert alert-danger alertemail" role="alert">
                             @TempData["MensagemErro"]
@@ -35,9 +39,6 @@
                     <div class="botaologar">
                         <button type="submit" class="btn btn-success mt-md-2">Entrar</button>
                     </div>
-                </div>
-                <div class="botaocadastrar">
-                    <a class="btn btn-success mt-md-3" href="/login/cadastrarusuario">Cadastrar-se</a>
                 </div>
             </div>
 

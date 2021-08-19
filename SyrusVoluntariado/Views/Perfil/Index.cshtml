@@ -1,1 +1,31 @@
-﻿
+﻿@model SyrusVoluntariado.Models.Usuario
+
+@{
+    //Layout = "_Layout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "Meu Perfil";
+}
+
+<link href="/css/FundoPaginas.css" rel="stylesheet" type="text/css" />
+
+<div class="perfil-infos">
+    <table class="table table-borderless" id="fontePerfil">
+        <tbody>
+            <tr>
+                <th scope="row">Nome</th>
+                <td>@Model.Nome</td>
+            </tr>
+            <tr>
+                <th scope="row">Email</th>
+                <td>@Model.Email</td>
+            </tr>
+            <tr>
+                <th scope="row">Sexo</th>
+                <td>@Model.Sexo</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
