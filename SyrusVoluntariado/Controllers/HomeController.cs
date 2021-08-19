@@ -18,8 +18,8 @@ namespace SyrusVoluntariado.Controllers {
         public IActionResult Index(int? page) {
             var pageNumber = page ?? 1;
 
-            var palavras = _db.Vagas.ToList();
-            var resultadoPaginado = palavras.ToPagedList(pageNumber, 6);
+            var vagas = _db.Vagas.ToList();
+            var resultadoPaginado = vagas.ToPagedList(pageNumber, 6);
             return View(resultadoPaginado);
         }
 

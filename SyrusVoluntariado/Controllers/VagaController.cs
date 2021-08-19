@@ -22,8 +22,9 @@ namespace SyrusVoluntariado.Controllers {
         public IActionResult Index(int? page) {
             var pageNumber = page ?? 1;
 
-            var palavras = _db.Vagas.ToList();
-            var resultadoPaginado = palavras.ToPagedList(pageNumber, 10);
+            var vagas = _db.Vagas.ToList();
+
+            var resultadoPaginado = vagas.ToPagedList(pageNumber, 10);
 
             return View(resultadoPaginado);
         }
@@ -64,6 +65,5 @@ namespace SyrusVoluntariado.Controllers {
 
             return View(vaga);
         }
-
     }
 }

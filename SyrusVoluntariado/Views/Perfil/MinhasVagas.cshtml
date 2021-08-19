@@ -1,6 +1,4 @@
-﻿@model X.PagedList.IPagedList<SyrusVoluntariado.Models.Vaga>
-@using X.PagedList.Mvc.Core;
-@using X.PagedList;
+﻿@model List<SyrusVoluntariado.Models.Vaga>
 
 
 @{
@@ -8,7 +6,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @{
-    ViewBag.Title = "Syrus Voluntariado";
+    ViewBag.Title = "Palavras - Listagem";
 }
 
 <link href="/css/PagedList.css" rel="stylesheet" type="text/css" />
@@ -31,5 +29,5 @@
 
 </div>
 <br />
-@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
+
 
