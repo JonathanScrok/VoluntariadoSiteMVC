@@ -1,6 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Http;
 @{ 
     string Login = Context.Session.GetString("Login");
+    string NomeUsuario = Context.Session.GetString("UsuarioLogado");
 }
 
 <html>
@@ -28,8 +29,8 @@
                             <a class="nav-link" href="/vaga">Lista de Eventos</a>
                         </li>
                         @*<li class="nav-item">
-                                <a class="nav-link" href="/contato">Quem somos</a>
-                            </li>*@
+                    <a class="nav-link" href="/contato">Quem somos</a>
+                </li>*@
                     </ul>
                 </div>
                 <!--TODO - Apresentar este menu apenas se o usuário tiver logado-->
@@ -43,6 +44,9 @@
                         <a class="btn btn-dark me-md-2" href="/login">Entrar</a>
                     </div>
                 } else {
+                    <div class="nav-item">
+                        <a class="nav-link">@NomeUsuario</a>
+                    </div>
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                         <a class="btn btn-dark me-md-2" href="/Login/logout">Sair</a>
                     </div>
