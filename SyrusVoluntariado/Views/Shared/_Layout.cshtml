@@ -9,6 +9,7 @@
 <head>
     <title>@ViewBag.Title</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
 
@@ -24,29 +25,29 @@
                     <ul class="navbar-nav">
 
                         <li class="nav-item">
-                            <a class="nav-link " aria-current="page" href="/vaga/cadastrar">Criar Vaga</a>
+                            <a class="btn btn-outline-success w3-btn w3-round-large" href="/vaga/cadastrar">Criar Vaga</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/vaga">Lista de Eventos</a>
+                            <a class="btn btn-outline-success w3-btn w3-round-large" href="/vaga">Lista de Eventos</a>
                         </li>
                         @*<li class="nav-item">
-                    <a class="nav-link" href="/contato">Quem somos</a>
-                </li>*@
+                            <a class="nav-link" href="/contato">Quem somos</a>
+                        </li>*@
                     </ul>
                 </div>
-                <!--TODO - Apresentar este menu apenas se o usuário tiver logado-->
                 @if (Login != null) {
                     <div class="nav-item">
-                        <a class="btn" href="/perfil">Meu Perfil</a>
+                        <a class="btn btn-outline-warning w3-btn w3-round-large" href="/perfil">Meu Perfil</a>
                     </div>
                 }
+
                 @if (Login == null) {
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                         <a class="btn btn-dark me-md-2" href="/login">Entrar</a>
                     </div>
                 } else {
                     <div class="nav-item">
-                        <a class="nav-link">@NomeUsuario</a>
+                        <button type="button" class="btn ms-2" id="Nome-UsuarioHeader" disabled>@NomeUsuario</button>
                     </div>
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                         <a class="btn btn-dark me-md-2" href="/Login/logout">Sair</a>
