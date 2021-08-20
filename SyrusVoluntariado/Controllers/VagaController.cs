@@ -31,7 +31,8 @@ namespace SyrusVoluntariado.Controllers {
 
         [HttpGet]
         public IActionResult Cadastrar() {
-            //ViewBag.Nivel = niveis;
+            ViewBag.CadastrarAtualizar = "Cadastrar";
+
             return View(new Vaga());
         }
 
@@ -61,7 +62,18 @@ namespace SyrusVoluntariado.Controllers {
         [HttpGet]
         public IActionResult Visualizar(int Id) {
 
+            var IdfUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault();
             Vaga vaga = _db.Vagas.Find(Id);
+            VagaCandidatura vagaCandidatura = _db.VagaCandidaturas.Find(Id);
+
+            var CandidatosBanco = _db.VagaCandidaturas.Where(a => a.Idf_Usuario_Candidatado == IdfUsuarioLogado && a.Idf_Vaga == Id).FirstOrDefault();
+
+            if (CandidatosBanco != null) {
+                ViewBag.JaVoluntariado = true;
+            }
+            if (vaga.Idf_Usuario_Adm == IdfUsuarioLogado) {
+                ViewBag.ADMVaga = true;
+            }
 
             return View(vaga);
         }
@@ -76,6 +88,7 @@ namespace SyrusVoluntariado.Controllers {
             Vaga vaga = _db.Vagas.Find(Id);
 
             if (IdfUsuarioLogado == vaga.Idf_Usuario_Adm) {
+                ViewBag.CadastrarAtualizar = "Salvar";
                 return View("Cadastrar", vaga);
             }
 
@@ -122,12 +135,14 @@ namespace SyrusVoluntariado.Controllers {
 
             Vaga vaga = _db.Vagas.Find(Id);
 
-            VagaCandidatura VagaCandidatada = new VagaCandidatura();
-            VagaCandidatada.Idf_Vaga = Id;
-            VagaCandidatada.Idf_Usuario_Candidatado = IdfUsuarioLogado;
+            if (vaga.Idf_Usuario_Adm != IdfUsuarioLogado) {
+                VagaCandidatura VagaCandidatada = new VagaCandidatura();
+                VagaCandidatada.Idf_Vaga = Id;
+                VagaCandidatada.Idf_Usuario_Candidatado = IdfUsuarioLogado;
 
-            _db.VagaCandidaturas.Add(VagaCandidatada);
-            _db.SaveChanges();
+                _db.VagaCandidaturas.Add(VagaCandidatada);
+                _db.SaveChanges();
+            }
 
             return RedirectToAction("Visualizar", "Vaga", vaga);
         }

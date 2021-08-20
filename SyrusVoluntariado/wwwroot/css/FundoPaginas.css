@@ -35,7 +35,6 @@
 }
 
 .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
-   
     background-color: #62c0a3;
     border-color: #62c0a3;
 }
@@ -71,6 +70,7 @@
     justify-content: space-around;
     flex-wrap: nowrap;
 }
+
 #cadastroLogin {
     background-color: #4fb961;
     border-color: #4fb961;
@@ -83,8 +83,8 @@
 
 #Nome-UsuarioHeader {
     margin-right: 10px;
-    color:antiquewhite;
-    background-color:black;
+    color: antiquewhite;
+    background-color: black;
     border-width: 4px;
     border-color: aqua;
 }
@@ -96,5 +96,23 @@
 }
 
 .accordion-item {
-    border: 0px solid rgba(0,0,0,0); 
+    border: 0px solid rgba(0,0,0,0);
+}
+
+.AdmVisualizando {
+    display: flex;
+    /* float: right; */
+    flex-direction: row;
+    justify-content: center;
+}
+
+#Adm-Mensagem {
+    max-width: 500px;
+    display: flex;
+    justify-content: center;
+}
+
+#Adm__Mensagem {
+    display: flex;
+    justify-content: center;
 }

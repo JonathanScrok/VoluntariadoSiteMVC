@@ -17,9 +17,9 @@ namespace SyrusVoluntariado.Library.Validation {
             // - Verificar se o nome existe
             // - Verificar se o Id é o mesmo do registro no banco.
 
-            var palavraBanco =_db.Vagas.Where(a => a.Titulo == vaga.Titulo && a.Id != vaga.Id).FirstOrDefault();
+            var TituloVaga =_db.Vagas.Where(a => a.Titulo == vaga.Titulo && a.Id != vaga.Id).FirstOrDefault();
 
-            if (palavraBanco == null) {
+            if (TituloVaga == null) {
                 return ValidationResult.Success;
             } else {
                 return new ValidationResult("O evento com titulo '"+ vaga.Titulo+"' já está cadastrada!");

@@ -17,9 +17,9 @@ namespace SyrusVoluntariado.Library.Validation {
             // - Verificar se o nome existe
             // - Verificar se o Id é o mesmo do registro no banco.
 
-            var palavraBanco = _db.Usuarios.Where(a => a.Email == usuario.Email && a.Id != usuario.Id).FirstOrDefault();
+            var UsuariosBanco = _db.Usuarios.Where(a => a.Email == usuario.Email && a.Id != usuario.Id).FirstOrDefault();
 
-            if (palavraBanco == null) {
+            if (UsuariosBanco == null) {
                 return ValidationResult.Success;
             } else {
                 return new ValidationResult("O email " + usuario.Email + " já está cadastrado!");

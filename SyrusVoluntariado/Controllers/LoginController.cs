@@ -84,9 +84,9 @@ namespace SyrusVoluntariado.Controllers {
 
         public bool ExisteEmail(Usuario usuario) {
 
-            var palavraBanco = _db.Usuarios.Where(a => a.Email == usuario.Email && a.Id != usuario.Id).FirstOrDefault();
+            var UsuariosCadastrados = _db.Usuarios.Where(a => a.Email == usuario.Email && a.Id != usuario.Id).FirstOrDefault();
 
-            if (palavraBanco == null) {
+            if (UsuariosCadastrados == null) {
                 return false;
             } else {
                 return true;

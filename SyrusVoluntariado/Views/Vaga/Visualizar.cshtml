@@ -62,9 +62,25 @@
                     </div>
                 </div>
             </div>
-            <div class="botao-voluntariar">
-                <a class="btn btn-success" href="/vaga/voluntariar/@Model.Id">Voluntariar-me</a>
-            </div>
+            @if (ViewBag.ADMVaga == true) {
+                <div id="Adm__Mensagem">
+                    <div class="alert alert-danger mt-md-2" id="Adm-Mensagem" role="alert">
+                        Você é administrador desta vaga!
+                    </div>
+                </div>
+                <div class="AdmVisualizando mt-md-2">
+                    <a class="btn btn-info" href="/vaga/editar/@Model.Id">Editar</a>
+                    <a class="btn btn-danger ms-2" onclick="ConfirmacaoExcluirVaga();">Excluir</a>
+                </div>
+            } else if (ViewBag.JaVoluntariado == true) {
+                <div class="botao-voluntariar">
+                    <button class="btn btn-success" disabled>Voluntariar-me</button>
+                </div>
+            } else {
+                <div class="botao-voluntariar">
+                    <a class="btn btn-success" href="/vaga/voluntariar/@Model.Id">Voluntariar-me</a>
+                </div>
+            }
         </div>
     </div>
 </section>
