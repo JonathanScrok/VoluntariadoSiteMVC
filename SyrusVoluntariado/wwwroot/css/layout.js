@@ -1,13 +1,24 @@
 ﻿
-//$(document).ready(function () {
-//    $(".exampleModal").click(function () {
-//        $("#exampleModal").modal();
-//    });
-//});
 
-var descendentes = document.querySelectorAll("#cookies-click").click();
+$(document).ready(function () {
+    var aceitacaoCookies = sessionStorage.getItem("Cookies");
+    console.log(aceitacaoCookies);
+    if (aceitacaoCookies == null) {
+        $('#exampleModal').modal('show');
+    }
+    
+});
 
-if (window.location.pathname == "/") {
-    console.log("entrou no if");
-    myfunction();
+
+function SalvarConcordancia() {
+    sessionStorage.setItem("Cookies", "True")
+
+    $('#exampleModal').modal('hide');
 }
+
+
+/*var descendentes = document.querySelectorAll("#cookies-click").click();*/
+
+//if (window.location.pathname == "/") {
+    
+//}

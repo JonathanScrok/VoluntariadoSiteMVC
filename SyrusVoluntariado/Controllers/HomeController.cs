@@ -23,10 +23,5 @@ namespace SyrusVoluntariado.Controllers {
             return View(resultadoPaginado);
         }
 
-        [HttpPost]
-        public IActionResult Cookies() {
-            HttpContext.Session.SetString("Cookies", "true");
-            return Ok();
-        }
     }
 }

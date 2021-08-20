@@ -13,6 +13,7 @@
 
 <link href="/css/PagedList.css" rel="stylesheet" type="text/css" />
 <link href="/css/FundoPaginas.css" rel="stylesheet" type="text/css" />
+<link href="/css/layout.js" rel="stylesheet" type="text/javascript" />
 
 
 <div class="row">
@@ -31,5 +32,6 @@
 
 </div>
 <br />
+
 @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
 
