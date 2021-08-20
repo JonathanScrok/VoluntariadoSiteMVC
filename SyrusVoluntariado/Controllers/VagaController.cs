@@ -45,7 +45,7 @@ namespace SyrusVoluntariado.Controllers {
             if (ModelState.IsValid) {
 
                 vaga.DataVaga = DateTime.Now;
-                vaga.IdfUsuario = IdUsuarioLogado;
+                vaga.Idf_Usuario_Adm = IdUsuarioLogado;
 
                 _db.Vagas.Add(vaga);
                 _db.SaveChanges();
@@ -72,10 +72,10 @@ namespace SyrusVoluntariado.Controllers {
 
             //ViewBag.Nivel = niveis;
             var IdfUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault();
-            
+
             Vaga vaga = _db.Vagas.Find(Id);
 
-            if (IdfUsuarioLogado == vaga.IdfUsuario) {
+            if (IdfUsuarioLogado == vaga.Idf_Usuario_Adm) {
                 return View("Cadastrar", vaga);
             }
 
@@ -92,7 +92,7 @@ namespace SyrusVoluntariado.Controllers {
             if (ModelState.IsValid) {
 
                 vaga.DataVaga = DateTime.Now;
-                vaga.IdfUsuario = IdfUsuarioLogado;
+                vaga.Idf_Usuario_Adm = IdfUsuarioLogado;
                 _db.Vagas.Update(vaga);
                 _db.SaveChanges();
 
@@ -108,12 +108,28 @@ namespace SyrusVoluntariado.Controllers {
 
             Vaga vaga = _db.Vagas.Find(Id);
 
-            if (IdfUsuarioLogado == vaga.IdfUsuario) {
+            if (IdfUsuarioLogado == vaga.Idf_Usuario_Adm) {
                 _db.Vagas.Remove(vaga);
                 _db.SaveChanges();
             }
 
             return RedirectToAction("MinhasVagas", "Perfil");
+        }
+
+        [HttpGet]
+        public IActionResult Voluntariar(int Id) {
+            var IdfUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault();
+
+            Vaga vaga = _db.Vagas.Find(Id);
+
+            VagaCandidatura VagaCandidatada = new VagaCandidatura();
+            VagaCandidatada.Idf_Vaga = Id;
+            VagaCandidatada.Idf_Usuario_Candidatado = IdfUsuarioLogado;
+
+            _db.VagaCandidaturas.Add(VagaCandidatada);
+            _db.SaveChanges();
+
+            return RedirectToAction("Visualizar", "Vaga", vaga);
         }
     }
 }

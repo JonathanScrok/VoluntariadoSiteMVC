@@ -11,6 +11,7 @@ namespace SyrusVoluntariado.Database {
         //public DbSet<Palavra> Palavras { get; set; }
         public DbSet<Vaga> Vagas { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<VagaCandidatura> VagaCandidaturas { get; set; }
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options){
             //EF - Garantir que o banco seja criado pelo EF - Code First

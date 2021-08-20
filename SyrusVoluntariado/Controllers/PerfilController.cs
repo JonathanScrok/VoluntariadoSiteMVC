@@ -29,7 +29,7 @@ namespace SyrusVoluntariado.Controllers {
         public IActionResult MinhasVagas() {
 
             int IdfUsuario = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault();
-            var VagasUsuario = _db.Vagas.Where(a => a.IdfUsuario == IdfUsuario).ToList();
+            var VagasUsuario = _db.Vagas.Where(a => a.Idf_Usuario_Adm == IdfUsuario).ToList();
 
             return View(VagasUsuario);
         }
