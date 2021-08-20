@@ -20,6 +20,7 @@
     margin: 20px;
     border: 4px solid;
     border-image: linear-gradient( 132deg, #99d6c2 0%, #44ab89 65%) 1;
+    background: linear-gradient(90deg, rgba(30,69,56,1) 9%, rgba(68,171,137,1) 100%);
 }
 
 
@@ -33,6 +34,7 @@
     margin: 20px;
     border: 4px solid;
     border-image: linear-gradient( 132deg, #99d6c2 0%, #44ab89 65%) 1;
+    background: linear-gradient(90deg, rgba(30,69,56,1) 9%, rgba(68,171,137,1) 100%);
 }
 
 .botaologar {
