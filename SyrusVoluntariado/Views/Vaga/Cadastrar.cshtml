@@ -20,7 +20,7 @@
     <div class="row g-2 mt-md-2">
         <div class="col-md">
             <div class="form-floating">
-                <input type="text" name="titulo" value="@Model.Titulo" class="form-control" id="titulo" placeholder="Titulo da vaga">
+                <input type="text" name="titulo" value="@Model.Titulo" class="form-control" id="titulo" placeholder="Titulo do Evento">
                 <label for="titulo">Titulo:</label>
                 @Html.ValidationMessage("titulo")
             </div>
@@ -36,7 +36,7 @@
     <div class="row g-2 mt-md-2">
         <div class="col-md">
             <div class="form-floating">
-                <textarea type="text" name="descricao" value="@Model.Descricao" class="form-control" id="descricao" placeholder="Descrição da vaga"></textarea>
+                <textarea type="text" name="descricao" value="@Model.Descricao" class="form-control" id="descricao" placeholder="Descrição do evento"></textarea>
                 <label for="descricao">Descrição:</label>
                 @Html.ValidationMessage("descricao")
             </div>

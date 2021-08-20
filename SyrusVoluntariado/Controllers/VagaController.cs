@@ -50,7 +50,7 @@ namespace SyrusVoluntariado.Controllers {
                 _db.Vagas.Add(vaga);
                 _db.SaveChanges();
 
-                TempData["Mensagem"] = "A vaga foi cadastrada com sucesso!";
+                TempData["Mensagem"] = "O evento foi cadastrada com sucesso!";
 
                 return RedirectToAction("Index");
             }
@@ -79,7 +79,7 @@ namespace SyrusVoluntariado.Controllers {
                 return View("Cadastrar", vaga);
             }
 
-            TempData["MensagemErro"] = "Vaga inacessível com seu usuário";
+            TempData["MensagemErro"] = "Evento inacessível com seu usuário";
             return RedirectToAction("Index", "Vaga");
         }
 
@@ -111,8 +111,6 @@ namespace SyrusVoluntariado.Controllers {
             if (IdfUsuarioLogado == vaga.IdfUsuario) {
                 _db.Vagas.Remove(vaga);
                 _db.SaveChanges();
-
-                TempData["Mensagem"] = "A palavra foi excluida com sucesso!";
             }
 
             return RedirectToAction("MinhasVagas", "Perfil");
