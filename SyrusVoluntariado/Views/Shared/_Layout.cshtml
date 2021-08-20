@@ -72,10 +72,25 @@
                     <b>Cookies</b>: Guardamos estatísticas de visitas para melhorar sua experiência de navegação. Ao continuar, você concorda com nossa <a href="">política de privacidade</a>.
                 </div>
                 <div class="modal-footer">
-                    <a class="btn btn-secondary"  onclick="SalvarConcordancia();">Concordo</a>
+                    <a class="btn btn-secondary" onclick="SalvarConcordancia();">Concordo</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade " id="confirmar-excluir" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"><b>Excluir Vaga</b></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Deseja mesmo excluir esta vaga?
                 </div>
                 <div class="modal-footer">
-                    <a  href="/vaga">Lista de Eventos</a>
+                    <a class="btn btn-danger" href="/vaga/excluir/@ViewBag.Id">Sim</a>
+                    <a class="btn btn-secondary" onclick="FecharModal();">Cancelar</a>
                 </div>
             </div>
         </div>

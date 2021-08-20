@@ -15,6 +15,7 @@
 
 <div class="row">
     @foreach (var vaga in Model) {
+        ViewBag.Id = vaga.Id;
         <div class="col-sm-6 mt-md-3">
             <div class="card">
                 <div class="card-body">
@@ -23,8 +24,8 @@
                     <p class="card-text">@vaga.DataVaga.ToString("dd/MM/yyyy")</p>
                     <a href="/vaga/visualizar/@vaga.Id" class="btn " style="background-color: #62c0a3;"><b>Visualizar</b></a>
                     <div style="float:right;">
-                        <a href="/vaga/editar/@vaga.Id">Editar</a>
-                        <a href="/vaga/excluir/@vaga.Id">Excluir</a>
+                        <a class="btn btn-info" href="/vaga/editar/@vaga.Id">Editar</a>
+                        <a class="btn btn-danger" onclick="ConfirmacaoExcluirVaga();">Excluir</a>
                     </div>
                 </div>
             </div>

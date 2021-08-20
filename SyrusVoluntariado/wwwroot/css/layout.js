@@ -16,6 +16,13 @@ function SalvarConcordancia() {
     $('#exampleModal').modal('hide');
 }
 
+function ConfirmacaoExcluirVaga() {
+    $('#confirmar-excluir').modal('show');
+}
+
+function FecharModal() {
+    $('#confirmar-excluir').modal('hide');
+}
 
 /*var descendentes = document.querySelectorAll("#cookies-click").click();*/
 
