@@ -11,12 +11,20 @@
     ViewBag.Title = "Vagas - Listagem";
 }
 
-@if (TempData["Mensagem"] != null) {
-    <div class="alert alert-success" role="alert">
-        @TempData["Mensagem"]
-    </div>
-}
-
+<div class="mt-md-3">
+    @if (TempData["Mensagem"] != null) {
+        <div class="alert alert-success" role="alert">
+            @TempData["Mensagem"]
+        </div>
+    }
+</div>
+<div class="mt-md-3">
+    @if (TempData["MensagemErro"] != null) {
+        <div class="alert alert-danger alertemail" role="alert">
+            @TempData["MensagemErro"]
+        </div>
+    }
+</div>
 <link href="/css/PagedList.css" rel="stylesheet" type="text/css" />
 <link href="/css/FundoPaginas.css" rel="stylesheet" type="text/css" />
 

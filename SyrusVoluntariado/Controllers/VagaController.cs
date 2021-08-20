@@ -65,5 +65,57 @@ namespace SyrusVoluntariado.Controllers {
 
             return View(vaga);
         }
+
+
+        [HttpGet]
+        public IActionResult Editar(int Id) {
+
+            //ViewBag.Nivel = niveis;
+            var IdfUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault();
+            
+            Vaga vaga = _db.Vagas.Find(Id);
+
+            if (IdfUsuarioLogado == vaga.IdfUsuario) {
+                return View("Cadastrar", vaga);
+            }
+
+            TempData["MensagemErro"] = "Vaga inacessível com seu usuário";
+            return RedirectToAction("Index", "Vaga");
+        }
+
+        [HttpPost]
+        public IActionResult Editar([FromForm] Vaga vaga) {
+
+            //ViewBag.Nivel = niveis;
+            var IdfUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault();
+
+            if (ModelState.IsValid) {
+
+                vaga.DataVaga = DateTime.Now;
+                vaga.IdfUsuario = IdfUsuarioLogado;
+                _db.Vagas.Update(vaga);
+                _db.SaveChanges();
+
+                return RedirectToAction("MinhasVagas", "Perfil");
+            }
+            return View("Cadastrar", vaga);
+        }
+
+        [HttpGet]
+        public IActionResult Excluir(int Id) {
+
+            var IdfUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault();
+
+            Vaga vaga = _db.Vagas.Find(Id);
+
+            if (IdfUsuarioLogado == vaga.IdfUsuario) {
+                _db.Vagas.Remove(vaga);
+                _db.SaveChanges();
+
+                TempData["Mensagem"] = "A palavra foi excluida com sucesso!";
+            }
+
+            return RedirectToAction("MinhasVagas", "Perfil");
+        }
     }
 }

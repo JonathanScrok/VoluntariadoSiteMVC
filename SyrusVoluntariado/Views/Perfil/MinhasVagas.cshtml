@@ -22,6 +22,11 @@
                     <p class="card-text">@vaga.Descricao</p>
                     <p class="card-text">@vaga.DataVaga.ToString("dd/MM/yyyy")</p>
                     <a href="/vaga/visualizar/@vaga.Id" class="btn " style="background-color: #62c0a3;"><b>Visualizar</b></a>
+                    <div style="float:right;">
+                        <a href="/vaga/editar/@vaga.Id">Editar</a>
+                        <a href="/vaga/excluir/@vaga.Id" >Excluir</a>
+                    </div>
+                    
                 </div>
             </div>
         </div>
