@@ -73,6 +73,13 @@
                     <a class="btn btn-danger ms-2" onclick="ConfirmacaoExcluirVaga();">Excluir</a>
                 </div>
             } else if (ViewBag.JaVoluntariado == true) {
+                @if (TempData["MensagemErro"] != null) {
+                    <div id="Adm__Mensagem" class="mt-md-2">
+                        <div class="alert alert-danger alertemail" role="alert">
+                            @TempData["MensagemErro"]
+                        </div>
+                    </div>
+                }
                 <div class="botao-voluntariar">
                     <button class="btn btn-success" disabled>Voluntariar-me</button>
                 </div>

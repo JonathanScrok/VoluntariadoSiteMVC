@@ -134,14 +134,21 @@ namespace SyrusVoluntariado.Controllers {
             var IdfUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault();
 
             Vaga vaga = _db.Vagas.Find(Id);
+            var CandidatosBanco = _db.VagaCandidaturas.Where(a => a.Idf_Usuario_Candidatado == IdfUsuarioLogado && a.Idf_Vaga == Id).FirstOrDefault();
 
             if (vaga.Idf_Usuario_Adm != IdfUsuarioLogado) {
-                VagaCandidatura VagaCandidatada = new VagaCandidatura();
-                VagaCandidatada.Idf_Vaga = Id;
-                VagaCandidatada.Idf_Usuario_Candidatado = IdfUsuarioLogado;
+                if (CandidatosBanco == null) {
+                    VagaCandidatura VagaCandidatada = new VagaCandidatura();
+                    VagaCandidatada.Idf_Vaga = Id;
+                    VagaCandidatada.Idf_Usuario_Candidatado = IdfUsuarioLogado;
 
-                _db.VagaCandidaturas.Add(VagaCandidatada);
-                _db.SaveChanges();
+                    _db.VagaCandidaturas.Add(VagaCandidatada);
+                    _db.SaveChanges();
+                } else {
+                    // Avisar em um DataTemp que já esta cadastrado!
+                    TempData["MensagemErro"] = "Você já está cadastrado nesta vaga!";
+                    ViewBag.JaVoluntariado = true;
+                }
             }
 
             return RedirectToAction("Visualizar", "Vaga", vaga);
