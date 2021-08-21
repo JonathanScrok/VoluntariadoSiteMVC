@@ -2,7 +2,6 @@
 
 $(document).ready(function () {
     var aceitacaoCookies = sessionStorage.getItem("Cookies");
-    console.log(aceitacaoCookies);
     if (aceitacaoCookies == null) {
         $('#exampleModal').modal('show');
     }

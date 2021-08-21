@@ -116,3 +116,15 @@
     display: flex;
     justify-content: center;
 }
+
+#MeuPerfilButton {
+    color: white;
+}
+
+#sairButton {
+    color: white;
+}
+
+#dropItens {
+    background-color: dimgrey;
+}

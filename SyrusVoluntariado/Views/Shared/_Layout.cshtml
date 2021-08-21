@@ -38,22 +38,19 @@
                             </li>*@
                     </ul>
                 </div>
-                @if (Login != null) {
-                    <div class="nav-item">
-                        <a class="btn btn-outline-warning w3-btn w3-round-large" href="/perfil">Meu Perfil</a>
-                    </div>
-                }
-
                 @if (Login == null) {
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                         <a class="btn btn-dark me-md-2" href="/login">Entrar</a>
                     </div>
                 } else {
-                    <div class="nav-item">
-                        <button type="button" class="btn ms-2" id="Nome-UsuarioHeader" disabled>@NomeUsuario</button>
-                    </div>
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <a class="btn btn-dark me-md-2" href="/Login/logout">Sair</a>
+                    <div class="dropdown">
+                        <a class="btn dropdown-toggle" href="#" role="button" id="Nome-UsuarioHeader" data-bs-toggle="dropdown" aria-expanded="false">
+                            @NomeUsuario
+                        </a>
+                        <ul class="dropdown-menu" id="dropItens" aria-labelledby="dropdownMenuLink">
+                            <li><a class="dropdown-item" id="MeuPerfilButton" href="/perfil">Meu Perfil</a></li>
+                            <li><a class="dropdown-item" id="sairButton" href="/Login/logout">Sair</a></li>
+                        </ul>
                     </div>
                 }
 
