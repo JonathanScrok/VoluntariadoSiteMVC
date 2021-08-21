@@ -4,7 +4,6 @@
     string Login = Context.Session.GetString("Login");
     string NomeUsuario = Context.Session.GetString("UsuarioLogado");
 }
-
 <html>
 <head>
     <title>@ViewBag.Title</title>
@@ -96,13 +95,25 @@
         <div>
             @RenderBody()
         </div>
-        <footer>
-            <div class="row"></div>
-            <div class="col-sm-12">
-                Todos os direitos reservados &copy; 2020 - @DateTime.Now.Year
-            </div>
-        </footer>
     </div>
+
+    @if (ViewBag.FooterPrecisa != false) {
+        <footer id="footer-pai">
+            <div class="b-example-divider"></div>
+            <section class="footer ">
+                <div class="py-3 my-4">
+                    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+                        <li class="nav-item"><a href="/" class="nav-link px-2 text-muted"><b>Inicio</b></a></li>
+                        <li class="nav-item"><a href="/vaga/cadastrar" class="nav-link px-2 text-muted"><b>Criar Vaga</b></a></li>
+                        <li class="nav-item"><a href="/vaga" class="nav-link px-2 text-muted"><b>Eventos</b></a></li>
+                        <li class="nav-item"><a href="" class="nav-link px-2 text-muted"><b>Sobre nós</b></a></li>
+                    </ul>
+                    <p class="text-center text-muted">Todos os direitos reservados &copy; 2021 - @DateTime.Now.Year</p>
+                </div>
+            </section>
+        </footer>
+    }
+
 </body>
 </html>
 <script src="/css/layout.js"></script>

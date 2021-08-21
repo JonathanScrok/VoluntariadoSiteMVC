@@ -16,6 +16,7 @@ namespace SyrusVoluntariado.Controllers {
 
         [HttpGet]
         public IActionResult Index() {
+            ViewBag.FooterPrecisa = false;
             return View();
         }
 
@@ -55,6 +56,7 @@ namespace SyrusVoluntariado.Controllers {
 
         [HttpGet]
         public IActionResult CadastrarUsuario() {
+            ViewBag.FooterPrecisa = false;
             return View(new Usuario());
         }
 

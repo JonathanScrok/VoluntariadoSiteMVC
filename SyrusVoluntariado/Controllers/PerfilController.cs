@@ -19,7 +19,7 @@ namespace SyrusVoluntariado.Controllers {
         }
 
         public IActionResult Index() {
-
+            ViewBag.FooterPrecisa = false;
             int IdfUsuario = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault();
             Usuario usuario = _db.Usuarios.Find(IdfUsuario);
 
@@ -27,7 +27,7 @@ namespace SyrusVoluntariado.Controllers {
         }
 
         public IActionResult MinhasVagas() {
-
+            ViewBag.FooterPrecisa = false;
             int IdfUsuario = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault();
             var VagasUsuario = _db.Vagas.Where(a => a.Idf_Usuario_Adm == IdfUsuario).ToList();
 
@@ -35,7 +35,7 @@ namespace SyrusVoluntariado.Controllers {
         }
 
         public IActionResult VagasCandidatadas() {
-
+            ViewBag.FooterPrecisa = false;
             int IdfUsuario = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault();
             var IdVagasCandidatadas = _db.VagaCandidaturas.Where(a => a.Idf_Usuario_Candidatado == IdfUsuario).ToList();
             List<Vaga> CarregaVagasCandidatadas = null;

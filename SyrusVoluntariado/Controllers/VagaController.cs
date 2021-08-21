@@ -145,7 +145,7 @@ namespace SyrusVoluntariado.Controllers {
                     _db.VagaCandidaturas.Add(VagaCandidatada);
                     _db.SaveChanges();
                 } else {
-                    TempData["MensagemErro"] = "Você já está cadastrado nesta vaga!";
+                    TempData["MensagemErro"] = "Você já está cadastrado neste evento!";
                     ViewBag.JaVoluntariado = true;
                 }
             }

@@ -5,7 +5,6 @@ $(document).ready(function () {
     if (aceitacaoCookies == null) {
         $('#exampleModal').modal('show');
     }
-    
 });
 
 function SalvarConcordancia() {
