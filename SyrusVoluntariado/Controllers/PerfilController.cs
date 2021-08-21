@@ -50,7 +50,6 @@ namespace SyrusVoluntariado.Controllers {
             foreach (var Id in Idfvagas) {
                 CarregaVagasCandidatadas = _db.Vagas.Where(a => a.Id == Id).ToList();
                 MinhasCandidaturas.Add(CarregaVagasCandidatadas[0]);
-                //Cada Vaga retornada adicionar a uma Lista
             }
             
             return View(MinhasCandidaturas);

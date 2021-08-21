@@ -8,7 +8,6 @@ $(document).ready(function () {
     
 });
 
-
 function SalvarConcordancia() {
     sessionStorage.setItem("Cookies", "True")
 
@@ -22,9 +21,3 @@ function ConfirmacaoExcluirVaga() {
 function FecharModal() {
     $('#confirmar-excluir').modal('hide');
 }
-
-/*var descendentes = document.querySelectorAll("#cookies-click").click();*/
-
-//if (window.location.pathname == "/") {
-    
-//}

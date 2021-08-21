@@ -101,7 +101,6 @@
 
 .AdmVisualizando {
     display: flex;
-    /* float: right; */
     flex-direction: row;
     justify-content: center;
 }
