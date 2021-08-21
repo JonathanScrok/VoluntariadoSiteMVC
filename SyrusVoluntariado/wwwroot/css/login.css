@@ -23,6 +23,14 @@
     background: linear-gradient(90deg, rgba(30,69,56,1) 9%, rgba(68,171,137,1) 100%);
 }
 
+.logininput {
+    margin: 9px 6px 10px 4px;
+}
+
+.emailLogin {
+    position: relative;
+    width: 99%;
+}
 
 .cadastro__filho {
     width: 100%;

@@ -29,23 +29,23 @@
                             @TempData["MensagemErro"]
                         </div>
                     }
-                    <div class="form-floating">
-                        <input type="text" name="nome" value="@Model.Nome" class="form-control" id="nome" placeholder="Nome">
+                    <div class="form-floating emailLogin">
+                        <input type="text" name="nome" value="@Model.Nome" class="form-control logininput" id="nome" placeholder="Nome">
                         <label for="nome">Nome Completo:</label>
                         @Html.ValidationMessage("nome")
                     </div>
-                    <div class="form-floating mt-md-3">
-                        <input type="text" name="sexo" value="@Model.Sexo" class="form-control" id="sexo" placeholder="sexo">
+                    <div class="form-floating emailLogin">
+                        <input type="text" name="sexo" value="@Model.Sexo" class="form-control logininput" id="sexo" placeholder="sexo">
                         <label for="sexo">Sexo:</label>
                         @Html.ValidationMessage("sexo")
                     </div>
-                    <div class="form-floating mt-md-3">
-                        <input type="text" name="email" value="@Model.Email" class="form-control" id="email" placeholder="Exemplo@exemplo.com">
+                    <div class="form-floating emailLogin">
+                        <input type="text" name="email" value="@Model.Email" class="form-control logininput" id="email" placeholder="Exemplo@exemplo.com">
                         <label for="email">Email:</label>
                         @Html.ValidationMessage("email")
                     </div>
-                    <div class="form-floating mt-md-3">
-                        <input type="password" name="senha" value="@Model.Senha" class="form-control" id="senha" placeholder="Senha">
+                    <div class="form-floating emailLogin">
+                        <input type="password" name="senha" value="@Model.Senha" class="form-control logininput" id="senha" placeholder="Senha">
                         <label for="senha">Senha:</label>
                         @Html.ValidationMessage("senha")
                     </div>
