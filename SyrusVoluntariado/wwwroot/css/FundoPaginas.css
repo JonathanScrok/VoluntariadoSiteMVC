@@ -169,3 +169,11 @@
     display: flex;
     justify-content: flex-end;
 }
+
+.Botao-MinhasVagas {
+    background-color: #cc9900;
+}
+
+.Botao-VagasCandidatadas {
+    background-color: #007e00;
+}
