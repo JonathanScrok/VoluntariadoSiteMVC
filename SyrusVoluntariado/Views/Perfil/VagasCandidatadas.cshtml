@@ -1,0 +1,57 @@
+﻿@model List<SyrusVoluntariado.Models.Vaga>
+
+@{
+    //Layout = "_Layout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "Vagas - Listagem";
+}
+
+<div class="mt-md-3">
+    @if (TempData["Mensagem"] != null) {
+        <div class="alert alert-success" role="alert">
+            @TempData["Mensagem"]
+        </div>
+    }
+</div>
+
+<div class="mt-md-3">
+    @if (TempData["MensagemErro"] != null) {
+        <div class="alert alert-danger alertemail" role="alert">
+            @TempData["MensagemErro"]
+        </div>
+    }
+</div>
+
+<link href="/css/PagedList.css" rel="stylesheet" type="text/css" />
+<link href="/css/FundoPaginas.css" rel="stylesheet" type="text/css" />
+
+<span> <b>Total de Vagas:</b> @Model.Count</span>
+<table class="table">
+    <thead class="table-dark">
+        <tr>
+            <th scope="col">Titulo</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Categoria</th>
+            <th scope="col">Local</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody class="tab-list-vagas">
+        @foreach (var vaga in Model) {
+            <tr>
+                <th scope="row">@vaga.Titulo</th>
+                <td>@vaga.Descricao</td>
+                <td>@vaga.Categoria</td>
+                <td>@vaga.Local</td>
+                <td>
+                    <a href="/vaga/visualizar/@vaga.Id" class="btn">Visualizar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+

@@ -33,5 +33,27 @@ namespace SyrusVoluntariado.Controllers {
 
             return View(VagasUsuario);
         }
+
+        public IActionResult VagasCandidatadas() {
+
+            int IdfUsuario = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault();
+            var IdVagasCandidatadas = _db.VagaCandidaturas.Where(a => a.Idf_Usuario_Candidatado == IdfUsuario).ToList();
+            List<Vaga> CarregaVagasCandidatadas = null;
+            List<Vaga> MinhasCandidaturas = new List<Vaga>();
+            List<int> Idfvagas = new List<int>();
+
+            for (int i = 0; i < IdVagasCandidatadas.Count; i++) {
+                var idf = IdVagasCandidatadas[i].Idf_Vaga;
+                Idfvagas.Add(idf);
+            }
+
+            foreach (var Id in Idfvagas) {
+                CarregaVagasCandidatadas = _db.Vagas.Where(a => a.Id == Id).ToList();
+                MinhasCandidaturas.Add(CarregaVagasCandidatadas[0]);
+                //Cada Vaga retornada adicionar a uma Lista
+            }
+            
+            return View(MinhasCandidaturas);
+        }
     }
 }

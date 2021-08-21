@@ -39,7 +39,7 @@ namespace SyrusVoluntariado.Controllers {
         [HttpPost]
         public IActionResult Cadastrar([FromForm] Vaga vaga) {
 
-            //ViewBag.Nivel = niveis;
+            ViewBag.CadastrarAtualizar = "Cadastrar";
             var ValorUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado");
             int IdUsuarioLogado = ValorUsuarioLogado.GetValueOrDefault();
 
@@ -99,7 +99,7 @@ namespace SyrusVoluntariado.Controllers {
         [HttpPost]
         public IActionResult Editar([FromForm] Vaga vaga) {
 
-            //ViewBag.Nivel = niveis;
+            ViewBag.CadastrarAtualizar = "Salvar";
             var IdfUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault();
 
             if (ModelState.IsValid) {
@@ -145,7 +145,6 @@ namespace SyrusVoluntariado.Controllers {
                     _db.VagaCandidaturas.Add(VagaCandidatada);
                     _db.SaveChanges();
                 } else {
-                    // Avisar em um DataTemp que já esta cadastrado!
                     TempData["MensagemErro"] = "Você já está cadastrado nesta vaga!";
                     ViewBag.JaVoluntariado = true;
                 }
