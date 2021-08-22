@@ -152,5 +152,35 @@ namespace SyrusVoluntariado.Controllers {
 
             return RedirectToAction("Visualizar", "Vaga", vaga);
         }
+
+        [HttpGet]
+        public IActionResult ListaVoluntarios(int Id) {
+            ViewBag.FooterPrecisa = false;
+
+            var ListaVoluntarios = _db.VagaCandidaturas.Where(a => a.Idf_Vaga == Id).ToList();
+            List<Usuario> CarregaVagasCandidatadas = null;
+
+            List<Usuario> voluntarios = new List<Usuario>();
+            List<int> IdfVoluntarios = new List<int>();
+
+            for (int i = 0; i < ListaVoluntarios.Count; i++) {
+                var idf = ListaVoluntarios[i].Idf_Usuario_Candidatado;
+                IdfVoluntarios.Add(idf);
+            }
+
+            foreach (var IdUsu in IdfVoluntarios) {
+                CarregaVagasCandidatadas = _db.Usuarios.Where(a => a.Id == IdUsu).ToList();
+                voluntarios.Add(CarregaVagasCandidatadas[0]);
+            }
+
+            var pageNumber = 1;
+
+            var resultadoPaginado = voluntarios.ToPagedList(pageNumber, 10);
+
+            return View(resultadoPaginado);
+
+        }
+
+
     }
 }

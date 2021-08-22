@@ -1,0 +1,53 @@
+﻿@model X.PagedList.IPagedList<SyrusVoluntariado.Models.Usuario>
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "Voluntários";
+}
+
+<div class="mt-md-3">
+    @if (TempData["Mensagem"] != null) {
+        <div class="alert alert-success" role="alert">
+            @TempData["Mensagem"]
+        </div>
+    }
+</div>
+<div class="mt-md-3">
+    @if (TempData["MensagemErro"] != null) {
+        <div class="alert alert-danger alertemail" role="alert">
+            @TempData["MensagemErro"]
+        </div>
+    }
+</div>
+
+<link href="/css/PagedList.css" rel="stylesheet" type="text/css" />
+<link href="/css/FundoPaginas.css" rel="stylesheet" type="text/css" />
+
+<span> <b>Total de Vagas:</b> @Model.TotalItemCount</span>
+<table class="table">
+    <thead class="table-dark">
+        <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">Email</th>
+            <th scope="col">Sexo</th>
+        </tr>
+    </thead>
+
+    <tbody class="tab-list-vagas">
+        @foreach (var usuario in Model) {
+            <tr>
+                <th scope="row">@usuario.Nome</th>
+                <td>@usuario.Email</td>
+                <td>@usuario.Sexo</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
+
