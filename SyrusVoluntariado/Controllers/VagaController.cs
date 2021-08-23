@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SyrusVoluntariado.Database;
 using SyrusVoluntariado.Library.Filters;
+using SyrusVoluntariado.Library.Mail;
 using SyrusVoluntariado.Models;
 using System;
 using System.Collections.Generic;
@@ -134,6 +135,9 @@ namespace SyrusVoluntariado.Controllers {
             var IdfUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault();
 
             Vaga vaga = _db.Vagas.Find(Id);
+            Usuario usuario = _db.Usuarios.Find(IdfUsuarioLogado);
+            Usuario usuarioAdm = _db.Usuarios.Find(vaga.Idf_Usuario_Adm);
+
             var CandidatosBanco = _db.VagaCandidaturas.Where(a => a.Idf_Usuario_Candidatado == IdfUsuarioLogado && a.Idf_Vaga == Id).FirstOrDefault();
 
             if (vaga.Idf_Usuario_Adm != IdfUsuarioLogado) {
@@ -144,6 +148,8 @@ namespace SyrusVoluntariado.Controllers {
 
                     _db.VagaCandidaturas.Add(VagaCandidatada);
                     _db.SaveChanges();
+
+                    EnviarEmail.EnviarMensagemContato(usuario, usuarioAdm.Email, Id);
                 } else {
                     TempData["MensagemErro"] = "Você já está cadastrado neste evento!";
                     ViewBag.JaVoluntariado = true;
