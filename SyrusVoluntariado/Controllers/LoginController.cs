@@ -42,17 +42,25 @@ namespace SyrusVoluntariado.Controllers {
                 HttpContext.Session.SetString("UsuarioLogado", ValidaDados.Nome);
 
                 HttpContext.Session.SetInt32("IdUsuarioLogado", ValidaDados.Id);
-
-                string UrlAction = TempData["URLRedirectAction"].ToString();
-                string UrlControler = TempData["URLRedirectController"].ToString();
-                string Id = TempData["URLRedirectArgumento"].ToString();
-
-                if (Id != "null") {
-                    return Redirect("/" + UrlControler + "/" + UrlAction + "/" + Id);
-                } else {
+                string UrlAction;
+                string UrlControler;
+                string Id;
+                try {
+                    UrlAction = TempData["URLRedirectAction"].ToString();
+                    UrlControler = TempData["URLRedirectController"].ToString();
+                    TempData["URLRedirectAction"] = "Index";
+                    TempData["URLRedirectController"] = "Home";
+                    Id = TempData["URLRedirectArgumento"].ToString();
+                    if (Id != "null") {
+                        return Redirect("/" + UrlControler + "/" + UrlAction + "/" + Id);
+                    } else {
+                        return RedirectToAction(UrlAction, UrlControler);
+                    }
+                } catch (NullReferenceException) {
+                    UrlAction = "Index";
+                    UrlControler = "Home";
                     return RedirectToAction(UrlAction, UrlControler);
                 }
-
             } else {
 
                 TempData["MensagemErro"] = "Email ou senha estão incorretos!";
