@@ -43,7 +43,15 @@ namespace SyrusVoluntariado.Controllers {
 
                 HttpContext.Session.SetInt32("IdUsuarioLogado", ValidaDados.Id);
 
-                return RedirectToAction("Index", "Home");
+                string UrlAction = TempData["URLRedirectAction"].ToString();
+                string UrlControler = TempData["URLRedirectController"].ToString();
+                string Id = TempData["URLRedirectArgumento"].ToString();
+
+                if (Id != "null") {
+                    return Redirect("/" + UrlControler + "/" + UrlAction + "/" + Id);
+                } else {
+                    return RedirectToAction(UrlAction, UrlControler);
+                }
 
             } else {
 

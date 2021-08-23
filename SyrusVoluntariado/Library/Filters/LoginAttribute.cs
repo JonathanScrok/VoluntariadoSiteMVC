@@ -11,11 +11,26 @@ namespace SyrusVoluntariado.Library.Filters {
 
         public override void OnActionExecuting(ActionExecutingContext context) {
 
+            var ValoresRedirecionamento = context.ActionDescriptor.RouteValues.Values.ToList();
+            var ValorArgumento = context.ActionArguments.Values.ToList();
+
+            string ActionRedi = ValoresRedirecionamento[0];
+            string ControlerRedi = ValoresRedirecionamento[1];
+
             if (context.HttpContext.Session.GetString("Login") == null) {
 
                 if (context.Controller != null) {
-
                     Controller controlador = context.Controller as Controller;
+                    string argumento;
+                    if (ValorArgumento.Count > 0) {
+                        argumento = ValorArgumento[0].ToString();
+                    } else {
+                        argumento = "null";
+                    }
+
+                    controlador.TempData["URLRedirectController"] = ControlerRedi;
+                    controlador.TempData["URLRedirectAction"] = ActionRedi;
+                    controlador.TempData["URLRedirectArgumento"] = argumento;
                     controlador.TempData["MensagemErro"] = "Faça o Login para acessar esta página!";
                 }
 
