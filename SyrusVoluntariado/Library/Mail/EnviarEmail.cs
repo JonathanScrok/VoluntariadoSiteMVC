@@ -11,7 +11,7 @@ namespace SyrusVoluntariado.Library.Mail {
 
         public static void EnviarMensagemContato(Usuario usuario, string emailAdm, int idVaga) {
 
-            string hrefListaVagas = "https://localhost:44394/vaga/listavoluntarios/" + idVaga;
+            string hrefListaVagas = "https://syrusvoluntariado.herokuapp.com/vaga/listavoluntarios/" + idVaga;
 
             string conteudo = string.Format("<p>Nome: {0}<br/> Email: {1}<br/> Sexo: {2}</p><p><a href='{3}'>Ver todos voluntários</a></p>", usuario.Nome, usuario.Email, usuario.Sexo, hrefListaVagas);
 
