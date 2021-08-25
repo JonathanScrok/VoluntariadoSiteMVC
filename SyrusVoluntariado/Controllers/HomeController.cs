@@ -23,5 +23,10 @@ namespace SyrusVoluntariado.Controllers {
             return View(resultadoPaginado);
         }
 
+        public IActionResult QuemSomosNos() {
+            return View();
+        }
+
+
     }
 }
