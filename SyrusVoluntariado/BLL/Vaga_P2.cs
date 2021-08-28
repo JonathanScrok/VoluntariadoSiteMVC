@@ -9,13 +9,21 @@ using System.Threading.Tasks;
 
 namespace SyrusVoluntariado.BLL {
     public class Vaga_P2 {
+
+        #region StringConnection
         private const string stringConnection = "Data Source=DESKTOP-MF80E68;Initial Catalog=be_helper;Integrated Security=False;User Id=sa;Password=b3ah3lper#2021;MultipleActiveResultSets=True";
+        #endregion
+
+        //--- Comandos
 
         private const string SELECT_TODASVAGAS = @"select * from helper.Vagas";
 
         private const string SELECT_TODOSUSUARIOS = @"select * from helper.Usuarios";
 
-       
+
+
+       //--- Metodos
+
         #region Busca todas as Vagas do Banco
         public static List<Vaga> TodasVagas() {
             SqlConnection conn = null;
