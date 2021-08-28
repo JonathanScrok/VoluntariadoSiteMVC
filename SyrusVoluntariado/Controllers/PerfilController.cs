@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SyrusVoluntariado.BLL;
 using SyrusVoluntariado.Database;
 using SyrusVoluntariado.Library.Filters;
 using SyrusVoluntariado.Models;
@@ -29,7 +30,9 @@ namespace SyrusVoluntariado.Controllers {
         public IActionResult MinhasVagas() {
             ViewBag.FooterPrecisa = false;
             int IdfUsuario = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault();
-            var VagasUsuario = _db.Vagas.Where(a => a.Idf_Usuario_Adm == IdfUsuario).ToList();
+
+            List<Vaga> vagas = Vaga_P2.TodasVagas();
+            var VagasUsuario = vagas.Where(a => a.Idf_Usuario_Adm == IdfUsuario).ToList();
 
             return View(VagasUsuario);
         }
@@ -38,9 +41,11 @@ namespace SyrusVoluntariado.Controllers {
             ViewBag.FooterPrecisa = false;
             int IdfUsuario = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault();
             var IdVagasCandidatadas = _db.VagaCandidaturas.Where(a => a.Idf_Usuario_Candidatado == IdfUsuario).ToList();
+
             List<Vaga> CarregaVagasCandidatadas = null;
             List<Vaga> MinhasCandidaturas = new List<Vaga>();
             List<int> Idfvagas = new List<int>();
+            List<Vaga> vagas = Vaga_P2.TodasVagas();
 
             for (int i = 0; i < IdVagasCandidatadas.Count; i++) {
                 var idf = IdVagasCandidatadas[i].Idf_Vaga;
@@ -48,7 +53,7 @@ namespace SyrusVoluntariado.Controllers {
             }
 
             foreach (var Id in Idfvagas) {
-                CarregaVagasCandidatadas = _db.Vagas.Where(a => a.Id == Id).ToList();
+                CarregaVagasCandidatadas = vagas.Where(a => a.Id == Id).ToList();
                 MinhasCandidaturas.Add(CarregaVagasCandidatadas[0]);
             }
             

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SyrusVoluntariado.BLL;
 using SyrusVoluntariado.Database;
 using SyrusVoluntariado.Library.Filters;
 using SyrusVoluntariado.Library.Mail;
@@ -23,7 +24,8 @@ namespace SyrusVoluntariado.Controllers {
         public IActionResult Index(int? page) {
             var pageNumber = page ?? 1;
 
-            var vagas = _db.Vagas.ToList();
+            //var vagas = _db.Vagas.ToList();
+            List<Vaga> vagas = Vaga_P2.TodasVagas();
 
             var resultadoPaginado = vagas.ToPagedList(pageNumber, 10);
 
@@ -64,6 +66,7 @@ namespace SyrusVoluntariado.Controllers {
         public IActionResult Visualizar(int Id) {
 
             var IdfUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault();
+
             Vaga vaga = _db.Vagas.Find(Id);
             VagaCandidatura vagaCandidatura = _db.VagaCandidaturas.Find(Id);
 

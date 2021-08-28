@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SyrusVoluntariado.BLL;
 using SyrusVoluntariado.Database;
+using SyrusVoluntariado.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +20,9 @@ namespace SyrusVoluntariado.Controllers {
         public IActionResult Index(int? page) {
             var pageNumber = page ?? 1;
 
-            var vagas = _db.Vagas.ToList();
+            //var vagas = _db.Vagas.ToList();
+            List<Vaga> vagas = Vaga_P2.TodasVagas();
+
             var resultadoPaginado = vagas.ToPagedList(pageNumber, 6);
             return View(resultadoPaginado);
         }
