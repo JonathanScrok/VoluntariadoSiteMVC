@@ -17,8 +17,10 @@ namespace SyrusVoluntariado.BLL {
         //--- Comandos
 
         private const string SELECT_TODASVAGAS = @"select * from helper.Vagas";
+        private const string SELECT_BUSCAVAGAID = @"select * from helper.Vagas where Id = @Id";
 
         private const string SELECT_TODOSUSUARIOS = @"select * from helper.Usuarios";
+        private const string SELECT_BUSCAUSUARIOID = @"select * from helper.Usuarios where Id_Usuario = @Id";
 
 
 
