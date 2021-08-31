@@ -15,62 +15,68 @@
 <link href="/css/FundoPaginas.css" rel="stylesheet" type="text/css" />
 <link href="/css/layout.js" rel="stylesheet" type="text/javascript" />
 
-
-<div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    </div>
-    <div class="carousel-inner">
-        <div class="carousel-item active" data-bs-interval="10000">
-            <img src="/img/0ntpr33fabb13z2w6ng55067.jpg" class="d-block w-100" alt="Ong">
-            <div class="carousel-caption d-none d-md-block">
-                <h5><b>Todos juntos por uma causa</b></h5>
-                <p>Be a Helper buscando unir todos</p>
-            </div>
+<div>
+    <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
-        <div class="carousel-item" data-bs-interval="10000">
-            <img src="/img/R.png" class="d-block w-100" alt="Alcance">
-            <div class="carousel-caption d-none d-md-block">
-                <h5><b>Alcance Curitiba</b></h5>
-                <p>A igreja Alcance é a principal incentivadora do Be a Helper</p>
+        <div class="carousel-inner">
+            <div class="carousel-item active" data-bs-interval="10000">
+                <img src="/img/0ntpr33fabb13z2w6ng55067.jpg" class="d-block w-100" alt="Ong">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5><b>Todos juntos por uma causa</b></h5>
+                    <p>Be a Helper buscando unir todos</p>
+                </div>
             </div>
-        </div>
-        <div class="carousel-item" data-bs-interval="10000">
-            <img src="/img/ongs-600x315.png" class="d-block w-100" alt="ong">
-            <div class="carousel-caption d-none d-md-block">
-                <h5><b>Ongs por todo o Brasil</b></h5>
-                <p>Ongs por todo os brasil estão criando eventos no Be a Helper</p>
+            <div class="carousel-item" data-bs-interval="10000">
+                <img src="/img/R.png" class="d-block w-100" alt="Alcance">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5><b>Alcance Curitiba</b></h5>
+                    <p>A igreja Alcance é a principal incentivadora do Be a Helper</p>
+                </div>
             </div>
-        </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Anterior</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Proximo</span>
-    </button>
-</div>
-
-<div class="row">
-    @foreach (var vaga in Model) {
-        <div class="col-sm-6">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">@vaga.Titulo</h5>
-                    <p class="card-text">@vaga.Descricao</p>
-                    <p class="card-text">@vaga.DataVaga.ToString("dd/MM/yyyy")</p>
-                    <a href="/vaga/visualizar/@vaga.Id" class="btn " style="background-color: #62c0a3;"><b>Visualizar</b></a>
+            <div class="carousel-item" data-bs-interval="10000">
+                <img src="/img/ongs-600x315.png" class="d-block w-100" alt="ong">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5><b>Ongs por todo o Brasil</b></h5>
+                    <p>Ongs por todo os brasil estão criando eventos no Be a Helper</p>
                 </div>
             </div>
         </div>
-    }
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Anterior</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Proximo</span>
+        </button>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-5 text-center mb-3 mt-6">
+            <h5 class="text-danger">Eventos</h5>
+        </div>
+    </div>
 
+    <div class="row">
+        @foreach (var vaga in Model) {
+            <div class="col-sm-3">
+                <div class="card" style="max-width: 19rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">@vaga.Titulo</h5>
+                        <p class="card-text">Data do Evento: @vaga.DataVaga.ToString("dd/MM/yyyy")</p>
+                        <p class="card-text">Local: @vaga.Local</p>
+                        <a href="/vaga/visualizar/@vaga.Id" class="btn " style="background-color: #62c0a3;"><b>Visualizar</b></a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <br />
+
+    @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
 </div>
-<br />
-
-@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
 
