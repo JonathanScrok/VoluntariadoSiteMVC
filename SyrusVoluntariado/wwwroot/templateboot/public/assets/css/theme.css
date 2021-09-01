@@ -5255,6 +5255,10 @@ fieldset:disabled .btn {
 }
 
 .card-title {
+    max-width: 25ch;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     color: lightgoldenrodyellow;
     margin-bottom: 0.5rem;
 }
