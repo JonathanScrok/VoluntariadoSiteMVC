@@ -46,13 +46,19 @@ namespace SyrusVoluntariado.Controllers {
             var ValorUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado");
             int IdUsuarioLogado = ValorUsuarioLogado.GetValueOrDefault();
 
+            Vaga_P1 vagas = new Vaga_P1();
+            vagas.CompleteObject();
+
             if (ModelState.IsValid) {
 
-                vaga.DataVaga = DateTime.Now;
-                vaga.Idf_Usuario_Adm = IdUsuarioLogado;
+                vagas.DataVaga = DateTime.Now;
+                vagas.IdUsuarioAdm = IdUsuarioLogado;
+                vagas.Titulo = vaga.Titulo;
+                vagas.Categoria = vaga.Categoria;
+                vagas.Descricao = vaga.Descricao;
+                vagas.CidadeEstado = vaga.Cidade_Estado;
 
-                _db.Vagas.Add(vaga);
-                _db.SaveChanges();
+                vagas.Save();
 
                 TempData["Mensagem"] = "O evento foi cadastrada com sucesso!";
 
@@ -65,7 +71,7 @@ namespace SyrusVoluntariado.Controllers {
         [HttpGet]
         public IActionResult Visualizar(int Id) {
 
-            Vaga_P1 vaga = new Vaga_P1(Convert.ToInt32(Id));
+            Vaga_P1 vaga = new Vaga_P1(Id);
             vaga.CompleteObject();
 
             var IdfUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault();
@@ -91,9 +97,10 @@ namespace SyrusVoluntariado.Controllers {
             //ViewBag.Nivel = niveis;
             var IdfUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault();
 
-            Vaga vaga = _db.Vagas.Find(Id);
+            Vaga_P1 vaga = new Vaga_P1(Id);
+            vaga.CompleteObject();
 
-            if (IdfUsuarioLogado == vaga.Idf_Usuario_Adm) {
+            if (IdfUsuarioLogado == vaga.IdUsuarioAdm) {
                 ViewBag.CadastrarAtualizar = "Salvar";
                 return View("Cadastrar", vaga);
             }
@@ -108,13 +115,21 @@ namespace SyrusVoluntariado.Controllers {
             ViewBag.CadastrarAtualizar = "Salvar";
             var IdfUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault();
 
+            Vaga_P1 vagas = new Vaga_P1(vaga.Id_Vaga);
+            vagas.CompleteObject();
+
             if (ModelState.IsValid) {
 
-                vaga.DataVaga = DateTime.Now;
-                vaga.Idf_Usuario_Adm = IdfUsuarioLogado;
-                _db.Vagas.Update(vaga);
-                _db.SaveChanges();
+                vagas.DataVaga = DateTime.Now;
+                vagas.IdUsuarioAdm = IdfUsuarioLogado;
+                vagas.Titulo = vaga.Titulo;
+                vagas.Categoria = vaga.Categoria;
+                vagas.Descricao = vaga.Descricao;
+                vagas.CidadeEstado = vaga.Cidade_Estado;
 
+                vagas.Save();
+
+                TempData["Mensagem"] = "O evento foi atualizado com sucesso!";
                 return RedirectToAction("MinhasVagas", "Perfil");
             }
             return View("Cadastrar", vaga);

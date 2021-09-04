@@ -159,6 +159,9 @@ namespace SyrusVoluntariado.BLL
         #region Consultas
         private const string SELECT_TODASVAGAS = @"select * from helper.Vagas";
         private const string SELECT_BUSCAVAGAID = @"select * from helper.Vagas where Id_Vaga = @Id_Vaga";
+
+        private const string UPDATE_VAGA = @"UPDATE helper.Vagas SET Id_Usuario_Adm = @Id_Usuario_Adm, Titulo = @Titulo, Categoria = @Categoria, Descricao = @Descricao, Cidade_Estado = @Cidade_Estado, DataVaga = @DataVaga WHERE Id_Vaga = @Id_Vaga";
+        private const string INSERT_VAGA = @"INSERT INTO helper.Vagas(Id_Usuario_Adm, Titulo, Categoria ,Descricao, Cidade_Estado, DataVaga) VALUES (@Id_Usuario_Adm, @Titulo, @Categoria, @Descricao, @Cidade_Estado, @DataVaga)";
         #endregion
 
         #region Metodos
@@ -234,97 +237,131 @@ namespace SyrusVoluntariado.BLL
 
         #region Insert
 
-        //private void Insert()
-        //{
-        //    List<SqlParameter> parms = GetParameters();
-        //    SetParameters(parms);
+        private void Insert()
+        {
+            List<SqlParameter> parms = GetParameters();
+            SetParameters(parms);
 
-        //    using (SqlConnection conn = new SqlConnection(DataAccessLayer.CONN_STRING))
-        //    {
-        //        conn.Open();
-        //        using (SqlTransaction trans = conn.BeginTransaction())
-        //        {
-        //            try
-        //            {
-        //                SqlCommand cmd = DataAccessLayer.ExecuteNonQueryCmd(trans, CommandType.Text, SPINSERT, parms);
-        //                this._idVaga = Convert.ToInt32(cmd.Parameters["@Idf_Usuario"].Value);
-        //                cmd.Parameters.Clear();
-        //                this._persisted = true;
-        //                this._modified = false;
-        //                trans.Commit();
+            using (SqlConnection conn = new SqlConnection(stringConnection))
+            {
+                conn.Open();
+                using (SqlTransaction trans = conn.BeginTransaction())
+                {
+                    try
+                    {
+                        SqlCommand cmd = new SqlCommand(INSERT_VAGA, conn, trans);
 
-        //            }
-        //            catch
-        //            {
-        //                trans.Rollback();
-        //                throw;
-        //            }
-        //        }
-        //    }
-        //}
+                        for (int i = 0; i < parms.Count; i++)
+                        {
+                            cmd.Parameters.Add(parms[i]);
+                        }
 
-        //private void Insert(SqlTransaction trans)
-        //{
-        //    List<SqlParameter> parms = GetParameters();
-        //    SetParameters(parms);
-        //    SqlCommand cmd = DataAccessLayer.ExecuteNonQueryCmd(trans, CommandType.Text, SPINSERT, parms);
-        //    this._idVaga = Convert.ToInt32(cmd.Parameters["@Idf_Usuario"].Value);
-        //    cmd.Parameters.Clear();
-        //    this._persisted = true;
-        //    this._modified = false;
+                        cmd.ExecuteNonQuery();
+                        this._idVaga = Convert.ToInt32(cmd.Parameters["@Id_Vaga"].Value);
+                        cmd.Parameters.Clear();
+                        this._persisted = true;
+                        this._modified = false;
+                        trans.Commit();
 
-        //}
+                    }
+                    catch
+                    {
+                        trans.Rollback();
+                        throw;
+                    }
+                }
+            }
+        }
+
+        private void Insert(SqlTransaction trans)
+        {
+            List<SqlParameter> parms = GetParameters();
+            SetParameters(parms);
+            SqlConnection conn = null;
+            conn = new SqlConnection(stringConnection);
+            conn.Open();
+
+
+            SqlCommand cmd = new SqlCommand(INSERT_VAGA, conn, trans);
+
+            for (int i = 0; i < parms.Count; i++)
+            {
+                cmd.Parameters.Add(parms[i]);
+            }
+
+            cmd.ExecuteNonQuery();
+            this._idVaga = Convert.ToInt32(cmd.Parameters["@Id_Vaga"].Value);
+            cmd.Parameters.Clear();
+            this._persisted = true;
+            this._modified = false;
+
+        }
         #endregion
 
         #region Update
-        ///// <summary>
-        ///// Método utilizado para atualizar uma instância de Usuario no banco de dados.
-        ///// </summary>
-        ///// <remarks>Jonathan Scrok</remarks>
-        //private void Update()
-        //{
-        //    if (this._modified)
-        //    {
-        //        List<SqlParameter> parms = GetParameters();
-        //        SetParameters(parms);
-        //        DataAccessLayer.ExecuteNonQuery(CommandType.Text, SPUPDATE, parms);
-        //        this._modified = false;
-        //    }
-        //}
-        ///// <summary>
-        ///// Método utilizado para atualizar uma instância de Usuario no banco de dados, dentro de uma transação.
-        ///// </summary>
-        ///// <param name="trans">Transação existente no banco de dados.</param>
-        ///// <remarks>Jonathan Scrok</remarks>
-        //private void Update(SqlTransaction trans)
-        //{
-        //    if (this._modified)
-        //    {
-        //        List<SqlParameter> parms = GetParameters();
-        //        SetParameters(parms);
-        //        DataAccessLayer.ExecuteNonQuery(trans, CommandType.Text, SPUPDATE, parms);
-        //        this._modified = false;
-        //    }
-        //}
+        private void Update()
+        {
+            
+            if (this._modified)
+            {
+                SqlConnection conn = null;
+                conn = new SqlConnection(stringConnection);
+                conn.Open();
+
+                List<SqlParameter> parms = GetParameters();
+                SetParameters(parms);
+                SqlCommand cmd = new SqlCommand(UPDATE_VAGA, conn);
+
+                for (int i = 0; i < parms.Count; i++)
+                {
+                    cmd.Parameters.Add(parms[i]);
+                }
+
+                cmd.ExecuteNonQuery();
+                this._modified = false;
+            }
+        }
+
+        private void Update(SqlTransaction trans)
+        {
+            if (this._modified)
+            {
+                SqlConnection conn = null;
+                conn = new SqlConnection(stringConnection);
+                conn.Open();
+
+                List<SqlParameter> parms = GetParameters();
+                SetParameters(parms);
+                SqlCommand cmd = new SqlCommand(UPDATE_VAGA, conn);
+
+                for (int i = 0; i < parms.Count; i++)
+                {
+                    cmd.Parameters.Add(parms[i]);
+                }
+
+                cmd.ExecuteNonQuery();
+                this._modified = false;
+            }
+        }
         #endregion
 
         #region Save
 
-        //public void Save()
-        //{
-        //    if (!this._persisted)
-        //        this.Insert();
-        //    else
-        //        this.Update();
-        //}
+        public void Save()
+        {
+            if (!this._persisted)
+                this.Insert();
+            else
+                this.Update();
+        }
 
-        //public void Save(SqlTransaction trans)
-        //{
-        //    if (!this._persisted)
-        //        this.Insert(trans);
-        //    else
-        //        this.Update(trans);
-        //}
+        public void Save(SqlTransaction trans)
+        {
+            if (!this._persisted)
+                this.Insert(trans);
+            else
+                this.Update(trans);
+        }
         #endregion
 
         #region CompleteObject

@@ -1,4 +1,4 @@
-﻿@model SyrusVoluntariado.Models.Vaga
+﻿@model SyrusVoluntariado.BLL.Vaga_P1
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -13,8 +13,8 @@
 }
 <link href="/css/FundoPaginas.css" rel="stylesheet" type="text/css" />
 <form method="post">
-    <input type="hidden" name="id" value="@Model.Id_Vaga" />
-    <input type="hidden" name="id" value="@Model.DataVaga = @DateTime.Now.ToString("dd/MM/yyyy");" />
+    <input type="hidden" name="id_Vaga" value="@Model.IdVaga" />
+    <input type="hidden" name="id_Vaga" value="@Model.DataVaga = @DateTime.Now.ToString("dd/MM/yyyy");" />
     
     <div class="row g-2 mt-md-2">
         <div class="col-md">
@@ -45,8 +45,8 @@
     <div class="row g-2 mt-md-2">
         <div class="col-md">
             <div class="form-floating">
-                <input type="text" name="local" value="@Model.Cidade_Estado" class="form-control" id="local" placeholder="">
-                <label for="local">Local:</label>
+                <input type="text" name="Cidade_Estado" value="@Model.CidadeEstado" class="form-control" id="Cidade_Estado" placeholder="">
+                <label for="Cidade_Estado">Local:</label>
                 @Html.ValidationMessage("local")
             </div>
         </div>
