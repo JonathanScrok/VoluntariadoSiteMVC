@@ -31,7 +31,7 @@ namespace SyrusVoluntariado.Controllers {
             ViewBag.FooterPrecisa = false;
             int IdfUsuario = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault();
 
-            List<Vaga> vagas = Vaga_P2.TodasVagas();
+            List<Vaga> vagas = Vaga_P1.TodasVagas();
             var VagasUsuario = vagas.Where(a => a.Idf_Usuario_Adm == IdfUsuario).ToList();
 
             return View(VagasUsuario);
@@ -45,7 +45,7 @@ namespace SyrusVoluntariado.Controllers {
             List<Vaga> CarregaVagasCandidatadas = null;
             List<Vaga> MinhasCandidaturas = new List<Vaga>();
             List<int> Idfvagas = new List<int>();
-            List<Vaga> vagas = Vaga_P2.TodasVagas();
+            List<Vaga> vagas = Vaga_P1.TodasVagas();
 
             for (int i = 0; i < IdVagasCandidatadas.Count; i++) {
                 var idf = IdVagasCandidatadas[i].Idf_Vaga;
@@ -53,7 +53,7 @@ namespace SyrusVoluntariado.Controllers {
             }
 
             foreach (var Id in Idfvagas) {
-                CarregaVagasCandidatadas = vagas.Where(a => a.Id == Id).ToList();
+                CarregaVagasCandidatadas = vagas.Where(a => a.Id_Vaga == Id).ToList();
                 MinhasCandidaturas.Add(CarregaVagasCandidatadas[0]);
             }
             

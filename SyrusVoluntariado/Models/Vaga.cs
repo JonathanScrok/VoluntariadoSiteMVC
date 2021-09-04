@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace SyrusVoluntariado.Models {
     public class Vaga {
-
         public int Id { get; set; }
+
+
+        public int Id_Vaga { get; set; }
 
         public int Idf_Usuario_Adm { get; set; }
 
@@ -27,7 +29,7 @@ namespace SyrusVoluntariado.Models {
 
         [Required(ErrorMessage = "O Campo é Obrigatório!")]
         [MaxLength(10, ErrorMessage = "O Campo deve possuir no máximo 10 caracteres!")]
-        public string Local { get; set; }
+        public string Cidade_Estado { get; set; }
 
         public DateTime DataVaga { get; set; }
 

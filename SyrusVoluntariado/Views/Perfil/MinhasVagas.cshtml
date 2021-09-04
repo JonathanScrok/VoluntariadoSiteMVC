@@ -15,16 +15,16 @@
 
 <div class="row">
     @foreach (var vaga in Model) {
-        ViewBag.Id = vaga.Id;
+        ViewBag.Id = vaga.Id_Vaga;
         <div class="col-sm-6 mt-md-3">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">@vaga.Titulo</h5>
                     <p class="card-text">@vaga.Descricao</p>
                     <p class="card-text">@vaga.DataVaga.ToString("dd/MM/yyyy")</p>
-                    <a href="/vaga/listavoluntarios/@vaga.Id" class="btn " style="background-color: #62c0a3;"><b>Lista de Voluntários</b></a>
+                    <a href="/vaga/listavoluntarios/@vaga.Id_Vaga" class="btn " style="background-color: #62c0a3;"><b>Lista de Voluntários</b></a>
                     <div style="float:right;">
-                        <a class="btn btn-info" href="/vaga/editar/@vaga.Id">Editar</a>
+                        <a class="btn btn-info" href="/vaga/editar/@vaga.Id_Vaga">Editar</a>
                         <a class="btn btn-danger ms-md-2" onclick="ConfirmacaoExcluirVaga();">Excluir</a>
                     </div>
                 </div>

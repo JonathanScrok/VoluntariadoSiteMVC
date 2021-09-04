@@ -10,83 +10,9 @@ using System.Threading.Tasks;
 namespace SyrusVoluntariado.BLL {
     public class Vaga_P2 {
 
-        #region StringConnection
-        private const string stringConnection = "Data Source=DESKTOP-P97AO4H;Initial Catalog=be_helper;Integrated Security=False;User Id=sa;Password=b3ah3lper#2021;MultipleActiveResultSets=True";
-        #endregion
-
-        //--- Comandos
-
-        private const string SELECT_TODASVAGAS = @"select * from helper.Vagas";
-        private const string SELECT_BUSCAVAGAID = @"select * from helper.Vagas where Id = @Id";
-
-        private const string SELECT_TODOSUSUARIOS = @"select * from helper.Usuarios";
-        private const string SELECT_BUSCAUSUARIOID = @"select * from helper.Usuarios where Id_Usuario = @Id";
-
-
-
        //--- Metodos
 
-        #region Busca todas as Vagas do Banco
-        public static List<Vaga> TodasVagas() {
-            SqlConnection conn = null;
-            SqlDataReader reader = null;
-            List<Vaga> Vagas = new List<Vaga>();
-
-            try {
-                conn = new SqlConnection(stringConnection);
-                conn.Open();
-
-                SqlCommand cmd = new SqlCommand(SELECT_TODASVAGAS, conn);
-
-                Mapper.CreateMap<IDataRecord, Vaga>();
-
-                using (reader = cmd.ExecuteReader()) {
-                    Vagas = Mapper.Map<List<Vaga>>(reader);
-                    return Vagas;
-                }
-            } finally {
-
-                if (reader != null) {
-                    reader.Close();
-                }
-
-                if (conn != null) {
-                    conn.Close();
-                }
-            }
-        }
-        #endregion
-
-        #region Busca todos os Usuários do Banco
-        public static List<Usuario> TodosUsuarios() {
-            SqlConnection conn = null;
-            SqlDataReader reader = null;
-            List<Usuario> usuarios = new List<Usuario>();
-
-            try {
-                conn = new SqlConnection(stringConnection);
-                conn.Open();
-
-                SqlCommand cmd = new SqlCommand(SELECT_TODOSUSUARIOS, conn);
-
-                Mapper.CreateMap<IDataRecord, Usuario>();
-
-                using (reader = cmd.ExecuteReader()) {
-                    usuarios = Mapper.Map<List<Usuario>>(reader);
-                    return usuarios;
-                }
-            } finally {
-
-                if (reader != null) {
-                    reader.Close();
-                }
-
-                if (conn != null) {
-                    conn.Close();
-                }
-            }
-        }
-        #endregion
+       
 
     }
 

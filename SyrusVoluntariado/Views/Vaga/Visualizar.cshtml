@@ -1,4 +1,4 @@
-﻿@model SyrusVoluntariado.Models.Vaga
+﻿@model SyrusVoluntariado.BLL.Vaga_P1
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -44,7 +44,7 @@
                 </h2>
                 <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingThree">
                     <div class="accordion-body">
-                        @Model.Local
+                        @Model.CidadeEstado
                     </div>
                 </div>
             </div>
@@ -68,7 +68,7 @@
                     </div>
                 </div>
                 <div class="AdmVisualizando mt-md-2">
-                    <a class="btn btn-info" href="/vaga/editar/@Model.Id">Editar</a>
+                    <a class="btn btn-info" href="/vaga/editar/@Model.IdVaga">Editar</a>
                     <a class="btn btn-danger ms-2" onclick="ConfirmacaoExcluirVaga();">Excluir</a>
                 </div>
             } else if (ViewBag.JaVoluntariado == true) {
@@ -84,7 +84,7 @@
                 </div>
             } else {
                 <div class="botao-voluntariar">
-                    <a class="btn btn-success" href="/vaga/voluntariar/@Model.Id">Voluntariar-me</a>
+                    <a class="btn btn-success" href="/vaga/voluntariar/@Model.IdVaga">Voluntariar-me</a>
                 </div>
             }
         </div>

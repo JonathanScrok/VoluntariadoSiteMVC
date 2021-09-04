@@ -13,7 +13,7 @@
 }
 <link href="/css/FundoPaginas.css" rel="stylesheet" type="text/css" />
 <form method="post">
-    <input type="hidden" name="id" value="@Model.Id" />
+    <input type="hidden" name="id" value="@Model.Id_Vaga" />
     <input type="hidden" name="id" value="@Model.DataVaga = @DateTime.Now.ToString("dd/MM/yyyy");" />
     
     <div class="row g-2 mt-md-2">
@@ -45,7 +45,7 @@
     <div class="row g-2 mt-md-2">
         <div class="col-md">
             <div class="form-floating">
-                <input type="text" name="local" value="@Model.Local" class="form-control" id="local" placeholder="">
+                <input type="text" name="local" value="@Model.Cidade_Estado" class="form-control" id="local" placeholder="">
                 <label for="local">Local:</label>
                 @Html.ValidationMessage("local")
             </div>

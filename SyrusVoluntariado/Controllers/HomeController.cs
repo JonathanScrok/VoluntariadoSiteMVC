@@ -21,7 +21,7 @@ namespace SyrusVoluntariado.Controllers {
             var pageNumber = page ?? 1;
 
             //var vagas = _db.Vagas.ToList();
-            List<Vaga> vagas = Vaga_P2.TodasVagas();
+            List<Vaga> vagas = Vaga_P1.TodasVagas();
 
             var resultadoPaginado = vagas.ToPagedList(pageNumber, 6);
             return View(resultadoPaginado);

@@ -25,7 +25,7 @@ namespace SyrusVoluntariado.Controllers {
             var pageNumber = page ?? 1;
 
             //var vagas = _db.Vagas.ToList();
-            List<Vaga> vagas = Vaga_P2.TodasVagas();
+            List<Vaga> vagas = Vaga_P1.TodasVagas();
 
             var resultadoPaginado = vagas.ToPagedList(pageNumber, 10);
 
@@ -65,17 +65,19 @@ namespace SyrusVoluntariado.Controllers {
         [HttpGet]
         public IActionResult Visualizar(int Id) {
 
+            Vaga_P1 vaga = new Vaga_P1(Convert.ToInt32(Id));
+            vaga.CompleteObject();
+
             var IdfUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault();
 
-            Vaga vaga = _db.Vagas.Find(Id);
+            //Vaga vaga = _db.Vagas.Find(Id);
             VagaCandidatura vagaCandidatura = _db.VagaCandidaturas.Find(Id);
-
             var CandidatosBanco = _db.VagaCandidaturas.Where(a => a.Idf_Usuario_Candidatado == IdfUsuarioLogado && a.Idf_Vaga == Id).FirstOrDefault();
 
             if (CandidatosBanco != null) {
                 ViewBag.JaVoluntariado = true;
             }
-            if (vaga.Idf_Usuario_Adm == IdfUsuarioLogado) {
+            if (vaga.IdUsuarioAdm == IdfUsuarioLogado) {
                 ViewBag.ADMVaga = true;
             }
 
