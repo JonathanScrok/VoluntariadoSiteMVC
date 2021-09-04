@@ -142,7 +142,7 @@ namespace SyrusVoluntariado.Controllers {
 
             Vaga vaga = _db.Vagas.Find(Id);
 
-            if (IdfUsuarioLogado == vaga.Idf_Usuario_Adm) {
+            if (IdfUsuarioLogado == vaga.Id_Usuario_Adm) {
                 _db.Vagas.Remove(vaga);
                 _db.SaveChanges();
             }
@@ -156,11 +156,11 @@ namespace SyrusVoluntariado.Controllers {
 
             Vaga vaga = _db.Vagas.Find(Id);
             Usuario usuario = _db.Usuarios.Find(IdfUsuarioLogado);
-            Usuario usuarioAdm = _db.Usuarios.Find(vaga.Idf_Usuario_Adm);
+            Usuario usuarioAdm = _db.Usuarios.Find(vaga.Id_Usuario_Adm);
 
             var CandidatosBanco = _db.VagaCandidaturas.Where(a => a.Idf_Usuario_Candidatado == IdfUsuarioLogado && a.Idf_Vaga == Id).FirstOrDefault();
 
-            if (vaga.Idf_Usuario_Adm != IdfUsuarioLogado) {
+            if (vaga.Id_Usuario_Adm != IdfUsuarioLogado) {
                 if (CandidatosBanco == null) {
                     VagaCandidatura VagaCandidatada = new VagaCandidatura();
                     VagaCandidatada.Idf_Vaga = Id;

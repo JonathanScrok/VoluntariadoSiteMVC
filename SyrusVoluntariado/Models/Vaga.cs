@@ -12,7 +12,7 @@ namespace SyrusVoluntariado.Models {
 
         public int Id_Vaga { get; set; }
 
-        public int Idf_Usuario_Adm { get; set; }
+        public int Id_Usuario_Adm { get; set; }
 
         [Required(ErrorMessage = "O Campo é Obrigatório!")]
         [MaxLength(30, ErrorMessage = "O Campo deve possuir no máximo 30 caracteres!")]
