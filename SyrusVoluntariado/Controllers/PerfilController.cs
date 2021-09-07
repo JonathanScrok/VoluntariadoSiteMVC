@@ -22,9 +22,11 @@ namespace SyrusVoluntariado.Controllers {
         public IActionResult Index() {
             ViewBag.FooterPrecisa = false;
             int IdfUsuario = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault();
-            Usuario usuario = _db.Usuarios.Find(IdfUsuario);
 
-            return View(usuario);
+            Usuario_P1 Usuario = new Usuario_P1(IdfUsuario);
+            Usuario.CompleteObject();
+
+            return View(Usuario);
         }
 
         public IActionResult MinhasVagas() {

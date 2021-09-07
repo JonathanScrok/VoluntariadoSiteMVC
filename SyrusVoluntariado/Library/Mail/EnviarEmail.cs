@@ -1,4 +1,5 @@
-﻿using SyrusVoluntariado.Models;
+﻿using SyrusVoluntariado.BLL;
+using SyrusVoluntariado.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 namespace SyrusVoluntariado.Library.Mail {
     public class EnviarEmail {
 
-        public static void EnviarMensagemContato(Usuario usuario, string emailAdm, int idVaga) {
+        public static void EnviarMensagemContato(Usuario_P1 usuario, string emailAdm, int idVaga) {
 
             string hrefListaVagas = "https://syrusvoluntariado.herokuapp.com/vaga/listavoluntarios/" + idVaga;
 

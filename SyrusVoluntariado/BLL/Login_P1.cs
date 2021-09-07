@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SyrusVoluntariado.BLL
 {
-    public partial class Usuario_P1
+    public partial class Login_P1
     {
         #region StringConnection
         private const string stringConnection = "Data Source=DESKTOP-P97AO4H;Initial Catalog=be_helper;Integrated Security=False;User Id=sa;Password=b3ah3lper#2021;MultipleActiveResultSets=True";
@@ -17,10 +17,10 @@ namespace SyrusVoluntariado.BLL
 
         #region Atributos
 
+        private int _idLogin;
         private int _idUsuario;
-        private string _nome;
-        private int _sexo;
         private string _email;
+        private string _senha;
         private DateTime _dataCadastro;
 
         private bool _persisted;
@@ -28,19 +28,22 @@ namespace SyrusVoluntariado.BLL
 
         #endregion
 
-        #region Construtores
-        public Usuario_P1()
+        #region Propriedades
+
+        #region IdLogin
+        public int IdLogin
         {
-            this._persisted = false;
-        }
-        public Usuario_P1(int idUsuario)
-        {
-            this._idUsuario = idUsuario;
-            this._persisted = true;
+            get
+            {
+                return this._idLogin;
+            }
+            set
+            {
+                this._idLogin = value;
+                this._modified = true;
+            }
         }
         #endregion
-
-        #region Propriedades
 
         #region IdUsuario
         public int IdUsuario
@@ -52,36 +55,6 @@ namespace SyrusVoluntariado.BLL
             set
             {
                 this._idUsuario = value;
-                this._modified = true;
-            }
-        }
-        #endregion
-
-        #region Nome
-        public string Nome
-        {
-            get
-            {
-                return this._nome;
-            }
-            set
-            {
-                this._nome = value;
-                this._modified = true;
-            }
-        }
-        #endregion
-
-        #region Sexo
-        public int Sexo
-        {
-            get
-            {
-                return this._sexo;
-            }
-            set
-            {
-                this._sexo = value;
                 this._modified = true;
             }
         }
@@ -102,7 +75,24 @@ namespace SyrusVoluntariado.BLL
         }
         #endregion
 
+        #region Senha
+
+        public string Senha
+        {
+            get
+            {
+                return this._senha;
+            }
+            set
+            {
+                this._senha = value;
+                this._modified = true;
+            }
+        }
+        #endregion
+
         #region DataCadastro
+
         public DateTime DataCadastro
         {
             get
@@ -119,13 +109,26 @@ namespace SyrusVoluntariado.BLL
 
         #endregion
 
-        #region Consultas
-        private const string SELECT_TODOSUSUARIOS = @"select * from helper.Usuarios";
-        private const string SELECT_BUSCAUSUARIOID = @"select * from helper.Usuarios WITH(NOLOCK) where Id_Usuario = @Id_Usuario";
-        private const string SELECT_BUSCAUSUARIOEMAIL = @"select * from helper.Usuarios WITH(NOLOCK) where Email = @Email";
+        #region Construtores
+        public Login_P1()
+        {
+            this._persisted = false;
+        }
+        public Login_P1(int IdLogin)
+        {
+            this._idLogin = IdLogin;
+            this._persisted = true;
+        }
+        #endregion
 
-        private const string UPDATE_USUARIO = @"UPDATE helper.Usuarios SET Nome = @Nome, Sexo = @Sexo, Email = @Email, DataCadastro = @DataCadastro WHERE Id_Usuario = @Id_Usuario";
-        private const string INSERT_USUARIO = @"INSERT INTO helper.Usuarios(Nome, Sexo ,Email, DataCadastro) VALUES (@Nome, @Sexo, @Email, @DataCadastro);";
+        #region Consultas
+        private const string SELECT_TODOSLOGINS = @"select * from helper.Logins";
+        private const string SELECT_BUSCALOGINID = @"select * from helper.Logins where Id_Login = @Id_Login";
+        private const string SELECT_BUSCALOGIN_IDUSUARIO = @"select * from helper.Logins where Id_Usuario = @Id_Usuario";
+        private const string SELECT_BUSCALOGIN_EMAIL = @"select Email from helper.Logins where Email = @Email";
+
+        private const string UPDATE_LOGIN = @"UPDATE helper.Logins SET Id_Login = @Id_Login,Id_Usuario = @Id_Usuario, Email = @Email, Senha = @Senha, DataCadastro = @DataCadastro WHERE Id_Login = @Id_Login";
+        private const string INSERT_LOGIN = @"INSERT INTO helper.Logins(Id_Usuario, Email, Senha , DataCadastro) VALUES (@Id_Usuario, @Email, @Senha, @DataCadastro)";
         #endregion
 
         #region Metodos
@@ -135,10 +138,10 @@ namespace SyrusVoluntariado.BLL
         private static List<SqlParameter> GetParameters()
         {
             List<SqlParameter> parms = new List<SqlParameter>();
+            parms.Add(new SqlParameter("@Id_Login", SqlDbType.Int, 4));
             parms.Add(new SqlParameter("@Id_Usuario", SqlDbType.Int, 4));
-            parms.Add(new SqlParameter("@Nome", SqlDbType.VarChar, 100));
-            parms.Add(new SqlParameter("@Sexo", SqlDbType.Int, 1));
             parms.Add(new SqlParameter("@Email", SqlDbType.VarChar, 100));
+            parms.Add(new SqlParameter("@Senha", SqlDbType.VarChar, 50));
             parms.Add(new SqlParameter("@DataCadastro", SqlDbType.DateTime, 8));
 
             return (parms);
@@ -149,34 +152,34 @@ namespace SyrusVoluntariado.BLL
 
         private void SetParameters(List<SqlParameter> parms)
         {
-            parms[0].Value = this._idUsuario;
-            parms[1].Value = this._nome;
-            parms[2].Value = this._sexo;
-            parms[3].Value = this._email;
+            parms[0].Value = this._idLogin;
+            parms[1].Value = this._idUsuario;
+            parms[2].Value = this._email;
+            parms[3].Value = this._senha;
             parms[4].Value = this._dataCadastro;
         }
         #endregion
 
-        #region Busca todos os Usuários do Banco
-        public static List<Usuario> TodosUsuarios()
+        #region Busca todas os Logins do Banco
+        public static List<Login> TodosLogins()
         {
             SqlConnection conn = null;
             SqlDataReader reader = null;
-            List<Usuario> usuarios = new List<Usuario>();
+            List<Login> Logins = new List<Login>();
 
             try
             {
                 conn = new SqlConnection(stringConnection);
                 conn.Open();
 
-                SqlCommand cmd = new SqlCommand(SELECT_TODOSUSUARIOS, conn);
+                SqlCommand cmd = new SqlCommand(SELECT_TODOSLOGINS, conn);
 
-                Mapper.CreateMap<IDataRecord, Usuario>();
+                Mapper.CreateMap<IDataRecord, Login>();
 
                 using (reader = cmd.ExecuteReader())
                 {
-                    usuarios = Mapper.Map<List<Usuario>>(reader);
-                    return usuarios;
+                    Logins = Mapper.Map<List<Login>>(reader);
+                    return Logins;
                 }
             }
             finally
@@ -195,6 +198,35 @@ namespace SyrusVoluntariado.BLL
         }
         #endregion
 
+        #region Busca Login por Email
+        public static List<Usuario> BuscaLogin_Email(string Email)
+        {
+            SqlConnection conn = null;
+            SqlDataReader reader = null;
+            List<Usuario> emails = new List<Usuario>();
+
+            List<SqlParameter> parms = new List<SqlParameter>();
+            parms.Add(new SqlParameter("@Email", SqlDbType.VarChar, 100));
+            parms[0].Value = Email;
+
+            conn = new SqlConnection(stringConnection);
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand(SELECT_BUSCALOGIN_EMAIL, conn);
+            cmd.Parameters.Add(parms[0]);
+
+            Mapper.CreateMap<IDataRecord, Usuario>();
+
+            using (reader = cmd.ExecuteReader())
+            {
+                emails = Mapper.Map<List<Usuario>>(reader);
+                return emails;
+            }
+        }
+        #endregion
+
+        #endregion
+
         #region Insert
 
         private void Insert()
@@ -209,7 +241,7 @@ namespace SyrusVoluntariado.BLL
                 {
                     try
                     {
-                        SqlCommand cmd = new SqlCommand(INSERT_USUARIO, conn, trans);
+                        SqlCommand cmd = new SqlCommand(INSERT_LOGIN, conn, trans);
 
                         for (int i = 0; i < parms.Count; i++)
                         {
@@ -217,7 +249,7 @@ namespace SyrusVoluntariado.BLL
                         }
 
                         cmd.ExecuteNonQuery();
-                        this._idUsuario = Convert.ToInt32(cmd.Parameters["@Id_Usuario"].Value);
+                        this._idLogin = Convert.ToInt32(cmd.Parameters["@Id_Login"].Value);
                         cmd.Parameters.Clear();
                         this._persisted = true;
                         this._modified = false;
@@ -242,7 +274,7 @@ namespace SyrusVoluntariado.BLL
             conn.Open();
 
 
-            SqlCommand cmd = new SqlCommand(INSERT_USUARIO, conn, trans);
+            SqlCommand cmd = new SqlCommand(INSERT_LOGIN, conn, trans);
 
             for (int i = 0; i < parms.Count; i++)
             {
@@ -250,7 +282,7 @@ namespace SyrusVoluntariado.BLL
             }
 
             cmd.ExecuteNonQuery();
-            this._idUsuario = Convert.ToInt32(cmd.Parameters["@Id_Usuario"].Value);
+            this._idLogin = Convert.ToInt32(cmd.Parameters["@Id_Login"].Value);
             cmd.Parameters.Clear();
             this._persisted = true;
             this._modified = false;
@@ -270,7 +302,7 @@ namespace SyrusVoluntariado.BLL
 
                 List<SqlParameter> parms = GetParameters();
                 SetParameters(parms);
-                SqlCommand cmd = new SqlCommand(UPDATE_USUARIO, conn);
+                SqlCommand cmd = new SqlCommand(UPDATE_LOGIN, conn);
 
                 for (int i = 0; i < parms.Count; i++)
                 {
@@ -292,7 +324,7 @@ namespace SyrusVoluntariado.BLL
 
                 List<SqlParameter> parms = GetParameters();
                 SetParameters(parms);
-                SqlCommand cmd = new SqlCommand(UPDATE_USUARIO, conn);
+                SqlCommand cmd = new SqlCommand(UPDATE_LOGIN, conn);
 
                 for (int i = 0; i < parms.Count; i++)
                 {
@@ -325,32 +357,34 @@ namespace SyrusVoluntariado.BLL
         #endregion
 
         #region CompleteObject
-
+        /// <summary>
+        /// Método utilizado para completar uma instância de Usuario a partir do banco de dados.
+        /// </summary>
+        /// <returns>Verdadeiro ou falso informando se a operação foi executada com sucesso.</returns>
+        /// <remarks>Jonathan Scrok</remarks>
         public bool CompleteObject()
         {
-            using (IDataReader dr = LoadDataReader(this._idUsuario))
+            using (IDataReader dr = LoadDataReader(this._idLogin))
             {
                 return SetInstance(dr, this);
             }
         }
-
-        public bool CompleteObject(string email)
-        {
-            using (IDataReader dr = LoadDataReader(email))
-            {
-                return SetInstance(dr, this);
-            }
-        }
+        /// <summary>
+        /// Método utilizado para completar uma instância de Usuario a partir do banco de dados, dentro de uma transação.
+        /// </summary>
+        /// <param name="trans">Transação existente no banco de dados.</param>
+        /// <returns>Verdadeiro ou falso informando se a operação foi executada com sucesso.</returns>
+        /// <remarks>Jonathan Scrok</remarks>
         public bool CompleteObject(SqlTransaction trans)
         {
-            using (IDataReader dr = LoadDataReader(this._idUsuario, trans))
+            using (IDataReader dr = LoadDataReader(this._idLogin, trans))
             {
                 return SetInstance(dr, this);
             }
         }
         public async Task<bool> CompleteObjectAsync(SqlTransaction trans)
         {
-            using (IDataReader dr = await LoadDataReaderAsync(this._idUsuario, trans))
+            using (IDataReader dr = await LoadDataReaderAsync(this._idLogin, trans))
             {
                 return SetInstance(dr, this);
             }
@@ -358,81 +392,63 @@ namespace SyrusVoluntariado.BLL
         #endregion
 
         #region LoadDataReader
-        private static IDataReader LoadDataReader(int IdUsuario)
+        private static IDataReader LoadDataReader(int IdLogin)
         {
             List<SqlParameter> parms = new List<SqlParameter>();
-            parms.Add(new SqlParameter("@Id_Usuario", SqlDbType.Int, 4));
+            parms.Add(new SqlParameter("@Id_Login", SqlDbType.Int, 4));
 
-            parms[0].Value = IdUsuario;
+            parms[0].Value = IdLogin;
 
             SqlConnection conn = null;
             conn = new SqlConnection(stringConnection);
             conn.Open();
 
-            SqlCommand cmd = new SqlCommand(SELECT_BUSCAUSUARIOID, conn);
+            SqlCommand cmd = new SqlCommand(SELECT_BUSCALOGINID, conn);
             cmd.Parameters.Add(parms[0]);
 
             return cmd.ExecuteReader();
         }
-
-        private static IDataReader LoadDataReader(string email)
+        private static IDataReader LoadDataReader(int IdLogin, SqlTransaction trans)
         {
             List<SqlParameter> parms = new List<SqlParameter>();
-            parms.Add(new SqlParameter("@Email", SqlDbType.VarChar, 100));
+            parms.Add(new SqlParameter("@Id_Login", SqlDbType.Int, 4));
 
-            parms[0].Value = email;
+            parms[0].Value = IdLogin;
 
             SqlConnection conn = null;
             conn = new SqlConnection(stringConnection);
             conn.Open();
 
-            SqlCommand cmd = new SqlCommand(SELECT_BUSCAUSUARIOEMAIL, conn);
+            SqlCommand cmd = new SqlCommand(SELECT_BUSCALOGINID, conn);
             cmd.Parameters.Add(parms[0]);
 
             return cmd.ExecuteReader();
         }
-
-        private static IDataReader LoadDataReader(int IdUsuario, SqlTransaction trans)
+        private static async Task<IDataReader> LoadDataReaderAsync(int IdLogin, SqlTransaction trans)
         {
             List<SqlParameter> parms = new List<SqlParameter>();
-            parms.Add(new SqlParameter("@Id_Usuario", SqlDbType.Int, 4));
+            parms.Add(new SqlParameter("@Id_Login", SqlDbType.Int, 4));
 
-            parms[0].Value = IdUsuario;
-
+            parms[0].Value = IdLogin;
             SqlConnection conn = null;
             conn = new SqlConnection(stringConnection);
             conn.Open();
 
-            SqlCommand cmd = new SqlCommand(SELECT_BUSCAUSUARIOID, conn);
-            cmd.Parameters.Add(parms[0]);
-
-            return cmd.ExecuteReader();
-        }
-        private static async Task<IDataReader> LoadDataReaderAsync(int IdUsuario, SqlTransaction trans)
-        {
-            List<SqlParameter> parms = new List<SqlParameter>();
-            parms.Add(new SqlParameter("@Id_Usuario", SqlDbType.Int, 4));
-
-            parms[0].Value = IdUsuario;
-            SqlConnection conn = null;
-            conn = new SqlConnection(stringConnection);
-            conn.Open();
-
-            SqlCommand cmd = new SqlCommand(SELECT_BUSCAUSUARIOID, conn);
+            SqlCommand cmd = new SqlCommand(SELECT_BUSCALOGINID, conn);
             cmd.Parameters.Add(parms[0]);
 
             return await cmd.ExecuteReaderAsync();
         }
-        private static async Task<IDataReader> LoadDataReaderAsync(int Id_Usuario)
+        private static async Task<IDataReader> LoadDataReaderAsync(int Id_Login)
         {
             List<SqlParameter> parms = new List<SqlParameter>();
-            parms.Add(new SqlParameter("@Id_Usuario", SqlDbType.Int, 4));
+            parms.Add(new SqlParameter("@Id_Login", SqlDbType.Int, 4));
 
             SqlConnection conn = null;
             conn = new SqlConnection(stringConnection);
             conn.Open();
 
-            SqlCommand cmd = new SqlCommand(SELECT_BUSCAUSUARIOID, conn);
+            SqlCommand cmd = new SqlCommand(SELECT_BUSCALOGINID, conn);
             cmd.Parameters.Add(parms[0]);
 
             return await cmd.ExecuteReaderAsync();
@@ -447,16 +463,16 @@ namespace SyrusVoluntariado.BLL
         /// <param name="objUsuario">Instância a ser manipulada.</param>
         /// <returns>Verdadeiro ou falso informando se a operação foi executada com sucesso.</returns>
         /// <remarks>Jonathan Scrok</remarks>
-        private static bool SetInstance(IDataReader dr, Usuario_P1 objVaga)
+        private static bool SetInstance(IDataReader dr, Login_P1 objVaga)
         {
             try
             {
                 if (dr.Read())
                 {
+                    objVaga._idLogin = Convert.ToInt32(dr["Id_Login"]);
                     objVaga._idUsuario = Convert.ToInt32(dr["Id_Usuario"]);
-                    objVaga._nome = Convert.ToString(dr["Nome"]);
-                    objVaga._sexo = Convert.ToInt32(dr["Sexo"]);
                     objVaga._email = Convert.ToString(dr["Email"]);
+                    objVaga._senha = Convert.ToString(dr["Senha"]);
                     objVaga._dataCadastro = Convert.ToDateTime(dr["DataCadastro"]);
 
                     return true;
@@ -475,8 +491,6 @@ namespace SyrusVoluntariado.BLL
                 dr.Dispose();
             }
         }
-        #endregion
-
         #endregion
     }
 }

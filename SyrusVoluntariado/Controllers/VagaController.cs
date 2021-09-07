@@ -154,13 +154,18 @@ namespace SyrusVoluntariado.Controllers {
         public IActionResult Voluntariar(int Id) {
             var IdfUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault();
 
-            Vaga vaga = _db.Vagas.Find(Id);
-            Usuario usuario = _db.Usuarios.Find(IdfUsuarioLogado);
-            Usuario usuarioAdm = _db.Usuarios.Find(vaga.Id_Usuario_Adm);
+            Vaga_P1 vaga = new Vaga_P1(Id);
+            vaga.CompleteObject();
+
+            Usuario_P1 usuario = new Usuario_P1(IdfUsuarioLogado);
+            usuario.CompleteObject();
+
+            Usuario_P1 usuarioAdm = new Usuario_P1(vaga.IdUsuarioAdm);
+            usuarioAdm.CompleteObject();
 
             var CandidatosBanco = _db.VagaCandidaturas.Where(a => a.Idf_Usuario_Candidatado == IdfUsuarioLogado && a.Idf_Vaga == Id).FirstOrDefault();
 
-            if (vaga.Id_Usuario_Adm != IdfUsuarioLogado) {
+            if (vaga.IdUsuarioAdm != IdfUsuarioLogado) {
                 if (CandidatosBanco == null) {
                     VagaCandidatura VagaCandidatada = new VagaCandidatura();
                     VagaCandidatada.Idf_Vaga = Id;

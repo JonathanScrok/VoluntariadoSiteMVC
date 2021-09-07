@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using SyrusVoluntariado.Database;
+using SyrusVoluntariado.BLL;
 using SyrusVoluntariado.Models;
 using System;
 using System.Collections.Generic;
@@ -8,11 +8,6 @@ using System.Linq;
 using System.Threading.Tasks;
 namespace SyrusVoluntariado.Controllers {
     public class LoginController : Controller {
-        private DatabaseContext _db;
-
-        public LoginController(DatabaseContext db) {
-            _db = db;
-        }
 
         [HttpGet]
         public IActionResult Index() {
@@ -23,8 +18,9 @@ namespace SyrusVoluntariado.Controllers {
         [HttpPost]
         public ActionResult Index([FromForm] Usuario usuario) {
 
-            var ValidaDados = _db.Usuarios.Where(a => a.Email == usuario.Email && a.Senha == usuario.Senha).FirstOrDefault();
+            var Logins = Login_P1.TodosLogins();
 
+            var ValidaDados = Logins.Where(a => a.Email == usuario.Email && a.Senha == usuario.Senha).FirstOrDefault();
 
             if (ValidaDados != null) {
 
@@ -37,14 +33,17 @@ namespace SyrusVoluntariado.Controllers {
                 * Ler Session
                 * string login = HttpContext.Session.GetString("Login");
                 */
+                Usuario_P1 Usuario = new Usuario_P1(ValidaDados.Id_Usuario);
+                Usuario.CompleteObject();
 
                 HttpContext.Session.SetString("Login", "true");
-                HttpContext.Session.SetString("UsuarioLogado", ValidaDados.Nome);
+                HttpContext.Session.SetString("UsuarioLogado", Usuario.Nome);
 
-                HttpContext.Session.SetInt32("IdUsuarioLogado", ValidaDados.Id);
+                HttpContext.Session.SetInt32("IdUsuarioLogado", ValidaDados.Id_Usuario);
                 string UrlAction;
                 string UrlControler;
                 string Id;
+
                 try {
                     UrlAction = TempData["URLRedirectAction"].ToString();
                     UrlControler = TempData["URLRedirectController"].ToString();
@@ -66,8 +65,6 @@ namespace SyrusVoluntariado.Controllers {
                 TempData["MensagemErro"] = "Email ou senha estão incorretos!";
                 return View();
             }
-
-
         }
 
         [HttpGet]
@@ -87,8 +84,35 @@ namespace SyrusVoluntariado.Controllers {
 
             if (ModelState.IsValid && ExistenciaEmail == false) {
 
-                _db.Usuarios.Add(usuario);
-                _db.SaveChanges();
+                Usuario_P1 usu = new Usuario_P1();
+
+                usu.Nome = usuario.Nome;
+                usu.Email = usuario.Email;
+                if (usuario.Sexo == "Masculino")
+                {
+                    usu.Sexo = 1;
+                }
+                else if (usuario.Sexo == "Feminino")
+                {
+                    usu.Sexo = 2;
+                }
+                else
+                {
+                    usu.Sexo = 3;
+                }
+                //usu.Sexo = usuario.Sexo;
+
+                usu.DataCadastro = DateTime.Now;
+                usu.Save();
+
+                usu.CompleteObject(usuario.Email);
+                 
+                Login_P1 login = new Login_P1();
+                login.IdUsuario = usu.IdUsuario;
+                login.Email = usuario.Email;
+                login.Senha = usuario.Senha;
+                login.DataCadastro = DateTime.Now;
+                login.Save();
 
                 HttpContext.Session.SetString("Login", "true");
 
@@ -102,9 +126,9 @@ namespace SyrusVoluntariado.Controllers {
 
         public bool ExisteEmail(Usuario usuario) {
 
-            var UsuariosCadastrados = _db.Usuarios.Where(a => a.Email == usuario.Email && a.Id != usuario.Id).FirstOrDefault();
+            int? emails = Login_P1.BuscaLogin_Email(usuario.Email).Count;
 
-            if (UsuariosCadastrados == null) {
+            if (emails == 0 || emails == null) {
                 return false;
             } else {
                 return true;
