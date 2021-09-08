@@ -117,7 +117,7 @@ namespace SyrusVoluntariado.Controllers {
                 HttpContext.Session.SetString("Login", "true");
 
                 HttpContext.Session.SetString("UsuarioLogado", usuario.Nome);
-                HttpContext.Session.SetInt32("IdUsuarioLogado", usuario.Id);
+                HttpContext.Session.SetInt32("IdUsuarioLogado", usu.IdUsuario);
 
                 return RedirectToAction("Index", "Home");
             }

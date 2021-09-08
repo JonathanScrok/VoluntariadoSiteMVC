@@ -46,10 +46,10 @@ namespace SyrusVoluntariado.Controllers {
             var ValorUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado");
             int IdUsuarioLogado = ValorUsuarioLogado.GetValueOrDefault();
 
-            Vaga_P1 vagas = new Vaga_P1();
-            vagas.CompleteObject();
-
             if (ModelState.IsValid) {
+
+                Vaga_P1 vagas = new Vaga_P1();
+                vagas.CompleteObject();
 
                 vagas.DataVaga = DateTime.Now;
                 vagas.IdUsuarioAdm = IdUsuarioLogado;

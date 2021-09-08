@@ -12,7 +12,7 @@ namespace SyrusVoluntariado.BLL
     public partial class Login_P1
     {
         #region StringConnection
-        private const string stringConnection = "Data Source=DESKTOP-P97AO4H;Initial Catalog=be_helper;Integrated Security=False;User Id=sa;Password=b3ah3lper#2021;MultipleActiveResultSets=True";
+        private const string stringConnection = "Data Source=mssql-49550-0.cloudclusters.net,11255;Initial Catalog=be_helper;Integrated Security=False;User Id=AdminBeaHelper;Password=B3ah3lper#2021;MultipleActiveResultSets=True";
         #endregion
 
         #region Atributos
