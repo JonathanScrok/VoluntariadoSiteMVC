@@ -20,7 +20,7 @@ namespace SyrusVoluntariado.Controllers {
         }
 
         public IActionResult Index() {
-            ViewBag.FooterPrecisa = false;
+
             int IdfUsuario = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault();
 
             Usuario_P1 Usuario = new Usuario_P1(IdfUsuario);

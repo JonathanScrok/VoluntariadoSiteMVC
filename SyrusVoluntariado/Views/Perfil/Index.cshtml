@@ -8,32 +8,34 @@
 }
 
 <link href="/css/FundoPaginas.css" rel="stylesheet" type="text/css" />
-<div class="perfil-tudo">
-    <div class="perfil-infos">
-        <table class="table table-borderless" id="fontePerfil">
-            <tbody>
-                <tr>
-                    <th scope="row">Nome</th>
-                    <td>@Model.Nome</td>
-                </tr>
-                <tr>
-                    <th scope="row">Email</th>
-                    <td>@Model.Email</td>
-                </tr>
-                <tr>
-                    <th scope="row">Sexo</th>
-                    <td>@Model.Sexo</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+<section>
+    <div class="perfil-tudo">
+        <div class="perfil-infos">
+            <table class="table table-borderless" id="fontePerfil">
+                <tbody>
+                    <tr>
+                        <th scope="row">Nome</th>
+                        <td>@Model.Nome</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Email</th>
+                        <td>@Model.Email</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Sexo</th>
+                        <td>@Model.Sexo</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-    <div class="botoes-perfil">
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <a class="btn Botao-MinhasVagas btn-lg" href="/perfil/minhasvagas"><b>Meus Eventos</b></a>
-        </div>
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end ms-2">
-            <a class="btn Botao-VagasCandidatadas btn-lg" href="/perfil/vagascandidatadas"><b>Vagas Candidatadas</b></a>
+        <div class="botoes-perfil">
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a class="btn Botao-MinhasVagas btn-lg" href="/perfil/minhasvagas"><b>Meus Eventos</b></a>
+            </div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end ms-2">
+                <a class="btn Botao-VagasCandidatadas btn-lg" href="/perfil/vagascandidatadas"><b>Vagas Candidatadas</b></a>
+            </div>
         </div>
     </div>
-</div>
+</section>
