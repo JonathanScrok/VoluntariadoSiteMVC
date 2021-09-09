@@ -159,14 +159,10 @@ namespace SyrusVoluntariado.Controllers
                 Vaga_P1 vaga = new Vaga_P1(Id);
                 vaga.CompleteObject();
 
-                //Vaga vaga = _db.Vagas.Find(Id);
-
                 if (IdfUsuarioLogado == vaga.IdUsuarioAdm)
                 {
+                    bool resultado = Vaga_P1.Delete(Id);
 
-
-                    //_db.Vagas.Remove(vaga);
-                    //_db.SaveChanges();
                 }
             }
             return RedirectToAction("MinhasVagas", "Perfil");

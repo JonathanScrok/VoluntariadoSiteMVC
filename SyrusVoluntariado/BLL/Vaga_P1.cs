@@ -162,6 +162,7 @@ namespace SyrusVoluntariado.BLL
 
         private const string UPDATE_VAGA = @"UPDATE helper.Vagas SET Id_Usuario_Adm = @Id_Usuario_Adm, Titulo = @Titulo, Categoria = @Categoria, Descricao = @Descricao, Cidade_Estado = @Cidade_Estado, DataVaga = @DataVaga WHERE Id_Vaga = @Id_Vaga";
         private const string INSERT_VAGA = @"INSERT INTO helper.Vagas(Id_Usuario_Adm, Titulo, Categoria ,Descricao, Cidade_Estado, DataVaga) VALUES (@Id_Usuario_Adm, @Titulo, @Categoria, @Descricao, @Cidade_Estado, @DataVaga)";
+        private const string DELETE_VAGA = @"DELETE FROM helper.vagas WHERE Id_Vaga = @Id_Vaga";
         #endregion
 
         #region Metodos
@@ -361,6 +362,38 @@ namespace SyrusVoluntariado.BLL
                 this.Insert(trans);
             else
                 this.Update(trans);
+        }
+        #endregion
+
+        #region Delete
+        public static bool Delete(int id_Vaga)
+        {
+            List<SqlParameter> parms = new List<SqlParameter>();
+            parms.Add(new SqlParameter("@Id_Vaga", SqlDbType.Int, 4));
+
+            parms[0].Value = id_Vaga;
+
+            SqlConnection conn = null;
+            conn = new SqlConnection(stringConnection);
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand(DELETE_VAGA, conn);
+
+            for (int i = 0; i < parms.Count; i++)
+            {
+                cmd.Parameters.Add(parms[i]);
+            }
+
+            var quantidade = cmd.ExecuteNonQuery();
+
+            if (quantidade > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         #endregion
 
