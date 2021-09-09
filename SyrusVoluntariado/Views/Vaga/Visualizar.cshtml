@@ -4,6 +4,7 @@
 }
 @{
     ViewBag.Title = "Visualizar Evento";
+    ViewBag.Id = Model.IdVaga;
 }
 <link href="/css/FundoPaginas.css" rel="stylesheet" type="text/css" />
 
@@ -61,7 +62,8 @@
                     </div>
                 </div>
             </div>
-            @if (ViewBag.ADMVaga == true) {
+            @if (ViewBag.ADMVaga == true)
+            {
                 <div id="Adm__Mensagem">
                     <div class="alert alert-danger mt-md-2" id="Adm-Mensagem" role="alert">
                         Você é administrador desta vaga!
@@ -71,8 +73,11 @@
                     <a class="btn btn-info" href="/vaga/editar/@Model.IdVaga">Editar</a>
                     <a class="btn btn-danger ms-2" onclick="ConfirmacaoExcluirVaga();">Excluir</a>
                 </div>
-            } else if (ViewBag.JaVoluntariado == true) {
-                @if (TempData["MensagemErro"] != null) {
+            }
+            else if (ViewBag.JaVoluntariado == true)
+            {
+                @if (TempData["MensagemErro"] != null)
+                {
                     <div id="Adm__Mensagem" class="mt-md-2">
                         <div class="alert alert-danger alertemail" role="alert">
                             @TempData["MensagemErro"]
@@ -82,7 +87,9 @@
                 <div class="botao-voluntariar">
                     <button class="btn btn-success" disabled>Já Voluntariado</button>
                 </div>
-            } else {
+            }
+            else
+            {
                 <div class="botao-voluntariar">
                     <a class="btn btn-success" href="/vaga/voluntariar/@Model.IdVaga">Voluntariar-me</a>
                 </div>

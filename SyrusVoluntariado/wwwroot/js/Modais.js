@@ -1,6 +1,4 @@
-﻿
-
-$(document).ready(function () {
+﻿$(document).ready(function () {
     var aceitacaoCookies = sessionStorage.getItem("Cookies");
     if (aceitacaoCookies == null) {
         $('#exampleModal').modal('show');

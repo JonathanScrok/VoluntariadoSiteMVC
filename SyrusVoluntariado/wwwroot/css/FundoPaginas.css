@@ -39,6 +39,11 @@ html {
     background: linear-gradient(90deg, rgba(74,74,74,1) 0%, rgba(15,15,15,1) 100%);
 }
 
+.btn-danger {
+    color: #FFFEFE;
+    background-color: darkred;
+    border-color: darkred;
+}
 #footerMain {
     /*    page-break-after: always;
     left: 0;

@@ -26,7 +26,6 @@
     <meta name="msapplication-TileImage" content="/templateboot/public/assets/img/favicons/mstile-150x150.png">
     <meta name="theme-color" content="#62c0a3">
     <link href="/templateboot/public/assets/css/theme.css" rel="stylesheet" />
-
     <link href="/css/FundoPaginas.css" rel="stylesheet" type="text/css" />
 </head>
 
@@ -81,39 +80,57 @@
             </div>
         </div>
 
-    </main>
-        <section class="bg-900 pb-0 pt-2">
-
-            @if (ViewBag.FooterPrecisa != false)
-            {
-                <section class="bg-900 pb-0 pt-5">
-
-                    <div>
-                        <ul class="nav justify-content-center pb-4">
-                            <li class="nav-item"><a href="/" class="nav-link px-2 text-muted"><b>Inicio</b></a></li>
-                            <li class="nav-item"><a href="/vaga/cadastrar" class="nav-link px-2 text-muted"><b>Criar Vaga</b></a></li>
-                            <li class="nav-item"><a href="/vaga" class="nav-link px-2 text-muted"><b>Eventos</b></a></li>
-                            <li class="nav-item"><a href="/home/quemsomosnos" class="nav-link px-2 text-muted"><b>Sobre nós</b></a></li>
-                        </ul>
+        <!-- Modal -->
+        <div class="modal fade" id="confirmar-excluir" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Excluir Vaga</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-
-                </section>}
-            <section class="py-0 bg-1000">
-                <div class="container">
-                    <div class="row justify-content-md-between justify-content-evenly py-4">
-                        <div class="col-12 col-sm-8 col-md-6 col-lg-auto text-center text-md-start">
-                            <p class="fs--1 my-2 fw-bold text-200">Todos direitos reservados &copy; Be a Helper, @DateTime.Now.Year</p>
-                        </div>
-                        <div class="col-12 col-sm-8 col-md-6">
-                            <p class="fs--1 my-2 text-center text-md-end text-200">
-                                <b class="fw-bold text-primary">&nbsp;BE A HELPER</b>
-                            </p>
-                        </div>
+                    <div class="modal-body">
+                        Deseja mesmo excluir a vaga?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <a class="btn btn-danger" href="/vaga/excluir/@ViewBag.Id">Excluir</a>
                     </div>
                 </div>
-            </section>
+            </div>
+        </div>
+    </main>
+    <section class="bg-900 pb-0 pt-2">
 
+        @if (ViewBag.FooterPrecisa != false)
+        {
+            <section class="bg-900 pb-0 pt-5">
+
+                <div>
+                    <ul class="nav justify-content-center pb-4">
+                        <li class="nav-item"><a href="/" class="nav-link px-2 text-muted"><b>Inicio</b></a></li>
+                        <li class="nav-item"><a href="/vaga/cadastrar" class="nav-link px-2 text-muted"><b>Criar Vaga</b></a></li>
+                        <li class="nav-item"><a href="/vaga" class="nav-link px-2 text-muted"><b>Eventos</b></a></li>
+                        <li class="nav-item"><a href="/home/quemsomosnos" class="nav-link px-2 text-muted"><b>Sobre nós</b></a></li>
+                    </ul>
+                </div>
+
+            </section>}
+        <section class="py-0 bg-1000">
+            <div class="container">
+                <div class="row justify-content-md-between justify-content-evenly py-4">
+                    <div class="col-12 col-sm-8 col-md-6 col-lg-auto text-center text-md-start">
+                        <p class="fs--1 my-2 fw-bold text-200">Todos direitos reservados &copy; Be a Helper, @DateTime.Now.Year</p>
+                    </div>
+                    <div class="col-12 col-sm-8 col-md-6">
+                        <p class="fs--1 my-2 text-center text-md-end text-200">
+                            <b class="fw-bold text-primary">&nbsp;BE A HELPER</b>
+                        </p>
+                    </div>
+                </div>
+            </div>
         </section>
+
+    </section>
     <!-- ===============================================-->
     <!--    End of Main Content-->
     <!-- ===============================================-->
@@ -126,6 +143,8 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
     <script src="/templateboot/public/vendors/fontawesome/all.min.js"></script>
     <script src="/templateboot/public/assets/js/theme.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="/js/Modais.js"></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
 </body>

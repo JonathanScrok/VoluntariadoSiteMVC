@@ -11,17 +11,21 @@ using System.Linq;
 using System.Threading.Tasks;
 using X.PagedList;
 
-namespace SyrusVoluntariado.Controllers {
+namespace SyrusVoluntariado.Controllers
+{
     [Login]
-    public class VagaController : Controller {
+    public class VagaController : Controller
+    {
 
         private DatabaseContext _db;
 
-        public VagaController(DatabaseContext db) {
+        public VagaController(DatabaseContext db)
+        {
             _db = db;
         }
 
-        public IActionResult Index(int? page) {
+        public IActionResult Index(int? page)
+        {
             var pageNumber = page ?? 1;
 
             //var vagas = _db.Vagas.ToList();
@@ -33,20 +37,23 @@ namespace SyrusVoluntariado.Controllers {
         }
 
         [HttpGet]
-        public IActionResult Cadastrar() {
+        public IActionResult Cadastrar()
+        {
             ViewBag.CadastrarAtualizar = "Cadastrar";
 
             return View(new Vaga_P1());
         }
 
         [HttpPost]
-        public IActionResult Cadastrar([FromForm] Vaga vaga) {
+        public IActionResult Cadastrar([FromForm] Vaga vaga)
+        {
 
             ViewBag.CadastrarAtualizar = "Cadastrar";
             var ValorUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado");
             int IdUsuarioLogado = ValorUsuarioLogado.GetValueOrDefault();
 
-            if (ModelState.IsValid) {
+            if (ModelState.IsValid)
+            {
 
                 Vaga_P1 vagas = new Vaga_P1();
                 vagas.CompleteObject();
@@ -69,7 +76,8 @@ namespace SyrusVoluntariado.Controllers {
         }
 
         [HttpGet]
-        public IActionResult Visualizar(int Id) {
+        public IActionResult Visualizar(int Id)
+        {
 
             Vaga_P1 vaga = new Vaga_P1(Id);
             vaga.CompleteObject();
@@ -80,10 +88,12 @@ namespace SyrusVoluntariado.Controllers {
             VagaCandidatura vagaCandidatura = _db.VagaCandidaturas.Find(Id);
             var CandidatosBanco = _db.VagaCandidaturas.Where(a => a.Idf_Usuario_Candidatado == IdfUsuarioLogado && a.Idf_Vaga == Id).FirstOrDefault();
 
-            if (CandidatosBanco != null) {
+            if (CandidatosBanco != null)
+            {
                 ViewBag.JaVoluntariado = true;
             }
-            if (vaga.IdUsuarioAdm == IdfUsuarioLogado) {
+            if (vaga.IdUsuarioAdm == IdfUsuarioLogado)
+            {
                 ViewBag.ADMVaga = true;
             }
 
@@ -92,7 +102,8 @@ namespace SyrusVoluntariado.Controllers {
 
 
         [HttpGet]
-        public IActionResult Editar(int Id) {
+        public IActionResult Editar(int Id)
+        {
 
             //ViewBag.Nivel = niveis;
             var IdfUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault();
@@ -100,7 +111,8 @@ namespace SyrusVoluntariado.Controllers {
             Vaga_P1 vaga = new Vaga_P1(Id);
             vaga.CompleteObject();
 
-            if (IdfUsuarioLogado == vaga.IdUsuarioAdm) {
+            if (IdfUsuarioLogado == vaga.IdUsuarioAdm)
+            {
                 ViewBag.CadastrarAtualizar = "Salvar";
                 return View("Cadastrar", vaga);
             }
@@ -110,15 +122,16 @@ namespace SyrusVoluntariado.Controllers {
         }
 
         [HttpPost]
-        public IActionResult Editar([FromForm] Vaga vaga) {
+        public IActionResult Editar([FromForm] Vaga vaga)
+        {
 
             ViewBag.CadastrarAtualizar = "Salvar";
             var IdfUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault();
 
-            Vaga_P1 vagas = new Vaga_P1(vaga.Id_Vaga);
-            vagas.CompleteObject();
-
-            if (ModelState.IsValid) {
+            if (ModelState.IsValid)
+            {
+                Vaga_P1 vagas = new Vaga_P1(vaga.Id_Vaga);
+                vagas.CompleteObject();
 
                 vagas.DataVaga = DateTime.Now;
                 vagas.IdUsuarioAdm = IdfUsuarioLogado;
@@ -136,22 +149,32 @@ namespace SyrusVoluntariado.Controllers {
         }
 
         [HttpGet]
-        public IActionResult Excluir(int Id) {
+        public IActionResult Excluir(int Id)
+        {
 
             var IdfUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault();
 
-            Vaga vaga = _db.Vagas.Find(Id);
+            if (Id != 0)
+            {
+                Vaga_P1 vaga = new Vaga_P1(Id);
+                vaga.CompleteObject();
 
-            if (IdfUsuarioLogado == vaga.Id_Usuario_Adm) {
-                _db.Vagas.Remove(vaga);
-                _db.SaveChanges();
+                //Vaga vaga = _db.Vagas.Find(Id);
+
+                if (IdfUsuarioLogado == vaga.IdUsuarioAdm)
+                {
+
+
+                    //_db.Vagas.Remove(vaga);
+                    //_db.SaveChanges();
+                }
             }
-
             return RedirectToAction("MinhasVagas", "Perfil");
         }
 
         [HttpGet]
-        public IActionResult Voluntariar(int Id) {
+        public IActionResult Voluntariar(int Id)
+        {
             var IdfUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault();
 
             Vaga_P1 vaga = new Vaga_P1(Id);
@@ -165,8 +188,10 @@ namespace SyrusVoluntariado.Controllers {
 
             var CandidatosBanco = _db.VagaCandidaturas.Where(a => a.Idf_Usuario_Candidatado == IdfUsuarioLogado && a.Idf_Vaga == Id).FirstOrDefault();
 
-            if (vaga.IdUsuarioAdm != IdfUsuarioLogado) {
-                if (CandidatosBanco == null) {
+            if (vaga.IdUsuarioAdm != IdfUsuarioLogado)
+            {
+                if (CandidatosBanco == null)
+                {
                     VagaCandidatura VagaCandidatada = new VagaCandidatura();
                     VagaCandidatada.Idf_Vaga = Id;
                     VagaCandidatada.Idf_Usuario_Candidatado = IdfUsuarioLogado;
@@ -175,7 +200,9 @@ namespace SyrusVoluntariado.Controllers {
                     _db.SaveChanges();
 
                     EnviarEmail.EnviarMensagemContato(usuario, usuarioAdm.Email, Id);
-                } else {
+                }
+                else
+                {
                     TempData["MensagemErro"] = "Você já está cadastrado neste evento!";
                     ViewBag.JaVoluntariado = true;
                 }
@@ -185,7 +212,8 @@ namespace SyrusVoluntariado.Controllers {
         }
 
         [HttpGet]
-        public IActionResult ListaVoluntarios(int Id) {
+        public IActionResult ListaVoluntarios(int Id)
+        {
             ViewBag.FooterPrecisa = false;
 
             var ListaVoluntarios = _db.VagaCandidaturas.Where(a => a.Idf_Vaga == Id).ToList();
@@ -194,12 +222,14 @@ namespace SyrusVoluntariado.Controllers {
             List<Usuario> voluntarios = new List<Usuario>();
             List<int> IdfVoluntarios = new List<int>();
 
-            for (int i = 0; i < ListaVoluntarios.Count; i++) {
+            for (int i = 0; i < ListaVoluntarios.Count; i++)
+            {
                 var idf = ListaVoluntarios[i].Idf_Usuario_Candidatado;
                 IdfVoluntarios.Add(idf);
             }
 
-            foreach (var IdUsu in IdfVoluntarios) {
+            foreach (var IdUsu in IdfVoluntarios)
+            {
                 CarregaVagasCandidatadas = _db.Usuarios.Where(a => a.Id == IdUsu).ToList();
                 voluntarios.Add(CarregaVagasCandidatadas[0]);
             }
