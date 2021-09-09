@@ -37,7 +37,11 @@ namespace SyrusVoluntariado.Controllers {
                 Usuario.CompleteObject();
 
                 HttpContext.Session.SetString("Login", "true");
-                HttpContext.Session.SetString("UsuarioLogado", Usuario.Nome);
+
+                string[] NomeCompleto = Usuario.Nome.Split(" ");
+
+                string primeiroNome = NomeCompleto[0].ToString();
+                HttpContext.Session.SetString("UsuarioLogado", primeiroNome);
 
                 HttpContext.Session.SetInt32("IdUsuarioLogado", ValidaDados.Id_Usuario);
                 string UrlAction;
@@ -116,7 +120,9 @@ namespace SyrusVoluntariado.Controllers {
 
                 HttpContext.Session.SetString("Login", "true");
 
-                HttpContext.Session.SetString("UsuarioLogado", usuario.Nome);
+                string[] NomeCompleto = usuario.Nome.Split(" ");
+                string primeiroNome = NomeCompleto[0].ToString();
+                HttpContext.Session.SetString("UsuarioLogado", primeiroNome);
                 HttpContext.Session.SetInt32("IdUsuarioLogado", usu.IdUsuario);
 
                 return RedirectToAction("Index", "Home");
