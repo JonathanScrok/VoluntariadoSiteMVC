@@ -12,13 +12,12 @@ namespace SyrusVoluntariado.Library.Validation {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext) {
 
             Vaga vaga = validationContext.ObjectInstance as Vaga;
-            var _db = (DatabaseContext)validationContext.GetService(typeof(DatabaseContext));
+            //var _db = (DatabaseContext)validationContext.GetService(typeof(DatabaseContext));
             List<Vaga> vagas = Vaga_P1.TodasVagas();
 
             //Já existe no banco 1 registro:
             // - Verificar se o nome existe
             // - Verificar se o Id é o mesmo do registro no banco.
-
 
             var TituloVaga = vagas.Where(a => a.Titulo == vaga.Titulo && a.Id_Vaga != vaga.Id_Vaga).FirstOrDefault();
 

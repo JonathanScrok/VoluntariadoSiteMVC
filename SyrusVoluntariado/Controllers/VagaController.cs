@@ -17,13 +17,6 @@ namespace SyrusVoluntariado.Controllers
     public class VagaController : Controller
     {
 
-        private DatabaseContext _db;
-
-        public VagaController(DatabaseContext db)
-        {
-            _db = db;
-        }
-
         public IActionResult Index(int? page)
         {
             var pageNumber = page ?? 1;
@@ -210,22 +203,24 @@ namespace SyrusVoluntariado.Controllers
         {
             ViewBag.FooterPrecisa = false;
 
-            var ListaVoluntarios = _db.VagaCandidaturas.Where(a => a.Id_Vaga == Id).ToList();
-            List<Usuario> CarregaVagasCandidatadas = null;
+            List<VagaCandidatura> ListaUsuariosVoluntariados = VagaCandidaturas_P1.TodasUsuarioCandidatadosVaga(Id);
 
-            List<Usuario> voluntarios = new List<Usuario>();
+            List<Usuario_P1> voluntarios = new List<Usuario_P1>();
             List<int> IdfVoluntarios = new List<int>();
 
-            for (int i = 0; i < ListaVoluntarios.Count; i++)
+            //Salva todos ID dos usuários candidatados
+            for (int i = 0; i < ListaUsuariosVoluntariados.Count; i++)
             {
-                var idf = ListaVoluntarios[i].Id_Usuario;
+                var idf = ListaUsuariosVoluntariados[i].Id_Usuario;
                 IdfVoluntarios.Add(idf);
             }
 
             foreach (var IdUsu in IdfVoluntarios)
             {
-                CarregaVagasCandidatadas = _db.Usuarios.Where(a => a.Id == IdUsu).ToList();
-                voluntarios.Add(CarregaVagasCandidatadas[0]);
+                Usuario_P1 Usuario = new Usuario_P1(IdUsu);
+                Usuario.CompleteObject();
+
+                voluntarios.Add(Usuario);
             }
 
             var pageNumber = 1;

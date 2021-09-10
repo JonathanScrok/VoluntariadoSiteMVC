@@ -1,4 +1,5 @@
-﻿using SyrusVoluntariado.Database;
+﻿using SyrusVoluntariado.BLL;
+using SyrusVoluntariado.Database;
 using SyrusVoluntariado.Models;
 using System;
 using System.Collections.Generic;
@@ -11,13 +12,13 @@ namespace SyrusVoluntariado.Library.Validation {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext) {
 
             Usuario usuario = validationContext.ObjectInstance as Usuario;
-            var _db = (DatabaseContext)validationContext.GetService(typeof(DatabaseContext));
+            //var _db = (DatabaseContext)validationContext.GetService(typeof(DatabaseContext));
 
-            //Já existe no banco 1 registro:
+            List<Usuario> usuarios = Usuario_P1.TodosUsuarios();
+
             // - Verificar se o nome existe
             // - Verificar se o Id é o mesmo do registro no banco.
-
-            var UsuariosBanco = _db.Usuarios.Where(a => a.Email == usuario.Email && a.Id != usuario.Id).FirstOrDefault();
+            var UsuariosBanco = usuarios.Where(a => a.Email == usuario.Email && a.Id != usuario.Id).FirstOrDefault();
 
             if (UsuariosBanco == null) {
                 return ValidationResult.Success;

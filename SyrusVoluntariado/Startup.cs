@@ -14,12 +14,12 @@ namespace SyrusVoluntariado {
     public class Startup {
         public void ConfigureServices(IServiceCollection services) {
             services.AddMvc();
-            services.AddDbContext<DatabaseContext>(options => {
-                //Providers - Bibliotecas Conexões com Bancos - SqlServer, MySQL, Oracle, Postgree, Firebird, DB2...
-                //options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=site01;Integrated Security=True");
+            //services.AddDbContext<DatabaseContext>(options => {
+            //    //Providers - Bibliotecas Conexões com Bancos - SqlServer, MySQL, Oracle, Postgree, Firebird, DB2...
+            //    //options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=site01;Integrated Security=True");
 
-                options.UseSqlite("Data Source=Database\\bancoVoluntarios.db");
-            });
+            //    options.UseSqlite("Data Source=Database\\bancoVoluntarios.db");
+            //});
 
             services.AddDistributedMemoryCache();
             services.AddSession();

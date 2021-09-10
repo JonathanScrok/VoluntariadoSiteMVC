@@ -15,7 +15,7 @@ namespace SyrusVoluntariado.Database {
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options){
             //EF - Garantir que o banco seja criado pelo EF - Code First
-            Database.EnsureCreated();
+           //Database.EnsureCreated();
 
         }
     }

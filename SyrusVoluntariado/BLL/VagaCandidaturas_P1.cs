@@ -108,6 +108,7 @@ namespace SyrusVoluntariado.BLL
         private const string SELECT_TODASCANDIDATURAS = @"select * from helper.VagaCandidaturas";
         private const string SELECT_BUSCA_CANDIDATURAID = @"select * from helper.VagaCandidaturas where Id_Candidatura = @Id_Candidatura";
         private const string SELECT_BUSCA_CANDIDATURA_IDUSUARIO = @"select * from helper.VagaCandidaturas where Id_Usuario = @Id_Usuario";
+        private const string SELECT_BUSCA_CANDIDATURA_IDVAGA = @"select * from helper.VagaCandidaturas where Id_Vaga = @Id_Vaga";
 
         private const string UPDATE_CANDIDATURA = @"UPDATE helper.VagaCandidaturas SET Id_Candidatura = @Id_Candidatura, Id_Vaga = @Id_Vaga, Id_Usuario = @Id_Usuario, DataCadastro = @DataCadastro where Id_Candidatura = @Id_Candidatura";
         private const string INSERT_CANDIDATURA = @"INSERT INTO helper.VagaCandidaturas(Id_Vaga, Id_Usuario, DataCadastro) VALUES (@Id_Vaga, @Id_Usuario, @DataCadastro)";
@@ -198,6 +199,50 @@ namespace SyrusVoluntariado.BLL
                 conn.Open();
 
                 SqlCommand cmd = new SqlCommand(SELECT_BUSCA_CANDIDATURA_IDUSUARIO, conn);
+                cmd.Parameters.Add(parms[0]);
+
+                Mapper.CreateMap<IDataRecord, VagaCandidatura>();
+
+                using (reader = cmd.ExecuteReader())
+                {
+                    CandidaturasUsuario = Mapper.Map<List<VagaCandidatura>>(reader);
+                    return CandidaturasUsuario;
+                }
+            }
+            finally
+            {
+
+                if (reader != null)
+                {
+                    reader.Close();
+                }
+
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+        }
+        #endregion
+
+        #region Busca todos os usuários Candidatados na vaga
+        public static List<VagaCandidatura> TodasUsuarioCandidatadosVaga(int IdVaga)
+        {
+            SqlConnection conn = null;
+            SqlDataReader reader = null;
+            List<VagaCandidatura> CandidaturasUsuario = new List<VagaCandidatura>();
+
+            try
+            {
+                List<SqlParameter> parms = new List<SqlParameter>();
+                parms.Add(new SqlParameter("@Id_Vaga", SqlDbType.Int, 4));
+
+                parms[0].Value = IdVaga;
+
+                conn = new SqlConnection(stringConnection);
+                conn.Open();
+
+                SqlCommand cmd = new SqlCommand(SELECT_BUSCA_CANDIDATURA_IDVAGA, conn);
                 cmd.Parameters.Add(parms[0]);
 
                 Mapper.CreateMap<IDataRecord, VagaCandidatura>();
