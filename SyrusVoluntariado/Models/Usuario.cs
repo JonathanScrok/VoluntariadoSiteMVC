@@ -14,7 +14,7 @@ namespace SyrusVoluntariado.Models {
         public string Nome { get; set; }
 
         [Required(ErrorMessage = "O Campo é Obrigatório!")]
-        public string Sexo { get; set; }
+        public int? Sexo { get; set; }
 
         [Required(ErrorMessage = "O Campo é Obrigatório!")]
         [EmailAddress(ErrorMessage = "O Email é inválido!")]

@@ -199,3 +199,8 @@ width: 100%;
 .Botao-VagasCandidatadas {
     background-color: #007e00;
 }
+
+.marginesquerda-99 {
+    margin-left: 0.25rem !important;
+    width: 99%;
+}

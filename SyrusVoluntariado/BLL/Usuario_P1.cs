@@ -19,7 +19,7 @@ namespace SyrusVoluntariado.BLL
 
         private int _idUsuario;
         private string _nome;
-        private int _sexo;
+        private int? _sexo;
         private string _email;
         private DateTime _dataCadastro;
 
@@ -73,7 +73,7 @@ namespace SyrusVoluntariado.BLL
         #endregion
 
         #region Sexo
-        public int Sexo
+        public int? Sexo
         {
             get
             {
