@@ -110,7 +110,7 @@ namespace SyrusVoluntariado.BLL
         private const string SELECT_BUSCA_CANDIDATURA_IDUSUARIO = @"select * from helper.VagaCandidaturas where Id_Usuario = @Id_Usuario";
 
         private const string UPDATE_CANDIDATURA = @"UPDATE helper.VagaCandidaturas SET Id_Candidatura = @Id_Candidatura, Id_Vaga = @Id_Vaga, Id_Usuario = @Id_Usuario, DataCadastro = @DataCadastro where Id_Candidatura = @Id_Candidatura";
-        private const string INSERT_CANDIDATURA = @"INSERT INTO helper.VagaCandidaturas(Id_Candidatura, Id_Vaga, Id_Usuario, DataCadastro) VALUES (@Id_Candidatura, @Id_Vaga, @Id_Usuario, @DataCadastro)";
+        private const string INSERT_CANDIDATURA = @"INSERT INTO helper.VagaCandidaturas(Id_Vaga, Id_Usuario, DataCadastro) VALUES (@Id_Vaga, @Id_Usuario, @DataCadastro)";
         private const string DELETE_CANDIDATURA = @"DELETE FROM helper.VagaCandidaturas WHERE Id_Candidatura = @Id_Candidatura";
         #endregion
 
@@ -439,22 +439,6 @@ namespace SyrusVoluntariado.BLL
             conn.Open();
 
             SqlCommand cmd = new SqlCommand(SELECT_BUSCA_CANDIDATURAID, conn);
-            cmd.Parameters.Add(parms[0]);
-
-            return cmd.ExecuteReader();
-        }
-        private static IDataReader LoadDataReaderUsuario(int IdUsuario)
-        {
-            List<SqlParameter> parms = new List<SqlParameter>();
-            parms.Add(new SqlParameter("@Id_Usuario", SqlDbType.Int, 4));
-
-            parms[0].Value = IdUsuario;
-
-            SqlConnection conn = null;
-            conn = new SqlConnection(stringConnection);
-            conn.Open();
-
-            SqlCommand cmd = new SqlCommand(SELECT_BUSCA_CANDIDATURA_IDUSUARIO, conn);
             cmd.Parameters.Add(parms[0]);
 
             return cmd.ExecuteReader();

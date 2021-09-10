@@ -28,7 +28,6 @@ namespace SyrusVoluntariado.Controllers
         {
             var pageNumber = page ?? 1;
 
-            //var vagas = _db.Vagas.ToList();
             List<Vaga> vagas = Vaga_P1.TodasVagas();
 
             var resultadoPaginado = vagas.ToPagedList(pageNumber, 10);
@@ -84,9 +83,8 @@ namespace SyrusVoluntariado.Controllers
 
             var IdfUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault();
 
-            //Vaga vaga = _db.Vagas.Find(Id);
-            VagaCandidatura vagaCandidatura = _db.VagaCandidaturas.Find(Id);
-            var CandidatosBanco = _db.VagaCandidaturas.Where(a => a.Id_Usuario == IdfUsuarioLogado && a.Id_Vaga == Id).FirstOrDefault();
+            List<VagaCandidatura> TodasCandidaturasUsuario = VagaCandidaturas_P1.TodasCandidaturasUsuario(IdfUsuarioLogado);
+            var CandidatosBanco = TodasCandidaturasUsuario.Where(a => a.Id_Usuario == IdfUsuarioLogado && a.Id_Vaga == Id).FirstOrDefault();
 
             if (CandidatosBanco != null)
             {
@@ -99,7 +97,6 @@ namespace SyrusVoluntariado.Controllers
 
             return View(vaga);
         }
-
 
         [HttpGet]
         public IActionResult Editar(int Id)
@@ -182,19 +179,20 @@ namespace SyrusVoluntariado.Controllers
             Usuario_P1 usuarioAdm = new Usuario_P1(vaga.IdUsuarioAdm);
             usuarioAdm.CompleteObject();
 
-            var CandidatosBanco = _db.VagaCandidaturas.Where(a => a.Id_Usuario == IdfUsuarioLogado && a.Id_Vaga == Id).FirstOrDefault();
+            List<VagaCandidatura> TodasCandidaturasUsuario = VagaCandidaturas_P1.TodasCandidaturasUsuario(IdfUsuarioLogado);
+            var CandidatosBanco = TodasCandidaturasUsuario.Where(a => a.Id_Usuario == IdfUsuarioLogado && a.Id_Vaga == Id).FirstOrDefault();
 
             if (vaga.IdUsuarioAdm != IdfUsuarioLogado)
             {
                 if (CandidatosBanco == null)
                 {
-                    VagaCandidatura VagaCandidatada = new VagaCandidatura();
-                    VagaCandidatada.Id_Vaga = Id;
-                    VagaCandidatada.Id_Usuario = IdfUsuarioLogado;
+                    VagaCandidaturas_P1 candidatarVaga = new VagaCandidaturas_P1();
+                    candidatarVaga.IdUsuario = IdfUsuarioLogado;
+                    candidatarVaga.IdVaga = Id;
+                    candidatarVaga.DataCadastro = DateTime.Now;
+                    candidatarVaga.Save();
 
-                    _db.VagaCandidaturas.Add(VagaCandidatada);
-                    _db.SaveChanges();
-
+                    ViewBag.JaVoluntariado = true;
                     EnviarEmail.EnviarMensagemContato(usuario, usuarioAdm.Email, Id);
                 }
                 else
@@ -204,7 +202,7 @@ namespace SyrusVoluntariado.Controllers
                 }
             }
 
-            return RedirectToAction("Visualizar", "Vaga", vaga);
+            return View("Visualizar", vaga);
         }
 
         [HttpGet]
