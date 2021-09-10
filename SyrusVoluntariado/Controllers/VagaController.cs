@@ -86,7 +86,7 @@ namespace SyrusVoluntariado.Controllers
 
             //Vaga vaga = _db.Vagas.Find(Id);
             VagaCandidatura vagaCandidatura = _db.VagaCandidaturas.Find(Id);
-            var CandidatosBanco = _db.VagaCandidaturas.Where(a => a.Idf_Usuario_Candidatado == IdfUsuarioLogado && a.Idf_Vaga == Id).FirstOrDefault();
+            var CandidatosBanco = _db.VagaCandidaturas.Where(a => a.Id_Usuario == IdfUsuarioLogado && a.Id_Vaga == Id).FirstOrDefault();
 
             if (CandidatosBanco != null)
             {
@@ -182,15 +182,15 @@ namespace SyrusVoluntariado.Controllers
             Usuario_P1 usuarioAdm = new Usuario_P1(vaga.IdUsuarioAdm);
             usuarioAdm.CompleteObject();
 
-            var CandidatosBanco = _db.VagaCandidaturas.Where(a => a.Idf_Usuario_Candidatado == IdfUsuarioLogado && a.Idf_Vaga == Id).FirstOrDefault();
+            var CandidatosBanco = _db.VagaCandidaturas.Where(a => a.Id_Usuario == IdfUsuarioLogado && a.Id_Vaga == Id).FirstOrDefault();
 
             if (vaga.IdUsuarioAdm != IdfUsuarioLogado)
             {
                 if (CandidatosBanco == null)
                 {
                     VagaCandidatura VagaCandidatada = new VagaCandidatura();
-                    VagaCandidatada.Idf_Vaga = Id;
-                    VagaCandidatada.Idf_Usuario_Candidatado = IdfUsuarioLogado;
+                    VagaCandidatada.Id_Vaga = Id;
+                    VagaCandidatada.Id_Usuario = IdfUsuarioLogado;
 
                     _db.VagaCandidaturas.Add(VagaCandidatada);
                     _db.SaveChanges();
@@ -212,7 +212,7 @@ namespace SyrusVoluntariado.Controllers
         {
             ViewBag.FooterPrecisa = false;
 
-            var ListaVoluntarios = _db.VagaCandidaturas.Where(a => a.Idf_Vaga == Id).ToList();
+            var ListaVoluntarios = _db.VagaCandidaturas.Where(a => a.Id_Vaga == Id).ToList();
             List<Usuario> CarregaVagasCandidatadas = null;
 
             List<Usuario> voluntarios = new List<Usuario>();
@@ -220,7 +220,7 @@ namespace SyrusVoluntariado.Controllers
 
             for (int i = 0; i < ListaVoluntarios.Count; i++)
             {
-                var idf = ListaVoluntarios[i].Idf_Usuario_Candidatado;
+                var idf = ListaVoluntarios[i].Id_Usuario;
                 IdfVoluntarios.Add(idf);
             }
 

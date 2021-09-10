@@ -1,4 +1,4 @@
-﻿@model List<SyrusVoluntariado.Models.Vaga>
+﻿@model List<SyrusVoluntariado.BLL.Vaga_P1>
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -43,9 +43,8 @@
                 <th scope="row">@vaga.Titulo</th>
                 <td>@vaga.Descricao</td>
                 <td>@vaga.Categoria</td>
-                <td>@vaga.Cidade_Estado</td>
                 <td>
-                    <a href="/vaga/visualizar/@vaga.Id_Vaga" class="btn">Visualizar</a>
+                    <a href="/vaga/visualizar/@vaga.IdVaga" class="btn">Visualizar</a>
                 </td>
             </tr>
         }

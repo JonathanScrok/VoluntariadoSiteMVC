@@ -8,8 +8,10 @@ namespace SyrusVoluntariado.Models {
 
         public int Id { get; set; }
 
-        public int Idf_Vaga { get; set; }
+        public int Id_Candidatura { get; set; }
 
-        public int Idf_Usuario_Candidatado { get; set; }
+        public int Id_Vaga { get; set; }
+
+        public int Id_Usuario { get; set; }
     }
 }

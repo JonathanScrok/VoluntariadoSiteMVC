@@ -13,12 +13,6 @@ namespace SyrusVoluntariado.Controllers {
     [Login]
     public class PerfilController : Controller {
 
-        private DatabaseContext _db;
-
-        public PerfilController(DatabaseContext db) {
-            _db = db;
-        }
-
         public IActionResult Index() {
 
             int IdfUsuario = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault();
@@ -42,23 +36,27 @@ namespace SyrusVoluntariado.Controllers {
         public IActionResult VagasCandidatadas() {
             ViewBag.FooterPrecisa = false;
             int IdfUsuario = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault();
-            var IdVagasCandidatadas = _db.VagaCandidaturas.Where(a => a.Idf_Usuario_Candidatado == IdfUsuario).ToList();
 
-            List<Vaga> CarregaVagasCandidatadas = null;
-            List<Vaga> MinhasCandidaturas = new List<Vaga>();
+            List<VagaCandidatura> VagasCandidatadas = VagaCandidaturas_P1.TodasCandidaturasUsuario(IdfUsuario);
+
+            List<Vaga_P1> MinhasCandidaturas = new List<Vaga_P1>();
             List<int> Idfvagas = new List<int>();
+
             List<Vaga> vagas = Vaga_P1.TodasVagas();
 
-            for (int i = 0; i < IdVagasCandidatadas.Count; i++) {
-                var idf = IdVagasCandidatadas[i].Idf_Vaga;
+            for (int i = 0; i < VagasCandidatadas.Count; i++)
+            {
+                var idf = VagasCandidatadas[i].Id_Vaga;
                 Idfvagas.Add(idf);
             }
 
-            foreach (var Id in Idfvagas) {
-                CarregaVagasCandidatadas = vagas.Where(a => a.Id_Vaga == Id).ToList();
-                MinhasCandidaturas.Add(CarregaVagasCandidatadas[0]);
+            foreach (var Id in Idfvagas)
+            {
+                Vaga_P1 vaga = new Vaga_P1(Id);
+                vaga.CompleteObject();
+                MinhasCandidaturas.Add(vaga);
             }
-            
+
             return View(MinhasCandidaturas);
         }
     }
