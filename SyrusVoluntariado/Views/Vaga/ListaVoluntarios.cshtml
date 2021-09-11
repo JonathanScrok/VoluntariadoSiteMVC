@@ -40,11 +40,23 @@
 
     <tbody class="tab-list-vagas">
         @foreach (var usuario in Model) {
-            <tr>
-                <th scope="row">@usuario.Nome</th>
-                <td>@usuario.Email</td>
-                <td>@usuario.Sexo</td>
-            </tr>
+        <tr>
+            <th scope="row">@usuario.Nome</th>
+            <td>@usuario.Email</td>
+            @if (@usuario.Sexo == 1)
+            {
+                <td>Masculino</td>
+            }
+            else if (@usuario.Sexo == 2)
+            {
+                <td>Feminino</td>
+            }
+            else
+            {
+                <td>Prefiro não declarar</td>
+            }
+
+        </tr>
         }
     </tbody>
 </table>

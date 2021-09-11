@@ -20,6 +20,21 @@ namespace SyrusVoluntariado.Controllers {
             Usuario_P1 Usuario = new Usuario_P1(IdfUsuario);
             Usuario.CompleteObject();
 
+            if (Usuario.Sexo == 1)
+            {
+                ViewBag.UsuarioSexo = "Masculino";
+            }
+            else if (Usuario.Sexo == 2)
+            {
+                ViewBag.UsuarioSexo = "Feminino";
+            }
+            else
+            {
+                ViewBag.UsuarioSexo = "Prefiro não declarar";
+            }
+
+            
+
             return View(Usuario);
         }
 

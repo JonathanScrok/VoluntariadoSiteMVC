@@ -12,9 +12,23 @@ namespace SyrusVoluntariado.Library.Mail {
 
         public static void EnviarMensagemContato(Usuario_P1 usuario, string emailAdm, int idVaga) {
 
-            string hrefListaVagas = "https://syrusvoluntariado.herokuapp.com/vaga/listavoluntarios/" + idVaga;
+            string hrefListaVagas = "https://beahelper.herokuapp.com/vaga/listavoluntarios/" + idVaga;
+            string Sexo;
 
-            string conteudo = string.Format("<p>Nome: {0}<br/> Email: {1}<br/> Sexo: {2}</p><p><a href='{3}'>Ver todos voluntários</a></p>", usuario.Nome, usuario.Email, usuario.Sexo, hrefListaVagas);
+            if (usuario.Sexo == 1)
+            {
+                Sexo = "Masculino";
+            }
+            else if (usuario.Sexo == 2)
+            {
+                Sexo = "Feminino";
+            }
+            else
+            {
+                Sexo = "Prefiro não declarar";
+            }
+
+            string conteudo = string.Format("<p>Nome: {0}<br/> Email: {1}<br/> Sexo: {2}</p><p><a href='{3}'>Ver todos voluntários</a></p>", usuario.Nome, usuario.Email, Sexo, hrefListaVagas);
 
             //Configurar Servidor SMTP
             SmtpClient smtp = new SmtpClient(Constants.ServidorSMTP, Constants.PortaSMTP);

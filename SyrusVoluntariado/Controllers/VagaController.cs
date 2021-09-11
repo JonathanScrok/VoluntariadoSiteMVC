@@ -186,11 +186,25 @@ namespace SyrusVoluntariado.Controllers
                     candidatarVaga.Save();
 
                     ViewBag.JaVoluntariado = true;
+
+                    if (usuario.Sexo == 1)
+                    {
+                        ViewBag.UsuarioSexo = "Masculino";
+                    }
+                    else if (usuario.Sexo == 2)
+                    {
+                        ViewBag.UsuarioSexo = "Feminino";
+                    }
+                    else
+                    {
+                        ViewBag.UsuarioSexo = "Prefiro não declarar";
+                    }
+
                     EnviarEmail.EnviarMensagemContato(usuario, usuarioAdm.Email, Id);
                 }
                 else
                 {
-                    TempData["MensagemErro"] = "Você já está cadastrado neste evento!";
+                    TempData["MensagemErro"] = "Você já está voluntariádo neste evento!";
                     ViewBag.JaVoluntariado = true;
                 }
             }
