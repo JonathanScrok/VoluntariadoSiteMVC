@@ -23,7 +23,8 @@ namespace SyrusVoluntariado.BLL
         private string _categoria;
         private string _descricao;
         private string _cidadeEstado;
-        private DateTime _dataVaga;
+        private DateTime _dataPublicacao;
+        private DateTime _dataEvento;
 
         private bool _persisted;
         private bool _modified;
@@ -126,17 +127,33 @@ namespace SyrusVoluntariado.BLL
         }
         #endregion
 
-        #region DataVaga
+        #region DataPublicacao
 
-        public DateTime DataVaga
+        public DateTime DataPublicacao
         {
             get
             {
-                return this._dataVaga;
+                return this._dataPublicacao;
             }
             set
             {
-                this._dataVaga = value;
+                this._dataPublicacao = value;
+                this._modified = true;
+            }
+        }
+        #endregion
+
+        #region DataEvento
+
+        public DateTime DataEvento
+        {
+            get
+            {
+                return this._dataEvento;
+            }
+            set
+            {
+                this._dataEvento = value;
                 this._modified = true;
             }
         }
@@ -157,12 +174,12 @@ namespace SyrusVoluntariado.BLL
         #endregion
 
         #region Consultas
-        private const string SELECT_TODASVAGAS = @"select * from helper.Vagas order by DataVaga desc";
-        private const string SELECT_ULTIMASVAGAS_TOP8 = @"select top 8 * from helper.Vagas order by DataVaga desc";
+        private const string SELECT_TODASVAGAS = @"select * from helper.Vagas order by DataPublicacao desc";
+        private const string SELECT_ULTIMASVAGAS_TOP8 = @"select top 8 * from helper.Vagas order by DataPublicacao desc";
         private const string SELECT_BUSCAVAGAID = @"select * from helper.Vagas where Id_Vaga = @Id_Vaga";
 
-        private const string UPDATE_VAGA = @"UPDATE helper.Vagas SET Id_Usuario_Adm = @Id_Usuario_Adm, Titulo = @Titulo, Categoria = @Categoria, Descricao = @Descricao, Cidade_Estado = @Cidade_Estado, DataVaga = @DataVaga WHERE Id_Vaga = @Id_Vaga";
-        private const string INSERT_VAGA = @"INSERT INTO helper.Vagas(Id_Usuario_Adm, Titulo, Categoria ,Descricao, Cidade_Estado, DataVaga) VALUES (@Id_Usuario_Adm, @Titulo, @Categoria, @Descricao, @Cidade_Estado, @DataVaga)";
+        private const string UPDATE_VAGA = @"UPDATE helper.Vagas SET Id_Usuario_Adm = @Id_Usuario_Adm, Titulo = @Titulo, Categoria = @Categoria, Descricao = @Descricao, Cidade_Estado = @Cidade_Estado, DataPublicacao = @DataPublicacao, DataEvento = @DataEvento WHERE Id_Vaga = @Id_Vaga";
+        private const string INSERT_VAGA = @"INSERT INTO helper.Vagas(Id_Usuario_Adm, Titulo, Categoria ,Descricao, Cidade_Estado, DataPublicacao, DataEvento) VALUES (@Id_Usuario_Adm, @Titulo, @Categoria, @Descricao, @Cidade_Estado, @DataPublicacao, @DataEvento)";
         private const string DELETE_VAGA = @"DELETE FROM helper.vagas WHERE Id_Vaga = @Id_Vaga";
         #endregion
 
@@ -179,7 +196,8 @@ namespace SyrusVoluntariado.BLL
             parms.Add(new SqlParameter("@Categoria", SqlDbType.VarChar, 100));
             parms.Add(new SqlParameter("@Descricao", SqlDbType.VarChar, 250));
             parms.Add(new SqlParameter("@Cidade_Estado", SqlDbType.VarChar, 50));
-            parms.Add(new SqlParameter("@DataVaga", SqlDbType.DateTime, 8));
+            parms.Add(new SqlParameter("@DataPublicacao", SqlDbType.DateTime, 8));
+            parms.Add(new SqlParameter("@DataEvento", SqlDbType.SmallDateTime, 8));
 
             return (parms);
         }
@@ -195,7 +213,8 @@ namespace SyrusVoluntariado.BLL
             parms[3].Value = this._categoria;
             parms[4].Value = this._descricao;
             parms[5].Value = this._cidadeEstado;
-            parms[6].Value = this._dataVaga;
+            parms[6].Value = this._dataPublicacao;
+            parms[7].Value = this._dataEvento;
         }
         #endregion
 
@@ -568,7 +587,8 @@ namespace SyrusVoluntariado.BLL
                     objVaga._descricao = Convert.ToString(dr["Descricao"]);
                     objVaga._categoria = Convert.ToString(dr["Categoria"]);
                     objVaga._cidadeEstado = Convert.ToString(dr["Cidade_Estado"]);
-                    objVaga._dataVaga = Convert.ToDateTime(dr["DataVaga"]);
+                    objVaga._dataPublicacao = Convert.ToDateTime(dr["DataPublicacao"]);
+                    objVaga._dataEvento = Convert.ToDateTime(dr["DataEvento"]);
 
                     return true;
                 }

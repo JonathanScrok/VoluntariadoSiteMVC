@@ -1,4 +1,4 @@
-﻿@model SyrusVoluntariado.BLL.Vaga_P1
+﻿@model SyrusVoluntariado.Models.Vaga
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -14,8 +14,8 @@
 <link href="/css/FundoPaginas.css" rel="stylesheet" type="text/css" />
 <section >
     <form method="post">
-        <input type="hidden" name="id_Vaga" value="@Model.IdVaga" />
-        <input type="hidden" name="id_Vaga" value="@Model.DataVaga = @DateTime.Now.ToString("dd/MM/yyyy");" />
+        <input type="hidden" name="id_Vaga" value="@Model.Id_Vaga" />
+        @*<input type="hidden" name="dataPublicacao" value="@Model.DataPublicacao = @DateTime.Now.ToString("dd/MM/yyyy");" />*@
 
         <div class="row g-2 mt-md-2">
             <div class="col-md">
@@ -36,7 +36,7 @@
         <div class="row g-2 mt-md-2">
             <div class="col-md">
                 <div class="form-floating">
-                    <textarea type="text" name="descricao" value="@Model.Descricao" class="form-control" id="descricao" placeholder=""></textarea>
+                    <textarea type="text" name="descricao" value="@Model.Descricao" class="form-control" id="descricao" placeholder="" style="margin-top: 0px; margin-bottom: 0px; height: 83px;"></textarea>
                     <label for="descricao">Descrição:</label>
                     @Html.ValidationMessage("descricao")
                 </div>
@@ -46,9 +46,16 @@
         <div class="row g-2 mt-md-2">
             <div class="col-md">
                 <div class="form-floating">
-                    <input type="text" name="Cidade_Estado" value="@Model.CidadeEstado" class="form-control" id="Cidade_Estado" placeholder="">
+                    <input type="text" name="Cidade_Estado" value="@Model.Cidade_Estado" class="form-control" id="Cidade_Estado" placeholder="">
                     <label for="Cidade_Estado">Local:</label>
                     @Html.ValidationMessage("local")
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="form-floating">
+                    <input id="dataEvento" type="datetime-local" class="form-control" name="DataEvento" value="@Model.DataEvento">
+                    <label for="dataEvento">Data do Evento:</label>
+                    @Html.ValidationMessage("dataevento")
                 </div>
             </div>
 

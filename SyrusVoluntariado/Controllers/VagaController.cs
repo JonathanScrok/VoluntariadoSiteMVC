@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SyrusVoluntariado.BLL;
 using SyrusVoluntariado.Database;
@@ -33,7 +34,7 @@ namespace SyrusVoluntariado.Controllers
         {
             ViewBag.CadastrarAtualizar = "Cadastrar";
 
-            return View(new Vaga_P1());
+            return View(new Vaga());
         }
 
         [HttpPost]
@@ -47,17 +48,18 @@ namespace SyrusVoluntariado.Controllers
             if (ModelState.IsValid)
             {
 
-                Vaga_P1 vagas = new Vaga_P1();
-                vagas.CompleteObject();
+                Vaga_P1 vagaCadastrar = new Vaga_P1();
+                vagaCadastrar.CompleteObject();
 
-                vagas.DataVaga = DateTime.Now;
-                vagas.IdUsuarioAdm = IdUsuarioLogado;
-                vagas.Titulo = vaga.Titulo;
-                vagas.Categoria = vaga.Categoria;
-                vagas.Descricao = vaga.Descricao;
-                vagas.CidadeEstado = vaga.Cidade_Estado;
+                vagaCadastrar.DataPublicacao = DateTime.Now;
+                vagaCadastrar.DataEvento = vaga.DataEvento;
+                vagaCadastrar.IdUsuarioAdm = IdUsuarioLogado;
+                vagaCadastrar.Titulo = vaga.Titulo;
+                vagaCadastrar.Categoria = vaga.Categoria;
+                vagaCadastrar.Descricao = vaga.Descricao;
+                vagaCadastrar.CidadeEstado = vaga.Cidade_Estado;
 
-                vagas.Save();
+                vagaCadastrar.Save();
 
                 TempData["Mensagem"] = "O evento foi cadastrada com sucesso!";
 
@@ -103,8 +105,11 @@ namespace SyrusVoluntariado.Controllers
 
             if (IdfUsuarioLogado == vaga.IdUsuarioAdm)
             {
+                Mapper.CreateMap<Vaga_P1, Vaga>();
+                Vaga VagaEdidar = Mapper.Map<Vaga>(vaga);
+
                 ViewBag.CadastrarAtualizar = "Salvar";
-                return View("Cadastrar", vaga);
+                return View("Cadastrar", VagaEdidar);
             }
 
             TempData["MensagemErro"] = "Evento inacessível com seu usuário";
@@ -123,7 +128,8 @@ namespace SyrusVoluntariado.Controllers
                 Vaga_P1 vagas = new Vaga_P1(vaga.Id_Vaga);
                 vagas.CompleteObject();
 
-                vagas.DataVaga = DateTime.Now;
+                vagas.DataPublicacao = DateTime.Now;
+                vagas.DataEvento = vaga.DataEvento;
                 vagas.IdUsuarioAdm = IdfUsuarioLogado;
                 vagas.Titulo = vaga.Titulo;
                 vagas.Categoria = vaga.Categoria;

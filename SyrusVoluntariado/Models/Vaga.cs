@@ -30,7 +30,9 @@ namespace SyrusVoluntariado.Models {
         [MaxLength(10, ErrorMessage = "O Campo deve possuir no máximo 10 caracteres!")]
         public string Cidade_Estado { get; set; }
 
-        public DateTime DataVaga { get; set; }
+        public DateTime DataPublicacao { get; set; }
+
+        public DateTime DataEvento { get; set; }
 
     }
 }
