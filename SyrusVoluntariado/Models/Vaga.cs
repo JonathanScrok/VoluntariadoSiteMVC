@@ -32,6 +32,7 @@ namespace SyrusVoluntariado.Models {
 
         public DateTime DataPublicacao { get; set; }
 
+        [Required(ErrorMessage = "O Campo é Obrigatório! - Caso o evento não possua Horário informar o campo como 00/00/0000 00:00")]
         public DateTime DataEvento { get; set; }
 
     }

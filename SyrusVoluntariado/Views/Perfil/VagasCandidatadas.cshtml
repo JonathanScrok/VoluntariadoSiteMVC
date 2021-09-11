@@ -8,7 +8,8 @@
 }
 
 <div class="mt-md-3">
-    @if (TempData["Mensagem"] != null) {
+    @if (TempData["Mensagem"] != null)
+    {
         <div class="alert alert-success" role="alert">
             @TempData["Mensagem"]
         </div>
@@ -16,7 +17,8 @@
 </div>
 
 <div class="mt-md-3">
-    @if (TempData["MensagemErro"] != null) {
+    @if (TempData["MensagemErro"] != null)
+    {
         <div class="alert alert-danger alertemail" role="alert">
             @TempData["MensagemErro"]
         </div>
@@ -38,11 +40,13 @@
         </tr>
     </thead>
     <tbody class="tab-list-vagas">
-        @foreach (var vaga in Model) {
+        @foreach (var vaga in Model)
+        {
             <tr>
                 <th scope="row">@vaga.Titulo</th>
                 <td>@vaga.Descricao</td>
                 <td>@vaga.Categoria</td>
+                <td>@vaga.CidadeEstado</td>
                 <td>
                     <a href="/vaga/visualizar/@vaga.IdVaga" class="btn">Visualizar</a>
                 </td>
@@ -50,6 +54,9 @@
         }
     </tbody>
 </table>
+
+
+
 
 
 
