@@ -204,3 +204,14 @@ width: 100%;
     margin-left: 0.25rem !important;
     width: 99%;
 }
+
+.vertodoseventos {
+    width: 100%;
+}
+
+.verEventos {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
