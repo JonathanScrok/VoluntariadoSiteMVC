@@ -157,7 +157,8 @@ namespace SyrusVoluntariado.BLL
         #endregion
 
         #region Consultas
-        private const string SELECT_TODASVAGAS = @"select * from helper.Vagas";
+        private const string SELECT_TODASVAGAS = @"select * from helper.Vagas order by DataVaga desc";
+        private const string SELECT_ULTIMASVAGAS_TOP8 = @"select top 8 * from helper.Vagas order by DataVaga desc";
         private const string SELECT_BUSCAVAGAID = @"select * from helper.Vagas where Id_Vaga = @Id_Vaga";
 
         private const string UPDATE_VAGA = @"UPDATE helper.Vagas SET Id_Usuario_Adm = @Id_Usuario_Adm, Titulo = @Titulo, Categoria = @Categoria, Descricao = @Descricao, Cidade_Estado = @Cidade_Estado, DataVaga = @DataVaga WHERE Id_Vaga = @Id_Vaga";
@@ -195,6 +196,44 @@ namespace SyrusVoluntariado.BLL
             parms[4].Value = this._descricao;
             parms[5].Value = this._cidadeEstado;
             parms[6].Value = this._dataVaga;
+        }
+        #endregion
+
+        #region Busca Top 8 ultimas vagas do Banco
+        public static List<Vaga> Top8UltimasVagas()
+        {
+            SqlConnection conn = null;
+            SqlDataReader reader = null;
+            List<Vaga> Vagas = new List<Vaga>();
+
+            try
+            {
+                conn = new SqlConnection(stringConnection);
+                conn.Open();
+
+                SqlCommand cmd = new SqlCommand(SELECT_ULTIMASVAGAS_TOP8, conn);
+
+                Mapper.CreateMap<IDataRecord, Vaga>();
+
+                using (reader = cmd.ExecuteReader())
+                {
+                    Vagas = Mapper.Map<List<Vaga>>(reader);
+                    return Vagas;
+                }
+            }
+            finally
+            {
+
+                if (reader != null)
+                {
+                    reader.Close();
+                }
+
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
         }
         #endregion
 
