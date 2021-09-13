@@ -5,8 +5,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SyrusVoluntariado.Models {
-    public class Vaga {
+namespace SyrusVoluntariado.Models
+{
+    public class Vaga
+    {
         public int Id { get; set; }
 
         public int Id_Vaga { get; set; }
@@ -31,8 +33,7 @@ namespace SyrusVoluntariado.Models {
         public string Cidade_Estado { get; set; }
 
         public DateTime DataPublicacao { get; set; }
-
-        [Required(ErrorMessage = "O Campo é Obrigatório! - Caso o evento não possua Horário informar o campo como 00/00/0000 00:00")]
+        
         public DateTime DataEvento { get; set; }
 
     }
