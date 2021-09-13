@@ -11,6 +11,7 @@ namespace SyrusVoluntariado.Models {
         public int Id { get; set; }
 
         [Required(ErrorMessage = "O Campo é Obrigatório!")]
+        [RegularExpression("^[a-zA-ZçÇáéíóúÁÉÍÓÚ ]+$", ErrorMessage = "O Nome só pode conter letras")]
         public string Nome { get; set; }
 
         [Required(ErrorMessage = "O Campo é Obrigatório!")]
