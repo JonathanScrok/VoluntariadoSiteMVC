@@ -175,7 +175,7 @@ namespace SyrusVoluntariado.BLL
 
         #region Consultas
         private const string SELECT_TODASVAGAS = @"select * from helper.Vagas order by DataPublicacao desc";
-        private const string SELECT_ULTIMASVAGAS_TOP8 = @"select top 8 * from helper.Vagas order by DataPublicacao desc";
+        private const string SELECT_ULTIMASVAGAS_TOP8 = @"select top 8 * from helper.Vagas order by DataEvento desc";
         private const string SELECT_BUSCAVAGAID = @"select * from helper.Vagas where Id_Vaga = @Id_Vaga";
 
         private const string UPDATE_VAGA = @"UPDATE helper.Vagas SET Id_Usuario_Adm = @Id_Usuario_Adm, Titulo = @Titulo, Categoria = @Categoria, Descricao = @Descricao, Cidade_Estado = @Cidade_Estado, DataPublicacao = @DataPublicacao, DataEvento = @DataEvento WHERE Id_Vaga = @Id_Vaga";
