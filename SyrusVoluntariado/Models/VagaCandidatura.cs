@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 namespace SyrusVoluntariado.Models {
     public class VagaCandidatura {
 
-        public int Id { get; set; }
-
         public int Id_Candidatura { get; set; }
 
         public int Id_Vaga { get; set; }

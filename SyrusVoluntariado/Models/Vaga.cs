@@ -9,8 +9,6 @@ namespace SyrusVoluntariado.Models
 {
     public class Vaga
     {
-        public int Id { get; set; }
-
         public int Id_Vaga { get; set; }
 
         public int Id_Usuario_Adm { get; set; }
