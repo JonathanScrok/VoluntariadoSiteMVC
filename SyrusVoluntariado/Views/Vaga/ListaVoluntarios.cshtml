@@ -11,14 +11,16 @@
 }
 
 <div class="mt-md-3">
-    @if (TempData["Mensagem"] != null) {
+    @if (TempData["Mensagem"] != null)
+    {
         <div class="alert alert-success" role="alert">
             @TempData["Mensagem"]
         </div>
     }
 </div>
 <div class="mt-md-3">
-    @if (TempData["MensagemErro"] != null) {
+    @if (TempData["MensagemErro"] != null)
+    {
         <div class="alert alert-danger alertemail" role="alert">
             @TempData["MensagemErro"]
         </div>
@@ -35,28 +37,62 @@
             <th scope="col">Nome</th>
             <th scope="col">Email</th>
             <th scope="col">Sexo</th>
+            <th scope="col"></th>
         </tr>
     </thead>
 
     <tbody class="tab-list-vagas">
-        @foreach (var usuario in Model) {
-        <tr>
-            <th scope="row">@usuario.Nome</th>
-            <td>@usuario.Email</td>
-            @if (@usuario.Sexo == 1)
-            {
-                <td>Masculino</td>
-            }
-            else if (@usuario.Sexo == 2)
-            {
-                <td>Feminino</td>
-            }
-            else
-            {
-                <td>Prefiro não declarar</td>
-            }
+        @foreach (var usuario in Model)
+        {
+            <tr>
+                <th scope="row">@usuario.Nome</th>
+                <td>@usuario.Email</td>
+                @if (@usuario.Sexo == 1)
+                {
+                    <td>Masculino</td>
+                }
+                else if (@usuario.Sexo == 2)
+                {
+                    <td>Feminino</td>
+                }
+                else
+                {
+                    <td>Prefiro não declarar</td>
+                }
 
-        </tr>
+                @if (ViewBag.Avaliado == false)
+                {
+                    <td>
+                        <a href="" class="btn">Avaliar</a>
+                    </td>
+                }
+                else
+                {
+            <td>
+                <div>
+                    <a href="javascript:void(0)" onclick="Avaliar(1)">
+                        <img src="/img/star0.png" id="s1">
+                    </a>
+
+                    <a href="javascript:void(0)" onclick="Avaliar(2)">
+                        <img src="/img/star0.png" id="s2">
+                    </a>
+
+                    <a href="javascript:void(0)" onclick="Avaliar(3)">
+                        <img src="/img/star0.png" id="s3">
+                    </a>
+
+                    <a href="javascript:void(0)" onclick="Avaliar(4)">
+                        <img src="/img/star0.png" id="s4">
+                    </a>
+
+                    <a href="javascript:void(0)" onclick="Avaliar(5)">
+                        <img src="/img/star0.png" id="s5">
+                    </a>
+                </div>
+            </td>
+                }
+            </tr>
         }
     </tbody>
 </table>

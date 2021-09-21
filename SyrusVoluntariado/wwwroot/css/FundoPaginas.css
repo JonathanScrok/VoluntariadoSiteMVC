@@ -57,8 +57,8 @@ width: 100%;
 }
 
 .tab-list-vagas {
-    background-color: navajowhite;
-    color: black;
+    background-color: black;
+    color: white;
 }
 
 .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
