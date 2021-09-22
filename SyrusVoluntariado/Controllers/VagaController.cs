@@ -153,7 +153,6 @@ namespace SyrusVoluntariado.Controllers
         [HttpGet]
         public IActionResult Excluir(int Id)
         {
-
             var IdfUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault();
 
             if (Id != 0)
@@ -178,12 +177,6 @@ namespace SyrusVoluntariado.Controllers
             Vaga_P1 vaga = new Vaga_P1(Id);
             vaga.CompleteObject();
 
-            Usuario_P1 usuario = new Usuario_P1(IdfUsuarioLogado);
-            usuario.CompleteObject();
-
-            Usuario_P1 usuarioAdm = new Usuario_P1(vaga.IdUsuarioAdm);
-            usuarioAdm.CompleteObject();
-
             List<VagaCandidatura> TodasCandidaturasUsuario = VagaCandidaturas_P1.TodasCandidaturasUsuario(IdfUsuarioLogado);
             var CandidatosBanco = TodasCandidaturasUsuario.Where(a => a.Id_Usuario == IdfUsuarioLogado && a.Id_Vaga == Id).FirstOrDefault();
 
@@ -196,6 +189,9 @@ namespace SyrusVoluntariado.Controllers
                     candidatarVaga.IdVaga = Id;
                     candidatarVaga.DataCadastro = DateTime.Now;
                     candidatarVaga.Save();
+
+                    Usuario_P1 usuario = new Usuario_P1(IdfUsuarioLogado);
+                    usuario.CompleteObject();
 
                     ViewBag.JaVoluntariado = true;
 
@@ -212,6 +208,9 @@ namespace SyrusVoluntariado.Controllers
                         ViewBag.UsuarioSexo = "Prefiro não declarar";
                     }
 
+                    Usuario_P1 usuarioAdm = new Usuario_P1(vaga.IdUsuarioAdm);
+                    usuarioAdm.CompleteObject();
+
                     EnviarEmail.EnviarMensagemContato(usuario, usuarioAdm.Email, Id);
                 }
                 else
@@ -221,8 +220,7 @@ namespace SyrusVoluntariado.Controllers
                 }
 
             }
-
-            return View("Visualizar", vaga);
+            return RedirectToAction("Visualizar", "Vaga", new { Id = Id});
         }
 
         [HttpGet]
