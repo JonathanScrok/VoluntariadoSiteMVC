@@ -45,7 +45,7 @@ namespace SyrusVoluntariado.Controllers
             var ValorUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado");
             int IdUsuarioLogado = ValorUsuarioLogado.GetValueOrDefault();
 
-            
+
             if (vaga.DataEvento.ToString("dd/MM/yyyy") == "01/01/0001")
             {
                 TempData["DataEvento"] = "Data Obrigatória! Caso não deseje informar o horário campo deve ser colocado como 00/00/0000 00:00";
@@ -172,59 +172,70 @@ namespace SyrusVoluntariado.Controllers
         [HttpGet]
         public IActionResult Voluntariar(int Id)
         {
-            
-            return RedirectToAction("Visualizar", "Vaga", new { Id = Id});
+            var teste = RealizarVoluntariar(Id);
+
+            return RedirectToAction("Visualizar", "Vaga", new { Id = Id });
         }
 
-        public void RealizarVolintariar(int Id)
+        public bool RealizarVoluntariar(int Id)
         {
-            var IdfUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault();
-
-            Vaga_P1 vaga = new Vaga_P1(Id);
-            vaga.CompleteObject();
-
-            List<VagaCandidatura> TodasCandidaturasUsuario = VagaCandidaturas_P1.TodasCandidaturasUsuario(IdfUsuarioLogado);
-            var CandidatosBanco = TodasCandidaturasUsuario.Where(a => a.Id_Usuario == IdfUsuarioLogado && a.Id_Vaga == Id).FirstOrDefault();
-
-            if (vaga.IdUsuarioAdm != IdfUsuarioLogado)
+            try
             {
-                if (CandidatosBanco == null)
+                var IdfUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault();
+
+                Vaga_P1 vaga = new Vaga_P1(Id);
+                vaga.CompleteObject();
+
+                List<VagaCandidatura> TodasCandidaturasUsuario = VagaCandidaturas_P1.TodasCandidaturasUsuario(IdfUsuarioLogado);
+                var CandidatosBanco = TodasCandidaturasUsuario.Where(a => a.Id_Usuario == IdfUsuarioLogado && a.Id_Vaga == Id).FirstOrDefault();
+
+                if (vaga.IdUsuarioAdm != IdfUsuarioLogado)
                 {
-                    VagaCandidaturas_P1 candidatarVaga = new VagaCandidaturas_P1();
-                    candidatarVaga.IdUsuario = IdfUsuarioLogado;
-                    candidatarVaga.IdVaga = Id;
-                    candidatarVaga.DataCadastro = DateTime.Now;
-                    candidatarVaga.Save();
-
-                    Usuario_P1 usuario = new Usuario_P1(IdfUsuarioLogado);
-                    usuario.CompleteObject();
-
-                    ViewBag.JaVoluntariado = true;
-
-                    if (usuario.Sexo == 1)
+                    if (CandidatosBanco == null)
                     {
-                        ViewBag.UsuarioSexo = "Masculino";
-                    }
-                    else if (usuario.Sexo == 2)
-                    {
-                        ViewBag.UsuarioSexo = "Feminino";
+                        VagaCandidaturas_P1 candidatarVaga = new VagaCandidaturas_P1();
+                        candidatarVaga.IdUsuario = IdfUsuarioLogado;
+                        candidatarVaga.IdVaga = Id;
+                        candidatarVaga.DataCadastro = DateTime.Now;
+                        candidatarVaga.Save();
+
+                        Usuario_P1 usuario = new Usuario_P1(IdfUsuarioLogado);
+                        usuario.CompleteObject();
+
+                        ViewBag.JaVoluntariado = true;
+
+                        if (usuario.Sexo == 1)
+                        {
+                            ViewBag.UsuarioSexo = "Masculino";
+                        }
+                        else if (usuario.Sexo == 2)
+                        {
+                            ViewBag.UsuarioSexo = "Feminino";
+                        }
+                        else
+                        {
+                            ViewBag.UsuarioSexo = "Prefiro não declarar";
+                        }
+
+                        Usuario_P1 usuarioAdm = new Usuario_P1(vaga.IdUsuarioAdm);
+                        usuarioAdm.CompleteObject();
+
+                        EnviarEmail.EnviarMensagemContato(usuario, usuarioAdm.Email, Id);
+                        return true;
                     }
                     else
                     {
-                        ViewBag.UsuarioSexo = "Prefiro não declarar";
+                        TempData["MensagemErro"] = "Você já está voluntariádo neste evento!";
+                        ViewBag.JaVoluntariado = true;
+                        return true;
                     }
-
-                    Usuario_P1 usuarioAdm = new Usuario_P1(vaga.IdUsuarioAdm);
-                    usuarioAdm.CompleteObject();
-
-                    EnviarEmail.EnviarMensagemContato(usuario, usuarioAdm.Email, Id);
-                }
-                else
-                {
-                    TempData["MensagemErro"] = "Você já está voluntariádo neste evento!";
-                    ViewBag.JaVoluntariado = true;
                 }
             }
+            catch (Exception)
+            {
+                throw;
+            }
+            return false;
         }
 
         [HttpGet]
