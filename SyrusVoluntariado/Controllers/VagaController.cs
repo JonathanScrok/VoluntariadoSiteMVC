@@ -172,70 +172,69 @@ namespace SyrusVoluntariado.Controllers
         [HttpGet]
         public IActionResult Voluntariar(int Id)
         {
-            var teste = RealizarVoluntariar(Id);
+            var IdfUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault();
 
-            return RedirectToAction("Visualizar", "Vaga", new { Id = Id });
+            Vaga_P1 vaga = new Vaga_P1(Id);
+            vaga.CompleteObject();
+
+            List<VagaCandidatura> TodasCandidaturasUsuario = VagaCandidaturas_P1.TodasCandidaturasUsuario(IdfUsuarioLogado);
+            var CandidatosBanco = TodasCandidaturasUsuario.Where(a => a.Id_Usuario == IdfUsuarioLogado && a.Id_Vaga == Id).FirstOrDefault();
+
+            if (vaga.IdUsuarioAdm != IdfUsuarioLogado)
+            {
+                if (CandidatosBanco == null)
+                {
+                    VagaCandidaturas_P1 candidatarVaga = new VagaCandidaturas_P1();
+                    candidatarVaga.IdUsuario = IdfUsuarioLogado;
+                    candidatarVaga.IdVaga = Id;
+                    candidatarVaga.DataCadastro = DateTime.Now;
+                    candidatarVaga.Save();
+
+                    ViewBag.JaVoluntariado = true;
+
+                    Usuario_P1 usuario = new Usuario_P1(IdfUsuarioLogado);
+                    usuario.CompleteObject();
+
+                    //bool EmailEnviado = EnviarCandidatoParaDonoVaga(IdfUsuarioLogado, vaga, usuario);
+                }
+                else
+                {
+                    TempData["MensagemErro"] = "Você já está voluntariádo neste evento!";
+                    ViewBag.JaVoluntariado = true;
+                }
+            }
+
+            return View("Visualizar", vaga);
         }
 
-        public bool RealizarVoluntariar(int Id)
+        public bool EnviarCandidatoParaDonoVaga(int IdfUsuarioLogado, Vaga_P1 vaga, Usuario_P1 usuario)
         {
             try
             {
-                var IdfUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault();
-
-                Vaga_P1 vaga = new Vaga_P1(Id);
-                vaga.CompleteObject();
-
-                List<VagaCandidatura> TodasCandidaturasUsuario = VagaCandidaturas_P1.TodasCandidaturasUsuario(IdfUsuarioLogado);
-                var CandidatosBanco = TodasCandidaturasUsuario.Where(a => a.Id_Usuario == IdfUsuarioLogado && a.Id_Vaga == Id).FirstOrDefault();
-
-                if (vaga.IdUsuarioAdm != IdfUsuarioLogado)
+                if (usuario.Sexo == 1)
                 {
-                    if (CandidatosBanco == null)
-                    {
-                        VagaCandidaturas_P1 candidatarVaga = new VagaCandidaturas_P1();
-                        candidatarVaga.IdUsuario = IdfUsuarioLogado;
-                        candidatarVaga.IdVaga = Id;
-                        candidatarVaga.DataCadastro = DateTime.Now;
-                        candidatarVaga.Save();
-
-                        ViewBag.JaVoluntariado = true;
-
-                        //Usuario_P1 usuario = new Usuario_P1(IdfUsuarioLogado);
-                        //usuario.CompleteObject();
-
-                        //if (usuario.Sexo == 1)
-                        //{
-                        //    ViewBag.UsuarioSexo = "Masculino";
-                        //}
-                        //else if (usuario.Sexo == 2)
-                        //{
-                        //    ViewBag.UsuarioSexo = "Feminino";
-                        //}
-                        //else
-                        //{
-                        //    ViewBag.UsuarioSexo = "Prefiro não declarar";
-                        //}
-
-                        //Usuario_P1 usuarioAdm = new Usuario_P1(vaga.IdUsuarioAdm);
-                        //usuarioAdm.CompleteObject();
-
-                        //EnviarEmail.EnviarMensagemContato(usuario, usuarioAdm.Email, Id);
-                        return true;
-                    }
-                    else
-                    {
-                        TempData["MensagemErro"] = "Você já está voluntariádo neste evento!";
-                        ViewBag.JaVoluntariado = true;
-                        return true;
-                    }
+                    ViewBag.UsuarioSexo = "Masculino";
                 }
+                else if (usuario.Sexo == 2)
+                {
+                    ViewBag.UsuarioSexo = "Feminino";
+                }
+                else
+                {
+                    ViewBag.UsuarioSexo = "Prefiro não declarar";
+                }
+
+                Usuario_P1 usuarioAdm = new Usuario_P1(vaga.IdUsuarioAdm);
+                usuarioAdm.CompleteObject();
+
+                EnviarEmail.EnviarMensagemContato(usuario, usuarioAdm.Email, vaga.IdVaga);
+
+                return true;
             }
             catch (Exception)
             {
-                throw;
+                return false;
             }
-            return false;
         }
 
         [HttpGet]
