@@ -219,6 +219,7 @@ namespace SyrusVoluntariado.Controllers
                     TempData["MensagemErro"] = "Você já está voluntariádo neste evento!";
                     ViewBag.JaVoluntariado = true;
                 }
+
             }
 
             return View("Visualizar", vaga);
@@ -231,7 +232,7 @@ namespace SyrusVoluntariado.Controllers
 
             List<VagaCandidatura> ListaUsuariosVoluntariados = VagaCandidaturas_P1.TodasUsuarioCandidatadosVaga(Id);
 
-            List<Usuario_P1> voluntarios = new List<Usuario_P1>();
+            List<UsuarioCompleto> voluntariosCompleto = new List<UsuarioCompleto>();
             List<int> IdfVoluntarios = new List<int>();
 
             //Salva todos ID dos usuários candidatados
@@ -243,15 +244,39 @@ namespace SyrusVoluntariado.Controllers
 
             foreach (var IdUsu in IdfVoluntarios)
             {
+                UsuarioCompleto UsuarioCompleto = new UsuarioCompleto();
+
                 Usuario_P1 Usuario = new Usuario_P1(IdUsu);
                 Usuario.CompleteObject();
 
-                voluntarios.Add(Usuario);
+                var Avaliacao = Avaliacao_P1.TodasAvaliacoesUsuario(IdUsu);
+
+                UsuarioCompleto.Email = Usuario.Email;
+                UsuarioCompleto.Nome = Usuario.Nome;
+                UsuarioCompleto.Sexo = Usuario.Sexo;
+
+                if (Avaliacao.Count > 0)
+                {
+                    int NotaSomadas = 0;
+                    for (int i = 0; i < Avaliacao.Count; i++)
+                    {
+                        NotaSomadas += Avaliacao[i].Nota;
+                    }
+
+                    UsuarioCompleto.NotaMedia = NotaSomadas / Avaliacao.Count;
+                    UsuarioCompleto.Avaliado = true;
+                }
+                else
+                {
+                    UsuarioCompleto.Avaliado = false;
+                }
+
+                voluntariosCompleto.Add(UsuarioCompleto);
             }
 
             var pageNumber = 1;
 
-            var resultadoPaginado = voluntarios.ToPagedList(pageNumber, 10);
+            var resultadoPaginado = voluntariosCompleto.ToPagedList(pageNumber, 10);
 
             return View(resultadoPaginado);
 

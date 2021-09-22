@@ -1,4 +1,4 @@
-﻿@model X.PagedList.IPagedList<SyrusVoluntariado.BLL.Usuario_P1>
+﻿@model X.PagedList.IPagedList<SyrusVoluntariado.Models.UsuarioCompleto>
 @using X.PagedList.Mvc.Core;
 @using X.PagedList;
 
@@ -37,7 +37,8 @@
             <th scope="col">Nome</th>
             <th scope="col">Email</th>
             <th scope="col">Sexo</th>
-            <th scope="col"></th>
+            <th scope="col">NotaMedia Media do Voluntário</th>
+            <th></th>
         </tr>
     </thead>
 
@@ -47,11 +48,11 @@
             <tr>
                 <th scope="row">@usuario.Nome</th>
                 <td>@usuario.Email</td>
-                @if (@usuario.Sexo == 1)
+                @if (usuario.Sexo == 1)
                 {
                     <td>Masculino</td>
                 }
-                else if (@usuario.Sexo == 2)
+                else if (usuario.Sexo == 2)
                 {
                     <td>Feminino</td>
                 }
@@ -60,38 +61,71 @@
                     <td>Prefiro não declarar</td>
                 }
 
-                @if (ViewBag.Avaliado == false)
-                {
-                    <td>
-                        <a href="" class="btn">Avaliar</a>
-                    </td>
-                }
-                else
-                {
-            <td>
-                <div>
-                    <a href="javascript:void(0)" onclick="Avaliar(1)">
-                        <img src="/img/star0.png" id="s1">
-                    </a>
-
-                    <a href="javascript:void(0)" onclick="Avaliar(2)">
-                        <img src="/img/star0.png" id="s2">
-                    </a>
-
-                    <a href="javascript:void(0)" onclick="Avaliar(3)">
-                        <img src="/img/star0.png" id="s3">
-                    </a>
-
-                    <a href="javascript:void(0)" onclick="Avaliar(4)">
-                        <img src="/img/star0.png" id="s4">
-                    </a>
-
-                    <a href="javascript:void(0)" onclick="Avaliar(5)">
-                        <img src="/img/star0.png" id="s5">
-                    </a>
-                </div>
-            </td>
-                }
+                <td>
+                    <div>
+                        @if (usuario.NotaMedia > 0)
+                        {
+                            <a>
+                                <img src="/img/star1.png" id="s1">
+                            </a>
+                        }
+                        else
+                        {
+                            <p>Nenhuma Avaliação</p>
+                        }
+                        @if (usuario.NotaMedia > 1)
+                        {
+                            <a>
+                                <img src="/img/star1.png" id="s2">
+                            </a>
+                        }
+                        else if (usuario.NotaMedia > 0)
+                        {
+                            <a>
+                                <img src="/img/star0.png" id="s2">
+                            </a>
+                        }
+                        @if (usuario.NotaMedia > 2)
+                        {
+                            <a>
+                                <img src="/img/star1.png" id="s3">
+                            </a>
+                        }
+                        else if (usuario.NotaMedia > 0)
+                        {
+                        <a>
+                            <img src="/img/star0.png" id="s3">
+                        </a>
+                        }
+                        @if (usuario.NotaMedia > 3)
+                        {
+                            <a>
+                                <img src="/img/star1.png" id="s4">
+                            </a>
+                        }
+                        else if (usuario.NotaMedia > 0)
+                        {
+                            <a>
+                                <img src="/img/star0.png" id="s4">
+                            </a>
+                        }
+                        @if (usuario.NotaMedia > 4)
+                        {
+                            <a>
+                                <img src="/img/star1.png" id="s5">
+                            </a>
+                        }
+                        else if (usuario.NotaMedia > 0)
+                        {
+                            <a>
+                                <img src="/img/star0.png" id="s5">
+                            </a>
+                        }
+                    </div>
+                </td>
+                <td>
+                    <a href="" class="btn btn-info">Avaliar</a>
+                </td>
             </tr>
         }
     </tbody>
