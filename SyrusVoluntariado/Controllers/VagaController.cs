@@ -199,28 +199,28 @@ namespace SyrusVoluntariado.Controllers
                         candidatarVaga.DataCadastro = DateTime.Now;
                         candidatarVaga.Save();
 
-                        Usuario_P1 usuario = new Usuario_P1(IdfUsuarioLogado);
-                        usuario.CompleteObject();
-
                         ViewBag.JaVoluntariado = true;
 
-                        if (usuario.Sexo == 1)
-                        {
-                            ViewBag.UsuarioSexo = "Masculino";
-                        }
-                        else if (usuario.Sexo == 2)
-                        {
-                            ViewBag.UsuarioSexo = "Feminino";
-                        }
-                        else
-                        {
-                            ViewBag.UsuarioSexo = "Prefiro não declarar";
-                        }
+                        //Usuario_P1 usuario = new Usuario_P1(IdfUsuarioLogado);
+                        //usuario.CompleteObject();
 
-                        Usuario_P1 usuarioAdm = new Usuario_P1(vaga.IdUsuarioAdm);
-                        usuarioAdm.CompleteObject();
+                        //if (usuario.Sexo == 1)
+                        //{
+                        //    ViewBag.UsuarioSexo = "Masculino";
+                        //}
+                        //else if (usuario.Sexo == 2)
+                        //{
+                        //    ViewBag.UsuarioSexo = "Feminino";
+                        //}
+                        //else
+                        //{
+                        //    ViewBag.UsuarioSexo = "Prefiro não declarar";
+                        //}
 
-                        EnviarEmail.EnviarMensagemContato(usuario, usuarioAdm.Email, Id);
+                        //Usuario_P1 usuarioAdm = new Usuario_P1(vaga.IdUsuarioAdm);
+                        //usuarioAdm.CompleteObject();
+
+                        //EnviarEmail.EnviarMensagemContato(usuario, usuarioAdm.Email, Id);
                         return true;
                     }
                     else
