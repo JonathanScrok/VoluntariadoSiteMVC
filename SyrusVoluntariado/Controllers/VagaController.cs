@@ -172,6 +172,12 @@ namespace SyrusVoluntariado.Controllers
         [HttpGet]
         public IActionResult Voluntariar(int Id)
         {
+            
+            return RedirectToAction("Visualizar", "Vaga", new { Id = Id});
+        }
+
+        public void RealizarVolintariar(int Id)
+        {
             var IdfUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault();
 
             Vaga_P1 vaga = new Vaga_P1(Id);
@@ -218,9 +224,7 @@ namespace SyrusVoluntariado.Controllers
                     TempData["MensagemErro"] = "Você já está voluntariádo neste evento!";
                     ViewBag.JaVoluntariado = true;
                 }
-
             }
-            return RedirectToAction("Visualizar", "Vaga", new { Id = Id});
         }
 
         [HttpGet]
