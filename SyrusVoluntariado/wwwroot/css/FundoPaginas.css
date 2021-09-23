@@ -215,3 +215,30 @@ width: 100%;
     justify-content: space-around;
 }
 
+#SalvarAvaliar {
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+#EstrelasAvaliar {
+    display: flex;
+    justify-content: space-around
+}
+
+#ModalAvaliar {
+    background-color: #130d00;
+}
+
+#TituloModalAvaliar {
+    color: white;
+}
+
+#TituloAvaliarAjuste {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}

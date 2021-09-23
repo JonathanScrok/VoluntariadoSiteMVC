@@ -38,6 +38,7 @@ namespace SyrusVoluntariado.Controllers {
             return View(Usuario);
         }
 
+        [HttpGet]
         public IActionResult MinhasVagas() {
             ViewBag.FooterPrecisa = false;
             int IdfUsuario = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault();
@@ -48,6 +49,7 @@ namespace SyrusVoluntariado.Controllers {
             return View(VagasUsuario);
         }
 
+        [HttpGet]
         public IActionResult VagasCandidatadas() {
             ViewBag.FooterPrecisa = false;
             int IdfUsuario = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault();
@@ -74,5 +76,16 @@ namespace SyrusVoluntariado.Controllers {
 
             return View(MinhasCandidaturas);
         }
+
+        [HttpGet]
+        public IActionResult Avaliar()
+        {
+            //int QtdEstrelas = HttpContext.Session.GetInt32("EstrelasAvaliacao").GetValueOrDefault();
+
+            //var qtdAvaliazcao = ViewBag.QtdEstrelas;
+            return View();
+        }
+
+
     }
 }
