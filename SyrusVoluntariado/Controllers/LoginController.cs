@@ -23,7 +23,6 @@ namespace SyrusVoluntariado.Controllers
         public IActionResult Index()
         {
             string login = HttpContext.Session.GetString("Login"); //Remover ou Comentar
-
             var Logado = HttpContext.Request.Cookies["Logado"];
             
             if (login == "true")
@@ -117,7 +116,6 @@ namespace SyrusVoluntariado.Controllers
         public IActionResult CadastrarUsuario()
         {
             string login = HttpContext.Session.GetString("Login"); //Remover ou Comentar
-
             var Logado = HttpContext.Request.Cookies["Logado"];
 
             if (login == "true")
