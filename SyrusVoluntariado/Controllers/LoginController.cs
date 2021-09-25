@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
+using RestSharp;
 using SyrusVoluntariado.BLL;
 using SyrusVoluntariado.Models;
 using System;
@@ -26,7 +27,9 @@ namespace SyrusVoluntariado.Controllers
             object loginCache = _cache.Get("Login");
             bool loginCache2 = _cache.Get<bool>("Login");
 
-            if (loginCache2 == true)
+            var teste = HttpContext.Response.Cookies.Equals("Login");
+
+            if (login == "true")
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -62,6 +65,9 @@ namespace SyrusVoluntariado.Controllers
                 Usuario.CompleteObject();
 
                 HttpContext.Session.SetString("Login", "true");
+
+                HttpContext.Response.Cookies.Append("Login", "true", new CookieOptions() { SameSite = SameSiteMode.Lax, Expires = DateTime.Now.AddYears(1) });
+
                 _cache.Set("Login", true, TimeSpan.FromDays(1));
 
 
@@ -112,7 +118,7 @@ namespace SyrusVoluntariado.Controllers
             string login = HttpContext.Session.GetString("Login");
             var loginCache = _cache.Get("Login");
 
-            if (loginCache != null)
+            if (login == "true")
             {
                 return RedirectToAction("Index", "Home");
             }

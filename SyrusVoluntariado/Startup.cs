@@ -34,7 +34,8 @@ namespace SyrusVoluntariado {
                 app.UseDeveloperExceptionPage();
             }
 
-
+            //app.UseCookiePolicy();
+            //app.UseAuthentication();
             app.UseSession();
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
