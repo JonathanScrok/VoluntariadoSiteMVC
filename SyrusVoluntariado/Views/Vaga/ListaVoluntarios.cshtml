@@ -30,7 +30,7 @@
 <link href="/css/PagedList.css" rel="stylesheet" type="text/css" />
 <link href="/css/FundoPaginas.css" rel="stylesheet" type="text/css" />
 
-<span> <b>Total de Vagas:</b> @Model.TotalItemCount</span>
+<span> <b>Total de Voluntários:</b> @Model.TotalItemCount</span>
 <table class="table">
     <thead class="table-dark">
         <tr>
@@ -124,7 +124,8 @@
                     </div>
                 </td>
                 <td>
-                    <a class="btn btn-info ms-md-2" onclick="ModalAvaliar();">Avaliar</a>
+                    @*<a class="btn btn-info ms-md-2" onclick="ModalAvaliar();">Avaliar</a>*@
+                    <a class="btn btn-info ms-md-2" href="/perfil/avaliar/@usuario.Id">Avaliar</a>
                 </td>
             </tr>
         }

@@ -262,7 +262,7 @@ namespace SyrusVoluntariado.Controllers
                 Usuario.CompleteObject();
 
                 var Avaliacao = Avaliacao_P1.TodasAvaliacoesUsuario(IdUsu);
-
+                UsuarioCompleto.Id = Usuario.IdUsuario;
                 UsuarioCompleto.Email = Usuario.Email;
                 UsuarioCompleto.Nome = Usuario.Nome;
                 UsuarioCompleto.Sexo = Usuario.Sexo;

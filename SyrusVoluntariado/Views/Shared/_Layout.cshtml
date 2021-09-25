@@ -31,144 +31,132 @@
 </head>
 
 
-<body>
-    <main class="main" id="top">
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3 d-block" data-navbar-on-scroll="data-navbar-on-scroll">
-            <div class="container">
-                <a class="navbar-brand" href="/">Be a Helper</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"> </span></button>
-                <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base">
-                        <li class="nav-item px-2"><a class="nav-link" href="/vaga/cadastrar">Criar Evento</a></li>
-                        <li class="nav-item px-2"><a class="nav-link" href="/vaga">Lista de Eventos</a></li>
-                    </ul>
-                    <div class="dropdown d-none d-lg-block">
-                        <button class="btn bg-soft-warning ms-2" id="dropdownMenuButton1" type="submit" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-search text-warning"></i></button>
-                        <div class="dropdown-menu dropdown-menu-lg-end p-0 rounded" aria-labelledby="dropdownMenuButton1" style="top:55px">
-                            <form>
-                                <input class="form-control border-200" type="search" placeholder="Pesquisar" aria-label="Search" style="background:#FDF1DF;" />
+<body style="height: 100%;padding: 0;margin: 0;">
+    <div style="position: relative; display: flex; min-height: 100%; flex-direction: column; justify-content: space-between; ">
+        <div class="SiteCompleto" style="min-height: 100%;">
+            <main class="main" id="top">
+                <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3 d-block" data-navbar-on-scroll="data-navbar-on-scroll">
+                    <div class="container">
+                        <a class="navbar-brand" href="/">Be a Helper</a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"> </span></button>
+                        <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
+                            <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base">
+                                <li class="nav-item px-2"><a class="nav-link" href="/vaga/cadastrar">Criar Evento</a></li>
+                                <li class="nav-item px-2"><a class="nav-link" href="/vaga">Lista de Eventos</a></li>
+                            </ul>
+                            <div class="dropdown d-none d-lg-block">
+                                <button class="btn bg-soft-warning ms-2" id="dropdownMenuButton1" type="submit" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-search text-warning"></i></button>
+                                <div class="dropdown-menu dropdown-menu-lg-end p-0 rounded" aria-labelledby="dropdownMenuButton1" style="top:55px">
+                                    <form>
+                                        <input class="form-control border-200" type="search" placeholder="Pesquisar" aria-label="Search" style="background:#FDF1DF;" />
+                                    </form>
+                                </div>
+                            </div>
+                            @if (Login == null)
+                            {
+                                <a class="btn btn-dark me-md-2 order-1 order-lg-0 ms-lg-3" href="/login">Entrar</a>
+                            }
+                            else
+                            {
+                                <ul class="navbar-nav">
+                                    <li class="dropdown">
+                                        <a class="btn dropdown-toggle me-md-2 order-1 order-lg-0 ms-lg-3" href="#" role="button" id="Nome-UsuarioHeader" data-bs-toggle="dropdown" aria-expanded="false">
+                                            @NomeUsuario
+                                        </a>
+                                        <ul class="dropdown-menu" id="dropItens" aria-labelledby="dropdownMenuLink">
+                                            <li><a class="dropdown-item" id="MeuPerfilButton" href="/perfil">Meu Perfil</a></li>
+                                            <li><a class="dropdown-item" id="sairButton" href="/Login/logout">Sair</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            }
+                            <form class="d-flex my-3 d-block d-lg-none">
+                                <input class="form-control me-2 border-200 bg-light" type="search" placeholder="Pesquisar" aria-label="Search" />
+                                <button class="btn btn-outline-primary" type="submit">Pesquisar</button>
                             </form>
                         </div>
                     </div>
-                    @if (Login == null)
-                    {
-                        <a class="btn btn-dark me-md-2 order-1 order-lg-0 ms-lg-3" href="/login">Entrar</a>
-                    }
-                    else
-                    {
-                        <ul class="navbar-nav">
-                            <li class="dropdown">
-                                <a class="btn dropdown-toggle me-md-2 order-1 order-lg-0 ms-lg-3" href="#" role="button" id="Nome-UsuarioHeader" data-bs-toggle="dropdown" aria-expanded="false">
-                                    @NomeUsuario
-                                </a>
-                                <ul class="dropdown-menu" id="dropItens" aria-labelledby="dropdownMenuLink">
-                                    <li><a class="dropdown-item" id="MeuPerfilButton" href="/perfil">Meu Perfil</a></li>
-                                    <li><a class="dropdown-item" id="sairButton" href="/Login/logout">Sair</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    }
-                    <form class="d-flex my-3 d-block d-lg-none">
-                        <input class="form-control me-2 border-200 bg-light" type="search" placeholder="Pesquisar" aria-label="Search" />
-                        <button class="btn btn-outline-primary" type="submit">Pesquisar</button>
-                    </form>
+                </nav>
+                <div class="container" id="ConteudoSite">
+                    <div>
+                        @RenderBody()
+                    </div>
                 </div>
-            </div>
-        </nav>
-        <div class="container" id="ConteudoSite">
-            <div>
-                @RenderBody()
-            </div>
+
+                <!-- Modais -->
+                <div class="modal fade" id="confirmar-excluir" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Excluir Vaga</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Deseja mesmo excluir a vaga?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                <a class="btn btn-danger" href="/vaga/excluir/@ViewBag.Id">Excluir</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel"><b>Cookies</b></h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <b>Cookies</b>: Guardamos estatísticas de visitas para melhorar sua experiência de navegação. Ao continuar, você concorda com nossa <a href=""><strong style="color:black">política de privacidade</strong></a>.
+                            </div>
+                            <div class="modal-footer">
+                                <a class="btn btn-secondary" onclick="SalvarConcordancia();">Concordo</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Fim Modais -->
+
+            </main>
         </div>
+        <footer class="FoooterSite" style="bottom: 0; left: 0; width: 100%; height: 100%;">
+            <section class="bg-900 pb-0 pt-2">
 
-        <!-- Modais -->
-        <div class="modal fade" id="confirmar-excluir" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Excluir Vaga</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        Deseja mesmo excluir a vaga?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <a class="btn btn-danger" href="/vaga/excluir/@ViewBag.Id">Excluir</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+                @if (ViewBag.FooterPrecisa != false)
+                {
+                    <section class="bg-900 pb-0 pt-5">
 
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel"><b>Cookies</b></h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <b>Cookies</b>: Guardamos estatísticas de visitas para melhorar sua experiência de navegação. Ao continuar, você concorda com nossa <a href=""><strong style="color:black">política de privacidade</strong></a>.
-                    </div>
-                    <div class="modal-footer">
-                        <a class="btn btn-secondary" onclick="SalvarConcordancia();">Concordo</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+                        <div>
+                            <ul class="nav justify-content-center pb-4">
+                                <li class="nav-item"><a href="/" class="nav-link px-2 text-muted"><b>Inicio</b></a></li>
+                                <li class="nav-item"><a href="/vaga/cadastrar" class="nav-link px-2 text-muted"><b>Criar Vaga</b></a></li>
+                                <li class="nav-item"><a href="/vaga" class="nav-link px-2 text-muted"><b>Eventos</b></a></li>
+                                <li class="nav-item"><a href="/home/quemsomosnos" class="nav-link px-2 text-muted"><b>Sobre nós</b></a></li>
+                            </ul>
+                        </div>
 
-        <div class="modal fade" id="avaliar-voluntario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content" id="ModalAvaliar">
-                    <div class="modal-header" id="TituloAvaliarAjuste">
-                        <h5 class="modal-title" id="TituloModalAvaliar"><b>Avaliar Voluntário</b></h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </section>}
+                <section class="py-0 bg-1000">
+                    <div class="container">
+                        <div class="row justify-content-md-between justify-content-evenly py-4">
+                            <div class="col-12 col-sm-8 col-md-6 col-lg-auto text-center text-md-start">
+                                <p class="fs--1 my-2 fw-bold text-200">Todos direitos reservados &copy; Be a Helper, @DateTime.Now.Year</p>
+                            </div>
+                            <div class="col-12 col-sm-8 col-md-6">
+                                <p class="fs--1 my-2 text-center text-md-end text-200">
+                                    <b class="fw-bold text-primary">&nbsp;BE A HELPER</b>
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="modal-body" id="EstrelasAvaliar">
+                </section>
 
-
-                    </div>
-                    <div class="modal-footer" id="SalvarAvaliar">
-                        <a class="btn btn-secondary" href="/perfil/Avaliar">Salvar</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Fim Modais -->
-
-    </main>
-    <section class="bg-900 pb-0 pt-2">
-
-        @if (ViewBag.FooterPrecisa != false)
-        {
-            <section class="bg-900 pb-0 pt-5">
-
-                <div>
-                    <ul class="nav justify-content-center pb-4">
-                        <li class="nav-item"><a href="/" class="nav-link px-2 text-muted"><b>Inicio</b></a></li>
-                        <li class="nav-item"><a href="/vaga/cadastrar" class="nav-link px-2 text-muted"><b>Criar Vaga</b></a></li>
-                        <li class="nav-item"><a href="/vaga" class="nav-link px-2 text-muted"><b>Eventos</b></a></li>
-                        <li class="nav-item"><a href="/home/quemsomosnos" class="nav-link px-2 text-muted"><b>Sobre nós</b></a></li>
-                    </ul>
-                </div>
-
-            </section>}
-        <section class="py-0 bg-1000">
-            <div class="container">
-                <div class="row justify-content-md-between justify-content-evenly py-4">
-                    <div class="col-12 col-sm-8 col-md-6 col-lg-auto text-center text-md-start">
-                        <p class="fs--1 my-2 fw-bold text-200">Todos direitos reservados &copy; Be a Helper, @DateTime.Now.Year</p>
-                    </div>
-                    <div class="col-12 col-sm-8 col-md-6">
-                        <p class="fs--1 my-2 text-center text-md-end text-200">
-                            <b class="fw-bold text-primary">&nbsp;BE A HELPER</b>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </section>
+            </section>
+        </footer>
+    </div>
     <!-- ===============================================-->
     <!--    End of Main Content-->
     <!-- ===============================================-->
