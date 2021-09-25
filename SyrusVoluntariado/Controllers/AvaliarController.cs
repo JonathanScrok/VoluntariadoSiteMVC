@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SyrusVoluntariado.Library.Filters;
 using SyrusVoluntariado.Models;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace SyrusVoluntariado.Controllers
 {
+    [Login]
     public class AvaliarController : Controller
     {
         [HttpGet]

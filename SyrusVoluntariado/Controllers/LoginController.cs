@@ -14,8 +14,18 @@ namespace SyrusVoluntariado.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            ViewBag.FooterPrecisa = false;
-            return View();
+            string login = HttpContext.Session.GetString("Login");
+
+            if (login == "true")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ViewBag.FooterPrecisa = false;
+                return View();
+            }
+
         }
 
         [HttpPost]
@@ -87,8 +97,17 @@ namespace SyrusVoluntariado.Controllers
         [HttpGet]
         public IActionResult CadastrarUsuario()
         {
-            ViewBag.FooterPrecisa = false;
-            return View(new Usuario());
+            string login = HttpContext.Session.GetString("Login");
+
+            if (login == "true")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ViewBag.FooterPrecisa = false;
+                return View(new Usuario());
+            }
         }
 
         [HttpPost]
