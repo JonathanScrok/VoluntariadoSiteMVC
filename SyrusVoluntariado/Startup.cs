@@ -20,6 +20,7 @@ namespace SyrusVoluntariado {
 
             //    options.UseSqlite("Data Source=Database\\bancoVoluntarios.db");
             //});
+            services.AddMemoryCache();
 
             services.AddDistributedMemoryCache();
             services.AddSession();

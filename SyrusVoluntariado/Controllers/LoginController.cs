@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using SyrusVoluntariado.BLL;
 using SyrusVoluntariado.Models;
 using System;
@@ -10,13 +11,22 @@ namespace SyrusVoluntariado.Controllers
 {
     public class LoginController : Controller
     {
+        private IMemoryCache _cache; 
+
+        public LoginController(IMemoryCache memoryCache)
+        {
+            _cache = memoryCache;
+        }
 
         [HttpGet]
         public IActionResult Index()
         {
             string login = HttpContext.Session.GetString("Login");
 
-            if (login == "true")
+            object loginCache = _cache.Get("Login");
+            bool loginCache2 = _cache.Get<bool>("Login");
+
+            if (loginCache2 == true)
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -52,6 +62,8 @@ namespace SyrusVoluntariado.Controllers
                 Usuario.CompleteObject();
 
                 HttpContext.Session.SetString("Login", "true");
+                _cache.Set("Login", true, TimeSpan.FromDays(1));
+
 
                 string[] NomeCompleto = Usuario.Nome.Split(" ");
 
@@ -98,8 +110,9 @@ namespace SyrusVoluntariado.Controllers
         public IActionResult CadastrarUsuario()
         {
             string login = HttpContext.Session.GetString("Login");
+            var loginCache = _cache.Get("Login");
 
-            if (login == "true")
+            if (loginCache != null)
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -148,6 +161,7 @@ namespace SyrusVoluntariado.Controllers
                 login.Save();
 
                 HttpContext.Session.SetString("Login", "true");
+                _cache.Set("Login", true, TimeSpan.FromDays(1));
 
                 string[] NomeCompleto = usuario.Nome.Split(" ");
                 string primeiroNome = NomeCompleto[0].ToString();
