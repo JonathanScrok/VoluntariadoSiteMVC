@@ -1,0 +1,43 @@
+﻿@{
+    var IdUsuario = ViewBag.IdUsuAvaliar;
+}
+
+
+<!DOCTYPE html>
+<html lang="pr-br">
+<head>
+    <meta charset="utf-8">
+    <title>Avaliar - Usuario</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="/css/Rating.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="star-widget">
+            <input type="radio" value="5" name="rate" id="rate-5">
+            <label for="rate-5" class="fas fa-star"></label>
+            <input type="radio" value="4" name="rate" id="rate-4">
+            <label for="rate-4" class="fas fa-star"></label>
+            <input type="radio" value="3" name="rate" id="rate-3">
+            <label for="rate-3" class="fas fa-star"></label>
+            <input type="radio" value="2" name="rate" id="rate-2">
+            <label for="rate-2" class="fas fa-star"></label>
+            <input type="radio" value="1" name="rate" id="rate-1">
+            <label for="rate-1" class="fas fa-star"></label>
+            <form action="">
+                <header></header>
+                <div class="btn">
+                    <button type="submit">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="/js/Rating.js"></script>
+
+</body>
+</html>

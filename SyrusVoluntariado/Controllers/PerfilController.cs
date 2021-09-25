@@ -77,15 +77,5 @@ namespace SyrusVoluntariado.Controllers {
             return View(MinhasCandidaturas);
         }
 
-        [HttpGet]
-        public IActionResult Avaliar()
-        {
-            //int QtdEstrelas = HttpContext.Session.GetInt32("EstrelasAvaliacao").GetValueOrDefault();
-
-            //var qtdAvaliazcao = ViewBag.QtdEstrelas;
-            return View();
-        }
-
-
     }
 }
