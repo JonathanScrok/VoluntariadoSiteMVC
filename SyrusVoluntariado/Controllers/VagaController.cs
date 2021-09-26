@@ -46,7 +46,7 @@ namespace SyrusVoluntariado.Controllers
             var ValorUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado"); //Remover ou Comentar
             int IdUsuarioLogado = GetUsuarioLogado();
 
-            int IdUsuarioLog = ValorUsuarioLogado.GetValueOrDefault();
+            int IdUsuarioLog = ValorUsuarioLogado.GetValueOrDefault(); //Remover ou Comentar
 
 
             if (vaga.DataEvento.ToString("dd/MM/yyyy") == "01/01/0001")
@@ -62,7 +62,7 @@ namespace SyrusVoluntariado.Controllers
 
                 vagaCadastrar.DataPublicacao = DateTime.Now;
                 vagaCadastrar.DataEvento = vaga.DataEvento;
-                vagaCadastrar.IdUsuarioAdm = IdUsuarioLog;
+                vagaCadastrar.IdUsuarioAdm = IdUsuarioLogado;
                 vagaCadastrar.Titulo = vaga.Titulo;
                 vagaCadastrar.Categoria = vaga.Categoria;
                 vagaCadastrar.Descricao = vaga.Descricao;
@@ -88,14 +88,14 @@ namespace SyrusVoluntariado.Controllers
             var IdfUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault(); //Remover ou Comentar
             int IdUsuarioLogado = GetUsuarioLogado();
 
-            List<VagaCandidatura> TodasCandidaturasUsuario = VagaCandidaturas_P1.TodasCandidaturasUsuario(IdfUsuarioLogado);
-            var CandidatosBanco = TodasCandidaturasUsuario.Where(a => a.Id_Usuario == IdfUsuarioLogado && a.Id_Vaga == Id).FirstOrDefault();
+            List<VagaCandidatura> TodasCandidaturasUsuario = VagaCandidaturas_P1.TodasCandidaturasUsuario(IdUsuarioLogado);
+            var CandidatosBanco = TodasCandidaturasUsuario.Where(a => a.Id_Usuario == IdUsuarioLogado && a.Id_Vaga == Id).FirstOrDefault();
 
             if (CandidatosBanco != null)
             {
                 ViewBag.JaVoluntariado = true;
             }
-            if (vaga.IdUsuarioAdm == IdfUsuarioLogado)
+            if (vaga.IdUsuarioAdm == IdUsuarioLogado)
             {
                 ViewBag.ADMVaga = true;
             }
@@ -114,7 +114,7 @@ namespace SyrusVoluntariado.Controllers
             Vaga_P1 vaga = new Vaga_P1(Id);
             vaga.CompleteObject();
 
-            if (IdfUsuarioLogado == vaga.IdUsuarioAdm)
+            if (IdUsuarioLogado == vaga.IdUsuarioAdm)
             {
                 Mapper.CreateMap<Vaga_P1, Vaga>();
                 Vaga VagaEdidar = Mapper.Map<Vaga>(vaga);
@@ -142,7 +142,7 @@ namespace SyrusVoluntariado.Controllers
 
                 vagas.DataPublicacao = DateTime.Now;
                 vagas.DataEvento = vaga.DataEvento;
-                vagas.IdUsuarioAdm = IdfUsuarioLogado;
+                vagas.IdUsuarioAdm = IdUsuarioLogado;
                 vagas.Titulo = vaga.Titulo;
                 vagas.Categoria = vaga.Categoria;
                 vagas.Descricao = vaga.Descricao;
@@ -167,7 +167,7 @@ namespace SyrusVoluntariado.Controllers
                 Vaga_P1 vaga = new Vaga_P1(Id);
                 vaga.CompleteObject();
 
-                if (IdfUsuarioLogado == vaga.IdUsuarioAdm)
+                if (IdUsuarioLogado == vaga.IdUsuarioAdm)
                 {
                     bool resultado = Vaga_P1.Delete(Id);
 
@@ -185,25 +185,25 @@ namespace SyrusVoluntariado.Controllers
             Vaga_P1 vaga = new Vaga_P1(Id);
             vaga.CompleteObject();
 
-            List<VagaCandidatura> TodasCandidaturasUsuario = VagaCandidaturas_P1.TodasCandidaturasUsuario(IdfUsuarioLogado);
-            var CandidatosBanco = TodasCandidaturasUsuario.Where(a => a.Id_Usuario == IdfUsuarioLogado && a.Id_Vaga == Id).FirstOrDefault();
+            List<VagaCandidatura> TodasCandidaturasUsuario = VagaCandidaturas_P1.TodasCandidaturasUsuario(IdUsuarioLogado);
+            var CandidatosBanco = TodasCandidaturasUsuario.Where(a => a.Id_Usuario == IdUsuarioLogado && a.Id_Vaga == Id).FirstOrDefault();
 
-            if (vaga.IdUsuarioAdm != IdfUsuarioLogado)
+            if (vaga.IdUsuarioAdm != IdUsuarioLogado)
             {
                 if (CandidatosBanco == null)
                 {
                     VagaCandidaturas_P1 candidatarVaga = new VagaCandidaturas_P1();
-                    candidatarVaga.IdUsuario = IdfUsuarioLogado;
+                    candidatarVaga.IdUsuario = IdUsuarioLogado;
                     candidatarVaga.IdVaga = Id;
                     candidatarVaga.DataCadastro = DateTime.Now;
                     candidatarVaga.Save();
 
                     ViewBag.JaVoluntariado = true;
 
-                    Usuario_P1 usuario = new Usuario_P1(IdfUsuarioLogado);
+                    Usuario_P1 usuario = new Usuario_P1(IdUsuarioLogado);
                     usuario.CompleteObject();
 
-                    //bool EmailEnviado = EnviarCandidatoParaDonoVaga(IdfUsuarioLogado, vaga, usuario);
+                    //bool EmailEnviado = EnviarCandidatoParaDonoVaga(IdUsuarioLogado, vaga, usuario);
                 }
                 else
                 {
@@ -215,7 +215,7 @@ namespace SyrusVoluntariado.Controllers
             return View("Visualizar", vaga);
         }
 
-        public bool EnviarCandidatoParaDonoVaga(int IdfUsuarioLogado, Vaga_P1 vaga, Usuario_P1 usuario)
+        public bool EnviarCandidatoParaDonoVaga(int IdUsuarioLogado, Vaga_P1 vaga, Usuario_P1 usuario)
         {
             try
             {
@@ -255,7 +255,7 @@ namespace SyrusVoluntariado.Controllers
             List<UsuarioCompleto> voluntariosCompleto = new List<UsuarioCompleto>();
             List<int> IdfVoluntarios = new List<int>();
 
-            //Salva todos ID dos usuários candidatados
+            //Lista todos ID dos usuários candidatados
             for (int i = 0; i < ListaUsuariosVoluntariados.Count; i++)
             {
                 var idf = ListaUsuariosVoluntariados[i].Id_Usuario;
@@ -304,9 +304,9 @@ namespace SyrusVoluntariado.Controllers
 
         public int GetUsuarioLogado()
         {
-            int idUsuario = Int32.Parse(HttpContext.Request.Cookies["IdUsuarioLogado"]);
+            int IdUsuarioLogado = Int32.Parse(HttpContext.Request.Cookies["IdUsuarioLogado"]);
 
-            return idUsuario;
+            return IdUsuarioLogado;
         }
 
 

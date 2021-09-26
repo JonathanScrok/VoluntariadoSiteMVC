@@ -16,9 +16,9 @@ namespace SyrusVoluntariado.Controllers {
         public IActionResult Index() {
 
             int IdfUsuario = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault(); //Remover ou Comentar
-            int IdUsuario = GetUsuarioLogado();
+            int IdUsuarioLogado = GetUsuarioLogado();
 
-            Usuario_P1 Usuario = new Usuario_P1(IdfUsuario);
+            Usuario_P1 Usuario = new Usuario_P1(IdUsuarioLogado);
             Usuario.CompleteObject();
 
             if (Usuario.Sexo == 1)
@@ -43,10 +43,10 @@ namespace SyrusVoluntariado.Controllers {
         public IActionResult MinhasVagas() {
             ViewBag.FooterPrecisa = false;
             int IdfUsuario = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault(); //Remover ou Comentar
-            int IdUsuario = GetUsuarioLogado();
+            int IdUsuarioLogado = GetUsuarioLogado();
 
             List<Vaga> vagas = Vaga_P1.TodasVagas();
-            var VagasUsuario = vagas.Where(a => a.Id_Usuario_Adm == IdfUsuario).ToList();
+            var VagasUsuario = vagas.Where(a => a.Id_Usuario_Adm == IdUsuarioLogado).ToList();
 
             return View(VagasUsuario);
         }
@@ -56,14 +56,14 @@ namespace SyrusVoluntariado.Controllers {
             ViewBag.FooterPrecisa = false;
 
             int IdfUsuario = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault(); //Remover ou Comentar
-            int IdUsuario = GetUsuarioLogado();
+            int IdUsuarioLogado = GetUsuarioLogado();
 
-            List<VagaCandidatura> VagasCandidatadas = VagaCandidaturas_P1.TodasCandidaturasUsuario(IdfUsuario);
+            List<VagaCandidatura> VagasCandidatadas = VagaCandidaturas_P1.TodasCandidaturasUsuario(IdUsuarioLogado);
 
             List<Vaga_P1> MinhasCandidaturas = new List<Vaga_P1>();
             List<int> Idfvagas = new List<int>();
 
-            List<Vaga> vagas = Vaga_P1.TodasVagas();
+            //List<Vaga> vagas = Vaga_P1.TodasVagas();
 
             for (int i = 0; i < VagasCandidatadas.Count; i++)
             {
@@ -83,9 +83,9 @@ namespace SyrusVoluntariado.Controllers {
 
         public int GetUsuarioLogado()
         {
-            int idUsuario = Int32.Parse(HttpContext.Request.Cookies["IdUsuarioLogado"]);
+            int IdUsuarioLogado = Int32.Parse(HttpContext.Request.Cookies["IdUsuarioLogado"]);
 
-            return idUsuario;
+            return IdUsuarioLogado;
         }
 
     }

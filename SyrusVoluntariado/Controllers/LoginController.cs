@@ -25,7 +25,7 @@ namespace SyrusVoluntariado.Controllers
             string login = HttpContext.Session.GetString("Login"); //Remover ou Comentar
             var Logado = HttpContext.Request.Cookies["Logado"];
             
-            if (login == "true")
+            if (Logado == "true")
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -118,7 +118,7 @@ namespace SyrusVoluntariado.Controllers
             string login = HttpContext.Session.GetString("Login"); //Remover ou Comentar
             var Logado = HttpContext.Request.Cookies["Logado"];
 
-            if (login == "true")
+            if (Logado == "true")
             {
                 return RedirectToAction("Index", "Home");
             }
