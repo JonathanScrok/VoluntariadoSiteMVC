@@ -15,7 +15,7 @@ namespace SyrusVoluntariado.Controllers {
 
         public IActionResult Index() {
 
-            int IdfUsuario = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault(); //Remover ou Comentar
+            //int IdfUsuario = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault(); //Remover ou Comentar
             int IdUsuarioLogado = GetUsuarioLogado();
 
             Usuario_P1 Usuario = new Usuario_P1(IdUsuarioLogado);
@@ -42,7 +42,7 @@ namespace SyrusVoluntariado.Controllers {
         [HttpGet]
         public IActionResult MinhasVagas() {
             ViewBag.FooterPrecisa = false;
-            int IdfUsuario = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault(); //Remover ou Comentar
+            //int IdfUsuario = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault(); //Remover ou Comentar
             int IdUsuarioLogado = GetUsuarioLogado();
 
             List<Vaga> vagas = Vaga_P1.TodasVagas();
@@ -55,7 +55,7 @@ namespace SyrusVoluntariado.Controllers {
         public IActionResult VagasCandidatadas() {
             ViewBag.FooterPrecisa = false;
 
-            int IdfUsuario = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault(); //Remover ou Comentar
+            //int IdfUsuario = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault(); //Remover ou Comentar
             int IdUsuarioLogado = GetUsuarioLogado();
 
             List<VagaCandidatura> VagasCandidatadas = VagaCandidaturas_P1.TodasCandidaturasUsuario(IdUsuarioLogado);

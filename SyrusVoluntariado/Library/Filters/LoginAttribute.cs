@@ -17,7 +17,7 @@ namespace SyrusVoluntariado.Library.Filters {
             string ActionRedi = ValoresRedirecionamento[0];
             string ControlerRedi = ValoresRedirecionamento[1];
 
-            var login = context.HttpContext.Session.GetString("Login"); //Remover ou Comentar
+            //var login = context.HttpContext.Session.GetString("Login"); //Remover ou Comentar
             var Logado = context.HttpContext.Request.Cookies["Logado"];
 
             if (Logado == null) {

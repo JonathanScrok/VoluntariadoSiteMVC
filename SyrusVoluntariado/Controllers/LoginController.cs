@@ -22,7 +22,7 @@ namespace SyrusVoluntariado.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            string login = HttpContext.Session.GetString("Login"); //Remover ou Comentar
+            //string login = HttpContext.Session.GetString("Login"); //Remover ou Comentar
             var Logado = HttpContext.Request.Cookies["Logado"];
             
             if (Logado == "true")
@@ -64,17 +64,17 @@ namespace SyrusVoluntariado.Controllers
                 CookieOptions option = new CookieOptions();
                 option.Expires = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "E. South America Standard Time").AddDays(7);
 
-                HttpContext.Session.SetString("Login", "true"); //Remover ou Comentar
+                //HttpContext.Session.SetString("Login", "true"); //Remover ou Comentar
                 Response.Cookies.Append("Logado", "true", option);
 
                 string[] NomeCompleto = Usuario.Nome.Split(" ");
 
                 string primeiroNome = NomeCompleto[0].ToString();
 
-                HttpContext.Session.SetString("UsuarioLogado", primeiroNome); //Remover ou Comentar
+                //HttpContext.Session.SetString("UsuarioLogado", primeiroNome); //Remover ou Comentar
                 Response.Cookies.Append("UsuarioLogado", primeiroNome, option);
 
-                HttpContext.Session.SetInt32("IdUsuarioLogado", ValidaDados.Id_Usuario); //Remover ou Comentar
+                //HttpContext.Session.SetInt32("IdUsuarioLogado", ValidaDados.Id_Usuario); //Remover ou Comentar
                 Response.Cookies.Append("IdUsuarioLogado", ValidaDados.Id_Usuario.ToString(), option);
 
                 string UrlAction;
@@ -115,7 +115,7 @@ namespace SyrusVoluntariado.Controllers
         [HttpGet]
         public IActionResult CadastrarUsuario()
         {
-            string login = HttpContext.Session.GetString("Login"); //Remover ou Comentar
+            //string login = HttpContext.Session.GetString("Login"); //Remover ou Comentar
             var Logado = HttpContext.Request.Cookies["Logado"];
 
             if (Logado == "true")
@@ -175,10 +175,10 @@ namespace SyrusVoluntariado.Controllers
                 string[] NomeCompleto = usuario.Nome.Split(" ");
                 string primeiroNome = NomeCompleto[0].ToString();
 
-                HttpContext.Session.SetString("UsuarioLogado", primeiroNome); //Remover ou Comentar
+                //HttpContext.Session.SetString("UsuarioLogado", primeiroNome); //Remover ou Comentar
                 Response.Cookies.Append("UsuarioLogado", primeiroNome, option);
 
-                HttpContext.Session.SetInt32("IdUsuarioLogado", usu.IdUsuario); //Remover ou Comentar
+                //HttpContext.Session.SetInt32("IdUsuarioLogado", usu.IdUsuario); //Remover ou Comentar
                 Response.Cookies.Append("IdUsuarioLogado", usu.IdUsuario.ToString(), option);
 
                 return RedirectToAction("Index", "Home");
@@ -203,7 +203,7 @@ namespace SyrusVoluntariado.Controllers
 
         public ActionResult Logout()
         {
-            HttpContext.Session.Clear(); //Remover ou Comentar
+            HttpContext.Session.Clear();
 
             foreach (var cookie in Request.Cookies.Keys)
             {

@@ -1,9 +1,9 @@
 ﻿@using Microsoft.AspNetCore.Http;
 @{
-    string Login = Context.Session.GetString("Login"); //Remover ou Comentar
+    //string Login = Context.Session.GetString("Login"); //Remover ou Comentar
     string Logado = Context.Request.Cookies["Logado"];
 
-    string NomeUsuario = Context.Session.GetString("UsuarioLogado"); //Remover ou Comentar
+    //string NomeUsuario = Context.Session.GetString("UsuarioLogado"); //Remover ou Comentar
     string PrimeiroNomeUsuario = Context.Request.Cookies["UsuarioLogado"];
 
 }

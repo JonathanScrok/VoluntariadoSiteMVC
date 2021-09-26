@@ -43,11 +43,9 @@ namespace SyrusVoluntariado.Controllers
 
             ViewBag.CadastrarAtualizar = "Cadastrar";
 
-            var ValorUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado"); //Remover ou Comentar
+            //var ValorUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado"); //Remover ou Comentar
+            //int IdUsuarioLog = ValorUsuarioLogado.GetValueOrDefault(); //Remover ou Comentar
             int IdUsuarioLogado = GetUsuarioLogado();
-
-            int IdUsuarioLog = ValorUsuarioLogado.GetValueOrDefault(); //Remover ou Comentar
-
 
             if (vaga.DataEvento.ToString("dd/MM/yyyy") == "01/01/0001")
             {
@@ -85,7 +83,7 @@ namespace SyrusVoluntariado.Controllers
             Vaga_P1 vaga = new Vaga_P1(Id);
             vaga.CompleteObject();
 
-            var IdfUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault(); //Remover ou Comentar
+            //var IdfUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault(); //Remover ou Comentar
             int IdUsuarioLogado = GetUsuarioLogado();
 
             List<VagaCandidatura> TodasCandidaturasUsuario = VagaCandidaturas_P1.TodasCandidaturasUsuario(IdUsuarioLogado);
@@ -108,7 +106,7 @@ namespace SyrusVoluntariado.Controllers
         {
 
             //ViewBag.Nivel = niveis;
-            var IdfUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault(); //Remover ou Comentar
+            //var IdfUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault(); //Remover ou Comentar
             int IdUsuarioLogado = GetUsuarioLogado();
 
             Vaga_P1 vaga = new Vaga_P1(Id);
@@ -132,7 +130,7 @@ namespace SyrusVoluntariado.Controllers
         {
 
             ViewBag.CadastrarAtualizar = "Salvar";
-            var IdfUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault(); //Remover ou Comentar
+            //var IdfUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault(); //Remover ou Comentar
             int IdUsuarioLogado = GetUsuarioLogado();
 
             if (ModelState.IsValid)
@@ -159,7 +157,7 @@ namespace SyrusVoluntariado.Controllers
         [HttpGet]
         public IActionResult Excluir(int Id)
         {
-            var IdfUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault(); //Remover ou Comentar
+            //var IdfUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault(); //Remover ou Comentar
             int IdUsuarioLogado = GetUsuarioLogado();
 
             if (Id != 0)
@@ -179,7 +177,7 @@ namespace SyrusVoluntariado.Controllers
         [HttpGet]
         public IActionResult Voluntariar(int Id)
         {
-            var IdfUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault(); //Remover ou Comentar
+            //var IdfUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault(); //Remover ou Comentar
             int IdUsuarioLogado = GetUsuarioLogado();
 
             Vaga_P1 vaga = new Vaga_P1(Id);
