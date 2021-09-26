@@ -44,8 +44,8 @@ namespace SyrusVoluntariado.BLL
         }
         #endregion
 
-        #region IdVaga
-        public int IdVaga
+        #region Nota
+        public int Nota
         {
             get
             {
@@ -226,7 +226,7 @@ namespace SyrusVoluntariado.BLL
         #endregion
 
         //#region Busca todas os usuários Avaliacoes
-        //public static List<Avaliacao> TodasUsuarioCandidatadosVaga(int IdVaga)
+        //public static List<Avaliacao> TodasUsuarioCandidatadosVaga(int Nota)
         //{
         //    SqlConnection conn = null;
         //    SqlDataReader reader = null;
@@ -237,7 +237,7 @@ namespace SyrusVoluntariado.BLL
         //        List<SqlParameter> parms = new List<SqlParameter>();
         //        parms.Add(new SqlParameter("@Nota", SqlDbType.Int, 4));
 
-        //        parms[0].Value = IdVaga;
+        //        parms[0].Value = Nota;
 
         //        conn = new SqlConnection(stringConnection);
         //        conn.Open();

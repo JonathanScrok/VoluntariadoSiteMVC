@@ -40,12 +40,17 @@ namespace SyrusVoluntariado.Controllers
         [HttpPost]
         public ActionResult Index([FromForm] Usuario usuario)
         {
+            //Buscar no banco usuarios com este email e senha:
+            //usuario.Email
+            //usuario.Senha
 
-            var Logins = Login_P1.TodosLogins();
+            //Se existir deixa passar..
 
-            var ValidaDados = Logins.Where(a => a.Email == usuario.Email && a.Senha == usuario.Senha).FirstOrDefault();
+            //var Logins = Login_P1.TodosLogins();
 
-            if (ValidaDados != null)
+            //var ValidaDados = Logins.Where(a => a.Email == usuario.Email && a.Senha == usuario.Senha).FirstOrDefault();
+
+            if (true)
             {
 
                 /*

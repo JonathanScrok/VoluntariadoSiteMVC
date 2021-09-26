@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SyrusVoluntariado.BLL;
 using SyrusVoluntariado.Library.Filters;
 using SyrusVoluntariado.Models;
 using System;
@@ -21,10 +22,25 @@ namespace SyrusVoluntariado.Controllers
         [HttpGet]
         public IActionResult PostAvaliacao(int Id)
         { //OBS: Id é a Quantidade de estrelas da avaliação!
-
             var QtdEstrelas = Id;
+            int IdUsuarioAvaliado = ViewBag.IdUsuAvaliar;
+            int IdUsuarioLogado = GetUsuarioLogado();
+
+            Avaliacao_P1 avaliacao = new Avaliacao_P1();
+            avaliacao.IdUsuario = IdUsuarioAvaliado;
+            avaliacao.Nota = QtdEstrelas;
+            avaliacao.DataCadastro = DateTime.Now;
+            avaliacao.Save();
+
 
             return RedirectToAction("ListaVoluntarios", "Vaga");
+        }
+
+        public int GetUsuarioLogado()
+        {
+            int IdUsuarioLogado = Int32.Parse(HttpContext.Request.Cookies["IdUsuarioLogado"]);
+
+            return IdUsuarioLogado;
         }
     }
 }
