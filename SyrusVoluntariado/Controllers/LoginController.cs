@@ -57,8 +57,10 @@ namespace SyrusVoluntariado.Controllers
                 * Ler Session
                 * string login = HttpContext.Session.GetString("Login");
                 */
-                Usuario_P1 Usuario = new Usuario_P1(LoginExitente[0].Id_Usuario);
-                Usuario.CompleteObject();
+                //Usuario_P1 Usuario = new Usuario_P1(LoginExitente[0].Id_Usuario);
+                //Usuario.CompleteObject();
+
+                List<Usuario> usuarioCompleto = Usuario_P1.BusaUsuario_PorID(LoginExitente[0].Id_Usuario);
 
 
                 CookieOptions option = new CookieOptions();
@@ -67,7 +69,7 @@ namespace SyrusVoluntariado.Controllers
                 //HttpContext.Session.SetString("Login", "true"); //Remover ou Comentar
                 Response.Cookies.Append("Logado", "true", option);
 
-                string[] NomeCompleto = Usuario.Nome.Split(" ");
+                string[] NomeCompleto = usuarioCompleto[0].Nome.Split(" ");
 
                 string primeiroNome = NomeCompleto[0].ToString();
 
