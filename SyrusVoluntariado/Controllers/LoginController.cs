@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
-using RestSharp;
 using SyrusVoluntariado.BLL;
 using SyrusVoluntariado.Models;
 using System;
@@ -22,10 +21,10 @@ namespace SyrusVoluntariado.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            //string login = HttpContext.Session.GetString("Login"); //Remover ou Comentar
+            string login = HttpContext.Session.GetString("Login"); //Remover ou Comentar
             var Logado = HttpContext.Request.Cookies["Logado"];
             
-            if (Logado == "true")
+            if (login == "true")
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -47,37 +46,27 @@ namespace SyrusVoluntariado.Controllers
 
             if (LoginExitente.Count > 0)
             {
-
-                /*
-                * Add Session
-                * HttpContext.Session.SetString("Login", "true");
-                * HttpContext.Session.SetInt32("UserID", 32);
-                * HttpContext.Session.SetString("Login", Serializar Object > String);
-
-                * Ler Session
-                * string login = HttpContext.Session.GetString("Login");
-                */
                 //Usuario_P1 Usuario = new Usuario_P1(LoginExitente[0].Id_Usuario);
                 //Usuario.CompleteObject();
 
                 List<Usuario> usuarioCompleto = Usuario_P1.BusaUsuario_PorID(LoginExitente[0].Id_Usuario);
 
 
-                CookieOptions option = new CookieOptions();
-                option.Expires = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "E. South America Standard Time").AddDays(7);
+                //CookieOptions option = new CookieOptions();
+                //option.Expires = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "E. South America Standard Time").AddDays(7);
 
-                //HttpContext.Session.SetString("Login", "true"); //Remover ou Comentar
-                Response.Cookies.Append("Logado", "true", option);
+                HttpContext.Session.SetString("Login", "true"); //Remover ou Comentar
+                //Response.Cookies.Append("Logado", "true", option);
 
                 string[] NomeCompleto = usuarioCompleto[0].Nome.Split(" ");
 
                 string primeiroNome = NomeCompleto[0].ToString();
 
-                //HttpContext.Session.SetString("UsuarioLogado", primeiroNome); //Remover ou Comentar
-                Response.Cookies.Append("UsuarioLogado", primeiroNome, option);
+                HttpContext.Session.SetString("UsuarioLogado", primeiroNome); //Remover ou Comentar
+                //Response.Cookies.Append("UsuarioLogado", primeiroNome, option);
 
-                //HttpContext.Session.SetInt32("IdUsuarioLogado", ValidaDados.Id_Usuario); //Remover ou Comentar
-                Response.Cookies.Append("IdUsuarioLogado", LoginExitente[0].Id_Usuario.ToString(), option);
+                HttpContext.Session.SetInt32("IdUsuarioLogado", LoginExitente[0].Id_Usuario); //Remover ou Comentar
+                //Response.Cookies.Append("IdUsuarioLogado", LoginExitente[0].Id_Usuario.ToString(), option);
 
                 string UrlAction;
                 string UrlControler;
