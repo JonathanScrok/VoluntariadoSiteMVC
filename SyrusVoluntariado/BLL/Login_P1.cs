@@ -126,6 +126,7 @@ namespace SyrusVoluntariado.BLL
         private const string SELECT_BUSCALOGINID = @"select * from helper.Logins where Id_Login = @Id_Login";
         private const string SELECT_BUSCALOGIN_IDUSUARIO = @"select * from helper.Logins where Id_Usuario = @Id_Usuario";
         private const string SELECT_BUSCALOGIN_EMAIL = @"select Email from helper.Logins where Email = @Email";
+        private const string SELECT_BUSCALOGIN_EMAILSENHA = @"select * from helper.Logins where Email = @Email AND Senha = @Senha";
 
         private const string UPDATE_LOGIN = @"UPDATE helper.Logins SET Id_Login = @Id_Login,Id_Usuario = @Id_Usuario, Email = @Email, Senha = @Senha, DataCadastro = @DataCadastro WHERE Id_Login = @Id_Login";
         private const string INSERT_LOGIN = @"INSERT INTO helper.Logins(Id_Usuario, Email, Senha , DataCadastro) VALUES (@Id_Usuario, @Email, @Senha, @DataCadastro)";
@@ -221,6 +222,36 @@ namespace SyrusVoluntariado.BLL
             {
                 emails = Mapper.Map<List<Usuario>>(reader);
                 return emails;
+            }
+        }
+        #endregion
+
+        #region Busca Login por EMAIL e SENHA
+        public static List<Login> BuscaLogin_EmailSenha(string Email, string Senha)
+        {
+            SqlConnection conn = null;
+            SqlDataReader reader = null;
+            List<Login> login = new List<Login>();
+
+            List<SqlParameter> parms = new List<SqlParameter>();
+            parms.Add(new SqlParameter("@Email", SqlDbType.VarChar, 100));
+            parms.Add(new SqlParameter("@Senha", SqlDbType.VarChar, 100));
+            parms[0].Value = Email;
+            parms[1].Value = Senha;
+
+            conn = new SqlConnection(stringConnection);
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand(SELECT_BUSCALOGIN_EMAILSENHA, conn);
+            cmd.Parameters.Add(parms[0]);
+            cmd.Parameters.Add(parms[1]);
+
+            Mapper.CreateMap<IDataRecord, Login>();
+
+            using (reader = cmd.ExecuteReader())
+            {
+                login = Mapper.Map<List<Login>>(reader);
+                return login;
             }
         }
         #endregion

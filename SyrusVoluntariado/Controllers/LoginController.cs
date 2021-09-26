@@ -40,17 +40,12 @@ namespace SyrusVoluntariado.Controllers
         [HttpPost]
         public ActionResult Index([FromForm] Usuario usuario)
         {
-            //Buscar no banco usuarios com este email e senha:
-            //usuario.Email
-            //usuario.Senha
-
-            //Se existir deixa passar..
-
             //var Logins = Login_P1.TodosLogins();
-
             //var ValidaDados = Logins.Where(a => a.Email == usuario.Email && a.Senha == usuario.Senha).FirstOrDefault();
 
-            if (true)
+            var LoginExitente = Login_P1.BuscaLogin_EmailSenha(usuario.Email, usuario.Senha);
+
+            if (LoginExitente.Count > 0)
             {
 
                 /*
@@ -62,7 +57,7 @@ namespace SyrusVoluntariado.Controllers
                 * Ler Session
                 * string login = HttpContext.Session.GetString("Login");
                 */
-                Usuario_P1 Usuario = new Usuario_P1(1);
+                Usuario_P1 Usuario = new Usuario_P1(LoginExitente[0].Id_Usuario);
                 Usuario.CompleteObject();
 
 
@@ -80,7 +75,7 @@ namespace SyrusVoluntariado.Controllers
                 Response.Cookies.Append("UsuarioLogado", primeiroNome, option);
 
                 //HttpContext.Session.SetInt32("IdUsuarioLogado", ValidaDados.Id_Usuario); //Remover ou Comentar
-                Response.Cookies.Append("IdUsuarioLogado", "1", option);
+                Response.Cookies.Append("IdUsuarioLogado", LoginExitente[0].Id_Usuario.ToString(), option);
 
                 string UrlAction;
                 string UrlControler;
@@ -212,7 +207,10 @@ namespace SyrusVoluntariado.Controllers
 
             foreach (var cookie in Request.Cookies.Keys)
             {
-                Response.Cookies.Delete(cookie);
+                if (cookie != "AceitaCookies")
+                {
+                    Response.Cookies.Delete(cookie);
+                }
             }
 
             return RedirectToAction("Index", "Home");
