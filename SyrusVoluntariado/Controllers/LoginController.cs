@@ -62,7 +62,7 @@ namespace SyrusVoluntariado.Controllers
                 * Ler Session
                 * string login = HttpContext.Session.GetString("Login");
                 */
-                Usuario_P1 Usuario = new Usuario_P1(ValidaDados.Id_Usuario);
+                Usuario_P1 Usuario = new Usuario_P1(1);
                 Usuario.CompleteObject();
 
 
@@ -80,7 +80,7 @@ namespace SyrusVoluntariado.Controllers
                 Response.Cookies.Append("UsuarioLogado", primeiroNome, option);
 
                 //HttpContext.Session.SetInt32("IdUsuarioLogado", ValidaDados.Id_Usuario); //Remover ou Comentar
-                Response.Cookies.Append("IdUsuarioLogado", ValidaDados.Id_Usuario.ToString(), option);
+                Response.Cookies.Append("IdUsuarioLogado", "1", option);
 
                 string UrlAction;
                 string UrlControler;
