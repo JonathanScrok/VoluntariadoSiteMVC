@@ -46,19 +46,23 @@ namespace SyrusVoluntariado.Controllers
 
             if (LoginExitente.Count > 0)
             {
-                //Usuario_P1 Usuario = new Usuario_P1(LoginExitente[0].Id_Usuario);
-                //Usuario.CompleteObject();
+                Usuario_P1 Usuario = new Usuario_P1(LoginExitente[0].Id_Usuario);
+                Usuario.CompleteObject();
 
-                List<Usuario> usuarioCompleto = Usuario_P1.BusaUsuario_PorID(LoginExitente[0].Id_Usuario);
+                //List<Usuario> usuarioCompleto = Usuario_P1.BusaUsuario_PorID(LoginExitente[0].Id_Usuario);
 
 
-                //CookieOptions option = new CookieOptions();
+                CookieOptions option = new CookieOptions();
                 //option.Expires = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "E. South America Standard Time").AddDays(7);
-
+                option.Expires = DateTime.Now.AddDays(7);
+                
                 HttpContext.Session.SetString("Login", "true"); //Remover ou Comentar
+                Response.Cookies.Append("Logado", "true", option);
+                
+                
                 //Response.Cookies.Append("Logado", "true", option);
 
-                string[] NomeCompleto = usuarioCompleto[0].Nome.Split(" ");
+                string[] NomeCompleto = Usuario.Nome.Split(" ");
 
                 string primeiroNome = NomeCompleto[0].ToString();
 
