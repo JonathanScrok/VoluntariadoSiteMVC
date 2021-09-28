@@ -248,6 +248,7 @@ namespace SyrusVoluntariado.Controllers
         {
             ViewBag.FooterPrecisa = false;
             ViewBag.IdVaga = Id;
+            int IdUsuarioLogado = GetUsuarioLogado();
 
             List<VagaCandidatura> ListaUsuariosVoluntariados = VagaCandidaturas_P1.TodasUsuarioCandidatadosVaga(Id);
 
@@ -268,26 +269,37 @@ namespace SyrusVoluntariado.Controllers
                 Usuario_P1 Usuario = new Usuario_P1(IdUsu);
                 Usuario.CompleteObject();
 
+                var JaAvaliado = Avaliacao_P1.BuscaIdUsuario_AvaliouEAvaliado(IdUsu, IdUsuarioLogado);
+                
                 var Avaliacao = Avaliacao_P1.TodasAvaliacoesUsuario(IdUsu);
                 UsuarioCompleto.Id = Usuario.IdUsuario;
                 UsuarioCompleto.Email = Usuario.Email;
                 UsuarioCompleto.Nome = Usuario.Nome;
                 UsuarioCompleto.Sexo = Usuario.Sexo;
 
+                if (JaAvaliado.Count > 0)
+                {
+                    UsuarioCompleto.UsuarioLogadoAvaliou = true;
+                }
+                else
+                {
+                    UsuarioCompleto.UsuarioLogadoAvaliou = false;
+                }
+
                 if (Avaliacao.Count > 0)
                 {
-                    int NotaSomadas = 0;
+                    double NotaSomadas = 0;
                     for (int i = 0; i < Avaliacao.Count; i++)
                     {
                         NotaSomadas += Avaliacao[i].Nota;
                     }
 
                     UsuarioCompleto.NotaMedia = NotaSomadas / Avaliacao.Count;
-                    UsuarioCompleto.Avaliado = true;
+                    UsuarioCompleto.NuncaAvaliado = false;
                 }
                 else
                 {
-                    UsuarioCompleto.Avaliado = false;
+                    UsuarioCompleto.NuncaAvaliado = true;
                 }
 
                 voluntariosCompleto.Add(UsuarioCompleto);

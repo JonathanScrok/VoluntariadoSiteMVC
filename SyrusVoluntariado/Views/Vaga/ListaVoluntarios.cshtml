@@ -122,11 +122,22 @@
                                 <img src="/img/star0.png" id="s5">
                             </a>
                         }
+                        <a><strong style="font-size: 24px"> @usuario.NotaMedia</strong></a>
                     </div>
                 </td>
-                <td>
-                    <a class="btn btn-info ms-md-2" href="/avaliar/index/?Id=@usuario.Id&IdVaga=@IdVaga">Avaliar</a>
-                </td>
+                @if (usuario.UsuarioLogadoAvaliou == false)
+                {
+                    <td>
+                        <a class="btn btn-info ms-md-2" href="/avaliar/index/?Id=@usuario.Id&IdVaga=@IdVaga">Avaliar</a>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <a class="btn btn-info ms-md-2" disabled>Avaliado</a>
+                    </td>
+                }
+
             </tr>
         }
     </tbody>
@@ -135,6 +146,6 @@
 @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
 
 <script>
-    var 
+    var
 </script>
 

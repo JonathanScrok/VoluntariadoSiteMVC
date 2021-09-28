@@ -125,6 +125,7 @@ namespace SyrusVoluntariado.BLL
         private const string SELECT_TODASAVALIACOES = @"select * from helper.Avaliacao";
         private const string SELECT_BUSCA_AVALIACOESID = @"select * from helper.Avaliacao where Id_Avaliacao = @Id_Avaliacao";
         private const string SELECT_BUSCA_AVALIACOES_IDUSUARIO = @"select * from helper.Avaliacao where Id_Usuario_Avaliado = @Id_Usuario_Avaliado";
+        private const string SELECT_BUSCA_AVALIACOES_IDUSUARIOAVALIADO_E_IDUSUARIOAVALIOU = @"select * from helper.Avaliacao where Id_Usuario_Avaliado = @Id_Usuario_Avaliado AND Id_Usuario_Avaliou = @Id_Usuario_Avaliou";
 
         private const string UPDATE_AVALIACOES = @"UPDATE helper.Avaliacao SET Nota = @Nota, Id_Usuario_Avaliado = @Id_Usuario_Avaliado, Id_Usuario_Avaliou = @Id_Usuario_Avaliou, DataCadastro = @DataCadastro where Id_Avaliacao = @Id_Avaliacao";
         private const string INSERT_AVALIACOES = @"INSERT INTO helper.Avaliacao(Id_Usuario_Avaliado, Id_Usuario_Avaliou, Nota, DataCadastro) VALUES (@Id_Usuario_Avaliado, @Id_Usuario_Avaliou, @Nota, @DataCadastro)";
@@ -218,6 +219,53 @@ namespace SyrusVoluntariado.BLL
 
                 SqlCommand cmd = new SqlCommand(SELECT_BUSCA_AVALIACOES_IDUSUARIO, conn);
                 cmd.Parameters.Add(parms[0]);
+
+                Mapper.CreateMap<IDataRecord, Avaliacao>();
+
+                using (reader = cmd.ExecuteReader())
+                {
+                    CandidaturasUsuario = Mapper.Map<List<Avaliacao>>(reader);
+                    return CandidaturasUsuario;
+                }
+            }
+            finally
+            {
+
+                if (reader != null)
+                {
+                    reader.Close();
+                }
+
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+        }
+        #endregion
+
+        #region Busca as Avaliacoes por Id_Usuario_Avaliado e Id_Usuario_Avaliou
+        public static List<Avaliacao> BuscaIdUsuario_AvaliouEAvaliado(int IdUsuarioAvaliado, int IdUsuarioAvaliou)
+        {
+            SqlConnection conn = null;
+            SqlDataReader reader = null;
+            List<Avaliacao> CandidaturasUsuario = new List<Avaliacao>();
+
+            try
+            {
+                List<SqlParameter> parms = new List<SqlParameter>();
+                parms.Add(new SqlParameter("@Id_Usuario_Avaliado", SqlDbType.Int, 4));
+                parms.Add(new SqlParameter("@Id_Usuario_Avaliou", SqlDbType.Int, 4));
+
+                parms[0].Value = IdUsuarioAvaliado;
+                parms[1].Value = IdUsuarioAvaliou;
+
+                conn = new SqlConnection(stringConnection);
+                conn.Open();
+
+                SqlCommand cmd = new SqlCommand(SELECT_BUSCA_AVALIACOES_IDUSUARIOAVALIADO_E_IDUSUARIOAVALIOU, conn);
+                cmd.Parameters.Add(parms[0]);
+                cmd.Parameters.Add(parms[1]);
 
                 Mapper.CreateMap<IDataRecord, Avaliacao>();
 

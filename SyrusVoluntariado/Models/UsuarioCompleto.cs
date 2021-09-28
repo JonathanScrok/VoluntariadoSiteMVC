@@ -17,9 +17,10 @@ namespace SyrusVoluntariado.Models
 
         public int Id_Avaliacao { get; set; }
 
-        public int NotaMedia { get; set; }
+        public double NotaMedia { get; set; }
 
-        public bool Avaliado { get; set; }
+        public bool NuncaAvaliado { get; set; }
+        public bool UsuarioLogadoAvaliou { get; set; }
 
 
     }
