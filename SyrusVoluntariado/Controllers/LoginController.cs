@@ -39,8 +39,6 @@ namespace SyrusVoluntariado.Controllers
         [HttpPost]
         public ActionResult Index([FromForm] Usuario usuario)
         {
-            //var Logins = Login_P1.TodosLogins();
-            //var ValidaDados = Logins.Where(a => a.Email == usuario.Email && a.Senha == usuario.Senha).FirstOrDefault();
 
             var LoginExitente = Login_P1.BuscaLogin_EmailSenha(usuario.Email, usuario.Senha);
 
@@ -48,8 +46,6 @@ namespace SyrusVoluntariado.Controllers
             {
                 Usuario_P1 Usuario = new Usuario_P1(LoginExitente[0].Id_Usuario);
                 Usuario.CompleteObject();
-
-                //List<Usuario> usuarioCompleto = Usuario_P1.BusaUsuario_PorID(LoginExitente[0].Id_Usuario);
 
                 CookieOptions option = new CookieOptions();
                 //option.Expires = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "E. South America Standard Time").AddDays(7);
@@ -60,7 +56,6 @@ namespace SyrusVoluntariado.Controllers
                 
 
                 string[] NomeCompleto = Usuario.Nome.Split(" ");
-
                 string primeiroNome = NomeCompleto[0].ToString();
 
                 //HttpContext.Session.SetString("UsuarioLogado", primeiroNome); //Remover ou Comentar

@@ -19,7 +19,8 @@ namespace SyrusVoluntariado.BLL
 
         private int _idAvaliacao;
         private int _nota;
-        private int _idUsuario;
+        private int _idUsuarioAvaliado;
+        private int _idUsuarioAvaliou;
         private DateTime _dataCadastro;
 
         private bool _persisted;
@@ -59,16 +60,31 @@ namespace SyrusVoluntariado.BLL
         }
         #endregion
 
-        #region IdUsuario
-        public int IdUsuario
+        #region IdUsuarioAvaliado
+        public int IdUsuarioAvaliado
         {
             get
             {
-                return this._idUsuario;
+                return this._idUsuarioAvaliado;
             }
             set
             {
-                this._idUsuario = value;
+                this._idUsuarioAvaliado = value;
+                this._modified = true;
+            }
+        }
+        #endregion
+
+        #region IdUsuarioAvaliado
+        public int IdUsuarioAvaliou
+        {
+            get
+            {
+                return this._idUsuarioAvaliou;
+            }
+            set
+            {
+                this._idUsuarioAvaliou = value;
                 this._modified = true;
             }
         }
@@ -108,10 +124,10 @@ namespace SyrusVoluntariado.BLL
 
         private const string SELECT_TODASAVALIACOES = @"select * from helper.Avaliacao";
         private const string SELECT_BUSCA_AVALIACOESID = @"select * from helper.Avaliacao where Id_Avaliacao = @Id_Avaliacao";
-        private const string SELECT_BUSCA_AVALIACOES_IDUSUARIO = @"select * from helper.Avaliacao where Id_Usuario = @Id_Usuario";
+        private const string SELECT_BUSCA_AVALIACOES_IDUSUARIO = @"select * from helper.Avaliacao where Id_Usuario_Avaliado = @Id_Usuario_Avaliado";
 
-        private const string UPDATE_AVALIACOES = @"UPDATE helper.Avaliacao SET Id_Avaliacao = @Id_Avaliacao, Nome = @Nota, Id_Usuario = @Id_Usuario, DataCadastro = @DataCadastro where Id_Avaliacao = @Id_Avaliacao";
-        private const string INSERT_AVALIACOES = @"INSERT INTO helper.Avaliacao(Nome, Id_Usuario, DataCadastro) VALUES (@Nota, @Id_Usuario, @DataCadastro)";
+        private const string UPDATE_AVALIACOES = @"UPDATE helper.Avaliacao SET Nota = @Nota, Id_Usuario_Avaliado = @Id_Usuario_Avaliado, Id_Usuario_Avaliou = @Id_Usuario_Avaliou, DataCadastro = @DataCadastro where Id_Avaliacao = @Id_Avaliacao";
+        private const string INSERT_AVALIACOES = @"INSERT INTO helper.Avaliacao(Id_Usuario_Avaliado, Id_Usuario_Avaliou, Nota, DataCadastro) VALUES (@Id_Usuario_Avaliado, @Id_Usuario_Avaliou, @Nota, @DataCadastro)";
         private const string DELETE_AVALIACOES = @"DELETE FROM helper.Avaliacao WHERE Id_Avaliacao = @Id_Avaliacao";
         #endregion
 
@@ -124,7 +140,8 @@ namespace SyrusVoluntariado.BLL
             List<SqlParameter> parms = new List<SqlParameter>();
             parms.Add(new SqlParameter("@Id_Avaliacao", SqlDbType.Int, 4));
             parms.Add(new SqlParameter("@Nota", SqlDbType.Int, 4));
-            parms.Add(new SqlParameter("@Id_Usuario", SqlDbType.Int, 4));
+            parms.Add(new SqlParameter("@Id_Usuario_Avaliado", SqlDbType.Int, 4));
+            parms.Add(new SqlParameter("@Id_Usuario_Avaliou", SqlDbType.Int, 4));
             parms.Add(new SqlParameter("@DataCadastro", SqlDbType.DateTime, 8));
 
             return (parms);
@@ -137,8 +154,9 @@ namespace SyrusVoluntariado.BLL
         {
             parms[0].Value = this._idAvaliacao;
             parms[1].Value = this._nota;
-            parms[2].Value = this._idUsuario;
-            parms[3].Value = this._dataCadastro;
+            parms[2].Value = this._idUsuarioAvaliado;
+            parms[3].Value = this._idUsuarioAvaliou;
+            parms[4].Value = this._dataCadastro;
 
         }
         #endregion
@@ -181,8 +199,8 @@ namespace SyrusVoluntariado.BLL
         }
         #endregion
 
-        #region Busca todas as Avaliacoes por Id_Usuario
-        public static List<Avaliacao> TodasAvaliacoesUsuario(int IdUsuario)
+        #region Busca todas as Avaliacoes por Id_Usuario_Avaliado
+        public static List<Avaliacao> TodasAvaliacoesUsuario(int IdUsuarioAvaliado)
         {
             SqlConnection conn = null;
             SqlDataReader reader = null;
@@ -191,9 +209,9 @@ namespace SyrusVoluntariado.BLL
             try
             {
                 List<SqlParameter> parms = new List<SqlParameter>();
-                parms.Add(new SqlParameter("@Id_Usuario", SqlDbType.Int, 4));
+                parms.Add(new SqlParameter("@Id_Usuario_Avaliado", SqlDbType.Int, 4));
 
-                parms[0].Value = IdUsuario;
+                parms[0].Value = IdUsuarioAvaliado;
 
                 conn = new SqlConnection(stringConnection);
                 conn.Open();
@@ -469,7 +487,7 @@ namespace SyrusVoluntariado.BLL
         /// <summary>
         /// Método utilizado por retornar as colunas de um registro no banco de dados.
         /// </summary>
-        /// <param name="idUsuario">Chave do registro.</param>
+        /// <param name="IdUsuarioAvaliado">Chave do registro.</param>
         /// <returns>Cursor de leitura do banco de dados.</returns>
         /// <remarks>Jonathan Scrok</remarks>
         private static IDataReader LoadDataReader(int IdCandidatura)
@@ -492,7 +510,7 @@ namespace SyrusVoluntariado.BLL
         /// <summary>
         /// Método utilizado por retornar as colunas de um registro no banco de dados, dentro de uma transação.
         /// </summary>
-        /// <param name="idUsuario">Chave do registro.</param>
+        /// <param name="IdUsuarioAvaliado">Chave do registro.</param>
         /// <param name="trans">Transação existente no banco de dados.</param>
         /// <returns>Cursor de leitura do banco de dados.</returns>
         /// <remarks>Jonathan Scrok</remarks>
@@ -559,7 +577,7 @@ namespace SyrusVoluntariado.BLL
                 {
                     objVaga._idAvaliacao = Convert.ToInt32(dr["Id_Avaliacao"]);
                     objVaga._nota = Convert.ToInt32(dr["Nome"]);
-                    objVaga._idUsuario = Convert.ToInt32(dr["Id_Usuario"]);
+                    objVaga._idUsuarioAvaliado = Convert.ToInt32(dr["Id_Usuario_Avaliado"]);
                     objVaga._dataCadastro = Convert.ToDateTime(dr["DataCadastro"]);
 
 

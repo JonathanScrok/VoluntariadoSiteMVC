@@ -247,6 +247,7 @@ namespace SyrusVoluntariado.Controllers
         public IActionResult ListaVoluntarios(int Id)
         {
             ViewBag.FooterPrecisa = false;
+            ViewBag.IdVaga = Id;
 
             List<VagaCandidatura> ListaUsuariosVoluntariados = VagaCandidaturas_P1.TodasUsuarioCandidatadosVaga(Id);
 

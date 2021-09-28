@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using SyrusVoluntariado.BLL;
 using SyrusVoluntariado.Library.Filters;
 using SyrusVoluntariado.Models;
@@ -13,9 +14,11 @@ namespace SyrusVoluntariado.Controllers
     public class AvaliarController : Controller
     {
         [HttpGet]
-        public IActionResult Index(int Id)
+        public IActionResult Index(int Id, int IdVaga)
         {
-            ViewBag.IdUsuAvaliar = Id;
+            HttpContext.Session.SetInt32("UsuarioAvaliado", Id);
+            HttpContext.Session.SetInt32("VagaId", IdVaga);
+
             return View(new Avaliacao());
         }
 
@@ -23,17 +26,19 @@ namespace SyrusVoluntariado.Controllers
         public IActionResult PostAvaliacao(int Id)
         { //OBS: Id é a Quantidade de estrelas da avaliação!
             var QtdEstrelas = Id;
-            int IdUsuarioAvaliado = ViewBag.IdUsuAvaliar;
+            int IdUsuarioAvaliado = HttpContext.Session.GetInt32("UsuarioAvaliado").GetValueOrDefault();
             int IdUsuarioLogado = GetUsuarioLogado();
+            int IdVaga = HttpContext.Session.GetInt32("VagaId").GetValueOrDefault();
 
             Avaliacao_P1 avaliacao = new Avaliacao_P1();
-            avaliacao.IdUsuario = IdUsuarioAvaliado;
+            avaliacao.IdUsuarioAvaliado = IdUsuarioAvaliado;
+            avaliacao.IdUsuarioAvaliou = IdUsuarioLogado;
             avaliacao.Nota = QtdEstrelas;
             avaliacao.DataCadastro = DateTime.Now;
             avaliacao.Save();
 
 
-            return RedirectToAction("ListaVoluntarios", "Vaga");
+            return RedirectToAction("ListaVoluntarios", "Vaga", new {Id = IdVaga });
         }
 
         public int GetUsuarioLogado()

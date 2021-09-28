@@ -8,6 +8,7 @@
 }
 @{
     ViewBag.Title = "Voluntários";
+    var IdVaga = ViewBag.IdVaga;
 }
 
 <div class="mt-md-3">
@@ -124,7 +125,7 @@
                     </div>
                 </td>
                 <td>
-                    <a class="btn btn-info ms-md-2" href="/avaliar/index/@usuario.Id">Avaliar</a>
+                    <a class="btn btn-info ms-md-2" href="/avaliar/index/?Id=@usuario.Id&IdVaga=@IdVaga">Avaliar</a>
                 </td>
             </tr>
         }
@@ -132,4 +133,8 @@
 </table>
 
 @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
+
+<script>
+    var 
+</script>
 
