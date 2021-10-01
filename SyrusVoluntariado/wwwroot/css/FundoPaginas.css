@@ -242,3 +242,15 @@ width: 100%;
     align-items: center;
     flex-direction: column;
 }
+
+.ConjuntoEstrelas {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.MediaEstrelas {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
