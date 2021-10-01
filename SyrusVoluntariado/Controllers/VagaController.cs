@@ -293,8 +293,9 @@ namespace SyrusVoluntariado.Controllers
                     {
                         NotaSomadas += Avaliacao[i].Nota;
                     }
-
-                    UsuarioCompleto.NotaMedia = NotaSomadas / Avaliacao.Count;
+                    var media = NotaSomadas / Avaliacao.Count;
+                    media = Math.Round(media, 1);
+                    UsuarioCompleto.NotaMedia = media;
                     UsuarioCompleto.NuncaAvaliado = false;
                 }
                 else
