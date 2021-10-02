@@ -16,6 +16,4 @@ namespace SyrusVoluntariado.Database
             return connString;
         }
     }
-
-
 }

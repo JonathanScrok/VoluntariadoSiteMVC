@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using SyrusVoluntariado.Database;
 using SyrusVoluntariado.Models;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,8 @@ namespace SyrusVoluntariado.BLL
     public partial class Avaliacao_P1
     {
         #region StringConnection
-        private const string stringConnection = "Data Source=mssql-49550-0.cloudclusters.net,11255;Initial Catalog=be_helper;Integrated Security=False;User Id=AdminBeaHelper;Password=B3ah3lper#2021;MultipleActiveResultSets=True";
+        //private const string stringConnection = "Data Source=mssql-49550-0.cloudclusters.net,11255;Initial Catalog=be_helper;Integrated Security=False;User Id=AdminBeaHelper;Password=B3ah3lper#2021;MultipleActiveResultSets=True";
+        private static string stringConnection = DataAccessLayer.GetConnection();
         #endregion
 
         #region Atributos
