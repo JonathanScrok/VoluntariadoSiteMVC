@@ -21,7 +21,7 @@ namespace SyrusVoluntariado.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            string login = HttpContext.Session.GetString("Login"); //Remover ou Comentar
+            //string login = HttpContext.Session.GetString("Login"); //Remover ou Comentar
             var Logado = HttpContext.Request.Cookies["Logado"];
             
             if (Logado == "true")
@@ -48,7 +48,6 @@ namespace SyrusVoluntariado.Controllers
                 Usuario.CompleteObject();
 
                 CookieOptions option = new CookieOptions();
-                //option.Expires = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "E. South America Standard Time").AddDays(7);
                 option.Expires = DateTime.Now.AddDays(7);
                 
                 //HttpContext.Session.SetString("Login", "true"); //Remover ou Comentar
@@ -154,7 +153,6 @@ namespace SyrusVoluntariado.Controllers
                 login.Save();
 
                 CookieOptions option = new CookieOptions();
-                //option.Expires = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "E. South America Standard Time").AddDays(7);
                 option.Expires = DateTime.Now.AddDays(7);
 
                 //HttpContext.Session.SetString("Login", "true"); //Remover ou Comentar

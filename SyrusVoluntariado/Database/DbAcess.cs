@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 
 namespace SyrusVoluntariado.Database
 {
-    public class DataAccessLayer
+    public class DbAcess
     {
         public static IConfiguration Configuration;
 
         public static string GetConnection()
         {
-            var connString = DataAccessLayer.Configuration["ConnectionString"];
+            var connString = DbAcess.Configuration["ConnectionString"];
             return connString;
         }
+
     }
 }

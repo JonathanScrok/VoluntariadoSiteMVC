@@ -16,7 +16,7 @@ namespace SyrusVoluntariado {
 
         public Startup(IConfiguration configuration)
         {
-            DataAccessLayer.Configuration = configuration;
+            DbAcess.Configuration = configuration;
         }
 
         public void ConfigureServices(IServiceCollection services) {
@@ -27,8 +27,8 @@ namespace SyrusVoluntariado {
 
             //    options.UseSqlite("Data Source=Database\\bancoVoluntarios.db");
             //});
-            services.AddMemoryCache();
-            services.AddDistributedMemoryCache();
+            //services.AddMemoryCache();
+            //services.AddDistributedMemoryCache();
             services.AddSession();
             services.AddMvc(option => option.EnableEndpointRouting = false);
         }
