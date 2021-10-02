@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SyrusVoluntariado.Database;
@@ -12,6 +13,12 @@ using System.Threading.Tasks;
 
 namespace SyrusVoluntariado {
     public class Startup {
+
+        public Startup(IConfiguration configuration)
+        {
+            DataAccessLayer.Configuration = configuration;
+        }
+
         public void ConfigureServices(IServiceCollection services) {
             services.AddMvc();
             //services.AddDbContext<DatabaseContext>(options => {
@@ -21,7 +28,6 @@ namespace SyrusVoluntariado {
             //    options.UseSqlite("Data Source=Database\\bancoVoluntarios.db");
             //});
             services.AddMemoryCache();
-
             services.AddDistributedMemoryCache();
             services.AddSession();
             services.AddMvc(option => option.EnableEndpointRouting = false);
