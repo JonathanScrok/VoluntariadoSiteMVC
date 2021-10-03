@@ -1,4 +1,5 @@
-﻿@{
+﻿@model BeaHelper.BLL.Models.Usuario
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @{
@@ -20,13 +21,14 @@
                             <a href="/login/cadastrarusuario" class="btn btn-primary" id="cadastroLogin">Cadastrar-se</a>
                         </div>
                     </div>
-                    @if (TempData["MensagemErro"] != null) {
+                    @if (TempData["MensagemErro"] != null)
+                    {
                         <div class="alert alert-danger alertemail" role="alert">
                             @TempData["MensagemErro"]
                         </div>
                     }
                     <div class="form-floating emailLogin">
-                        <input type="text" name="email" class="form-control logininput" id="email" placeholder="">
+                        <input type="text" name="email" value="@Model.Email" class="form-control logininput" id="email" placeholder="">
                         <label for="email">Email:</label>
                         @Html.ValidationMessage("email")
                     </div>

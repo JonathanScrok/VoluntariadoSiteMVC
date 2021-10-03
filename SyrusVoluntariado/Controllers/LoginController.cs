@@ -11,12 +11,6 @@ namespace SyrusVoluntariado.Controllers
 {
     public class LoginController : Controller
     {
-        private IMemoryCache _cache; 
-
-        public LoginController(IMemoryCache memoryCache)
-        {
-            _cache = memoryCache;
-        }
 
         [HttpGet]
         public IActionResult Index()
@@ -31,7 +25,7 @@ namespace SyrusVoluntariado.Controllers
             else
             {
                 ViewBag.FooterPrecisa = false;
-                return View();
+                return View(new Usuario());
             }
 
         }
@@ -94,12 +88,12 @@ namespace SyrusVoluntariado.Controllers
                 else
                 {
                     TempData["MensagemErro"] = "Email ou senha estão incorretos!";
-                    return View();
+                    return View(usuario);
                 }
             }
             else
             {
-                return View();
+                return View(usuario);
             }
 
         }
