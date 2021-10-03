@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using BeaHelper.BLL.BD;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
-using SyrusVoluntariado.BLL;
-using SyrusVoluntariado.Models;
+using BeaHelper.BLL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,63 +39,69 @@ namespace SyrusVoluntariado.Controllers
         [HttpPost]
         public ActionResult Index([FromForm] Usuario usuario)
         {
-
-            var LoginExitente = Login_P1.BuscaLogin_EmailSenha(usuario.Email, usuario.Senha);
-
-            if (LoginExitente.Count > 0)
+            if (usuario.Email != null && usuario.Senha != null)
             {
-                Usuario_P1 Usuario = new Usuario_P1(LoginExitente[0].Id_Usuario);
-                Usuario.CompleteObject();
+                var LoginExitente = Login_P1.BuscaLogin_EmailSenha(usuario.Email, usuario.Senha);
 
-                CookieOptions option = new CookieOptions();
-                option.Expires = DateTime.Now.AddDays(7);
-                
-                //HttpContext.Session.SetString("Login", "true"); //Remover ou Comentar
-                Response.Cookies.Append("Logado", "true", option);
-                
-
-                string[] NomeCompleto = Usuario.Nome.Split(" ");
-                string primeiroNome = NomeCompleto[0].ToString();
-
-                //HttpContext.Session.SetString("UsuarioLogado", primeiroNome); //Remover ou Comentar
-                Response.Cookies.Append("UsuarioLogado", primeiroNome, option);
-
-                //HttpContext.Session.SetInt32("IdUsuarioLogado", LoginExitente[0].Id_Usuario); //Remover ou Comentar
-                Response.Cookies.Append("IdUsuarioLogado", LoginExitente[0].Id_Usuario.ToString(), option);
-
-                string UrlAction;
-                string UrlControler;
-                string Id;
-
-                try
+                if (LoginExitente.Count > 0)
                 {
-                    UrlAction = TempData["URLRedirectAction"].ToString();
-                    UrlControler = TempData["URLRedirectController"].ToString();
-                    TempData["URLRedirectAction"] = "Index";
-                    TempData["URLRedirectController"] = "Home";
-                    Id = TempData["URLRedirectArgumento"].ToString();
-                    if (Id != "null")
+                    Usuario_P1 Usuario = new Usuario_P1(LoginExitente[0].Id_Usuario);
+                    Usuario.CompleteObject();
+
+                    CookieOptions option = new CookieOptions();
+                    option.Expires = DateTime.Now.AddDays(7);
+
+                    //HttpContext.Session.SetString("Login", "true"); //Remover ou Comentar
+                    Response.Cookies.Append("Logado", "true", option);
+
+
+                    string[] NomeCompleto = Usuario.Nome.Split(" ");
+                    string primeiroNome = NomeCompleto[0].ToString();
+
+                    //HttpContext.Session.SetString("UsuarioLogado", primeiroNome); //Remover ou Comentar
+                    Response.Cookies.Append("UsuarioLogado", primeiroNome, option);
+
+                    //HttpContext.Session.SetInt32("IdUsuarioLogado", LoginExitente[0].Id_Usuario); //Remover ou Comentar
+                    Response.Cookies.Append("IdUsuarioLogado", LoginExitente[0].Id_Usuario.ToString(), option);
+
+                    string UrlAction;
+                    string UrlControler;
+                    string Id;
+
+                    try
                     {
-                        return Redirect("/" + UrlControler + "/" + UrlAction + "/" + Id);
+                        UrlAction = TempData["URLRedirectAction"].ToString();
+                        UrlControler = TempData["URLRedirectController"].ToString();
+                        TempData["URLRedirectAction"] = "Index";
+                        TempData["URLRedirectController"] = "Home";
+                        Id = TempData["URLRedirectArgumento"].ToString();
+                        if (Id != "null")
+                        {
+                            return Redirect("/" + UrlControler + "/" + UrlAction + "/" + Id);
+                        }
+                        else
+                        {
+                            return RedirectToAction(UrlAction, UrlControler);
+                        }
                     }
-                    else
+                    catch (NullReferenceException)
                     {
+                        UrlAction = "Index";
+                        UrlControler = "Home";
                         return RedirectToAction(UrlAction, UrlControler);
                     }
                 }
-                catch (NullReferenceException)
+                else
                 {
-                    UrlAction = "Index";
-                    UrlControler = "Home";
-                    return RedirectToAction(UrlAction, UrlControler);
+                    TempData["MensagemErro"] = "Email ou senha estão incorretos!";
+                    return View();
                 }
             }
             else
             {
-
-                TempData["MensagemErro"] = "Email ou senha estão incorretos!";
                 return View();
             }
+
         }
 
         [HttpGet]

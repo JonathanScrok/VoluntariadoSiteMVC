@@ -6,24 +6,23 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SyrusVoluntariado.Library.Validation {
-    public class UnicoNomePalavraAttribute : ValidationAttribute {
+namespace BeaHelper.BLL.Validation {
+    public class UnicoCadastroAttribute : ValidationAttribute {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext) {
 
-            Vaga vaga = validationContext.ObjectInstance as Vaga;
+            Usuario usuario = validationContext.ObjectInstance as Usuario;
             //var _db = (DatabaseContext)validationContext.GetService(typeof(DatabaseContext));
-            List<Vaga> vagas = Vaga_P1.TodasVagas();
 
-            //Já existe no banco 1 registro:
+            List<Usuario> usuarios = Usuario_P1.TodosUsuarios();
+
             // - Verificar se o nome existe
             // - Verificar se o Id é o mesmo do registro no banco.
+            var UsuariosBanco = usuarios.Where(a => a.Email == usuario.Email && a.Id != usuario.Id).FirstOrDefault();
 
-            var TituloVaga = vagas.Where(a => a.Titulo == vaga.Titulo && a.Id_Vaga != vaga.Id_Vaga).FirstOrDefault();
-
-            if (TituloVaga == null) {
+            if (UsuariosBanco == null) {
                 return ValidationResult.Success;
             } else {
-                return new ValidationResult("O evento com titulo '"+ vaga.Titulo+"' já está cadastrada!");
+                return new ValidationResult("O email " + usuario.Email + " já está cadastrado!");
             }
         }
     }

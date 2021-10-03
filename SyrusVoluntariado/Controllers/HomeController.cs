@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using SyrusVoluntariado.BLL;
-using SyrusVoluntariado.Database;
-using SyrusVoluntariado.Models;
+using BeaHelper.BLL.BD;
+using BeaHelper.BLL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

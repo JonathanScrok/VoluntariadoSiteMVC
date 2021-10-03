@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SyrusVoluntariado.BLL
+namespace BeaHelper.BLL.BD
 {
-    public class Avaliacao_P2
+    public partial class Login_P2
     {
     }
 }
