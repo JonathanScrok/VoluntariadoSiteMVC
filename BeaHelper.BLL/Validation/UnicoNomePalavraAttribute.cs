@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SyrusVoluntariado.Library.Validation {
+namespace BeaHelper.BLL.Validation {
     public class UnicoNomePalavraAttribute : ValidationAttribute {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext) {
 

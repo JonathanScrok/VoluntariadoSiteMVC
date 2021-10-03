@@ -1,11 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using SyrusVoluntariado.BLL;
-using SyrusVoluntariado.Database;
+using BeaHelper.BLL.BD;
 using SyrusVoluntariado.Library.Filters;
 using SyrusVoluntariado.Library.Mail;
-using SyrusVoluntariado.Models;
+using BeaHelper.BLL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

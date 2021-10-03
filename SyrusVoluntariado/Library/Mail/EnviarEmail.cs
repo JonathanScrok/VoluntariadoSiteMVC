@@ -1,5 +1,5 @@
-﻿using SyrusVoluntariado.BLL;
-using SyrusVoluntariado.Models;
+﻿using BeaHelper.BLL.BD;
+using BeaHelper.BLL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

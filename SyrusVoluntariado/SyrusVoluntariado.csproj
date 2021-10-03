@@ -15,4 +15,8 @@
     <Folder Include="wwwroot\templateboot\src\pug\mixins\common\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BeaHelper.BLL\BeaHelper.BLL.csproj" />
+  </ItemGroup>
+
 </Project>

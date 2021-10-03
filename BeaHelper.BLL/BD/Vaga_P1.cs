@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using SyrusVoluntariado.Database;
-using SyrusVoluntariado.Models;
+using BeaHelper.BLL.Database;
+using BeaHelper.BLL.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,9 +8,9 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SyrusVoluntariado.BLL
+namespace BeaHelper.BLL.BD
 {
-    public partial class VagaCandidaturas_P1
+    public partial class Vaga_P1
     {
         #region StringConnection
         //private const string stringConnection = "Data Source=mssql-49550-0.cloudclusters.net,11255;Initial Catalog=be_helper;Integrated Security=False;User Id=AdminBeaHelper;Password=B3ah3lper#2021;MultipleActiveResultSets=True";
@@ -19,10 +19,14 @@ namespace SyrusVoluntariado.BLL
 
         #region Atributos
 
-        private int _idCandidatura;
         private int _idVaga;
-        private int _idUsuario;
-        private DateTime _dataCadastro;
+        private int _idUsuarioAdm;
+        private string _titulo;
+        private string _categoria;
+        private string _descricao;
+        private string _cidadeEstado;
+        private DateTime _dataPublicacao;
+        private DateTime _dataEvento;
 
         private bool _persisted;
         private bool _modified;
@@ -30,21 +34,6 @@ namespace SyrusVoluntariado.BLL
         #endregion
 
         #region Propriedades
-
-        #region IdCandidatura
-        public int IdCandidatura
-        {
-            get
-            {
-                return this._idCandidatura;
-            }
-            set
-            {
-                this._idCandidatura = value;
-                this._modified = true;
-            }
-        }
-        #endregion
 
         #region IdVaga
         public int IdVaga
@@ -61,32 +50,112 @@ namespace SyrusVoluntariado.BLL
         }
         #endregion
 
-        #region IdUsuario
-        public int IdUsuario
+        #region IdUsuarioAdm
+        public int IdUsuarioAdm
         {
             get
             {
-                return this._idUsuario;
+                return this._idUsuarioAdm;
             }
             set
             {
-                this._idUsuario = value;
+                this._idUsuarioAdm = value;
                 this._modified = true;
             }
         }
         #endregion
 
-        #region DataCadastro
+        #region Titulo
 
-        public DateTime DataCadastro
+        public string Titulo
         {
             get
             {
-                return this._dataCadastro;
+                return this._titulo;
             }
             set
             {
-                this._dataCadastro = value;
+                this._titulo = value;
+                this._modified = true;
+            }
+        }
+        #endregion
+
+        #region Categoria
+
+        public string Categoria
+        {
+            get
+            {
+                return this._categoria;
+            }
+            set
+            {
+                this._categoria = value;
+                this._modified = true;
+            }
+        }
+        #endregion
+
+        #region Descricao
+
+        public string Descricao
+        {
+            get
+            {
+                return this._descricao;
+            }
+            set
+            {
+                this._descricao = value;
+                this._modified = true;
+            }
+        }
+        #endregion
+
+        #region CidadeEstado
+
+        public string CidadeEstado
+        {
+            get
+            {
+                return this._cidadeEstado;
+            }
+            set
+            {
+                this._cidadeEstado = value;
+                this._modified = true;
+            }
+        }
+        #endregion
+
+        #region DataPublicacao
+
+        public DateTime DataPublicacao
+        {
+            get
+            {
+                return this._dataPublicacao;
+            }
+            set
+            {
+                this._dataPublicacao = value;
+                this._modified = true;
+            }
+        }
+        #endregion
+
+        #region DataEvento
+
+        public DateTime DataEvento
+        {
+            get
+            {
+                return this._dataEvento;
+            }
+            set
+            {
+                this._dataEvento = value;
                 this._modified = true;
             }
         }
@@ -95,26 +164,25 @@ namespace SyrusVoluntariado.BLL
         #endregion
 
         #region Construtores
-        public VagaCandidaturas_P1()
+        public Vaga_P1()
         {
             this._persisted = false;
         }
-        public VagaCandidaturas_P1(int IdCandidatura)
+        public Vaga_P1(int idVaga)
         {
-            this._idCandidatura = IdCandidatura;
+            this._idVaga = idVaga;
             this._persisted = true;
         }
         #endregion
 
         #region Consultas
-        private const string SELECT_TODASCANDIDATURAS = @"select * from helper.VagaCandidaturas";
-        private const string SELECT_BUSCA_CANDIDATURAID = @"select * from helper.VagaCandidaturas where Id_Candidatura = @Id_Candidatura";
-        private const string SELECT_BUSCA_CANDIDATURA_IDUSUARIO = @"select * from helper.VagaCandidaturas where Id_Usuario = @Id_Usuario";
-        private const string SELECT_BUSCA_CANDIDATURA_IDVAGA = @"select * from helper.VagaCandidaturas where Id_Vaga = @Id_Vaga";
+        private const string SELECT_TODASVAGAS = @"select * from helper.Vagas order by DataPublicacao desc";
+        private const string SELECT_ULTIMASVAGAS_TOP8 = @"select top 8 * from helper.Vagas order by DataEvento desc";
+        private const string SELECT_BUSCAVAGAID = @"select * from helper.Vagas where Id_Vaga = @Id_Vaga";
 
-        private const string UPDATE_CANDIDATURA = @"UPDATE helper.VagaCandidaturas SET Id_Candidatura = @Id_Candidatura, Id_Vaga = @Id_Vaga, Id_Usuario = @Id_Usuario, DataCadastro = @DataCadastro where Id_Candidatura = @Id_Candidatura";
-        private const string INSERT_CANDIDATURA = @"INSERT INTO helper.VagaCandidaturas(Id_Vaga, Id_Usuario, DataCadastro) VALUES (@Id_Vaga, @Id_Usuario, @DataCadastro)";
-        private const string DELETE_CANDIDATURA = @"DELETE FROM helper.VagaCandidaturas WHERE Id_Candidatura = @Id_Candidatura";
+        private const string UPDATE_VAGA = @"UPDATE helper.Vagas SET Id_Usuario_Adm = @Id_Usuario_Adm, Titulo = @Titulo, Categoria = @Categoria, Descricao = @Descricao, Cidade_Estado = @Cidade_Estado, DataPublicacao = @DataPublicacao, DataEvento = @DataEvento WHERE Id_Vaga = @Id_Vaga";
+        private const string INSERT_VAGA = @"INSERT INTO helper.Vagas(Id_Usuario_Adm, Titulo, Categoria ,Descricao, Cidade_Estado, DataPublicacao, DataEvento) VALUES (@Id_Usuario_Adm, @Titulo, @Categoria, @Descricao, @Cidade_Estado, @DataPublicacao, @DataEvento)";
+        private const string DELETE_VAGA = @"DELETE FROM helper.vagas WHERE Id_Vaga = @Id_Vaga";
         #endregion
 
         #region Metodos
@@ -124,10 +192,14 @@ namespace SyrusVoluntariado.BLL
         private static List<SqlParameter> GetParameters()
         {
             List<SqlParameter> parms = new List<SqlParameter>();
-            parms.Add(new SqlParameter("@Id_Candidatura", SqlDbType.Int, 4));
             parms.Add(new SqlParameter("@Id_Vaga", SqlDbType.Int, 4));
-            parms.Add(new SqlParameter("@Id_Usuario", SqlDbType.Int, 4));
-            parms.Add(new SqlParameter("@DataCadastro", SqlDbType.DateTime, 8));
+            parms.Add(new SqlParameter("@Id_Usuario_Adm", SqlDbType.Int, 4));
+            parms.Add(new SqlParameter("@Titulo", SqlDbType.VarChar, 150));
+            parms.Add(new SqlParameter("@Categoria", SqlDbType.VarChar, 100));
+            parms.Add(new SqlParameter("@Descricao", SqlDbType.VarChar, 250));
+            parms.Add(new SqlParameter("@Cidade_Estado", SqlDbType.VarChar, 50));
+            parms.Add(new SqlParameter("@DataPublicacao", SqlDbType.DateTime, 8));
+            parms.Add(new SqlParameter("@DataEvento", SqlDbType.SmallDateTime, 8));
 
             return (parms);
         }
@@ -137,78 +209,37 @@ namespace SyrusVoluntariado.BLL
 
         private void SetParameters(List<SqlParameter> parms)
         {
-            parms[0].Value = this._idCandidatura;
-            parms[1].Value = this._idVaga;
-            parms[2].Value = this._idUsuario;
-            parms[3].Value = this._dataCadastro;
-
+            parms[0].Value = this._idVaga;
+            parms[1].Value = this._idUsuarioAdm;
+            parms[2].Value = this._titulo;
+            parms[3].Value = this._categoria;
+            parms[4].Value = this._descricao;
+            parms[5].Value = this._cidadeEstado;
+            parms[6].Value = this._dataPublicacao;
+            parms[7].Value = this._dataEvento;
         }
         #endregion
 
-        #region Busca todas as Candidaturas do Banco
-        public static List<VagaCandidatura> TodasCandidaturas()
+        #region Busca Top 8 ultimas vagas do Banco
+        public static List<Vaga> Top8UltimasVagas()
         {
             SqlConnection conn = null;
             SqlDataReader reader = null;
-            List<VagaCandidatura> Candidaturas = new List<VagaCandidatura>();
+            List<Vaga> Vagas = new List<Vaga>();
 
             try
             {
                 conn = new SqlConnection(stringConnection);
                 conn.Open();
 
-                SqlCommand cmd = new SqlCommand(SELECT_TODASCANDIDATURAS, conn);
+                SqlCommand cmd = new SqlCommand(SELECT_ULTIMASVAGAS_TOP8, conn);
 
-                Mapper.CreateMap<IDataRecord, VagaCandidatura>();
-
-                using (reader = cmd.ExecuteReader())
-                {
-                    Candidaturas = Mapper.Map<List<VagaCandidatura>>(reader);
-                    return Candidaturas;
-                }
-            }
-            finally
-            {
-
-                if (reader != null)
-                {
-                    reader.Close();
-                }
-
-                if (conn != null)
-                {
-                    conn.Close();
-                }
-            }
-        }
-        #endregion
-        
-        #region Busca todas as Candidaturas do Banco
-        public static List<VagaCandidatura> TodasCandidaturasUsuario(int IdUsuario)
-        {
-            SqlConnection conn = null;
-            SqlDataReader reader = null;
-            List<VagaCandidatura> CandidaturasUsuario = new List<VagaCandidatura>();
-           
-            try
-            {
-                List<SqlParameter> parms = new List<SqlParameter>();
-                parms.Add(new SqlParameter("@Id_Usuario", SqlDbType.Int, 4));
-
-                parms[0].Value = IdUsuario;
-
-                conn = new SqlConnection(stringConnection);
-                conn.Open();
-
-                SqlCommand cmd = new SqlCommand(SELECT_BUSCA_CANDIDATURA_IDUSUARIO, conn);
-                cmd.Parameters.Add(parms[0]);
-
-                Mapper.CreateMap<IDataRecord, VagaCandidatura>();
+                Mapper.CreateMap<IDataRecord, Vaga>();
 
                 using (reader = cmd.ExecuteReader())
                 {
-                    CandidaturasUsuario = Mapper.Map<List<VagaCandidatura>>(reader);
-                    return CandidaturasUsuario;
+                    Vagas = Mapper.Map<List<Vaga>>(reader);
+                    return Vagas;
                 }
             }
             finally
@@ -227,32 +258,26 @@ namespace SyrusVoluntariado.BLL
         }
         #endregion
 
-        #region Busca todos os usuários Candidatados na vaga
-        public static List<VagaCandidatura> TodasUsuarioCandidatadosVaga(int IdVaga)
+        #region Busca todas as Vagas do Banco
+        public static List<Vaga> TodasVagas()
         {
             SqlConnection conn = null;
             SqlDataReader reader = null;
-            List<VagaCandidatura> CandidaturasUsuario = new List<VagaCandidatura>();
+            List<Vaga> Vagas = new List<Vaga>();
 
             try
             {
-                List<SqlParameter> parms = new List<SqlParameter>();
-                parms.Add(new SqlParameter("@Id_Vaga", SqlDbType.Int, 4));
-
-                parms[0].Value = IdVaga;
-
                 conn = new SqlConnection(stringConnection);
                 conn.Open();
 
-                SqlCommand cmd = new SqlCommand(SELECT_BUSCA_CANDIDATURA_IDVAGA, conn);
-                cmd.Parameters.Add(parms[0]);
+                SqlCommand cmd = new SqlCommand(SELECT_TODASVAGAS, conn);
 
-                Mapper.CreateMap<IDataRecord, VagaCandidatura>();
+                Mapper.CreateMap<IDataRecord, Vaga>();
 
                 using (reader = cmd.ExecuteReader())
                 {
-                    CandidaturasUsuario = Mapper.Map<List<VagaCandidatura>>(reader);
-                    return CandidaturasUsuario;
+                    Vagas = Mapper.Map<List<Vaga>>(reader);
+                    return Vagas;
                 }
             }
             finally
@@ -285,7 +310,7 @@ namespace SyrusVoluntariado.BLL
                 {
                     try
                     {
-                        SqlCommand cmd = new SqlCommand(INSERT_CANDIDATURA, conn, trans);
+                        SqlCommand cmd = new SqlCommand(INSERT_VAGA, conn, trans);
 
                         for (int i = 0; i < parms.Count; i++)
                         {
@@ -293,7 +318,7 @@ namespace SyrusVoluntariado.BLL
                         }
 
                         cmd.ExecuteNonQuery();
-                        this._idCandidatura = Convert.ToInt32(cmd.Parameters["@Id_Candidatura"].Value);
+                        this._idVaga = Convert.ToInt32(cmd.Parameters["@Id_Vaga"].Value);
                         cmd.Parameters.Clear();
                         this._persisted = true;
                         this._modified = false;
@@ -318,7 +343,7 @@ namespace SyrusVoluntariado.BLL
             conn.Open();
 
 
-            SqlCommand cmd = new SqlCommand(INSERT_CANDIDATURA, conn, trans);
+            SqlCommand cmd = new SqlCommand(INSERT_VAGA, conn, trans);
 
             for (int i = 0; i < parms.Count; i++)
             {
@@ -326,7 +351,7 @@ namespace SyrusVoluntariado.BLL
             }
 
             cmd.ExecuteNonQuery();
-            this._idCandidatura = Convert.ToInt32(cmd.Parameters["@Id_Candidatura"].Value);
+            this._idVaga = Convert.ToInt32(cmd.Parameters["@Id_Vaga"].Value);
             cmd.Parameters.Clear();
             this._persisted = true;
             this._modified = false;
@@ -337,7 +362,7 @@ namespace SyrusVoluntariado.BLL
         #region Update
         private void Update()
         {
-
+            
             if (this._modified)
             {
                 SqlConnection conn = null;
@@ -346,7 +371,7 @@ namespace SyrusVoluntariado.BLL
 
                 List<SqlParameter> parms = GetParameters();
                 SetParameters(parms);
-                SqlCommand cmd = new SqlCommand(UPDATE_CANDIDATURA, conn);
+                SqlCommand cmd = new SqlCommand(UPDATE_VAGA, conn);
 
                 for (int i = 0; i < parms.Count; i++)
                 {
@@ -368,7 +393,7 @@ namespace SyrusVoluntariado.BLL
 
                 List<SqlParameter> parms = GetParameters();
                 SetParameters(parms);
-                SqlCommand cmd = new SqlCommand(UPDATE_CANDIDATURA, conn);
+                SqlCommand cmd = new SqlCommand(UPDATE_VAGA, conn);
 
                 for (int i = 0; i < parms.Count; i++)
                 {
@@ -401,18 +426,18 @@ namespace SyrusVoluntariado.BLL
         #endregion
 
         #region Delete
-        public static bool Delete(int Id_Candidatura)
+        public static bool Delete(int id_Vaga)
         {
             List<SqlParameter> parms = new List<SqlParameter>();
-            parms.Add(new SqlParameter("@Id_Candidatura", SqlDbType.Int, 4));
+            parms.Add(new SqlParameter("@Id_Vaga", SqlDbType.Int, 4));
 
-            parms[0].Value = Id_Candidatura;
+            parms[0].Value = id_Vaga;
 
             SqlConnection conn = null;
             conn = new SqlConnection(stringConnection);
             conn.Open();
 
-            SqlCommand cmd = new SqlCommand(DELETE_CANDIDATURA, conn);
+            SqlCommand cmd = new SqlCommand(DELETE_VAGA, conn);
 
             for (int i = 0; i < parms.Count; i++)
             {
@@ -440,7 +465,7 @@ namespace SyrusVoluntariado.BLL
         /// <remarks>Jonathan Scrok</remarks>
         public bool CompleteObject()
         {
-            using (IDataReader dr = LoadDataReader(this._idCandidatura))
+            using (IDataReader dr = LoadDataReader(this._idVaga))
             {
                 return SetInstance(dr, this);
             }
@@ -453,14 +478,14 @@ namespace SyrusVoluntariado.BLL
         /// <remarks>Jonathan Scrok</remarks>
         public bool CompleteObject(SqlTransaction trans)
         {
-            using (IDataReader dr = LoadDataReader(this._idCandidatura, trans))
+            using (IDataReader dr = LoadDataReader(this._idVaga, trans))
             {
                 return SetInstance(dr, this);
             }
         }
         public async Task<bool> CompleteObjectAsync(SqlTransaction trans)
         {
-            using (IDataReader dr = await LoadDataReaderAsync(this._idCandidatura, trans))
+            using (IDataReader dr = await LoadDataReaderAsync(this._idVaga, trans))
             {
                 return SetInstance(dr, this);
             }
@@ -474,23 +499,22 @@ namespace SyrusVoluntariado.BLL
         /// <param name="idUsuario">Chave do registro.</param>
         /// <returns>Cursor de leitura do banco de dados.</returns>
         /// <remarks>Jonathan Scrok</remarks>
-        private static IDataReader LoadDataReader(int IdCandidatura)
+        private static IDataReader LoadDataReader(int IdVaga)
         {
             List<SqlParameter> parms = new List<SqlParameter>();
-            parms.Add(new SqlParameter("@Id_Candidatura", SqlDbType.Int, 4));
+            parms.Add(new SqlParameter("@Id_Vaga", SqlDbType.Int, 4));
 
-            parms[0].Value = IdCandidatura;
+            parms[0].Value = IdVaga;
 
             SqlConnection conn = null;
             conn = new SqlConnection(stringConnection);
             conn.Open();
 
-            SqlCommand cmd = new SqlCommand(SELECT_BUSCA_CANDIDATURAID, conn);
+            SqlCommand cmd = new SqlCommand(SELECT_BUSCAVAGAID, conn);
             cmd.Parameters.Add(parms[0]);
 
             return cmd.ExecuteReader();
         }
-
         /// <summary>
         /// Método utilizado por retornar as colunas de um registro no banco de dados, dentro de uma transação.
         /// </summary>
@@ -498,47 +522,47 @@ namespace SyrusVoluntariado.BLL
         /// <param name="trans">Transação existente no banco de dados.</param>
         /// <returns>Cursor de leitura do banco de dados.</returns>
         /// <remarks>Jonathan Scrok</remarks>
-        private static IDataReader LoadDataReader(int IdCandidatura, SqlTransaction trans)
+        private static IDataReader LoadDataReader(int IdVaga, SqlTransaction trans)
         {
             List<SqlParameter> parms = new List<SqlParameter>();
-            parms.Add(new SqlParameter("@Id_Candidatura", SqlDbType.Int, 4));
+            parms.Add(new SqlParameter("@Id_Vaga", SqlDbType.Int, 4));
 
-            parms[0].Value = IdCandidatura;
+            parms[0].Value = IdVaga;
 
             SqlConnection conn = null;
             conn = new SqlConnection(stringConnection);
             conn.Open();
 
-            SqlCommand cmd = new SqlCommand(SELECT_BUSCA_CANDIDATURAID, conn);
+            SqlCommand cmd = new SqlCommand(SELECT_BUSCAVAGAID, conn);
             cmd.Parameters.Add(parms[0]);
 
             return cmd.ExecuteReader();
         }
-        private static async Task<IDataReader> LoadDataReaderAsync(int IdCandidatura, SqlTransaction trans)
+        private static async Task<IDataReader> LoadDataReaderAsync(int IdVaga, SqlTransaction trans)
         {
             List<SqlParameter> parms = new List<SqlParameter>();
-            parms.Add(new SqlParameter("@Id_Candidatura", SqlDbType.Int, 4));
+            parms.Add(new SqlParameter("@Id_Vaga", SqlDbType.Int, 4));
 
-            parms[0].Value = IdCandidatura;
+            parms[0].Value = IdVaga;
             SqlConnection conn = null;
             conn = new SqlConnection(stringConnection);
             conn.Open();
 
-            SqlCommand cmd = new SqlCommand(SELECT_BUSCA_CANDIDATURAID, conn);
+            SqlCommand cmd = new SqlCommand(SELECT_BUSCAVAGAID, conn);
             cmd.Parameters.Add(parms[0]);
 
             return await cmd.ExecuteReaderAsync();
         }
-        private static async Task<IDataReader> LoadDataReaderAsync(int Id_Candidatura)
+        private static async Task<IDataReader> LoadDataReaderAsync(int Id_Vaga)
         {
             List<SqlParameter> parms = new List<SqlParameter>();
-            parms.Add(new SqlParameter("@Id_Candidatura", SqlDbType.Int, 4));
+            parms.Add(new SqlParameter("@Id_Vaga", SqlDbType.Int, 4));
 
             SqlConnection conn = null;
             conn = new SqlConnection(stringConnection);
             conn.Open();
 
-            SqlCommand cmd = new SqlCommand(SELECT_BUSCA_CANDIDATURAID, conn);
+            SqlCommand cmd = new SqlCommand(SELECT_BUSCAVAGAID, conn);
             cmd.Parameters.Add(parms[0]);
 
             return await cmd.ExecuteReaderAsync();
@@ -553,17 +577,20 @@ namespace SyrusVoluntariado.BLL
         /// <param name="objUsuario">Instância a ser manipulada.</param>
         /// <returns>Verdadeiro ou falso informando se a operação foi executada com sucesso.</returns>
         /// <remarks>Jonathan Scrok</remarks>
-        private static bool SetInstance(IDataReader dr, VagaCandidaturas_P1 objVaga)
+        private static bool SetInstance(IDataReader dr, Vaga_P1 objVaga)
         {
             try
             {
                 if (dr.Read())
                 {
-                    objVaga._idCandidatura = Convert.ToInt32(dr["Id_Candidatura"]);
                     objVaga._idVaga = Convert.ToInt32(dr["Id_Vaga"]);
-                    objVaga._idUsuario = Convert.ToInt32(dr["Id_Usuario"]);
-                    objVaga._dataCadastro = Convert.ToDateTime(dr["DataCadastro"]);
-
+                    objVaga._idUsuarioAdm = Convert.ToInt32(dr["Id_Usuario_Adm"]);
+                    objVaga._titulo = Convert.ToString(dr["Titulo"]);
+                    objVaga._descricao = Convert.ToString(dr["Descricao"]);
+                    objVaga._categoria = Convert.ToString(dr["Categoria"]);
+                    objVaga._cidadeEstado = Convert.ToString(dr["Cidade_Estado"]);
+                    objVaga._dataPublicacao = Convert.ToDateTime(dr["DataPublicacao"]);
+                    objVaga._dataEvento = Convert.ToDateTime(dr["DataEvento"]);
 
                     return true;
                 }

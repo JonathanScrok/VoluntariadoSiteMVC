@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using SyrusVoluntariado.BLL;
 using SyrusVoluntariado.Library.Filters;
-using SyrusVoluntariado.Models;
+using BeaHelper.BLL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BeaHelper.BLL.BD;
 
 namespace SyrusVoluntariado.Controllers
 {
