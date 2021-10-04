@@ -32,8 +32,8 @@
 <link href="/css/FundoPaginas.css" rel="stylesheet" type="text/css" />
 
 <span> <b>Total de Voluntários:</b> @Model.TotalItemCount</span>
-<table class="table">
-    <thead class="table-dark">
+<table class="table table-dark">
+    <thead>
         <tr>
             <th class="ListVoluntarios_Columm" scope="col">Nome</th>
             <th class="ListVoluntarios_Columm" scope="col">Email</th>
@@ -43,7 +43,7 @@
         </tr>
     </thead>
 
-    <tbody class="tab-list-vagas">
+    <tbody>
         @foreach (var usuario in Model)
         {
             <tr>

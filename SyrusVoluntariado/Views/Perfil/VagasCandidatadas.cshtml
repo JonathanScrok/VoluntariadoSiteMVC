@@ -29,8 +29,8 @@
 <link href="/css/FundoPaginas.css" rel="stylesheet" type="text/css" />
 
 <span> <b>Total de Eventos:</b> @Model.Count</span>
-<table class="table">
-    <thead class="table-dark">
+<table class="table table-dark">
+    <thead>
         <tr>
             <th scope="col">Titulo</th>
             <th scope="col">Descrição</th>
@@ -39,7 +39,7 @@
             <th scope="col"></th>
         </tr>
     </thead>
-    <tbody class="tab-list-vagas">
+    <tbody>
         @foreach (var vaga in Model)
         {
             <tr>
@@ -48,7 +48,7 @@
                 <td>@vaga.Categoria</td>
                 <td>@vaga.CidadeEstado</td>
                 <td>
-                    <a href="/vaga/visualizar/@vaga.IdVaga" class="btn">Visualizar</a>
+                    <a href="/vaga/visualizar/@vaga.IdVaga" class="btn btn-light">Visualizar</a>
                 </td>
             </tr>
         }

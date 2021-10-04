@@ -11,14 +11,16 @@
 }
 
 <div class="mt-md-3">
-    @if (TempData["Mensagem"] != null) {
+    @if (TempData["Mensagem"] != null)
+    {
         <div class="alert alert-success" role="alert">
             @TempData["Mensagem"]
         </div>
     }
 </div>
 <div class="mt-md-3">
-    @if (TempData["MensagemErro"] != null) {
+    @if (TempData["MensagemErro"] != null)
+    {
         <div class="alert alert-danger alertemail" role="alert">
             @TempData["MensagemErro"]
         </div>
@@ -27,34 +29,34 @@
 <link href="/css/PagedList.css" rel="stylesheet" type="text/css" />
 <link href="/css/FundoPaginas.css" rel="stylesheet" type="text/css" />
 
-<section>
-    <span> <b>Total de Eventos:</b> @Model.TotalItemCount</span>
-    <table class="table">
-        <thead class="table-dark">
+
+<span> <b>Total de Eventos:</b> @Model.TotalItemCount</span>
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th scope="col">Titulo</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Categoria</th>
+            <th scope="col">Local</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var vaga in Model)
+        {
             <tr>
-                <th scope="col">Titulo</th>
-                <th scope="col">Descrição</th>
-                <th scope="col">Categoria</th>
-                <th scope="col">Local</th>
-                <th scope="col"></th>
+                <th scope="row">@vaga.Titulo</th>
+                <td>@vaga.Descricao</td>
+                <td>@vaga.Categoria</td>
+                <td>@vaga.Cidade_Estado</td>
+                <td>
+                    <a href="/vaga/visualizar/@vaga.Id_Vaga" class="btn btn-light">Visualizar</a>
+                </td>
             </tr>
-        </thead>
-        <tbody class="tab-list-vagas">
-            @foreach (var vaga in Model)
-            {
-                <tr>
-                    <th scope="row">@vaga.Titulo</th>
-                    <td>@vaga.Descricao</td>
-                    <td>@vaga.Categoria</td>
-                    <td>@vaga.Cidade_Estado</td>
-                    <td>
-                        <a href="/vaga/visualizar/@vaga.Id_Vaga" class="btn">Visualizar</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</section>
+        }
+    </tbody>
+</table>
+
 @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
 
 <script src="~/js/funcoes.js"></script>
