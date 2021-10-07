@@ -34,7 +34,7 @@ html {
     margin-top: 7px;
     color: wheat;
     background-color: #4a4a4a;
-/*    border: 4px solid;
+    /*    border: 4px solid;
     border-image: linear-gradient( 132deg, #3d987c 0%, #27614f 100%) 1;*/
     background: linear-gradient(90deg, rgba(74,74,74,1) 0%, rgba(15,15,15,1) 100%);
 }
@@ -51,9 +51,9 @@ html {
     width: 100%;
     padding: 0px;
     text-align: center;*/
-position:absolute;
-bottom: 0px;
-width: 100%;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
 }
 
 .tab-list-vagas {
@@ -182,7 +182,7 @@ width: 100%;
     background-color: #62c0a3;
 }
 
-#footer-pai{
+#footer-pai {
     display: flex;
 }
 
@@ -264,4 +264,8 @@ width: 100%;
     color: #f0f4f9;
     background-color: #5c5b6c;
     border-color: #5c5b6c;
+}
+
+.CorTabs {
+    color: black
 }

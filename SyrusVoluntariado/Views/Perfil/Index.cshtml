@@ -10,31 +10,61 @@
 <link href="/css/FundoPaginas.css" rel="stylesheet" type="text/css" />
 
 <div class="perfil-tudo">
-    <div class="perfil-infos">
-        <table class="table table-borderless" id="fontePerfil">
-            <tbody>
-                <tr>
-                    <th scope="row">Nome</th>
-                    <td>@Model.Nome</td>
-                </tr>
-                <tr>
-                    <th scope="row">Email</th>
-                    <td>@Model.Email</td>
-                </tr>
-                <tr>
-                    <th scope="row">Sexo</th>
-                    <td>@ViewBag.UsuarioSexo</td>
-                </tr>
-            </tbody>
-        </table>
+    @*<div class="perfil-infos">
+            <table class="table table-borderless" id="fontePerfil">
+                <tbody>
+                    <tr>
+                        <th scope="row">Nome</th>
+                        <td>@Model.Nome</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Email</th>
+                        <td>@Model.Email</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Sexo</th>
+                        <td>@ViewBag.UsuarioSexo</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>*@
+
+    <nav>
+        <div class="nav nav-tabs CorTabs" id="nav-tab" role="tablist">
+            <button class="nav-link CorTabs active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true"><strong>Meus Dados</strong></button>
+            <button class="nav-link CorTabs" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false"><strong>Meus Eventos</strong> </button>
+            <button class="nav-link CorTabs" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false"><strong>Eventos Voluntariados</strong></button>
+        </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active perfil-infos" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+            <table class="table table-borderless" id="fontePerfil">
+                <tbody>
+                    <tr>
+                        <th scope="row">Nome</th>
+                        <td>@Model.Nome</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Email</th>
+                        <td>@Model.Email</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Sexo</th>
+                        <td>@ViewBag.UsuarioSexo</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
+        <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
     </div>
 
-    <div class="botoes-perfil">
+    @*<div class="botoes-perfil">
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <a class="btn Botao-MinhasVagas btn-lg" href="/perfil/minhasvagas"><b>Meus Eventos</b></a>
         </div>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end ms-2">
             <a class="btn Botao-VagasCandidatadas btn-lg" href="/perfil/vagascandidatadas"><b>Eventos Voluntariados</b></a>
         </div>
-    </div>
+    </div>*@
 </div>
