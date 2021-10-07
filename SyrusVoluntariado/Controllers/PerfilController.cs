@@ -33,7 +33,32 @@ namespace SyrusVoluntariado.Controllers {
                 ViewBag.UsuarioSexo = "Prefiro não declarar";
             }
 
-            
+            // Minhas Vagas
+            List<Vaga> vagas = Vaga_P1.TodasVagas();
+            var VagasUsuario = vagas.Where(a => a.Id_Usuario_Adm == IdUsuarioLogado).ToList();
+            ViewBag.VagasCandidatas = VagasUsuario;
+            // -------------------------------------------------
+
+            // Vagas Candidatadas
+            List<VagaCandidatura> VagasCandidatadas = VagaCandidaturas_P1.TodasCandidaturasUsuario(IdUsuarioLogado);
+
+            List<Vaga_P1> MinhasCandidaturas = new List<Vaga_P1>();
+            List<int> Idfvagas = new List<int>();
+
+            for (int i = 0; i < VagasCandidatadas.Count; i++)
+            {
+                var idf = VagasCandidatadas[i].Id_Vaga;
+                Idfvagas.Add(idf);
+            }
+
+            foreach (var Id in Idfvagas)
+            {
+                Vaga_P1 vaga = new Vaga_P1(Id);
+                vaga.CompleteObject();
+                MinhasCandidaturas.Add(vaga);
+            }
+            ViewBag.MinhasVagas = MinhasCandidaturas;
+            // --------------------------------------------------
 
             return View(Usuario);
         }
