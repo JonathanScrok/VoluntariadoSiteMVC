@@ -293,50 +293,6 @@ namespace BeaHelper.BLL.BD
         }
         #endregion
 
-        //#region Busca todas os usuários Avaliacoes
-        //public static List<Avaliacao> TodasUsuarioCandidatadosVaga(int Nota)
-        //{
-        //    SqlConnection conn = null;
-        //    SqlDataReader reader = null;
-        //    List<Avaliacao> CandidaturasUsuario = new List<Avaliacao>();
-
-        //    try
-        //    {
-        //        List<SqlParameter> parms = new List<SqlParameter>();
-        //        parms.Add(new SqlParameter("@Nota", SqlDbType.Int, 4));
-
-        //        parms[0].Value = Nota;
-
-        //        conn = new SqlConnection(stringConnection);
-        //        conn.Open();
-
-        //        SqlCommand cmd = new SqlCommand(SELECT_BUSCA_AVALIACOES_NOTA, conn);
-        //        cmd.Parameters.Add(parms[0]);
-
-        //        Mapper.CreateMap<IDataRecord, Avaliacao>();
-
-        //        using (reader = cmd.ExecuteReader())
-        //        {
-        //            CandidaturasUsuario = Mapper.Map<List<Avaliacao>>(reader);
-        //            return CandidaturasUsuario;
-        //        }
-        //    }
-        //    finally
-        //    {
-
-        //        if (reader != null)
-        //        {
-        //            reader.Close();
-        //        }
-
-        //        if (conn != null)
-        //        {
-        //            conn.Close();
-        //        }
-        //    }
-        //}
-        //#endregion
-
         #region Insert
 
         private void Insert()

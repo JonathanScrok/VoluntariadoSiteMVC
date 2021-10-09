@@ -13,13 +13,9 @@ namespace SyrusVoluntariado.Library.Validation {
             Usuario usuario = validationContext.ObjectInstance as Usuario;
             //var _db = (DatabaseContext)validationContext.GetService(typeof(DatabaseContext));
 
-            List<Usuario> usuarios = Usuario_P1.TodosUsuarios();
+            List<Usuario> usuarios = Usuario_P2.BuscaUsuario_Email(usuario.Email);
 
-            // - Verificar se o nome existe
-            // - Verificar se o Id é o mesmo do registro no banco.
-            var UsuariosBanco = usuarios.Where(a => a.Email == usuario.Email && a.Id != usuario.Id).FirstOrDefault();
-
-            if (UsuariosBanco == null) {
+            if (usuarios.Count == 0) {
                 return ValidationResult.Success;
             } else {
                 return new ValidationResult("O email " + usuario.Email + " já está cadastrado!");

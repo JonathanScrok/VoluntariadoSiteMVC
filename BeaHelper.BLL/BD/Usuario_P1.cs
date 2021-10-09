@@ -157,72 +157,7 @@ namespace BeaHelper.BLL.BD
             parms[3].Value = this._email;
             parms[4].Value = this._dataCadastro;
         }
-        #endregion
-
-        #region Busca todos os Usuários do Banco
-        public static List<Usuario> TodosUsuarios()
-        {
-            SqlConnection conn = null;
-            SqlDataReader reader = null;
-            List<Usuario> usuarios = new List<Usuario>();
-
-            try
-            {
-                conn = new SqlConnection(stringConnection);
-                conn.Open();
-
-                SqlCommand cmd = new SqlCommand(SELECT_TODOSUSUARIOS, conn);
-
-                Mapper.CreateMap<IDataRecord, Usuario>();
-
-                using (reader = cmd.ExecuteReader())
-                {
-                    usuarios = Mapper.Map<List<Usuario>>(reader);
-                    return usuarios;
-                }
-            }
-            finally
-            {
-
-                if (reader != null)
-                {
-                    reader.Close();
-                }
-
-                if (conn != null)
-                {
-                    conn.Close();
-                }
-            }
-        }
-        #endregion
-
-        #region Busca Usuario Por ID
-        public static List<Usuario> BusaUsuario_PorID(int id)
-        {
-            SqlConnection conn = null;
-            SqlDataReader reader = null;
-            List<Usuario> usuarios = new List<Usuario>();
-
-            List<SqlParameter> parms = new List<SqlParameter>();
-            parms.Add(new SqlParameter("@Id_Usuario", SqlDbType.BigInt, 4));
-            parms[0].Value = id;
-
-            conn = new SqlConnection(stringConnection);
-            conn.Open();
-
-            SqlCommand cmd = new SqlCommand(SELECT_BUSCAUSUARIOID, conn);
-            cmd.Parameters.Add(parms[0]);
-
-            Mapper.CreateMap<IDataRecord, Usuario>();
-
-            using (reader = cmd.ExecuteReader())
-            {
-                usuarios = Mapper.Map<List<Usuario>>(reader);
-                return usuarios;
-            }
-        }
-        #endregion
+        #endregion        
 
         #region Insert
 

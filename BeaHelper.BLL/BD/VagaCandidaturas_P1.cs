@@ -182,8 +182,8 @@ namespace BeaHelper.BLL.BD
             }
         }
         #endregion
-        
-        #region Busca todas as Candidaturas do Banco
+
+        #region Busca Todas Candidaturas do Usuario por ID
         public static List<VagaCandidatura> TodasCandidaturasUsuario(int IdUsuario)
         {
             SqlConnection conn = null;
