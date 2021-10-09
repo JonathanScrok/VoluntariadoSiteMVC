@@ -12,15 +12,13 @@ namespace SyrusVoluntariado.Library.Validation {
 
             Vaga vaga = validationContext.ObjectInstance as Vaga;
             //var _db = (DatabaseContext)validationContext.GetService(typeof(DatabaseContext));
-            List<Vaga> vagas = Vaga_P1.TodasVagas();
+            List<Vaga> vagas = Vaga_P2.BuscaTitulo(vaga.Titulo);
 
             //Já existe no banco 1 registro:
             // - Verificar se o nome existe
             // - Verificar se o Id é o mesmo do registro no banco.
 
-            var TituloVaga = vagas.Where(a => a.Titulo == vaga.Titulo && a.Id_Vaga != vaga.Id_Vaga).FirstOrDefault();
-
-            if (TituloVaga == null) {
+            if (vagas.Count == 0) {
                 return ValidationResult.Success;
             } else {
                 return new ValidationResult("O evento com titulo '"+ vaga.Titulo+"' já está cadastrada!");
