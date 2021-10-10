@@ -31,6 +31,8 @@ namespace BeaHelper.BLL.Models
         public string Cidade_Estado { get; set; }
 
         public DateTime DataPublicacao { get; set; }
+        public bool SemData { get; set; }
+        public bool EventoRecorrente { get; set; }
 
         public DateTime DataEvento { get; set; }
 

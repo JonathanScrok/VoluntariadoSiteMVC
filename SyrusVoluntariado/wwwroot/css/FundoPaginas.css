@@ -269,3 +269,9 @@ html {
 .CorTabs {
     color: black
 }
+
+.CheckBox_DataEvento {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}

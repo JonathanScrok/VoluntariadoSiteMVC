@@ -64,9 +64,49 @@
                     <label for="DataEvento">Data do Evento:</label>
                     @TempData["DataEvento"]
                 </div>
+                <div class="CheckBox_DataEvento">
+                    <div class="form-check form-switch">
+                        @if (@Model.SemData == true)
+                        {
+                            <input class="form-check-input" type="checkbox" checked onclick="validaCheckSemData();" name="SemData" value="@Model.SemData" id="SemData">
+                        }
+                        else
+                        {
+                            <input class="form-check-input" type="checkbox" onclick="validaCheckSemData();" name="SemData" value="@Model.SemData" id="SemData">
+                        }
+                        <label class="form-check-label" for="SemData">Não possui data</label>
+                    </div>
+                   
+                    <div class="form-check form-switch chk2">
+                        <input class="form-check-input" type="checkbox" onclick="validaCheckEventoRecorrente();" name="EventoRecorrente" value="@Model.EventoRecorrente" id="EventoRecorrente">
+                        <label class="form-check-label" for="EventoRecorrente">Evento recorrente</label>
+                    </div>
+                </div>
             </div>
 
             <button type="submit" class="btn btn-success mt-md-2" style="align-items:center">@ViewBag.CadastrarAtualizar</button>
         </div>
     </form>
 </section>
+<script>
+    function validaCheckSemData() {
+        var chkSemData = document.getElementById('SemData');
+        if (chkSemData.checked) {
+            document.getElementById("SemData").value = true;
+        }
+        else {
+            document.getElementById("SemData").value = false;
+        }
+    }
+
+    function validaCheckEventoRecorrente() {
+        var chkEventoRecorrente = document.getElementById('EventoRecorrente');
+        if (chkEventoRecorrente.checked) {
+            document.getElementById("EventoRecorrente").value = true;
+        }
+        else {
+            document.getElementById("EventoRecorrente").value = false;
+        }
+    }
+
+</script>

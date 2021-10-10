@@ -32,7 +32,6 @@ namespace SyrusVoluntariado.Controllers
         public IActionResult Cadastrar()
         {
             ViewBag.CadastrarAtualizar = "Cadastrar";
-
             return View(new Vaga());
         }
 
