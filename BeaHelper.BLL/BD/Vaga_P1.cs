@@ -27,6 +27,8 @@ namespace BeaHelper.BLL.BD
         private string _cidadeEstado;
         private DateTime _dataPublicacao;
         private DateTime _dataEvento;
+        private bool _semData;
+        private bool _eventoRecorrente;
 
         private bool _persisted;
         private bool _modified;
@@ -161,6 +163,36 @@ namespace BeaHelper.BLL.BD
         }
         #endregion
 
+        #region SemData
+        public bool SemData
+        {
+            get
+            {
+                return this._semData;
+            }
+            set
+            {
+                this._semData = value;
+                this._modified = true;
+            }
+        }
+        #endregion
+
+        #region EventoRecorrente
+        public bool EventoRecorrente
+        {
+            get
+            {
+                return this._eventoRecorrente;
+            }
+            set
+            {
+                this._eventoRecorrente = value;
+                this._modified = true;
+            }
+        }
+        #endregion
+
         #endregion
 
         #region Construtores
@@ -180,8 +212,8 @@ namespace BeaHelper.BLL.BD
         private const string SELECT_ULTIMASVAGAS_TOP8 = @"select top 8 * from helper.Vagas order by DataEvento desc";
         private const string SELECT_BUSCAVAGAID = @"select * from helper.Vagas where Id_Vaga = @Id_Vaga";
 
-        private const string UPDATE_VAGA = @"UPDATE helper.Vagas SET Id_Usuario_Adm = @Id_Usuario_Adm, Titulo = @Titulo, Categoria = @Categoria, Descricao = @Descricao, Cidade_Estado = @Cidade_Estado, DataPublicacao = @DataPublicacao, DataEvento = @DataEvento WHERE Id_Vaga = @Id_Vaga";
-        private const string INSERT_VAGA = @"INSERT INTO helper.Vagas(Id_Usuario_Adm, Titulo, Categoria ,Descricao, Cidade_Estado, DataPublicacao, DataEvento) VALUES (@Id_Usuario_Adm, @Titulo, @Categoria, @Descricao, @Cidade_Estado, @DataPublicacao, @DataEvento)";
+        private const string UPDATE_VAGA = @"UPDATE helper.Vagas SET Id_Usuario_Adm = @Id_Usuario_Adm, Titulo = @Titulo, Categoria = @Categoria, Descricao = @Descricao, Cidade_Estado = @Cidade_Estado, DataPublicacao = @DataPublicacao, DataEvento = @DataEvento, SemData = @SemData, EventoRecorrente = @EventoRecorrente WHERE Id_Vaga = @Id_Vaga";
+        private const string INSERT_VAGA = @"INSERT INTO helper.Vagas(Id_Usuario_Adm, Titulo, Categoria ,Descricao, Cidade_Estado, DataPublicacao, DataEvento, SemData, EventoRecorrente) VALUES (@Id_Usuario_Adm, @Titulo, @Categoria, @Descricao, @Cidade_Estado, @DataPublicacao, @DataEvento, @SemData, @EventoRecorrente)";
         private const string DELETE_VAGA = @"DELETE FROM helper.vagas WHERE Id_Vaga = @Id_Vaga";
         #endregion
 
@@ -200,6 +232,8 @@ namespace BeaHelper.BLL.BD
             parms.Add(new SqlParameter("@Cidade_Estado", SqlDbType.VarChar, 50));
             parms.Add(new SqlParameter("@DataPublicacao", SqlDbType.DateTime, 8));
             parms.Add(new SqlParameter("@DataEvento", SqlDbType.SmallDateTime, 8));
+            parms.Add(new SqlParameter("@SemData", SqlDbType.Bit));
+            parms.Add(new SqlParameter("@EventoRecorrente", SqlDbType.Bit));
 
             return (parms);
         }
@@ -217,6 +251,8 @@ namespace BeaHelper.BLL.BD
             parms[5].Value = this._cidadeEstado;
             parms[6].Value = this._dataPublicacao;
             parms[7].Value = this._dataEvento;
+            parms[8].Value = this._semData;
+            parms[9].Value = this._eventoRecorrente;
         }
         #endregion
 
@@ -515,6 +551,8 @@ namespace BeaHelper.BLL.BD
                     objVaga._cidadeEstado = Convert.ToString(dr["Cidade_Estado"]);
                     objVaga._dataPublicacao = Convert.ToDateTime(dr["DataPublicacao"]);
                     objVaga._dataEvento = Convert.ToDateTime(dr["DataEvento"]);
+                    objVaga._semData = Convert.ToBoolean(dr["SemData"]);
+                    objVaga._eventoRecorrente = Convert.ToBoolean(dr["EventoRecorrente"]);
 
                     return true;
                 }

@@ -54,7 +54,6 @@ namespace SyrusVoluntariado.Controllers
             {
 
                 Vaga_P1 vagaCadastrar = new Vaga_P1();
-                vagaCadastrar.CompleteObject();
 
                 vagaCadastrar.DataPublicacao = DateTime.Now;
                 vagaCadastrar.DataEvento = vaga.DataEvento;
@@ -63,10 +62,12 @@ namespace SyrusVoluntariado.Controllers
                 vagaCadastrar.Categoria = vaga.Categoria;
                 vagaCadastrar.Descricao = vaga.Descricao;
                 vagaCadastrar.CidadeEstado = vaga.Cidade_Estado;
+                vagaCadastrar.SemData = vaga.SemData;
+                vagaCadastrar.EventoRecorrente = vaga.EventoRecorrente;
 
                 vagaCadastrar.Save();
 
-                TempData["Mensagem"] = "O evento foi cadastrada com sucesso!";
+                TempData["Mensagem"] = "O evento foi cadastrado com sucesso!";
 
                 return RedirectToAction("Index");
             }
@@ -143,6 +144,8 @@ namespace SyrusVoluntariado.Controllers
                 vagas.Categoria = vaga.Categoria;
                 vagas.Descricao = vaga.Descricao;
                 vagas.CidadeEstado = vaga.Cidade_Estado;
+                vagas.SemData = vaga.SemData;
+                vagas.EventoRecorrente = vaga.EventoRecorrente;
 
                 vagas.Save();
 

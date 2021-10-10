@@ -14,7 +14,9 @@ namespace BeaHelper.BLL.Validation {
             if (vaga.Titulo != null)
             {
                 List<Vaga> vagas = Vaga_P2.BuscaTitulo(vaga.Titulo);
-                if (vagas.Count == 0)
+                var TitulosCadastrados = vagas.Where(a => a.Id_Vaga != vaga.Id_Vaga).FirstOrDefault();
+
+                if (TitulosCadastrados == null)
                 {
                     return ValidationResult.Success;
                 }

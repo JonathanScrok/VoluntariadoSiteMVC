@@ -79,7 +79,14 @@
                     </div>
 
                     <div class="form-check form-switch chk2">
-                        <input class="form-check-input" type="checkbox" onclick="validaCheckEventoRecorrente();" name="EventoRecorrente" value="@Model.EventoRecorrente" id="EventoRecorrente">
+                        @if (@Model.EventoRecorrente == true)
+                        {
+                            <input class="form-check-input" type="checkbox" checked onclick="validaCheckEventoRecorrente();" name="EventoRecorrente" value="@Model.EventoRecorrente" id="EventoRecorrente">
+                        }
+                        else
+                        {
+                            <input class="form-check-input" type="checkbox" onclick="validaCheckEventoRecorrente();" name="EventoRecorrente" value="@Model.EventoRecorrente" id="EventoRecorrente">
+                        }
                         <label class="form-check-label" for="EventoRecorrente">Evento recorrente</label>
                     </div>
                 </div>
