@@ -6,13 +6,14 @@
     ViewBag.Title = "Cadastrar Evento";
 }
 
-@if (TempData["Mensagem"] != null) {
+@if (TempData["Mensagem"] != null)
+{
     <div class="alert alert-success mt-md-2" role="alert">
         @TempData["Mensagem"]
     </div>
 }
 <link href="/css/FundoPaginas.css" rel="stylesheet" type="text/css" />
-<section >
+<section>
     <form method="post">
         <input type="hidden" name="id_Vaga" value="@Model.Id_Vaga" />
         @*<input type="hidden" name="dataPublicacao" value="@Model.DataPublicacao = @DateTime.Now.ToString("dd/MM/yyyy");" />*@
@@ -76,7 +77,7 @@
                         }
                         <label class="form-check-label" for="SemData">Não possui data</label>
                     </div>
-                   
+
                     <div class="form-check form-switch chk2">
                         <input class="form-check-input" type="checkbox" onclick="validaCheckEventoRecorrente();" name="EventoRecorrente" value="@Model.EventoRecorrente" id="EventoRecorrente">
                         <label class="form-check-label" for="EventoRecorrente">Evento recorrente</label>
@@ -88,25 +89,4 @@
         </div>
     </form>
 </section>
-<script>
-    function validaCheckSemData() {
-        var chkSemData = document.getElementById('SemData');
-        if (chkSemData.checked) {
-            document.getElementById("SemData").value = true;
-        }
-        else {
-            document.getElementById("SemData").value = false;
-        }
-    }
-
-    function validaCheckEventoRecorrente() {
-        var chkEventoRecorrente = document.getElementById('EventoRecorrente');
-        if (chkEventoRecorrente.checked) {
-            document.getElementById("EventoRecorrente").value = true;
-        }
-        else {
-            document.getElementById("EventoRecorrente").value = false;
-        }
-    }
-
-</script>
+<script src="~/js/Cadastrar.js"></script>
