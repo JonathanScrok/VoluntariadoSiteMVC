@@ -34,7 +34,7 @@ namespace BeaHelper.BLL.Models
         public bool SemData { get; set; }
         public bool EventoRecorrente { get; set; }
 
-        public DateTime DataEvento { get; set; }
+        public DateTime? DataEvento { get; set; }
 
     }
 }
