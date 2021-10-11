@@ -22,7 +22,7 @@ namespace SyrusVoluntariado.Library.Validation {
             if (TitulosCadastrados == null) {
                 return ValidationResult.Success;
             } else {
-                return new ValidationResult("O evento com titulo '"+ vaga.Titulo+"' já está cadastrada!");
+                return new ValidationResult("O evento com titulo '"+ vaga.Titulo+"' já está cadastrado!");
             }
         }
     }

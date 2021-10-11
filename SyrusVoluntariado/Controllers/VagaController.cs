@@ -56,7 +56,15 @@ namespace SyrusVoluntariado.Controllers
                 Vaga_P1 vagaCadastrar = new Vaga_P1();
 
                 vagaCadastrar.DataPublicacao = DateTime.Now;
-                vagaCadastrar.DataEvento = vaga.DataEvento;
+                if (vaga.SemData == true)
+                {
+                    vagaCadastrar.DataEvento = null;
+                }
+                else
+                {
+                    vagaCadastrar.DataEvento = vaga.DataEvento;
+                }
+                
                 vagaCadastrar.IdUsuarioAdm = IdUsuarioLogado;
                 vagaCadastrar.Titulo = vaga.Titulo;
                 vagaCadastrar.Categoria = vaga.Categoria;

@@ -26,7 +26,7 @@ namespace BeaHelper.BLL.BD
         private string _descricao;
         private string _cidadeEstado;
         private DateTime _dataPublicacao;
-        private DateTime _dataEvento;
+        private DateTime? _dataEvento;
         private bool _semData;
         private bool _eventoRecorrente;
 
@@ -149,7 +149,7 @@ namespace BeaHelper.BLL.BD
 
         #region DataEvento
 
-        public DateTime DataEvento
+        public DateTime? DataEvento
         {
             get
             {

@@ -13,7 +13,7 @@ namespace BeaHelper.BLL.Validation {
             Vaga vaga = validationContext.ObjectInstance as Vaga;
             if (vaga.Titulo != null)
             {
-                List<Vaga> vagas = Vaga_P2.BuscaTitulo(vaga.Titulo);
+                List<Vaga> vagas = Vaga_P2.BuscaTitulo(vaga.Titulo);        
                 var TitulosCadastrados = vagas.Where(a => a.Id_Vaga != vaga.Id_Vaga).FirstOrDefault();
 
                 if (TitulosCadastrados == null)
@@ -22,7 +22,7 @@ namespace BeaHelper.BLL.Validation {
                 }
                 else
                 {
-                    return new ValidationResult("O evento com titulo '" + vaga.Titulo + "' já está cadastrada!");
+                    return new ValidationResult("O evento com titulo '" + vaga.Titulo + "' já está cadastrado!");
                 }
             }
             else

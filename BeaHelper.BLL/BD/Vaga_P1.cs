@@ -26,7 +26,7 @@ namespace BeaHelper.BLL.BD
         private string _descricao;
         private string _cidadeEstado;
         private DateTime _dataPublicacao;
-        private DateTime _dataEvento;
+        private DateTime? _dataEvento;
         private bool _semData;
         private bool _eventoRecorrente;
 
@@ -149,7 +149,7 @@ namespace BeaHelper.BLL.BD
 
         #region DataEvento
 
-        public DateTime DataEvento
+        public DateTime? DataEvento
         {
             get
             {
@@ -250,7 +250,16 @@ namespace BeaHelper.BLL.BD
             parms[4].Value = this._descricao;
             parms[5].Value = this._cidadeEstado;
             parms[6].Value = this._dataPublicacao;
-            parms[7].Value = this._dataEvento;
+
+            if (_dataEvento == null)
+            {
+                parms[7].Value = DBNull.Value;
+            }
+            else
+            {
+                parms[7].Value = this._dataEvento;
+            }
+
             parms[8].Value = this._semData;
             parms[9].Value = this._eventoRecorrente;
         }
@@ -550,7 +559,15 @@ namespace BeaHelper.BLL.BD
                     objVaga._categoria = Convert.ToString(dr["Categoria"]);
                     objVaga._cidadeEstado = Convert.ToString(dr["Cidade_Estado"]);
                     objVaga._dataPublicacao = Convert.ToDateTime(dr["DataPublicacao"]);
-                    objVaga._dataEvento = Convert.ToDateTime(dr["DataEvento"]);
+
+                    if (dr["DataEvento"] == DBNull.Value)
+                    {
+                        objVaga._dataEvento = null;
+                    }
+                    else
+                    {
+                        objVaga._dataEvento = Convert.ToDateTime(dr["DataEvento"]);
+                    }
                     objVaga._semData = Convert.ToBoolean(dr["SemData"]);
                     objVaga._eventoRecorrente = Convert.ToBoolean(dr["EventoRecorrente"]);
 
