@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.31605.320
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SyrusVoluntariado", "SyrusVoluntariado\SyrusVoluntariado.csproj", "{1F80B967-B39A-4572-A6A5-938258419722}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeaHelper.BLL", "BeaHelper.BLL\BeaHelper.BLL.csproj", "{B06EF3F9-E594-465F-930E-D54057912A4F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeaHelper.BLL", "BeaHelper.BLL\BeaHelper.BLL.csproj", "{B06EF3F9-E594-465F-930E-D54057912A4F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceEventosRecorrentes", "ServiceEventosRecorrentes\ServiceEventosRecorrentes.csproj", "{73B6117F-1561-4FB4-8FD0-D32FFAE7A094}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{B06EF3F9-E594-465F-930E-D54057912A4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B06EF3F9-E594-465F-930E-D54057912A4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B06EF3F9-E594-465F-930E-D54057912A4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73B6117F-1561-4FB4-8FD0-D32FFAE7A094}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73B6117F-1561-4FB4-8FD0-D32FFAE7A094}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73B6117F-1561-4FB4-8FD0-D32FFAE7A094}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73B6117F-1561-4FB4-8FD0-D32FFAE7A094}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
