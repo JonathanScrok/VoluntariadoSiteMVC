@@ -45,11 +45,6 @@ namespace SyrusVoluntariado.Controllers
             //int IdUsuarioLog = ValorUsuarioLogado.GetValueOrDefault(); //Remover ou Comentar
             int IdUsuarioLogado = GetUsuarioLogado();
 
-            if (vaga.DataEvento.GetValueOrDefault().ToString("dd/MM/yyyy") == "01/01/0001")
-            {
-                TempData["DataEvento"] = "Data Obrigatória! Caso não deseje informar o horário campo deve ser colocado como 00/00/0000 00:00";
-            }
-
             if (ModelState.IsValid)
             {
 
