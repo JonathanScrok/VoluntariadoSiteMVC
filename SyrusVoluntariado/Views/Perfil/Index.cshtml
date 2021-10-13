@@ -65,7 +65,15 @@
                             <div class="card-body">
                                 <h5 class="card-title">@vaga.Titulo</h5>
                                 <p class="card-text">@vaga.Descricao</p>
-                                <p class="card-text">@vaga.DataEvento.ToString("dd/MM/yyyy")</p>
+                                @if (@vaga.DataEvento == null)
+                                {
+                                    <p class="card-text">Data: Não escolhida</p>
+                                }
+                                else
+                                {
+                                    <p class="card-text">Data: @vaga.DataEvento.ToString("dd/MM/yyyy")</p>
+                                }
+
                                 <a href="/vaga/listavoluntarios/@vaga.Id_Vaga" class="btn " style="background-color: #62c0a3;"><b>Lista de Voluntários</b></a>
                                 <div style="float:right;">
                                     <a class="btn btn-info" href="/vaga/editar/@vaga.Id_Vaga">Editar</a>
