@@ -209,7 +209,7 @@ namespace BeaHelper.BLL.BD
         }
         #endregion
 
-        #region Busca Login por Email
+        #region Busca Usuario por Email
         public static List<Usuario> BuscaUsuario_Email(string Email)
         {
             SqlConnection conn = null;
