@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BeaHelper.BLL.Services;
+
 namespace SyrusVoluntariado.Controllers
 {
     public class LoginController : Controller
@@ -35,7 +37,8 @@ namespace SyrusVoluntariado.Controllers
         {
             if (usuario.Email != null && usuario.Senha != null)
             {
-                var LoginExitente = Login_P1.BuscaLogin_EmailSenha(usuario.Email, usuario.Senha);
+                string senhaEncoding = _encodeSenha.HashValue(usuario.Senha);
+                var LoginExitente = Login_P1.BuscaLogin_EmailSenha(usuario.Email, senhaEncoding);
 
                 if (LoginExitente.Count > 0)
                 {
@@ -133,6 +136,7 @@ namespace SyrusVoluntariado.Controllers
 
             if (ModelState.IsValid && ExistenciaEmail == false)
             {
+                string senhaEncoding = _encodeSenha.HashValue(usuario.Senha);
 
                 Usuario_P1 usu = new Usuario_P1();
 
@@ -148,7 +152,7 @@ namespace SyrusVoluntariado.Controllers
                 Login_P1 login = new Login_P1();
                 login.IdUsuario = usu.IdUsuario;
                 login.Email = usuario.Email;
-                login.Senha = usuario.Senha;
+                login.Senha = senhaEncoding;
                 login.DataCadastro = DateTime.Now;
                 login.Save();
 

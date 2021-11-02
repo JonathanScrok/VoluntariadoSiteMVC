@@ -275,3 +275,7 @@ html {
     flex-direction: row;
     justify-content: space-around;
 }
+
+.field-validation-error {
+    color: #cd2919;
+}
