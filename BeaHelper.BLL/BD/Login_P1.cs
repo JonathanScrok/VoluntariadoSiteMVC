@@ -129,6 +129,7 @@ namespace BeaHelper.BLL.BD
         private const string SELECT_BUSCALOGIN_IDUSUARIO = @"select * from helper.Logins where Id_Usuario = @Id_Usuario";
         private const string SELECT_BUSCALOGIN_EMAIL = @"select Email from helper.Logins where Email = @Email";
         private const string SELECT_BUSCALOGIN_EMAILSENHA = @"select * from helper.Logins where Email = @Email AND Senha = @Senha";
+        private const string SELECT_BUSCALOGIN_EMAILSENHACOUNT = @"select Count(*) from helper.Logins where Email = @Email AND Senha = @Senha";
 
         private const string UPDATE_LOGIN = @"UPDATE helper.Logins SET Id_Login = @Id_Login,Id_Usuario = @Id_Usuario, Email = @Email, Senha = @Senha, DataCadastro = @DataCadastro WHERE Id_Login = @Id_Login";
         private const string INSERT_LOGIN = @"INSERT INTO helper.Logins(Id_Usuario, Email, Senha , DataCadastro) VALUES (@Id_Usuario, @Email, @Senha, @DataCadastro)";
@@ -255,6 +256,36 @@ namespace BeaHelper.BLL.BD
                 login = Mapper.Map<List<Login>>(reader);
                 return login;
             }
+        }
+        #endregion
+
+        #region Busca login por EMAIL e SENHA
+        public static bool ExisteLogin(string Email, string Senha)
+        {
+            SqlConnection conn = null;
+            SqlDataReader reader = null;
+            int quantidade;
+            bool existe;
+
+            List<SqlParameter> parms = new List<SqlParameter>();
+            parms.Add(new SqlParameter("@Email", SqlDbType.VarChar, 100));
+            parms.Add(new SqlParameter("@Senha", SqlDbType.VarChar, 100));
+            parms[0].Value = Email;
+            parms[1].Value = Senha;
+
+            conn = new SqlConnection(stringConnection);
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand(SELECT_BUSCALOGIN_EMAILSENHACOUNT, conn);
+            cmd.Parameters.Add(parms[0]);
+            cmd.Parameters.Add(parms[1]);
+
+            quantidade = Convert.ToInt32(cmd.ExecuteScalar());
+
+            if (quantidade > 0)
+                return true;
+            else
+                return false;
         }
         #endregion
 
