@@ -1,13 +1,16 @@
 ﻿using BeaHelper.BLL.BD;
 using BeaHelper.BLL.Models;
 using Microsoft.AspNetCore.Mvc;
+using SyrusVoluntariado.Library.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace SyrusVoluntariado.Controllers
 {
+    [Login]
     public class VoluntarioController : Controller
     {
         public IActionResult Index()
@@ -21,10 +24,11 @@ namespace SyrusVoluntariado.Controllers
             }
 
             var pageNumber = 1;
-            //var resultadoPaginado = voluntariosCompleto.ToPagedList(pageNumber, 10);
+            
+            List<UsuarioCompleto> UsuariosCompletos = new List<UsuarioCompleto>();
+            var resultadoPaginado = UsuariosCompletos.ToPagedList(pageNumber, 10);
 
-            UsuarioCompleto UsuarioCompleto = new UsuarioCompleto();
-            return View(UsuarioCompleto);
+            return View(resultadoPaginado);
         }
     }
 }
