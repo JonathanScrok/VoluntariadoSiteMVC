@@ -39,7 +39,6 @@
             <th class="ListVoluntarios_Columm" scope="col">Email</th>
             <th class="ListVoluntarios_Columm" scope="col">Sexo</th>
             <th class="ListVoluntarios_Columm" scope="col">NotaMedia Media do Voluntário</th>
-            <th></th>
         </tr>
     </thead>
 
@@ -47,13 +46,13 @@
         @foreach (var usuario in Model)
         {
             <tr>
-                <td class="ListVoluntarios_Columm" scope="row">@usuario.Nome</td>
-                <td class="ListVoluntarios_Columm">@usuario.Email</td>
-                @if (usuario.Sexo == 1)
+                <td class="ListVoluntarios_Columm" scope="row">@usuario.Usuario.Nome</td>
+                <td class="ListVoluntarios_Columm">@usuario.Usuario.Email</td>
+                @if (usuario.Usuario.Sexo == 1)
                 {
                     <td class="ListVoluntarios_Columm">Masculino</td>
                 }
-                else if (usuario.Sexo == 2)
+                else if (usuario.Usuario.Sexo == 2)
                 {
                     <td class="ListVoluntarios_Columm">Feminino</td>
                 }
@@ -127,18 +126,6 @@
                         </div>
                     </div>
                 </td>
-                @if (usuario.UsuarioLogadoAvaliou == false)
-                {
-                    <td class="ListVoluntarios_Columm">
-                        <a class="btn btn-info ms-md-2" href="/avaliar/index/?Id=@usuario.Id&IdVaga=@IdVaga">Avaliar</a>
-                    </td>
-                }
-                else
-                {
-                    <td class="ListVoluntarios_Columm">
-                        <a class="btn btn-Cinza ms-md-2" disabled>Avaliado</a>
-                    </td>
-                }
 
             </tr>
         }

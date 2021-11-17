@@ -9,7 +9,8 @@ namespace BeaHelper.BLL.Models
     {
         public int Id_Avaliacao { get; set; }
 
-        public int Id_Usuario { get; set; }
+        public int Id_Usuario_Avaliado { get; set; }
+        public int Id_Usuario_Avaliou { get; set; }
 
         public int Nota { get; set; }
 

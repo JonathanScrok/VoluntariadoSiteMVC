@@ -18,15 +18,33 @@ namespace SyrusVoluntariado.Controllers
             var voluntarios = Usuario_P2.TodosUsuarios();
 
             List<UsuarioCompleto> voluntariosCompleto = new List<UsuarioCompleto>();
+            UsuarioCompleto voluntarioCompleto = new UsuarioCompleto();
             foreach (var voluntario in voluntarios)
             {
-                var AvaliacaoUsuario = Avaliacao_P1.TodasAvaliacoesUsuario(voluntario.Id);
+                var AvaliacaoUsuario = Avaliacao_P1.TodasAvaliacoesUsuario(voluntario.Id_Usuario);
+                int countNota = 0;
+                if (AvaliacaoUsuario != null && AvaliacaoUsuario.Count > 0)
+                {
+                    foreach (var avaliacao in AvaliacaoUsuario)
+                    {
+                        countNota += avaliacao.Nota;
+                    }
+                    voluntario.Senha = "0";
+                    voluntarioCompleto.Usuario = voluntario;
+                    voluntarioCompleto.NotaMedia = countNota / AvaliacaoUsuario.Count;
+                    voluntarioCompleto.NuncaAvaliado = false;
+                }
+                else
+                {
+                    voluntarioCompleto.Usuario = voluntario;
+                    voluntarioCompleto.NuncaAvaliado = true;
+                }
+                voluntariosCompleto.Add(voluntarioCompleto);
             }
 
             var pageNumber = 1;
-            
-            List<UsuarioCompleto> UsuariosCompletos = new List<UsuarioCompleto>();
-            var resultadoPaginado = UsuariosCompletos.ToPagedList(pageNumber, 10);
+
+            var resultadoPaginado = voluntariosCompleto.ToPagedList(pageNumber, 10);
 
             return View(resultadoPaginado);
         }
