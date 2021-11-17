@@ -1,0 +1,140 @@
+﻿@model X.PagedList.IPagedList<BeaHelper.BLL.Models.UsuarioCompleto>
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "Voluntários";
+    var IdVaga = ViewBag.IdVaga;
+}
+
+<div class="mt-md-3">
+    @if (TempData["Mensagem"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            @TempData["Mensagem"]
+        </div>
+    }
+</div>
+<div class="mt-md-3">
+    @if (TempData["MensagemErro"] != null)
+    {
+        <div class="alert alert-danger alertemail" role="alert">
+            @TempData["MensagemErro"]
+        </div>
+    }
+</div>
+
+<link href="/css/PagedList.css" rel="stylesheet" type="text/css" />
+<link href="/css/FundoPaginas.css" rel="stylesheet" type="text/css" />
+
+<span> <b>Total de Voluntários:</b> @Model.TotalItemCount</span>
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th class="ListVoluntarios_Columm" scope="col">Nome</th>
+            <th class="ListVoluntarios_Columm" scope="col">Email</th>
+            <th class="ListVoluntarios_Columm" scope="col">Sexo</th>
+            <th class="ListVoluntarios_Columm" scope="col">NotaMedia Media do Voluntário</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var usuario in Model)
+        {
+            <tr>
+                <td class="ListVoluntarios_Columm" scope="row">@usuario.Usuario.Nome</td>
+                <td class="ListVoluntarios_Columm">@usuario.Usuario.Email</td>
+                @if (usuario.Usuario.Sexo == 1)
+                {
+                    <td class="ListVoluntarios_Columm">Masculino</td>
+                }
+                else if (usuario.Usuario.Sexo == 2)
+                {
+                    <td class="ListVoluntarios_Columm">Feminino</td>
+                }
+                else
+                {
+                    <td class="ListVoluntarios_Columm">Prefiro não declarar</td>
+                }
+
+                <td class="ListVoluntarios_Columm">
+                    <div class="MediaEstrelas"><strong style="font-size: 21px"> @usuario.NotaMedia</strong></div>
+                    <div class="ConjuntoEstrelas">
+                        <div>
+                            @if (usuario.NotaMedia > 0)
+                            {
+                                <a>
+                                    <img src="/img/star1.png" id="s1">
+                                </a>
+                            }
+                            else
+                            {
+                                <p>Nenhuma Avaliação</p>
+                            }
+                            @if (usuario.NotaMedia > 1)
+                            {
+                                <a>
+                                    <img src="/img/star1.png" id="s2">
+                                </a>
+                            }
+                            else if (usuario.NotaMedia > 0)
+                            {
+                                <a>
+                                    <img src="/img/star0.png" id="s2">
+                                </a>
+                            }
+                            @if (usuario.NotaMedia > 2)
+                            {
+                                <a>
+                                    <img src="/img/star1.png" id="s3">
+                                </a>
+                            }
+                            else if (usuario.NotaMedia > 0)
+                            {
+                                <a>
+                                    <img src="/img/star0.png" id="s3">
+                                </a>
+                            }
+                            @if (usuario.NotaMedia > 3)
+                            {
+                                <a>
+                                    <img src="/img/star1.png" id="s4">
+                                </a>
+                            }
+                            else if (usuario.NotaMedia > 0)
+                            {
+                                <a>
+                                    <img src="/img/star0.png" id="s4">
+                                </a>
+                            }
+                            @if (usuario.NotaMedia > 4)
+                            {
+                                <a>
+                                    <img src="/img/star1.png" id="s5">
+                                </a>
+                            }
+                            else if (usuario.NotaMedia > 0)
+                            {
+                                <a>
+                                    <img src="/img/star0.png" id="s5">
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
+
+<script>
+    var
+</script>
+

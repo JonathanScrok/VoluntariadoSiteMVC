@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BeaHelper.BLL.Models {
     public class Usuario {
-        public int Id { get; set; }
+        public int Id_Usuario { get; set; }
 
         [Required(ErrorMessage = "O Campo é Obrigatório!")]
         [RegularExpression("^[a-zA-ZçÇáéíóúÁÉÍÓÚ ]+$", ErrorMessage = "O Nome só pode conter letras")]

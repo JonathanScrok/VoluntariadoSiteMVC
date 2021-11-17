@@ -15,6 +15,7 @@ namespace BeaHelper.BLL.Models
         public double NotaMedia { get; set; }
         public bool NuncaAvaliado { get; set; }
         public bool UsuarioLogadoAvaliou { get; set; }
+        public Usuario Usuario { get; set; }
 
 
     }
