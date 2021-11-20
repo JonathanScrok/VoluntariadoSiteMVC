@@ -18,7 +18,7 @@ namespace SyrusVoluntariado.Controllers
             var voluntarios = Usuario_P2.TodosUsuarios();
 
             List<UsuarioCompleto> voluntariosCompleto = new List<UsuarioCompleto>();
-            
+
 
             foreach (var voluntario in voluntarios)
             {
@@ -34,12 +34,23 @@ namespace SyrusVoluntariado.Controllers
                         countNota += avaliacao.Nota;
                     }
                     voluntario.Senha = "0";
+
+                    if (voluntario.NumeroCelular == null)
+                    {
+                        voluntario.NumeroCelular = "Não Declarado";
+                    }
+
                     voluntarioCompleto.Usuario = voluntario;
                     voluntarioCompleto.NotaMedia = countNota / AvaliacaoUsuario.Count;
                     voluntarioCompleto.NuncaAvaliado = false;
                 }
                 else
                 {
+                    if (voluntario.NumeroCelular == null)
+                    {
+                        voluntario.NumeroCelular = "Não Declarado";
+                    }
+
                     voluntarioCompleto.Usuario = voluntario;
                     voluntarioCompleto.NuncaAvaliado = true;
                 }

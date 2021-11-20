@@ -52,6 +52,11 @@
                         @Html.ValidationMessage("email")
                     </div>
                     <div class="form-floating emailLogin">
+                        <input type="text" name="NumeroCelular" value="@Model.NumeroCelular" class="form-control logininput" id="NumeroCelular" placeholder="">
+                        <label for="NumeroCelular">Celular:</label>
+                        @Html.ValidationMessage("NumeroCelular")
+                    </div>
+                    <div class="form-floating emailLogin">
                         <input type="password" name="senha" value="@Model.Senha" class="form-control logininput" id="senha" placeholder="">
                         <label for="senha">Senha:</label>
                         @Html.ValidationMessage("senha")

@@ -23,6 +23,7 @@ namespace BeaHelper.BLL.BD
         private string _nome;
         private int? _sexo;
         private string _email;
+        private string _numeroCelular;
         private DateTime _dataCadastro;
 
         private bool _persisted;
@@ -92,6 +93,21 @@ namespace BeaHelper.BLL.BD
         }
         #endregion
 
+        #region NumeroCelular
+        public string NumeroCelular
+        {
+            get
+            {
+                return this._numeroCelular;
+            }
+            set
+            {
+                this._numeroCelular = value;
+                this._modified = true;
+            }
+        }
+        #endregion
+
         #region DataCadastro
         public DateTime DataCadastro
         {
@@ -127,6 +143,7 @@ namespace BeaHelper.BLL.BD
             parms.Add(new SqlParameter("@Sexo", SqlDbType.Int, 1));
             parms.Add(new SqlParameter("@Email", SqlDbType.VarChar, 100));
             parms.Add(new SqlParameter("@DataCadastro", SqlDbType.DateTime, 8));
+            parms.Add(new SqlParameter("@NumeroCelular", SqlDbType.VarChar, 20));
 
             return (parms);
         }
@@ -141,6 +158,7 @@ namespace BeaHelper.BLL.BD
             parms[2].Value = this._sexo;
             parms[3].Value = this._email;
             parms[4].Value = this._dataCadastro;
+            parms[5].Value = this._numeroCelular;
         }
         #endregion
 

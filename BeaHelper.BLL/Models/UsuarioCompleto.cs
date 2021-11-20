@@ -11,6 +11,7 @@ namespace BeaHelper.BLL.Models
         public string Nome { get; set; }
         public int? Sexo { get; set; }
         public string Email { get; set; }
+        public string NumeroCelular { get; set; }
         public int Id_Avaliacao { get; set; }
         public double NotaMedia { get; set; }
         public bool NuncaAvaliado { get; set; }

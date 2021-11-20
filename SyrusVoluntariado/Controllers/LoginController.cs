@@ -142,6 +142,7 @@ namespace SyrusVoluntariado.Controllers
 
                 usu.Nome = usuario.Nome;
                 usu.Email = usuario.Email;
+                usu.NumeroCelular = usuario.NumeroCelular;
                 usu.Sexo = usuario.Sexo;
 
                 usu.DataCadastro = DateTime.Now;

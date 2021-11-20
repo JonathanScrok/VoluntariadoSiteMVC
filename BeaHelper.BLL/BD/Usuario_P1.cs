@@ -23,6 +23,7 @@ namespace BeaHelper.BLL.BD
         private string _nome;
         private int? _sexo;
         private string _email;
+        private string _numeroCelular;
         private DateTime _dataCadastro;
 
         private bool _persisted;
@@ -104,6 +105,21 @@ namespace BeaHelper.BLL.BD
         }
         #endregion
 
+        #region NumeroCelular
+        public string NumeroCelular
+        {
+            get
+            {
+                return this._numeroCelular;
+            }
+            set
+            {
+                this._numeroCelular = value;
+                this._modified = true;
+            }
+        }
+        #endregion
+
         #region DataCadastro
         public DateTime DataCadastro
         {
@@ -126,8 +142,8 @@ namespace BeaHelper.BLL.BD
         private const string SELECT_BUSCAUSUARIOID = @"select * from helper.Usuarios WITH(NOLOCK) where Id_Usuario = @Id_Usuario";
         private const string SELECT_BUSCAUSUARIOEMAIL = @"select * from helper.Usuarios WITH(NOLOCK) where Email = @Email";
 
-        private const string UPDATE_USUARIO = @"UPDATE helper.Usuarios SET Nome = @Nome, Sexo = @Sexo, Email = @Email, DataCadastro = @DataCadastro WHERE Id_Usuario = @Id_Usuario";
-        private const string INSERT_USUARIO = @"INSERT INTO helper.Usuarios(Nome, Sexo ,Email, DataCadastro) VALUES (@Nome, @Sexo, @Email, @DataCadastro);";
+        private const string UPDATE_USUARIO = @"UPDATE helper.Usuarios SET Nome = @Nome, Sexo = @Sexo, Email = @Email, DataCadastro = @DataCadastro, NumeroCelular = @NumeroCelular WHERE Id_Usuario = @Id_Usuario";
+        private const string INSERT_USUARIO = @"INSERT INTO helper.Usuarios(Nome, Sexo ,Email, DataCadastro, NumeroCelular) VALUES (@Nome, @Sexo, @Email, @DataCadastro, @NumeroCelular);";
         #endregion
 
         #region Metodos
@@ -142,6 +158,7 @@ namespace BeaHelper.BLL.BD
             parms.Add(new SqlParameter("@Sexo", SqlDbType.Int, 1));
             parms.Add(new SqlParameter("@Email", SqlDbType.VarChar, 100));
             parms.Add(new SqlParameter("@DataCadastro", SqlDbType.DateTime, 8));
+            parms.Add(new SqlParameter("@NumeroCelular", SqlDbType.VarChar, 20));
 
             return (parms);
         }
@@ -156,6 +173,7 @@ namespace BeaHelper.BLL.BD
             parms[2].Value = this._sexo;
             parms[3].Value = this._email;
             parms[4].Value = this._dataCadastro;
+            parms[5].Value = this._numeroCelular;
         }
         #endregion        
 
@@ -422,6 +440,7 @@ namespace BeaHelper.BLL.BD
                     objVaga._sexo = Convert.ToInt32(dr["Sexo"]);
                     objVaga._email = Convert.ToString(dr["Email"]);
                     objVaga._dataCadastro = Convert.ToDateTime(dr["DataCadastro"]);
+                    objVaga._numeroCelular = Convert.ToString(dr["NumeroCelular"]);
 
                     return true;
                 }
