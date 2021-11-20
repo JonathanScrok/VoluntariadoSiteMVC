@@ -18,11 +18,15 @@ namespace SyrusVoluntariado.Controllers
             var voluntarios = Usuario_P2.TodosUsuarios();
 
             List<UsuarioCompleto> voluntariosCompleto = new List<UsuarioCompleto>();
-            UsuarioCompleto voluntarioCompleto = new UsuarioCompleto();
+            
+
             foreach (var voluntario in voluntarios)
             {
+                UsuarioCompleto voluntarioCompleto = new UsuarioCompleto();
+
                 var AvaliacaoUsuario = Avaliacao_P1.TodasAvaliacoesUsuario(voluntario.Id_Usuario);
                 int countNota = 0;
+
                 if (AvaliacaoUsuario != null && AvaliacaoUsuario.Count > 0)
                 {
                     foreach (var avaliacao in AvaliacaoUsuario)

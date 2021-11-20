@@ -202,8 +202,8 @@ namespace SyrusVoluntariado.Controllers
 
                     ViewBag.JaVoluntariado = true;
 
-                    Usuario_P1 usuario = new Usuario_P1(IdUsuarioLogado);
-                    usuario.CompleteObject();
+                    //Usuario_P1 usuario = new Usuario_P1(IdUsuarioLogado);
+                    //usuario.CompleteObject();
 
                     //bool EmailEnviado = EnviarCandidatoParaDonoVaga(IdUsuarioLogado, vaga, usuario);
                 }
@@ -213,8 +213,7 @@ namespace SyrusVoluntariado.Controllers
                     ViewBag.JaVoluntariado = true;
                 }
             }
-
-            return View("Visualizar", vaga);
+            return Json(Ok());
         }
 
         public bool EnviarCandidatoParaDonoVaga(int IdUsuarioLogado, Vaga_P1 vaga, Usuario_P1 usuario)

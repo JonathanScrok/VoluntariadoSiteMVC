@@ -93,9 +93,12 @@
             else
             {
                 <div class="botao-voluntariar">
-                    <a class="btn btn-success" href="/vaga/voluntariar/@Model.IdVaga">Voluntariar-me</a>
+                    <button class="btn btn-success" id="BotaoVoluntatiarMe" onclick="voluntariarNaVaga();">Voluntariar-me</button>
                 </div>
             }
         </div>
     </div>
 </div>
+<script>
+    var idVaga = @Model.IdVaga;
+</script>
