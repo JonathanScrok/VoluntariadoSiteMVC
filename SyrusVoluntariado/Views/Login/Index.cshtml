@@ -37,6 +37,12 @@
                         <label for="senha">Senha:</label>
                         @Html.ValidationMessage("senha")
                     </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox"  name="ManterConectado" onclick="validaCheckManterConectado()" value="@Model.ManterConectado" id="ManterConectado">
+                        <label class="form-check-label" for="ManterConectado" id="manterConectada">
+                            Manter Conectado
+                        </label>
+                    </div>
                     <div class="botaologar">
                         <button type="submit" class="btn btn-success mt-md-2">Entrar</button>
                     </div>
@@ -50,3 +56,5 @@
 </form>
 
 @ViewBag.Mesagem
+
+<script src="~/js/Login.js"></script>

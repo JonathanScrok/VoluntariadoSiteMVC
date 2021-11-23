@@ -17,9 +17,10 @@ namespace SyrusVoluntariado.Library.Filters {
             string ActionRedi = ValoresRedirecionamento[0];
             string ControlerRedi = ValoresRedirecionamento[1];
 
-            var Logado = context.HttpContext.Request.Cookies["Logado"];
+            string LoginSession = context.HttpContext.Session.GetString("Login"); //Remover ou Comentar
+            var LogadoCookie = context.HttpContext.Request.Cookies["Logado"];
 
-            if (Logado == null) {
+            if (LogadoCookie == null && LoginSession == null) {
 
                 if (context.Controller != null) {
                     Controller controlador = context.Controller as Controller;

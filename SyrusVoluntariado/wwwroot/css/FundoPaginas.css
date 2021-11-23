@@ -279,3 +279,17 @@ html {
 .field-validation-error {
     color: #cd2919;
 }
+
+#email {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+#senha {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+#manterConectada {
+    color: white;
+}

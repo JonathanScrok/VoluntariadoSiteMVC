@@ -22,5 +22,7 @@ namespace BeaHelper.BLL.Models {
 
         [Required(ErrorMessage = "O Campo é Obrigatório!")]
         public string Senha { get; set; }
+
+        public bool ManterConectado { get; set; }
     }
 }

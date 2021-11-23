@@ -144,6 +144,8 @@ namespace BeaHelper.BLL.BD
 
         private const string UPDATE_USUARIO = @"UPDATE helper.Usuarios SET Nome = @Nome, Sexo = @Sexo, Email = @Email, DataCadastro = @DataCadastro, NumeroCelular = @NumeroCelular WHERE Id_Usuario = @Id_Usuario";
         private const string INSERT_USUARIO = @"INSERT INTO helper.Usuarios(Nome, Sexo ,Email, DataCadastro, NumeroCelular) VALUES (@Nome, @Sexo, @Email, @DataCadastro, @NumeroCelular);";
+        private const string DELETE_USUARIO = @"DELETE FROM helper.Usuarios WHERE Id_Usuario = @Id_Usuario";
+
         #endregion
 
         #region Metodos

@@ -1,10 +1,10 @@
 ﻿@using Microsoft.AspNetCore.Http;
 @{
-    //string Login = Context.Session.GetString("Login"); //Remover ou Comentar
-    string Logado = Context.Request.Cookies["Logado"];
+    string Login = Context.Session.GetString("Login"); //Session
+    string Logado = Context.Request.Cookies["Logado"]; //Cookie
 
-    //string NomeUsuario = Context.Session.GetString("UsuarioLogado"); //Remover ou Comentar
-    string PrimeiroNomeUsuario = Context.Request.Cookies["UsuarioLogado"];
+    string NomeUsuario = Context.Session.GetString("UsuarioLogado"); //Session
+    string PrimeiroNomeUsuario = Context.Request.Cookies["UsuarioLogado"]; //Cookie
 
 }
 
@@ -57,7 +57,7 @@
                                     </form>
                                 </div>
                             </div>
-                            @if (Logado == null)
+                            @if (Logado == null && Login == null)
                             {
                                 <a class="btn btn-dark me-md-2 order-1 order-lg-0 ms-lg-3" href="/login">Entrar</a>
                             }
@@ -65,9 +65,18 @@
                             {
                                 <ul class="navbar-nav">
                                     <li class="dropdown">
-                                        <a class="btn dropdown-toggle me-md-2 order-1 order-lg-0 ms-lg-3" href="#" role="button" id="Nome-UsuarioHeader" data-bs-toggle="dropdown" aria-expanded="false">
-                                            @PrimeiroNomeUsuario
-                                        </a>
+                                        @if (@NomeUsuario != null)
+                                        {
+                                            <a class="btn dropdown-toggle me-md-2 order-1 order-lg-0 ms-lg-3" href="#" role="button" id="Nome-UsuarioHeader" data-bs-toggle="dropdown" aria-expanded="false">
+                                                @NomeUsuario
+                                            </a>
+                                        }
+                                        else if (@PrimeiroNomeUsuario != null)
+                                        {
+                                            <a class="btn dropdown-toggle me-md-2 order-1 order-lg-0 ms-lg-3" href="#" role="button" id="Nome-UsuarioHeader" data-bs-toggle="dropdown" aria-expanded="false">
+                                                @PrimeiroNomeUsuario
+                                            </a>
+                                        }
                                         <ul class="dropdown-menu" id="dropItens" aria-labelledby="dropdownMenuLink">
                                             <li><a class="dropdown-item" id="MeuPerfilButton" href="/perfil">Meu Perfil</a></li>
                                             <li><a class="dropdown-item" id="MeuPerfilButton" href="/perfil/minhasvagas ">Meus Eventos</a></li>
