@@ -10,40 +10,38 @@
 
 <div>
     <div class="info__filho">
-        <div class="accordion" id="accordionPanelsStayOpenExample">
+        <div class="" id="">
             <div class="accordion-item">
-                <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                    <button style="background-color: #62c0a3;" class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
-                        <b>TITULO DO EVENTO</b>
-                    </button>
-                </h2>
-                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                <div style="background-color: #62c0a3;" id="" class="">
+                    <div class="accordion-body">
+                        <strong>TITULO DO EVENTO</strong>
+                    </div>
+                </div>
+                <div id="" class="">
                     <div class="accordion-body">
                         @Model.Titulo
                     </div>
                 </div>
             </div>
-
             <div class="accordion-item">
-                <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-                    <button style="background-color: #62c0a3;" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-                        <b>DESCRIÇÃO</b>
-                    </button>
-                </h2>
-                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingTwo">
+                <div style="background-color: #62c0a3;" id="" class="">
+                    <div class="accordion-body">
+                        <strong>DESCRIÇÃO</strong>
+                    </div>
+                </div>
+                <div id="" class="">
                     <div class="accordion-body">
                         @Model.Descricao
                     </div>
                 </div>
             </div>
-
             <div class="accordion-item">
-                <h2 class="accordion-header" id="panelsStayOpen-headingThree">
-                    <button style="background-color: #62c0a3;" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-                        <b>LOCAL</b>
-                    </button>
-                </h2>
-                <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingThree">
+                <div style="background-color: #62c0a3;" id="" class="">
+                    <div class="accordion-body">
+                        <strong>LOCAL</strong>
+                    </div>
+                </div>
+                <div id="" class="">
                     <div class="accordion-body">
                         @Model.CidadeEstado
                     </div>
@@ -51,19 +49,25 @@
             </div>
             @if (@Model.DataEvento != null)
             {
+ 
+                string Data = @Model.DataEvento.GetValueOrDefault().ToString("dd/MM/yyyy");
+                string Hora = @Model.DataEvento.GetValueOrDefault().ToString("HH:mm");
+                string DataHora = Data + " ás " + Hora;
+
                 <div class="accordion-item">
-                    <h2 class="accordion-header" id="panelsStayOpen-headingFour">
-                        <button style="background-color: #62c0a3;" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false" aria-controls="panelsStayOpen-collapseFour">
-                            <b>DATA DO EVENTO</b>
-                        </button>
-                    </h2>
-                    <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingFour">
+                    <div style="background-color: #62c0a3;" id="" class="">
                         <div class="accordion-body">
-                            @Model.DataEvento.GetValueOrDefault().ToString("dd/MM/yyyy")
+                            <strong>DATA DO EVENTO</strong>
+                        </div>
+                    </div>
+                    <div id="" class="">
+                        <div class="accordion-body">
+                            @DataHora
                         </div>
                     </div>
                 </div>
             }
+
             @if (ViewBag.ADMVaga == true)
             {
                 <div id="Adm__Mensagem">
