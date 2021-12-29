@@ -293,3 +293,9 @@ html {
 #manterConectada {
     color: white;
 }
+
+#DadosVagaVisualizar {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
