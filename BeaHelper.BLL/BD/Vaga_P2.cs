@@ -371,6 +371,30 @@ namespace BeaHelper.BLL.BD
         }
         #endregion
 
+        #region Busca Vagas parecidas pelo Local
+        public static List<Vaga> VagasParecidasLocal(string local, int idVaga)
+        {
+            SqlConnection conn = null;
+            SqlDataReader reader = null;
+            List<Vaga> vaga = new List<Vaga>();
+
+            conn = new SqlConnection(stringConnection);
+            conn.Open();
+
+            string query = "select top 4 * from helper.Vagas where Cidade_Estado like '%"+ local + "%' and Id_Vaga != " + idVaga + "Order by DataEvento asc";
+
+            SqlCommand cmd = new SqlCommand(query, conn);
+
+            Mapper.CreateMap<IDataRecord, Vaga>();
+
+            using (reader = cmd.ExecuteReader())
+            {
+                vaga = Mapper.Map<List<Vaga>>(reader);
+                return vaga;
+            }
+        }
+        #endregion
+
         #endregion
 
         #region SetInstance

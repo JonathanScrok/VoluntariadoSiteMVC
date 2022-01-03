@@ -100,6 +100,9 @@ namespace SyrusVoluntariado.Controllers
                 ViewBag.ADMVaga = true;
             }
 
+            List<Vaga> vagasParecidas = Vaga_P2.VagasParecidasLocal(vaga.CidadeEstado, vaga.IdVaga);
+            ViewBag.VagasParecidas = vagasParecidas;
+            ViewBag.Local = vaga.CidadeEstado.ToUpper();
             return View(vaga);
         }
 

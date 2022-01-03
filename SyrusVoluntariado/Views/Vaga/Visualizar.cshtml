@@ -49,7 +49,7 @@
             </div>
             @if (@Model.DataEvento != null)
             {
- 
+
                 string Data = @Model.DataEvento.GetValueOrDefault().ToString("dd/MM/yyyy");
                 string Hora = @Model.DataEvento.GetValueOrDefault().ToString("HH:mm");
                 string DataHora = Data + " ás " + Hora;
@@ -101,6 +101,43 @@
                 </div>
             }
         </div>
+        @if (@ViewBag.VagasParecidas.Count > 0)
+        {
+            string Data = string.Empty;
+            string Hora = string.Empty;
+            <hr />
+            <strong>OUTROS EVENTOS EM @ViewBag.Local</strong>
+            <div class="row">
+                @foreach (var vaga in ViewBag.VagasParecidas)
+                {
+                    if (vaga.DataEvento != null)
+                    {
+                        var DataCompleta = (DateTime)vaga.DataEvento;
+                        Data = DataCompleta.ToString("dd/MM/yyyy");
+                        Hora = DataCompleta.ToString("HH:mm");
+                    }
+                    <div class="col-sm-3">
+                        <div class="card" style="max-width: 19rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">@vaga.Titulo</h5>
+                                @if (@vaga.DataEvento == null)
+                                {
+                                    <p class="card-text">Data do Evento: Não escolhida</p>
+                                }
+                                else
+                                {
+                                    <p class="card-datahora">Data do Evento: @Data</p>
+                                    <p class="card-text">Horário do Evento: @Hora</p>
+                                }
+                                <p class="card-text">Local: @vaga.Cidade_Estado</p>
+                                <a href="/vaga/visualizar/@vaga.Id_Vaga" class="btn " style="background-color: #62c0a3;"><b>Visualizar</b></a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+
     </div>
 </div>
 <script>
