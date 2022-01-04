@@ -53,20 +53,20 @@ function share() {
     $('#compartilhar-vaga').modal('show');
 }
 
+let mensagem = document.querySelector(".mensagem");
+
 function CopiarLink() {
-    mensagem.style.display = "block";
+    mensagem.style.display = "flex";
 
     var copyText = window.location.href;
 
-    /* Copy the text inside the text field */
+    // Copia Texto para Area de Transferencia
     navigator.clipboard.writeText(copyText);
 }
 
-let mensagem = document.querySelector(".mensagem");
-
 // mostra a mensagem
 function showMessage() {
-    mensagem.style.display = "block";
+    mensagem.style.display = "flex";
 }
 // esconde a mensagem
 function hideMessage() {

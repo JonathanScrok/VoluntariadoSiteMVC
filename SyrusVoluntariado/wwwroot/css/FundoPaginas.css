@@ -366,6 +366,8 @@ html {
 .mensagem {
     display: none;
     position: absolute;
+    flex-direction: row;
+    justify-content: center;
     top: -100%; /* Usei % para que voce entenda que da para se adaptar com o tamanho do botão/container ou qualquer outra coisa a qual a mensagem esta relacionada*/
     left: 0;
     right: 0;
