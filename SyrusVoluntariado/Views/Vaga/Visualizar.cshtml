@@ -101,12 +101,20 @@
                 </div>
             }
         </div>
+
+        <div>
+            <h5><strong>COMPARTILHAR EVENTO</strong></h5>
+        </div>
+        <a href="javascript:void(0)" onclick="share()">
+            <img width="40" height="40" src="/img/shared.png" alt="">
+        </a>
+
         @if (@ViewBag.VagasParecidas.Count > 0)
         {
             string Data = string.Empty;
             string Hora = string.Empty;
             <hr />
-            <strong>OUTROS EVENTOS EM @ViewBag.Local</strong>
+            <h5><strong>OUTROS EVENTOS EM @ViewBag.Local</strong></h5>
             <div class="row">
                 @foreach (var vaga in ViewBag.VagasParecidas)
                 {
@@ -137,7 +145,6 @@
                 }
             </div>
         }
-
     </div>
 </div>
 <script>

@@ -355,3 +355,34 @@ html {
 .card-datahora{
     margin-bottom:5px
 }
+
+#center-itens {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+/* Aqui a mensagem ja está com o display none para já começar escondida*/
+.mensagem {
+    display: none;
+    position: absolute;
+    top: -100%; /* Usei % para que voce entenda que da para se adaptar com o tamanho do botão/container ou qualquer outra coisa a qual a mensagem esta relacionada*/
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 100px;
+    height: 20px;
+    color: white;
+    background-color: black;
+    /*Caso queira, por exemplo que fique ao lado 
+é so mudar o top para 0 e o left ou o right setar com 100%
+  top:0;
+  left:100%;
+  right:0;
+  margin: auto;
+  width:100px;
+  height:20px;
+  border:1px solid red;
+
+*/
+}

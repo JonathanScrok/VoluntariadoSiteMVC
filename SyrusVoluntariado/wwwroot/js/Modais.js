@@ -1,6 +1,8 @@
 ﻿$(document).ready(function () {
     //var aceitacaoCookies = sessionStorage.getItem("Cookies");
     var aceitaCookie = getCookie('AceitaCookies');
+    document.getElementById("CompartilharWpp").href = "https://api.whatsapp.com/send?text="+ window.location.href;
+    document.getElementById("CompartilharFacebook").href = "https://www.facebook.com/sharer/sharer.php?u=" + window.location.href;
 
     if (aceitaCookie == null) {
         $('#exampleModal').modal('show');
@@ -45,4 +47,28 @@ function getCookie(name) {
 
 function eraseCookie(name) {
     document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
+
+function share() {
+    $('#compartilhar-vaga').modal('show');
+}
+
+function CopiarLink() {
+    mensagem.style.display = "block";
+
+    var copyText = window.location.href;
+
+    /* Copy the text inside the text field */
+    navigator.clipboard.writeText(copyText);
+}
+
+let mensagem = document.querySelector(".mensagem");
+
+// mostra a mensagem
+function showMessage() {
+    mensagem.style.display = "block";
+}
+// esconde a mensagem
+function hideMessage() {
+    mensagem.style.display = "none";
 }
