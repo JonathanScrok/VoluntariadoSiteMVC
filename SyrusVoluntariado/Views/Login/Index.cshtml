@@ -17,14 +17,20 @@
                 <div class="col-md">
                     <div class="botoes-entrar">
                         <div class="btn-group mb-md-3">
-                            <a href="" aria-current="page" class="btn btn-primary active" id="ativobotao">Entrar</a>
-                            <a href="/login/cadastrarusuario" class="btn btn-primary" id="cadastroLogin">Cadastrar-se</a>
+                            <a href="" aria-current="page" class="btn btn-primary active" id="ativobotao"><strong>Entrar</strong></a>
+                            <a href="/login/cadastrarusuario" class="btn btn-primary" id="cadastroLogin"><strong>Cadastrar-se</strong></a>
                         </div>
                     </div>
                     @if (TempData["MensagemErro"] != null)
                     {
                         <div class="alert alert-danger alertemail" role="alert">
                             @TempData["MensagemErro"]
+                        </div>
+                    }
+                    @if (TempData["MensagemSucesso"] != null)
+                    {
+                        <div class="alert alert-success alertemail" role="alert">
+                            @TempData["MensagemSucesso"]
                         </div>
                     }
                     <div class="form-floating emailLogin">
@@ -38,7 +44,7 @@
                         @Html.ValidationMessage("senha")
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox"  name="ManterConectado" onclick="validaCheckManterConectado()" value="@Model.ManterConectado" id="ManterConectado">
+                        <input class="form-check-input" type="checkbox" name="ManterConectado" onclick="validaCheckManterConectado()" value="@Model.ManterConectado" id="ManterConectado">
                         <label class="form-check-label" for="ManterConectado" id="manterConectada">
                             Manter Conectado
                         </label>
@@ -46,6 +52,7 @@
                     <div class="botaologar">
                         <button type="submit" class="btn btn-success mt-md-2">Entrar</button>
                     </div>
+                    <p><strong><a class="botao_esqueci_senha" href="/login/RecuperarSenha">Esqueci minha senha</a></strong></p>
                 </div>
             </div>
 

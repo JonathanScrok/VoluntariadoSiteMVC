@@ -131,7 +131,7 @@ namespace BeaHelper.BLL.BD
         private const string SELECT_BUSCALOGIN_EMAILSENHA = @"select * from helper.Logins where Email = @Email AND Senha = @Senha";
         private const string SELECT_BUSCALOGIN_EMAILSENHACOUNT = @"select Count(*) from helper.Logins where Email = @Email AND Senha = @Senha";
 
-        private const string UPDATE_LOGIN = @"UPDATE helper.Logins SET Id_Login = @Id_Login,Id_Usuario = @Id_Usuario, Email = @Email, Senha = @Senha, DataCadastro = @DataCadastro WHERE Id_Login = @Id_Login";
+        private const string UPDATE_LOGIN = @"UPDATE helper.Logins SET Id_Usuario = @Id_Usuario, Email = @Email, Senha = @Senha, DataCadastro = @DataCadastro WHERE Id_Login = @Id_Login";
         private const string INSERT_LOGIN = @"INSERT INTO helper.Logins(Id_Usuario, Email, Senha , DataCadastro) VALUES (@Id_Usuario, @Email, @Senha, @DataCadastro)";
         #endregion
 
@@ -259,13 +259,11 @@ namespace BeaHelper.BLL.BD
         }
         #endregion
 
-        #region Busca login por EMAIL e SENHA
+        #region Busca login por EMAIL e SENHA (bool)
         public static bool ExisteLogin(string Email, string Senha)
         {
             SqlConnection conn = null;
-            SqlDataReader reader = null;
             int quantidade;
-            bool existe;
 
             List<SqlParameter> parms = new List<SqlParameter>();
             parms.Add(new SqlParameter("@Email", SqlDbType.VarChar, 100));

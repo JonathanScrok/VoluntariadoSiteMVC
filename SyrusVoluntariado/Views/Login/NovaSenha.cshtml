@@ -1,0 +1,46 @@
+﻿@model BeaHelper.BLL.Models.AlterarSenha
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "Nova Senha";
+}
+
+<link href="/css/login.css" rel="stylesheet" type="text/css" />
+<link href="/css/FundoPaginas.css" rel="stylesheet" type="text/css" />
+
+<form method="post" action="/login/novasenha">
+    <div class="row g-2 mt-md-2">
+        <section class="login-pai">
+            <div class="login__filho">
+                <div class="col-md">
+                    <input type="hidden" name="IdUsuario" value="@Model.IdUsuario" />
+                    @if (TempData["MensagemErro"] != null)
+                    {
+                        <div class="alert alert-danger alertemail" role="alert">
+                            @TempData["MensagemErro"]
+                        </div>
+                    }
+                    <div class="form-floating emailLogin">
+                        <input type="password" name="senha" value="@Model.Senha" class="form-control logininput" id="senha" placeholder="">
+                        <label for="senha">Nova Senha:</label>
+                        @Html.ValidationMessage("senha")
+                    </div>
+                    <div class="form-floating emailLogin">
+                        <input type="password" name="ConfirmacaoSenha" value="@Model.ConfirmacaoSenha" class="form-control logininput" id="ConfirmacaoSenha" placeholder="">
+                        <label for="ConfirmacaoSenha">Confirmar Senha:</label>
+                        @Html.ValidationMessage("ConfirmacaoSenha")
+                    </div>
+                    <div class="botaologar">
+                        <button type="submit" class="btn btn-success mt-md-2">Enviar</button>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </div>
+</form>
+
+@ViewBag.Mesagem
+
+<script src="~/js/Login.js"></script>

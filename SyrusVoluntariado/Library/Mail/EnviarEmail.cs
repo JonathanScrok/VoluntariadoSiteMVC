@@ -47,5 +47,30 @@ namespace SyrusVoluntariado.Library.Mail {
 
             smtp.Send(mensagem);
         }
+
+        public static void EnviarRecuperacaoSenha(Usuario_P1 usuario)
+        {
+            //string link = "";
+            string link = "https://localhost:44394/login/novasenha/"+ usuario.IdUsuario;
+
+            string conteudo = string.Format("<p>Olá Senhor(a): {0}<br/>Verificamos que solicitou a recuperação de senha em nosso site. <br/>Para recuperar sua senha clique no link a baixo <br/>" + link, usuario.Nome);
+
+            using (MailMessage mail = new MailMessage())
+            {
+                mail.From = new MailAddress("tutorialaprendizdedev@gmail.com");
+                mail.To.Add(usuario.Email);
+                mail.Subject = "Recuperação de senha!";
+                mail.Body = "<h1>Solicitação de Recuperação de Senha.</h1>" + conteudo;
+                mail.IsBodyHtml = true;
+                //mail.Attachments.Add(new Attachment("C:\\file.zip"));
+
+                using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
+                {
+                    smtp.Credentials = new NetworkCredential(Constants.Usuario, Constants.Senha);
+                    smtp.EnableSsl = true;
+                    smtp.Send(mail);
+                }
+            }
+        }
     }
 }

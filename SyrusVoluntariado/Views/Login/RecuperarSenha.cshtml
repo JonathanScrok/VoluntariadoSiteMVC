@@ -1,0 +1,58 @@
+﻿@model BeaHelper.BLL.Models.Usuario
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "Recuperar Senha";
+}
+
+<link href="/css/login.css" rel="stylesheet" type="text/css" />
+<link href="/css/FundoPaginas.css" rel="stylesheet" type="text/css" />
+
+@if (ViewBag.EmailEnviado == false)
+{
+    <form method="post" action="/login/recuperarsenha">
+        <div class="row g-2 mt-md-2">
+            <section class="login-pai">
+                <div class="login__filho">
+                    <div class="col-md">
+
+                        @if (TempData["MensagemErro"] != null)
+                        {
+                            <div class="alert alert-danger alertemail" role="alert">
+                                @TempData["MensagemErro"]
+                            </div>
+                        }
+                        <p style="color: white;">Informe seu e-mail que nós enviaremos um link para a alteração de senha:</p>
+                        <div class="form-floating emailLogin">
+                            <input type="text" name="email" value="@Model.Email" class="form-control logininput" id="email" placeholder="">
+                            <label for="email">Email:</label>
+                            @Html.ValidationMessage("email")
+                        </div>
+                        <div class="botaologar">
+                            <button type="submit" class="btn btn-success mt-md-2">Enviar</button>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+    </form>
+}
+else
+{
+    <div class="row g-2 mt-md-2">
+        <section class="login-pai">
+            <div class="SucessEmail__filho">
+                <div class="col-md">
+                    <div class="alert alert-success alertemail" role="alert">
+                        Email enviado com sucesso! <br />Verifique sua caixa de entrada e siga os passos!
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+}
+@ViewBag.Mesagem
+
+<script src="~/js/Login.js"></script>

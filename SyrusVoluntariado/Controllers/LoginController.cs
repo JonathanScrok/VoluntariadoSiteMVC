@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BeaHelper.BLL.Services;
+using SyrusVoluntariado.Library.Mail;
+using AutoMapper;
 
 namespace SyrusVoluntariado.Controllers
 {
@@ -179,6 +181,78 @@ namespace SyrusVoluntariado.Controllers
             return View(usuario);
         }
 
+        [HttpGet]
+        public IActionResult RecuperarSenha()
+        {
+            ViewBag.EmailEnviado = false;
+            return View(new Usuario());
+        }
+
+        [HttpPost]
+        public IActionResult RecuperarSenha([FromForm] Usuario usuario)
+        {
+
+            //var config = new MapperConfiguration(cfg =>
+            //{
+            //    cfg.CreateMap<Usuario_P1, Usuario>();
+            //});
+            //IMapper _mapper = config.CreateMapper();
+            //var usuarioEmail = _mapper.Map<Usuario_P1>(usuario);
+
+            var result = EnviarEmailRecuperacaoSenha(usuario);
+            if (result == false)
+            {
+                ViewBag.EmailEnviado = false;
+                return View(usuario);
+            }
+            else
+            {
+                ViewBag.EmailEnviado = true;
+                return View();
+            }
+        }
+
+        [HttpGet]
+        public IActionResult NovaSenha(int id)
+        {
+            AlterarSenha usuarioSenha = new AlterarSenha();
+            usuarioSenha.IdUsuario = id;
+            return View(usuarioSenha);
+        }
+
+        [HttpPost]
+        public IActionResult NovaSenha([FromForm] AlterarSenha novasenha)
+        {
+            if (ModelState.IsValid)
+            {
+                if (novasenha.Senha == novasenha.ConfirmacaoSenha)
+                {
+                    string senhaEncoding = _encodeSenha.HashValue(novasenha.Senha);
+                    Login_P1 login = new Login_P1(novasenha.IdUsuario);
+                    login.CompleteObject();
+                    login.IdUsuario = novasenha.IdUsuario;
+                    login.Senha = senhaEncoding;
+                    login.Save();
+
+                    TempData["MensagemSucesso"] = "Sua senha foi alterada com sucesso!";
+                    return RedirectToAction("Index", "Login");
+                }
+                else
+                {
+                    TempData["MensagemErro"] = "As senhas devem coincidirem";
+                    return View(novasenha);
+                }
+
+            }
+            return View(novasenha);
+        }
+
+        [HttpGet]
+        public IActionResult EmailEnviado()
+        {
+            return View();
+        }
+
         public bool ExisteEmail(Usuario usuario)
         {
 
@@ -191,6 +265,31 @@ namespace SyrusVoluntariado.Controllers
             else
             {
                 return true;
+            }
+        }
+
+        public bool EnviarEmailRecuperacaoSenha(Usuario usuario)
+        {
+            try
+            {
+                Usuario_P1 usuarioAdm = new Usuario_P1();
+                usuarioAdm.CompleteObject(usuario.Email);
+
+                if (usuarioAdm.Email != null && usuarioAdm.Nome != null)
+                {
+                    EnviarEmail.EnviarRecuperacaoSenha(usuarioAdm);
+                }
+                else
+                {
+                    TempData["MensagemErro"] = "Este e-mail não está cadastrado em nosso sistema!";
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
             }
         }
 
