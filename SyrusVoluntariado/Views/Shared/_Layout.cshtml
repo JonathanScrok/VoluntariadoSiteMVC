@@ -144,15 +144,18 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="hideMessage()"></button>
                             </div>
                             <div class="modal-body" id="center-itens">
-                                <a href="javascript:void(0)" data-toogle="tooltip" title="Compartilhar no Facebook" target="_blank" id="CompartilharFacebook" class="me-md-2">
+                                <a href="javascript:void(0)" data-toogle="tooltip" title="Compartilhar no Facebook" onclick="hideMessage()" target="_blank" id="CompartilharFacebook" class="me-md-2">
                                     <img width="45" height="45" src="/img/facebook.png" alt="Compartilhar no Facebook">
                                 </a>
-                                <a href="javascript:void(0)" id="CompartilharWpp" data-toogle="tooltip" target="_blank" title="Compartilhar no WhatsApp" class="me-md-2">
+                                <a href="javascript:void(0)" id="CompartilharWpp" data-toogle="tooltip" target="_blank" onclick="hideMessage()" title="Compartilhar no WhatsApp" class="me-md-2">
                                     <img width="45" height="45" src="/img/whatsapp.png" alt="Compartilhar no WhatsApp">
                                 </a>
-                                <p class="mensagem" >Copiado!</p>
-                                <a href="javascript:void(0)" id="copylink" onclick="CopiarLink()" data-toogle="tooltip" title="Copiar Link">
+                                <p class="mensagem">Copiado!</p>
+                                <a href="javascript:void(0)" id="copylink" onclick="CopiarLink()" data-toogle="tooltip" title="Copiar Link" class="me-md-2">
                                     <img width="45" height="45" src="/img/Copylink.png" alt="Copiar link">
+                                </a>
+                                <a href="javascript:void(0)" id="GerarQrcode" onclick="GerarQrcode()" data-toogle="tooltip" title="Gerar QRCode" class="me-md-2">
+                                    <img width="45" height="45" src="/img/QrCode.png" alt="Gerar QRCode">
                                 </a>
                             </div>
                         </div>

@@ -72,3 +72,9 @@ function showMessage() {
 function hideMessage() {
     mensagem.style.display = "none";
 }
+
+function GerarQrcode() {
+    mensagem.style.display = "none";
+
+
+}
