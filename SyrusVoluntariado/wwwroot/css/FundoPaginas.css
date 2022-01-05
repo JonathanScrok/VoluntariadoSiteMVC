@@ -362,6 +362,13 @@ html {
     justify-content: center;
 }
 
+#center-QrCodeEText {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
 /* Aqui a mensagem ja está com o display none para já começar escondida*/
 .mensagem {
     display: none;

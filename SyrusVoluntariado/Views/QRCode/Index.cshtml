@@ -1,0 +1,25 @@
+﻿@model Byte[]
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "Código QR - Evento";
+}
+
+
+<link href="/css/FundoPaginas.css" rel="stylesheet" type="text/css" />
+
+<div id="content">
+    @{
+        if (Model != null)
+        {
+            <div  id="center-QrCodeEText">
+                <h3>QR Code do evento:</h3>
+                <img style="width: 400px; height: 400px;" src="@String.Format("data:image/png;base64,{0}",
+                             Convert.ToBase64String(Model))" />
+            </div>
+        }
+    }
+</div>
+

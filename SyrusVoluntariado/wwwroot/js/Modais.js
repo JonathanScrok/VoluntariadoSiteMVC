@@ -3,6 +3,7 @@
     var aceitaCookie = getCookie('AceitaCookies');
     document.getElementById("CompartilharWpp").href = "https://api.whatsapp.com/send?text="+ window.location.href;
     document.getElementById("CompartilharFacebook").href = "https://www.facebook.com/sharer/sharer.php?u=" + window.location.href;
+    document.getElementById("GerarQrcode").href = window.location.origin + "/qrcode/?qrtexto=" + window.location.href;
 
     if (aceitaCookie == null) {
         $('#exampleModal').modal('show');
@@ -71,10 +72,4 @@ function showMessage() {
 // esconde a mensagem
 function hideMessage() {
     mensagem.style.display = "none";
-}
-
-function GerarQrcode() {
-    mensagem.style.display = "none";
-
-
 }
