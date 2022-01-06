@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31605.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SyrusVoluntariado", "SyrusVoluntariado\SyrusVoluntariado.csproj", "{1F80B967-B39A-4572-A6A5-938258419722}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeaHelper", "SyrusVoluntariado\BeaHelper.csproj", "{1F80B967-B39A-4572-A6A5-938258419722}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeaHelper.BLL", "BeaHelper.BLL\BeaHelper.BLL.csproj", "{B06EF3F9-E594-465F-930E-D54057912A4F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeaHelper.BLL", "BeaHelper.BLL\BeaHelper.BLL.csproj", "{B06EF3F9-E594-465F-930E-D54057912A4F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

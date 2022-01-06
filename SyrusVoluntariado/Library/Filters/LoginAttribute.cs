@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SyrusVoluntariado.Library.Filters {
+namespace BeaHelper.Library.Filters {
     public class LoginAttribute : ActionFilterAttribute {
 
         public override void OnActionExecuting(ActionExecutingContext context) {

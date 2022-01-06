@@ -8,10 +8,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BeaHelper.BLL.Services;
-using SyrusVoluntariado.Library.Mail;
+using BeaHelper.Library.Mail;
 using AutoMapper;
 
-namespace SyrusVoluntariado.Controllers
+namespace BeaHelper.Controllers
 {
     public class LoginController : Controller
     {

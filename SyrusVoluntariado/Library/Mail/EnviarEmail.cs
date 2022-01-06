@@ -7,7 +7,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
 
-namespace SyrusVoluntariado.Library.Mail {
+namespace BeaHelper.Library.Mail {
     public class EnviarEmail {
 
         public static void EnviarMensagemContato(Usuario_P1 usuario, string emailAdm, int idVaga) {

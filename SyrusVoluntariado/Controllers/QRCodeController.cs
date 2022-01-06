@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using QRCoder;
 
 
-namespace SyrusVoluntariado.Controllers
+namespace BeaHelper.Controllers
 {
     public class QRCodeController : Controller
     {

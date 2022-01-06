@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using BeaHelper.BLL.BD;
-using SyrusVoluntariado.Library.Filters;
-using SyrusVoluntariado.Library.Mail;
+using BeaHelper.Library.Filters;
+using BeaHelper.Library.Mail;
 using BeaHelper.BLL.Models;
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using X.PagedList;
 
-namespace SyrusVoluntariado.Controllers
+namespace BeaHelper.Controllers
 {
     [Login]
     public class VagaController : Controller

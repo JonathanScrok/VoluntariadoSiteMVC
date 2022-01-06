@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace SyrusVoluntariado.Views.Home
+namespace BeaHelper.Views.Home
 {
     public class IndexModel : PageModel
     {

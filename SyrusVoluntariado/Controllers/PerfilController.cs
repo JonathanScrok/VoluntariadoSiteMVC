@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using BeaHelper.BLL.BD;
-using SyrusVoluntariado.Library.Filters;
+using BeaHelper.Library.Filters;
 using BeaHelper.BLL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SyrusVoluntariado.Controllers {
+namespace BeaHelper.Controllers {
     [Login]
     public class PerfilController : Controller {
 

@@ -1,14 +1,14 @@
 ﻿using BeaHelper.BLL.BD;
 using BeaHelper.BLL.Models;
 using Microsoft.AspNetCore.Mvc;
-using SyrusVoluntariado.Library.Filters;
+using BeaHelper.Library.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using X.PagedList;
 
-namespace SyrusVoluntariado.Controllers
+namespace BeaHelper.Controllers
 {
     [Login]
     public class VoluntarioController : Controller

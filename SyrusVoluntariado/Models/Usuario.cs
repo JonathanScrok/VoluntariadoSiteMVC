@@ -1,11 +1,11 @@
-﻿using SyrusVoluntariado.Library.Validation;
+﻿using BeaHelper.Library.Validation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SyrusVoluntariado.Models {
+namespace BeaHelper.Models {
     public class Usuario {
 
         public int Id { get; set; }

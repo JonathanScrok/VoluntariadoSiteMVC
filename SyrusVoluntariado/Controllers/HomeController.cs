@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using X.PagedList;
 
-namespace SyrusVoluntariado.Controllers {
+namespace BeaHelper.Controllers {
     public class HomeController : Controller {
 
         public IActionResult Index(int? page) {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using SyrusVoluntariado.Library.Filters;
+using BeaHelper.Library.Filters;
 using BeaHelper.BLL.Models;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BeaHelper.BLL.BD;
 
-namespace SyrusVoluntariado.Controllers
+namespace BeaHelper.Controllers
 {
     [Login]
     public class AvaliarController : Controller

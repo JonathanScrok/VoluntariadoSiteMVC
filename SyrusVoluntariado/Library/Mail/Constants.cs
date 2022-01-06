@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SyrusVoluntariado.Library.Mail {
+namespace BeaHelper.Library.Mail {
     public class Constants {
 
         // POP3, IMAP - Ler mensagens de e-mail
