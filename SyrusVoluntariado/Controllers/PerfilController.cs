@@ -104,7 +104,15 @@ namespace BeaHelper.Controllers {
 
         public int GetUsuarioLogado()
         {
-            int IdUsuarioLogado = Int32.Parse(HttpContext.Request.Cookies["IdUsuarioLogado"]);
+            int IdUsuarioLogado = 0;
+            try
+            {
+                IdUsuarioLogado = Int32.Parse(HttpContext.Request.Cookies["IdUsuarioLogado"]);
+            }
+            catch (Exception)
+            {
+                IdUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault();
+            }
 
             return IdUsuarioLogado;
         }

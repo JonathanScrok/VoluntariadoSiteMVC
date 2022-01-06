@@ -66,14 +66,15 @@ namespace BeaHelper.Controllers
                         HttpContext.Session.SetInt32("IdUsuarioLogado", LoginExitente[0].Id_Usuario); //Session
                     }
 
-                    string UrlAction;
-                    string UrlControler;
+                    string UrlAction = string.Empty;
+                    string UrlControler = string.Empty;
                     string Id;
 
-                    try
+                    if (TempData["URLRedirectAction"] != null && TempData["URLRedirectController"] != null && TempData["URLRedirectArgumento"] != null)
                     {
                         UrlAction = TempData["URLRedirectAction"].ToString();
                         UrlControler = TempData["URLRedirectController"].ToString();
+
                         TempData["URLRedirectAction"] = "Index";
                         TempData["URLRedirectController"] = "Home";
                         Id = TempData["URLRedirectArgumento"].ToString();
@@ -86,7 +87,7 @@ namespace BeaHelper.Controllers
                             return RedirectToAction(UrlAction, UrlControler);
                         }
                     }
-                    catch (NullReferenceException)
+                    else
                     {
                         UrlAction = "Index";
                         UrlControler = "Home";
