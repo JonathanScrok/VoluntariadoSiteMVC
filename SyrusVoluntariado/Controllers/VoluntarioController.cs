@@ -25,7 +25,7 @@ namespace BeaHelper.Controllers
                 UsuarioCompleto voluntarioCompleto = new UsuarioCompleto();
 
                 var AvaliacaoUsuario = Avaliacao_P1.TodasAvaliacoesUsuario(voluntario.Id_Usuario);
-                int countNota = 0;
+                double countNota = 0;
 
                 if (AvaliacaoUsuario != null && AvaliacaoUsuario.Count > 0)
                 {
@@ -41,7 +41,9 @@ namespace BeaHelper.Controllers
                     }
 
                     voluntarioCompleto.Usuario = voluntario;
-                    voluntarioCompleto.NotaMedia = countNota / AvaliacaoUsuario.Count;
+                    var media = countNota / AvaliacaoUsuario.Count;
+                    media = Math.Round(media, 1);
+                    voluntarioCompleto.NotaMedia = media;
                     voluntarioCompleto.NuncaAvaliado = false;
                 }
                 else

@@ -13,8 +13,8 @@ namespace BeaHelper.BLL.Validation {
             Evento evento = validationContext.ObjectInstance as Evento;
             if (evento.Titulo != null)
             {
-                List<Evento> vagas = Evento_P2.BuscaTitulo(evento.Titulo);        
-                var TitulosCadastrados = vagas.Where(a => a.Id_Evento != evento.Id_Evento).FirstOrDefault();
+                List<Evento> eventos = Evento_P2.BuscaTitulo(evento.Titulo);        
+                var TitulosCadastrados = eventos.Where(a => a.Id_Evento != evento.Id_Evento).FirstOrDefault();
 
                 if (TitulosCadastrados == null)
                 {

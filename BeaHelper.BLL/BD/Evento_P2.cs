@@ -19,7 +19,7 @@ namespace BeaHelper.BLL.BD
 
         #region Atributos
 
-        private int _idVaga;
+        private int _idEvento;
         private int _idUsuarioAdm;
         private string _titulo;
         private string _categoria;
@@ -42,11 +42,11 @@ namespace BeaHelper.BLL.BD
         {
             get
             {
-                return this._idVaga;
+                return this._idEvento;
             }
             set
             {
-                this._idVaga = value;
+                this._idEvento = value;
                 this._modified = true;
             }
         }
@@ -198,7 +198,7 @@ namespace BeaHelper.BLL.BD
         #region Consultas
         private const string SELECT_TODASVAGAS = @"select * from helper.Eventos order by DataPublicacao desc";
         private const string SELECT_ULTIMASVAGAS_TOP8 = @"select top 8 * from helper.Eventos order by DataEvento desc";
-        private const string SELECT_MINHASVAGAS = @"select * from helper.Eventos WHERE Id_Usuario_Adm = @Id_Usuario_Adm";
+        private const string SELECT_MEUSEVENTOS = @"select * from helper.Eventos WHERE Id_Usuario_Adm = @Id_Usuario_Adm";
         private const string SELECT_TITULOS = @"select * from helper.Eventos WHERE Titulo = @Titulo";
         #endregion
 
@@ -228,7 +228,7 @@ namespace BeaHelper.BLL.BD
 
         private void SetParameters(List<SqlParameter> parms)
         {
-            parms[0].Value = this._idVaga;
+            parms[0].Value = this._idEvento;
             parms[1].Value = this._idUsuarioAdm;
             parms[2].Value = this._titulo;
             parms[3].Value = this._categoria;
@@ -241,8 +241,8 @@ namespace BeaHelper.BLL.BD
         }
         #endregion
 
-        #region Busca Top 8 ultimas vagas do Banco
-        public static List<Evento> Top8UltimasVagas()
+        #region Busca Top 8 ultimas eventos do Banco
+        public static List<Evento> Top8UltimasEventos()
         {
             SqlConnection conn = null;
             SqlDataReader reader = null;
@@ -280,7 +280,7 @@ namespace BeaHelper.BLL.BD
         #endregion
 
         #region Busca todas as Eventos do Banco
-        public static List<Evento> TodasVagas()
+        public static List<Evento> TodosEventos()
         {
             SqlConnection conn = null;
             SqlDataReader reader = null;
@@ -317,8 +317,8 @@ namespace BeaHelper.BLL.BD
         }
         #endregion
 
-        #region MinhasVagas por ID
-        public static List<Evento> MinhasVagas(int IdUsuarioAdm)
+        #region MeusEventos por ID
+        public static List<Evento> MeusEventos(int IdUsuarioAdm)
         {
             SqlConnection conn = null;
             SqlDataReader reader = null;
@@ -331,7 +331,7 @@ namespace BeaHelper.BLL.BD
             conn = new SqlConnection(stringConnection);
             conn.Open();
 
-            SqlCommand cmd = new SqlCommand(SELECT_MINHASVAGAS, conn);
+            SqlCommand cmd = new SqlCommand(SELECT_MEUSEVENTOS, conn);
             cmd.Parameters.Add(parms[0]);
 
             Mapper.CreateMap<IDataRecord, Evento>();
@@ -372,7 +372,7 @@ namespace BeaHelper.BLL.BD
         #endregion
 
         #region Busca Eventos parecidas pelo Local
-        public static List<Evento> VagasParecidasLocal(string local, int idVaga)
+        public static List<Evento> EventosParecidosLocal(string local, int idEvento)
         {
             SqlConnection conn = null;
             SqlDataReader reader = null;
@@ -381,7 +381,7 @@ namespace BeaHelper.BLL.BD
             conn = new SqlConnection(stringConnection);
             conn.Open();
 
-            string query = "select top 4 * from helper.Eventos where Cidade_Estado like '%"+ local + "%' and Id_Evento != " + idVaga + "Order by DataEvento asc";
+            string query = "select top 4 * from helper.Eventos where Cidade_Estado like '%"+ local + "%' and Id_Evento != " + idEvento + "Order by DataEvento asc";
 
             SqlCommand cmd = new SqlCommand(query, conn);
 
@@ -405,22 +405,22 @@ namespace BeaHelper.BLL.BD
         /// <param name="objUsuario">Instância a ser manipulada.</param>
         /// <returns>Verdadeiro ou falso informando se a operação foi executada com sucesso.</returns>
         /// <remarks>Jonathan Scrok</remarks>
-        private static bool SetInstance(IDataReader dr, Evento_P2 objVaga)
+        private static bool SetInstance(IDataReader dr, Evento_P2 objEvento)
         {
             try
             {
                 if (dr.Read())
                 {
-                    objVaga._idVaga = Convert.ToInt32(dr["Id_Evento"]);
-                    objVaga._idUsuarioAdm = Convert.ToInt32(dr["Id_Usuario_Adm"]);
-                    objVaga._titulo = Convert.ToString(dr["Titulo"]);
-                    objVaga._descricao = Convert.ToString(dr["Descricao"]);
-                    objVaga._categoria = Convert.ToString(dr["Categoria"]);
-                    objVaga._cidadeEstado = Convert.ToString(dr["Cidade_Estado"]);
-                    objVaga._dataPublicacao = Convert.ToDateTime(dr["DataPublicacao"]);
-                    objVaga._dataEvento = Convert.ToDateTime(dr["DataEvento"]);
-                    objVaga._semData = Convert.ToBoolean(dr["DataEvento"]);
-                    objVaga._eventoRecorrente = Convert.ToBoolean(dr["DataEvento"]);
+                    objEvento._idEvento = Convert.ToInt32(dr["Id_Evento"]);
+                    objEvento._idUsuarioAdm = Convert.ToInt32(dr["Id_Usuario_Adm"]);
+                    objEvento._titulo = Convert.ToString(dr["Titulo"]);
+                    objEvento._descricao = Convert.ToString(dr["Descricao"]);
+                    objEvento._categoria = Convert.ToString(dr["Categoria"]);
+                    objEvento._cidadeEstado = Convert.ToString(dr["Cidade_Estado"]);
+                    objEvento._dataPublicacao = Convert.ToDateTime(dr["DataPublicacao"]);
+                    objEvento._dataEvento = Convert.ToDateTime(dr["DataEvento"]);
+                    objEvento._semData = Convert.ToBoolean(dr["DataEvento"]);
+                    objEvento._eventoRecorrente = Convert.ToBoolean(dr["DataEvento"]);
 
                     return true;
                 }

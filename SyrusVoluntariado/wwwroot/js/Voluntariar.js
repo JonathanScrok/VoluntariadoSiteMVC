@@ -2,7 +2,7 @@
 
 });
 
-function voluntariarNaVaga() {
+function voluntariarNoEvento() {
 
     let SITE_URL = window.location.origin;
     $.ajax({

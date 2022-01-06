@@ -12,8 +12,8 @@ namespace BeaHelper.Library.Validation {
 
             Evento evento = validationContext.ObjectInstance as Evento;
             //var _db = (DatabaseContext)validationContext.GetService(typeof(DatabaseContext));
-            List<Evento> vagas = Evento_P2.BuscaTitulo(evento.Titulo);
-            var TitulosCadastrados = vagas.Where(a => a.Id_Evento != evento.Id_Evento).FirstOrDefault();
+            List<Evento> eventos = Evento_P2.BuscaTitulo(evento.Titulo);
+            var TitulosCadastrados = eventos.Where(a => a.Id_Evento != evento.Id_Evento).FirstOrDefault();
 
             //Já existe no banco 1 registro:
             // - Verificar se o nome existe

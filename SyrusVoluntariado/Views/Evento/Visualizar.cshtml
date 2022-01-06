@@ -12,36 +12,36 @@
     <div class="info__filho">
         <div class="" id="">
             <div class="accordion-item">
-                <div style="background-color: #62c0a3;" id="DadosVagaVisualizar" class="">
+                <div style="background-color: #62c0a3;" id="DadosEventoVisualizar" class="">
                     <div class="accordion-body">
                         <strong>TITULO DO EVENTO</strong>
                     </div>
                 </div>
-                <div id="DadosVagaVisualizar" class="">
+                <div id="DadosEventoVisualizar" class="">
                     <div class="accordion-body">
                         @Model.Titulo
                     </div>
                 </div>
             </div>
             <div class="accordion-item">
-                <div style="background-color: #62c0a3;" id="DadosVagaVisualizar" class="">
+                <div style="background-color: #62c0a3;" id="DadosEventoVisualizar" class="">
                     <div class="accordion-body">
                         <strong>DESCRIÇÃO</strong>
                     </div>
                 </div>
-                <div id="DadosVagaVisualizar" class="">
+                <div id="DadosEventoVisualizar" class="">
                     <div class="accordion-body">
                         @Model.Descricao
                     </div>
                 </div>
             </div>
             <div class="accordion-item">
-                <div style="background-color: #62c0a3;" id="DadosVagaVisualizar" class="">
+                <div style="background-color: #62c0a3;" id="DadosEventoVisualizar" class="">
                     <div class="accordion-body">
                         <strong>LOCAL</strong>
                     </div>
                 </div>
-                <div id="DadosVagaVisualizar" class="">
+                <div id="DadosEventoVisualizar" class="">
                     <div class="accordion-body">
                         @Model.CidadeEstado
                     </div>
@@ -55,12 +55,12 @@
                 string DataHora = Data + " ás " + Hora;
 
                 <div class="accordion-item">
-                    <div style="background-color: #62c0a3;" id="DadosVagaVisualizar" class="">
+                    <div style="background-color: #62c0a3;" id="DadosEventoVisualizar" class="">
                         <div class="accordion-body">
                             <strong>DATA DO EVENTO</strong>
                         </div>
                     </div>
-                    <div id="DadosVagaVisualizar" class="">
+                    <div id="DadosEventoVisualizar" class="">
                         <div class="accordion-body">
                             @DataHora
                         </div>
@@ -68,7 +68,7 @@
                 </div>
             }
 
-            @if (ViewBag.ADMVaga == true)
+            @if (ViewBag.ADMEvento == true)
             {
                 <div id="Adm__Mensagem">
                     <div class="alert alert-danger mt-md-2" id="Adm-Mensagem" role="alert">
@@ -77,7 +77,7 @@
                 </div>
                 <div class="AdmVisualizando mt-md-2">
                     <a class="btn btn-info" href="/evento/editar/@Model.IdEvento">Editar</a>
-                    <a class="btn btn-danger ms-2" onclick="ConfirmacaoExcluirVaga();">Excluir</a>
+                    <a class="btn btn-danger ms-2" onclick="ConfirmacaoExcluirEvento();">Excluir</a>
                 </div>
             }
             else if (ViewBag.JaVoluntariado == true)
@@ -97,7 +97,7 @@
             else
             {
                 <div class="botao-voluntariar">
-                    <button class="btn btn-success" id="BotaoVoluntatiarMe" onclick="voluntariarNaVaga();">Voluntariar-me</button>
+                    <button class="btn btn-success" id="BotaoVoluntatiarMe" onclick="voluntariarNoEvento();">Voluntariar-me</button>
                 </div>
             }
         </div>
@@ -109,14 +109,14 @@
             <img width="40" height="40" src="/img/shared.png" alt="">
         </a>
 
-        @if (@ViewBag.VagasParecidas.Count > 0)
+        @if (@ViewBag.EventosParecidos.Count > 0)
         {
             string Data = string.Empty;
             string Hora = string.Empty;
             <hr />
             <h5><strong>OUTROS EVENTOS EM @ViewBag.Local</strong></h5>
             <div class="row">
-                @foreach (var evento in ViewBag.VagasParecidas)
+                @foreach (var evento in ViewBag.EventosParecidos)
                 {
                     if (evento.DataEvento != null)
                     {

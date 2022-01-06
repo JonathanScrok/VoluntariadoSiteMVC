@@ -33,9 +33,9 @@ namespace BeaHelper.Controllers {
                 ViewBag.UsuarioSexo = "Prefiro não declarar";
             }
 
-            // Minhas Eventos
-            List<Evento> minhasvagas = Evento_P2.MinhasVagas(IdUsuarioLogado);
-            ViewBag.VagasCandidatas = minhasvagas;
+            // Meus Eventos
+            List<Evento> meuseventos = Evento_P2.MeusEventos(IdUsuarioLogado);
+            ViewBag.MeusEventosCriados = meuseventos;
             // -------------------------------------------------
 
             // Eventos Candidatadas
@@ -56,7 +56,7 @@ namespace BeaHelper.Controllers {
                 evento.CompleteObject();
                 MinhasCandidaturas.Add(evento);
             }
-            ViewBag.MinhasVagas = MinhasCandidaturas;
+            ViewBag.EventosCandidatados = MinhasCandidaturas;
             // --------------------------------------------------
 
             return View(Usuario);
@@ -67,7 +67,7 @@ namespace BeaHelper.Controllers {
             ViewBag.FooterPrecisa = false;
             int IdUsuarioLogado = GetUsuarioLogado();
 
-            List<Evento> meuseventos = Evento_P2.MinhasVagas(IdUsuarioLogado);
+            List<Evento> meuseventos = Evento_P2.MeusEventos(IdUsuarioLogado);
 
             return View(meuseventos);
         }
@@ -84,7 +84,7 @@ namespace BeaHelper.Controllers {
             List<Evento_P1> MinhasCandidaturas = new List<Evento_P1>();
             List<int> Idfvagas = new List<int>();
 
-            //List<Evento> vagas = Evento_P1.TodasVagas();
+            //List<Evento> vagas = Evento_P1.TodosEventos();
 
             for (int i = 0; i < EventosCandidatados.Count; i++)
             {

@@ -13,9 +13,9 @@ namespace BeaHelper.Controllers {
 
         public IActionResult Index(int? page) {
             var pageNumber = page ?? 1;
-            List<Evento> vagas = Evento_P2.Top8UltimasVagas();
+            List<Evento> eventos = Evento_P2.Top8UltimasEventos();
 
-            var resultadoPaginado = vagas.ToPagedList(pageNumber, 8);
+            var resultadoPaginado = eventos.ToPagedList(pageNumber, 8);
             return View(resultadoPaginado);
         }
 
