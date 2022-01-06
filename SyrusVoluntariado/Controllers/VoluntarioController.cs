@@ -60,8 +60,9 @@ namespace BeaHelper.Controllers
             }
 
             var pageNumber = 1;
-
-            var resultadoPaginado = voluntariosCompleto.ToPagedList(pageNumber, 10);
+            List<UsuarioCompleto> voluntariosOrdenados = voluntariosCompleto.OrderByDescending(x => x.NotaMedia).ToList();
+            
+            var resultadoPaginado = voluntariosOrdenados.ToPagedList(pageNumber, 10);
 
             return View(resultadoPaginado);
         }
