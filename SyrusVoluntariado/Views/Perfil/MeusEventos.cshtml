@@ -1,0 +1,38 @@
+﻿@model List<BeaHelper.BLL.Models.Evento>
+
+
+@{
+    //Layout = "_Layout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "Meus Eventos";
+}
+
+<link href="/css/PagedList.css" rel="stylesheet" type="text/css" />
+<link href="/css/FundoPaginas.css" rel="stylesheet" type="text/css" />
+<script src="/js/Modais.js"></script>
+
+<div class="row">
+    @foreach (var evento in Model) {
+        ViewBag.Id = evento.Id_Evento;
+        <div class="col-sm-6 mt-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">@evento.Titulo</h5>
+                    <p class="card-text">@evento.Descricao</p>
+                    <p class="card-text">@evento.DataEvento.GetValueOrDefault().ToString("dd/MM/yyyy")</p>
+                    <a href="/evento/listavoluntarios/@evento.Id_Evento" class="btn " style="background-color: #62c0a3;"><b>Lista de Voluntários</b></a>
+                    <div style="float:right;">
+                        <a class="btn btn-info" href="/evento/editar/@evento.Id_Evento">Editar</a>
+                        <a class="btn btn-danger ms-md-2" onclick="ConfirmacaoExcluirEvento();">Excluir</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+<br />
+
+

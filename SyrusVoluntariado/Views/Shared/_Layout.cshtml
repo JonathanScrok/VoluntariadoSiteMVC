@@ -45,8 +45,8 @@
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"> </span></button>
                         <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
                             <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base">
-                                <li class="nav-item px-2"><a class="nav-link" href="/vaga/cadastrar">Criar Evento</a></li>
-                                <li class="nav-item px-2"><a class="nav-link" href="/vaga">Eventos</a></li>
+                                <li class="nav-item px-2"><a class="nav-link" href="/evento/cadastrar">Criar Evento</a></li>
+                                <li class="nav-item px-2"><a class="nav-link" href="/evento">Eventos</a></li>
                                 <li class="nav-item px-2"><a class="nav-link" href="/voluntario">Voluntários</a></li>
                             </ul>
                             <div class="dropdown d-none d-lg-block">
@@ -79,8 +79,8 @@
                                         }
                                         <ul class="dropdown-menu" id="dropItens" aria-labelledby="dropdownMenuLink">
                                             <li><a class="dropdown-item" id="MeuPerfilButton" href="/perfil">Meu Perfil</a></li>
-                                            <li><a class="dropdown-item" id="MeuPerfilButton" href="/perfil/minhasvagas ">Meus Eventos</a></li>
-                                            <li><a class="dropdown-item" id="MeuPerfilButton" href="/perfil/vagascandidatadas ">Eventos Voluntariádos</a></li>
+                                            <li><a class="dropdown-item" id="MeuPerfilButton" href="/perfil/meuseventos ">Meus Eventos</a></li>
+                                            <li><a class="dropdown-item" id="MeuPerfilButton" href="/perfil/eventoscandidatados ">Eventos Voluntariádos</a></li>
                                             <li><a class="dropdown-item" id="sairButton" href="/Login/logout">Sair</a></li>
                                         </ul>
                                     </li>
@@ -104,15 +104,15 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Excluir Vaga</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Excluir Evento</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                Deseja mesmo excluir a vaga?
+                                Deseja mesmo excluir a evento?
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                <a class="btn btn-danger" href="/vaga/excluir/@ViewBag.Id">Excluir</a>
+                                <a class="btn btn-danger" href="/evento/excluir/@ViewBag.Id">Excluir</a>
                             </div>
                         </div>
                     </div>
@@ -136,7 +136,7 @@
                 </div>
 
 
-                <div class="modal fade" id="compartilhar-vaga" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="compartilhar-evento" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -176,8 +176,8 @@
                         <div>
                             <ul class="nav justify-content-center pb-4">
                                 <li class="nav-item"><a href="/" class="nav-link px-2 text-muted"><b>Inicio</b></a></li>
-                                <li class="nav-item"><a href="/vaga/cadastrar" class="nav-link px-2 text-muted"><b>Criar Vaga</b></a></li>
-                                <li class="nav-item"><a href="/vaga" class="nav-link px-2 text-muted"><b>Eventos</b></a></li>
+                                <li class="nav-item"><a href="/evento/cadastrar" class="nav-link px-2 text-muted"><b>Criar Evento</b></a></li>
+                                <li class="nav-item"><a href="/evento" class="nav-link px-2 text-muted"><b>Eventos</b></a></li>
                                 <li class="nav-item"><a href="/home/quemsomosnos" class="nav-link px-2 text-muted"><b>Sobre nós</b></a></li>
                             </ul>
                         </div>

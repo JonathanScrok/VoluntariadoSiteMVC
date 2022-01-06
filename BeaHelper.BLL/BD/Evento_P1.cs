@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BeaHelper.BLL.BD
 {
-    public partial class Vaga_P1
+    public partial class Evento_P1
     {
         #region StringConnection
         //private const string stringConnection = "Data Source=mssql-49550-0.cloudclusters.net,11255;Initial Catalog=be_helper;Integrated Security=False;User Id=AdminBeaHelper;Password=B3ah3lper#2021;MultipleActiveResultSets=True";
@@ -19,7 +19,7 @@ namespace BeaHelper.BLL.BD
 
         #region Atributos
 
-        private int _idVaga;
+        private int _idEvento;
         private int _idUsuarioAdm;
         private string _titulo;
         private string _categoria;
@@ -37,16 +37,16 @@ namespace BeaHelper.BLL.BD
 
         #region Propriedades
 
-        #region IdVaga
-        public int IdVaga
+        #region IdEvento
+        public int IdEvento
         {
             get
             {
-                return this._idVaga;
+                return this._idEvento;
             }
             set
             {
-                this._idVaga = value;
+                this._idEvento = value;
                 this._modified = true;
             }
         }
@@ -196,25 +196,25 @@ namespace BeaHelper.BLL.BD
         #endregion
 
         #region Construtores
-        public Vaga_P1()
+        public Evento_P1()
         {
             this._persisted = false;
         }
-        public Vaga_P1(int idVaga)
+        public Evento_P1(int idEvento)
         {
-            this._idVaga = idVaga;
+            this._idEvento = idEvento;
             this._persisted = true;
         }
         #endregion
 
         #region Consultas
-        private const string SELECT_TODASVAGAS = @"select * from helper.Vagas order by DataPublicacao desc";
-        private const string SELECT_ULTIMASVAGAS_TOP8 = @"select top 8 * from helper.Vagas order by DataEvento desc";
-        private const string SELECT_BUSCAVAGAID = @"select * from helper.Vagas where Id_Vaga = @Id_Vaga";
+        private const string SELECT_TODASEVENTOS = @"select * from helper.Eventos order by DataPublicacao desc";
+        private const string SELECT_ULTIMASEVENTOS_TOP8 = @"select top 8 * from helper.Eventos order by DataEvento desc";
+        private const string SELECT_BUSCAEVENTOID = @"select * from helper.Eventos where Id_Evento = @Id_Evento";
 
-        private const string UPDATE_VAGA = @"UPDATE helper.Vagas SET Id_Usuario_Adm = @Id_Usuario_Adm, Titulo = @Titulo, Categoria = @Categoria, Descricao = @Descricao, Cidade_Estado = @Cidade_Estado, DataPublicacao = @DataPublicacao, DataEvento = @DataEvento, SemData = @SemData, EventoRecorrente = @EventoRecorrente WHERE Id_Vaga = @Id_Vaga";
-        private const string INSERT_VAGA = @"INSERT INTO helper.Vagas(Id_Usuario_Adm, Titulo, Categoria ,Descricao, Cidade_Estado, DataPublicacao, DataEvento, SemData, EventoRecorrente) VALUES (@Id_Usuario_Adm, @Titulo, @Categoria, @Descricao, @Cidade_Estado, @DataPublicacao, @DataEvento, @SemData, @EventoRecorrente)";
-        private const string DELETE_VAGA = @"DELETE FROM helper.vagas WHERE Id_Vaga = @Id_Vaga";
+        private const string UPDATE_EVENTO = @"UPDATE helper.Eventos SET Id_Usuario_Adm = @Id_Usuario_Adm, Titulo = @Titulo, Categoria = @Categoria, Descricao = @Descricao, Cidade_Estado = @Cidade_Estado, DataPublicacao = @DataPublicacao, DataEvento = @DataEvento, SemData = @SemData, EventoRecorrente = @EventoRecorrente WHERE Id_Evento = @Id_Evento";
+        private const string INSERT_EVENTO = @"INSERT INTO helper.Eventos(Id_Usuario_Adm, Titulo, Categoria ,Descricao, Cidade_Estado, DataPublicacao, DataEvento, SemData, EventoRecorrente) VALUES (@Id_Usuario_Adm, @Titulo, @Categoria, @Descricao, @Cidade_Estado, @DataPublicacao, @DataEvento, @SemData, @EventoRecorrente)";
+        private const string DELETE_EVENTO = @"DELETE FROM helper.eventos WHERE Id_Evento = @Id_Evento";
         #endregion
 
         #region Metodos
@@ -224,7 +224,7 @@ namespace BeaHelper.BLL.BD
         private static List<SqlParameter> GetParameters()
         {
             List<SqlParameter> parms = new List<SqlParameter>();
-            parms.Add(new SqlParameter("@Id_Vaga", SqlDbType.Int, 4));
+            parms.Add(new SqlParameter("@Id_Evento", SqlDbType.Int, 4));
             parms.Add(new SqlParameter("@Id_Usuario_Adm", SqlDbType.Int, 4));
             parms.Add(new SqlParameter("@Titulo", SqlDbType.VarChar, 150));
             parms.Add(new SqlParameter("@Categoria", SqlDbType.VarChar, 100));
@@ -243,7 +243,7 @@ namespace BeaHelper.BLL.BD
 
         private void SetParameters(List<SqlParameter> parms)
         {
-            parms[0].Value = this._idVaga;
+            parms[0].Value = this._idEvento;
             parms[1].Value = this._idUsuarioAdm;
             parms[2].Value = this._titulo;
             parms[3].Value = this._categoria;
@@ -279,7 +279,7 @@ namespace BeaHelper.BLL.BD
                 {
                     try
                     {
-                        SqlCommand cmd = new SqlCommand(INSERT_VAGA, conn, trans);
+                        SqlCommand cmd = new SqlCommand(INSERT_EVENTO, conn, trans);
 
                         for (int i = 0; i < parms.Count; i++)
                         {
@@ -287,7 +287,7 @@ namespace BeaHelper.BLL.BD
                         }
 
                         cmd.ExecuteNonQuery();
-                        this._idVaga = Convert.ToInt32(cmd.Parameters["@Id_Vaga"].Value);
+                        this._idEvento = Convert.ToInt32(cmd.Parameters["@Id_Evento"].Value);
                         cmd.Parameters.Clear();
                         this._persisted = true;
                         this._modified = false;
@@ -312,7 +312,7 @@ namespace BeaHelper.BLL.BD
             conn.Open();
 
 
-            SqlCommand cmd = new SqlCommand(INSERT_VAGA, conn, trans);
+            SqlCommand cmd = new SqlCommand(INSERT_EVENTO, conn, trans);
 
             for (int i = 0; i < parms.Count; i++)
             {
@@ -320,7 +320,7 @@ namespace BeaHelper.BLL.BD
             }
 
             cmd.ExecuteNonQuery();
-            this._idVaga = Convert.ToInt32(cmd.Parameters["@Id_Vaga"].Value);
+            this._idEvento = Convert.ToInt32(cmd.Parameters["@Id_Evento"].Value);
             cmd.Parameters.Clear();
             this._persisted = true;
             this._modified = false;
@@ -340,7 +340,7 @@ namespace BeaHelper.BLL.BD
 
                 List<SqlParameter> parms = GetParameters();
                 SetParameters(parms);
-                SqlCommand cmd = new SqlCommand(UPDATE_VAGA, conn);
+                SqlCommand cmd = new SqlCommand(UPDATE_EVENTO, conn);
 
                 for (int i = 0; i < parms.Count; i++)
                 {
@@ -362,7 +362,7 @@ namespace BeaHelper.BLL.BD
 
                 List<SqlParameter> parms = GetParameters();
                 SetParameters(parms);
-                SqlCommand cmd = new SqlCommand(UPDATE_VAGA, conn);
+                SqlCommand cmd = new SqlCommand(UPDATE_EVENTO, conn);
 
                 for (int i = 0; i < parms.Count; i++)
                 {
@@ -395,18 +395,18 @@ namespace BeaHelper.BLL.BD
         #endregion
 
         #region Delete
-        public static bool Delete(int id_Vaga)
+        public static bool Delete(int id_Evento)
         {
             List<SqlParameter> parms = new List<SqlParameter>();
-            parms.Add(new SqlParameter("@Id_Vaga", SqlDbType.Int, 4));
+            parms.Add(new SqlParameter("@Id_Evento", SqlDbType.Int, 4));
 
-            parms[0].Value = id_Vaga;
+            parms[0].Value = id_Evento;
 
             SqlConnection conn = null;
             conn = new SqlConnection(stringConnection);
             conn.Open();
 
-            SqlCommand cmd = new SqlCommand(DELETE_VAGA, conn);
+            SqlCommand cmd = new SqlCommand(DELETE_EVENTO, conn);
 
             for (int i = 0; i < parms.Count; i++)
             {
@@ -434,7 +434,7 @@ namespace BeaHelper.BLL.BD
         /// <remarks>Jonathan Scrok</remarks>
         public bool CompleteObject()
         {
-            using (IDataReader dr = LoadDataReader(this._idVaga))
+            using (IDataReader dr = LoadDataReader(this._idEvento))
             {
                 return SetInstance(dr, this);
             }
@@ -447,14 +447,14 @@ namespace BeaHelper.BLL.BD
         /// <remarks>Jonathan Scrok</remarks>
         public bool CompleteObject(SqlTransaction trans)
         {
-            using (IDataReader dr = LoadDataReader(this._idVaga, trans))
+            using (IDataReader dr = LoadDataReader(this._idEvento, trans))
             {
                 return SetInstance(dr, this);
             }
         }
         public async Task<bool> CompleteObjectAsync(SqlTransaction trans)
         {
-            using (IDataReader dr = await LoadDataReaderAsync(this._idVaga, trans))
+            using (IDataReader dr = await LoadDataReaderAsync(this._idEvento, trans))
             {
                 return SetInstance(dr, this);
             }
@@ -468,18 +468,18 @@ namespace BeaHelper.BLL.BD
         /// <param name="idUsuario">Chave do registro.</param>
         /// <returns>Cursor de leitura do banco de dados.</returns>
         /// <remarks>Jonathan Scrok</remarks>
-        private static IDataReader LoadDataReader(int IdVaga)
+        private static IDataReader LoadDataReader(int IdEvento)
         {
             List<SqlParameter> parms = new List<SqlParameter>();
-            parms.Add(new SqlParameter("@Id_Vaga", SqlDbType.Int, 4));
+            parms.Add(new SqlParameter("@Id_Evento", SqlDbType.Int, 4));
 
-            parms[0].Value = IdVaga;
+            parms[0].Value = IdEvento;
 
             SqlConnection conn = null;
             conn = new SqlConnection(stringConnection);
             conn.Open();
 
-            SqlCommand cmd = new SqlCommand(SELECT_BUSCAVAGAID, conn);
+            SqlCommand cmd = new SqlCommand(SELECT_BUSCAEVENTOID, conn);
             cmd.Parameters.Add(parms[0]);
 
             return cmd.ExecuteReader();
@@ -491,47 +491,47 @@ namespace BeaHelper.BLL.BD
         /// <param name="trans">Transação existente no banco de dados.</param>
         /// <returns>Cursor de leitura do banco de dados.</returns>
         /// <remarks>Jonathan Scrok</remarks>
-        private static IDataReader LoadDataReader(int IdVaga, SqlTransaction trans)
+        private static IDataReader LoadDataReader(int IdEvento, SqlTransaction trans)
         {
             List<SqlParameter> parms = new List<SqlParameter>();
-            parms.Add(new SqlParameter("@Id_Vaga", SqlDbType.Int, 4));
+            parms.Add(new SqlParameter("@Id_Evento", SqlDbType.Int, 4));
 
-            parms[0].Value = IdVaga;
+            parms[0].Value = IdEvento;
 
             SqlConnection conn = null;
             conn = new SqlConnection(stringConnection);
             conn.Open();
 
-            SqlCommand cmd = new SqlCommand(SELECT_BUSCAVAGAID, conn);
+            SqlCommand cmd = new SqlCommand(SELECT_BUSCAEVENTOID, conn);
             cmd.Parameters.Add(parms[0]);
 
             return cmd.ExecuteReader();
         }
-        private static async Task<IDataReader> LoadDataReaderAsync(int IdVaga, SqlTransaction trans)
+        private static async Task<IDataReader> LoadDataReaderAsync(int IdEvento, SqlTransaction trans)
         {
             List<SqlParameter> parms = new List<SqlParameter>();
-            parms.Add(new SqlParameter("@Id_Vaga", SqlDbType.Int, 4));
+            parms.Add(new SqlParameter("@Id_Evento", SqlDbType.Int, 4));
 
-            parms[0].Value = IdVaga;
+            parms[0].Value = IdEvento;
             SqlConnection conn = null;
             conn = new SqlConnection(stringConnection);
             conn.Open();
 
-            SqlCommand cmd = new SqlCommand(SELECT_BUSCAVAGAID, conn);
+            SqlCommand cmd = new SqlCommand(SELECT_BUSCAEVENTOID, conn);
             cmd.Parameters.Add(parms[0]);
 
             return await cmd.ExecuteReaderAsync();
         }
-        private static async Task<IDataReader> LoadDataReaderAsync(int Id_Vaga)
+        private static async Task<IDataReader> LoadDataReaderAsync(int Id_Evento)
         {
             List<SqlParameter> parms = new List<SqlParameter>();
-            parms.Add(new SqlParameter("@Id_Vaga", SqlDbType.Int, 4));
+            parms.Add(new SqlParameter("@Id_Evento", SqlDbType.Int, 4));
 
             SqlConnection conn = null;
             conn = new SqlConnection(stringConnection);
             conn.Open();
 
-            SqlCommand cmd = new SqlCommand(SELECT_BUSCAVAGAID, conn);
+            SqlCommand cmd = new SqlCommand(SELECT_BUSCAEVENTOID, conn);
             cmd.Parameters.Add(parms[0]);
 
             return await cmd.ExecuteReaderAsync();
@@ -546,30 +546,30 @@ namespace BeaHelper.BLL.BD
         /// <param name="objUsuario">Instância a ser manipulada.</param>
         /// <returns>Verdadeiro ou falso informando se a operação foi executada com sucesso.</returns>
         /// <remarks>Jonathan Scrok</remarks>
-        private static bool SetInstance(IDataReader dr, Vaga_P1 objVaga)
+        private static bool SetInstance(IDataReader dr, Evento_P1 objEvento)
         {
             try
             {
                 if (dr.Read())
                 {
-                    objVaga._idVaga = Convert.ToInt32(dr["Id_Vaga"]);
-                    objVaga._idUsuarioAdm = Convert.ToInt32(dr["Id_Usuario_Adm"]);
-                    objVaga._titulo = Convert.ToString(dr["Titulo"]);
-                    objVaga._descricao = Convert.ToString(dr["Descricao"]);
-                    objVaga._categoria = Convert.ToString(dr["Categoria"]);
-                    objVaga._cidadeEstado = Convert.ToString(dr["Cidade_Estado"]);
-                    objVaga._dataPublicacao = Convert.ToDateTime(dr["DataPublicacao"]);
+                    objEvento._idEvento = Convert.ToInt32(dr["Id_Evento"]);
+                    objEvento._idUsuarioAdm = Convert.ToInt32(dr["Id_Usuario_Adm"]);
+                    objEvento._titulo = Convert.ToString(dr["Titulo"]);
+                    objEvento._descricao = Convert.ToString(dr["Descricao"]);
+                    objEvento._categoria = Convert.ToString(dr["Categoria"]);
+                    objEvento._cidadeEstado = Convert.ToString(dr["Cidade_Estado"]);
+                    objEvento._dataPublicacao = Convert.ToDateTime(dr["DataPublicacao"]);
 
                     if (dr["DataEvento"] == DBNull.Value)
                     {
-                        objVaga._dataEvento = null;
+                        objEvento._dataEvento = null;
                     }
                     else
                     {
-                        objVaga._dataEvento = Convert.ToDateTime(dr["DataEvento"]);
+                        objEvento._dataEvento = Convert.ToDateTime(dr["DataEvento"]);
                     }
-                    objVaga._semData = Convert.ToBoolean(dr["SemData"]);
-                    objVaga._eventoRecorrente = Convert.ToBoolean(dr["EventoRecorrente"]);
+                    objEvento._semData = Convert.ToBoolean(dr["SemData"]);
+                    objEvento._eventoRecorrente = Convert.ToBoolean(dr["EventoRecorrente"]);
 
                     return true;
                 }

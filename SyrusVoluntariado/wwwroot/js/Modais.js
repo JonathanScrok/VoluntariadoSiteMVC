@@ -17,7 +17,7 @@ function SalvarConcordancia() {
     $('#exampleModal').modal('hide');
 }
 
-function ConfirmacaoExcluirVaga() {
+function ConfirmacaoExcluirEvento() {
     $('#confirmar-excluir').modal('show');
 }
 
@@ -51,7 +51,7 @@ function eraseCookie(name) {
 }
 
 function share() {
-    $('#compartilhar-vaga').modal('show');
+    $('#compartilhar-evento').modal('show');
 }
 
 let mensagem = document.querySelector(".mensagem");

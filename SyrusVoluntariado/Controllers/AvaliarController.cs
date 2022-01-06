@@ -14,10 +14,10 @@ namespace BeaHelper.Controllers
     public class AvaliarController : Controller
     {
         [HttpGet]
-        public IActionResult Index(int Id, int IdVaga)
+        public IActionResult Index(int Id, int IdEvento)
         {
             HttpContext.Session.SetInt32("UsuarioAvaliado", Id);
-            HttpContext.Session.SetInt32("VagaId", IdVaga);
+            HttpContext.Session.SetInt32("VagaId", IdEvento);
 
             return View(new Avaliacao());
         }
@@ -28,7 +28,7 @@ namespace BeaHelper.Controllers
             var QtdEstrelas = Id;
             int IdUsuarioAvaliado = HttpContext.Session.GetInt32("UsuarioAvaliado").GetValueOrDefault();
             int IdUsuarioLogado = GetUsuarioLogado();
-            int IdVaga = HttpContext.Session.GetInt32("VagaId").GetValueOrDefault();
+            int IdEvento = HttpContext.Session.GetInt32("VagaId").GetValueOrDefault();
 
             Avaliacao_P1 avaliacao = new Avaliacao_P1();
             avaliacao.IdUsuarioAvaliado = IdUsuarioAvaliado;
@@ -38,7 +38,7 @@ namespace BeaHelper.Controllers
             avaliacao.Save();
 
 
-            return RedirectToAction("ListaVoluntarios", "Vaga", new {Id = IdVaga });
+            return RedirectToAction("ListaVoluntarios", "Evento", new {Id = IdEvento });
         }
 
         public int GetUsuarioLogado()

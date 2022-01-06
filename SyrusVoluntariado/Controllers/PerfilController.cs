@@ -33,70 +33,70 @@ namespace BeaHelper.Controllers {
                 ViewBag.UsuarioSexo = "Prefiro não declarar";
             }
 
-            // Minhas Vagas
-            List<Vaga> minhasvagas = Vaga_P2.MinhasVagas(IdUsuarioLogado);
-            ViewBag.VagasCandidatas = minhasvagas;
+            // Meus Eventos
+            List<Evento> meuseventos = Evento_P2.MeusEventos(IdUsuarioLogado);
+            ViewBag.MeusEventosCriados = meuseventos;
             // -------------------------------------------------
 
-            // Vagas Candidatadas
-            List<VagaCandidatura> VagasCandidatadas = VagaCandidaturas_P1.TodasCandidaturasUsuario(IdUsuarioLogado);
+            // Eventos Candidatadas
+            List<EventoCandidatura> EventosCandidatados = EventoCandidaturas_P1.TodasCandidaturasUsuario(IdUsuarioLogado);
 
-            List<Vaga_P1> MinhasCandidaturas = new List<Vaga_P1>();
+            List<Evento_P1> MinhasCandidaturas = new List<Evento_P1>();
             List<int> Idfvagas = new List<int>();
 
-            for (int i = 0; i < VagasCandidatadas.Count; i++)
+            for (int i = 0; i < EventosCandidatados.Count; i++)
             {
-                var idf = VagasCandidatadas[i].Id_Vaga;
+                var idf = EventosCandidatados[i].Id_Evento;
                 Idfvagas.Add(idf);
             }
 
             foreach (var Id in Idfvagas)
             {
-                Vaga_P1 vaga = new Vaga_P1(Id);
-                vaga.CompleteObject();
-                MinhasCandidaturas.Add(vaga);
+                Evento_P1 evento = new Evento_P1(Id);
+                evento.CompleteObject();
+                MinhasCandidaturas.Add(evento);
             }
-            ViewBag.MinhasVagas = MinhasCandidaturas;
+            ViewBag.EventosCandidatados = MinhasCandidaturas;
             // --------------------------------------------------
 
             return View(Usuario);
         }
 
         [HttpGet]
-        public IActionResult MinhasVagas() {
+        public IActionResult MeusEventos() {
             ViewBag.FooterPrecisa = false;
             int IdUsuarioLogado = GetUsuarioLogado();
 
-            List<Vaga> minhasvagas = Vaga_P2.MinhasVagas(IdUsuarioLogado);
+            List<Evento> meuseventos = Evento_P2.MeusEventos(IdUsuarioLogado);
 
-            return View(minhasvagas);
+            return View(meuseventos);
         }
 
         [HttpGet]
-        public IActionResult VagasCandidatadas() {
+        public IActionResult EventosCandidatados() {
             ViewBag.FooterPrecisa = false;
 
             //int IdfUsuario = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault(); //Remover ou Comentar
             int IdUsuarioLogado = GetUsuarioLogado();
 
-            List<VagaCandidatura> VagasCandidatadas = VagaCandidaturas_P1.TodasCandidaturasUsuario(IdUsuarioLogado);
+            List<EventoCandidatura> EventosCandidatados = EventoCandidaturas_P1.TodasCandidaturasUsuario(IdUsuarioLogado);
 
-            List<Vaga_P1> MinhasCandidaturas = new List<Vaga_P1>();
+            List<Evento_P1> MinhasCandidaturas = new List<Evento_P1>();
             List<int> Idfvagas = new List<int>();
 
-            //List<Vaga> vagas = Vaga_P1.TodasVagas();
+            //List<Evento> vagas = Evento_P1.TodosEventos();
 
-            for (int i = 0; i < VagasCandidatadas.Count; i++)
+            for (int i = 0; i < EventosCandidatados.Count; i++)
             {
-                var idf = VagasCandidatadas[i].Id_Vaga;
+                var idf = EventosCandidatados[i].Id_Evento;
                 Idfvagas.Add(idf);
             }
 
             foreach (var Id in Idfvagas)
             {
-                Vaga_P1 vaga = new Vaga_P1(Id);
-                vaga.CompleteObject();
-                MinhasCandidaturas.Add(vaga);
+                Evento_P1 evento = new Evento_P1(Id);
+                evento.CompleteObject();
+                MinhasCandidaturas.Add(evento);
             }
 
             return View(MinhasCandidaturas);

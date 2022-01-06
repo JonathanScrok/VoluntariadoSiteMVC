@@ -14,7 +14,7 @@ function SalvarConcordancia() {
     $('#exampleModal').modal('hide');
 }
 
-function ConfirmacaoExcluirVaga() {
+function ConfirmacaoExcluirEvento() {
     
     $('#confirmar-excluir').modal('show');
 }

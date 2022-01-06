@@ -2,12 +2,12 @@
 
 });
 
-function voluntariarNaVaga() {
+function voluntariarNoEvento() {
 
     let SITE_URL = window.location.origin;
     $.ajax({
         method: "GET",
-        url: SITE_URL + "/vaga/voluntariar/?id=" + idVaga,
+        url: SITE_URL + "/evento/voluntariar/?id=" + idEvento,
         contentType: "application/json"
     }).done(function (result) {
         $("#BotaoVoluntatiarMe").html('Já Voluntariado');

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BeaHelper.BLL.BD
 {
-    public class VagaCandidaturas_P2
+    public class EventoCandidaturas_P2
     {
     }
 }

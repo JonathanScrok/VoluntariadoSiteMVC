@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 namespace BeaHelper.Library.Mail {
     public class EnviarEmail {
 
-        public static void EnviarMensagemContato(Usuario_P1 usuario, string emailAdm, int idVaga) {
+        public static void EnviarMensagemContato(Usuario_P1 usuario, string emailAdm, int idEvento) {
 
-            string hrefListaVagas = "https://beahelper.herokuapp.com/vaga/listavoluntarios/" + idVaga;
+            string hrefListaEventos = "https://beahelper.herokuapp.com/evento/listavoluntarios/" + idEvento;
             string Sexo;
 
             if (usuario.Sexo == 1)
@@ -28,7 +28,7 @@ namespace BeaHelper.Library.Mail {
                 Sexo = "Prefiro não declarar";
             }
 
-            string conteudo = string.Format("<p>Nome: {0}<br/> Email: {1}<br/> Sexo: {2}</p><p><a href='{3}'>Ver todos voluntários</a></p>", usuario.Nome, usuario.Email, Sexo, hrefListaVagas);
+            string conteudo = string.Format("<p>Nome: {0}<br/> Email: {1}<br/> Sexo: {2}</p><p><a href='{3}'>Ver todos voluntários</a></p>", usuario.Nome, usuario.Email, Sexo, hrefListaEventos);
 
             //Configurar Servidor SMTP
             SmtpClient smtp = new SmtpClient(Constants.ServidorSMTP, Constants.PortaSMTP);
