@@ -1,4 +1,4 @@
-﻿@model X.PagedList.IPagedList<BeaHelper.BLL.Models.Vaga>
+﻿@model X.PagedList.IPagedList<BeaHelper.BLL.Models.Evento>
 @using X.PagedList.Mvc.Core;
 @using X.PagedList;
 
@@ -62,23 +62,23 @@
     </div>
 
     <div class="row">
-        @foreach (var vaga in Model)
+        @foreach (var evento in Model)
         {
             <div class="col-sm-3">
                 <div class="card" style="max-width: 19rem;">
                     <div class="card-body">
-                        <h5 class="card-title">@vaga.Titulo</h5>
-                        @if (@vaga.DataEvento == null)
+                        <h5 class="card-title">@evento.Titulo</h5>
+                        @if (@evento.DataEvento == null)
                         {
                             <p class="card-text">Data do Evento: Não escolhida</p>
                         }
                         else
                         {
-                            <p class="card-text">Data do Evento: @vaga.DataEvento.GetValueOrDefault().ToString("dd/MM/yyyy")</p>
+                            <p class="card-text">Data do Evento: @evento.DataEvento.GetValueOrDefault().ToString("dd/MM/yyyy")</p>
 
                         }
-                        <p class="card-text">Local: @vaga.Cidade_Estado</p>
-                        <a href="/vaga/visualizar/@vaga.Id_Vaga" class="btn " style="background-color: #62c0a3;"><b>Visualizar</b></a>
+                        <p class="card-text">Local: @evento.Cidade_Estado</p>
+                        <a href="/evento/visualizar/@evento.Id_Evento" class="btn " style="background-color: #62c0a3;"><b>Visualizar</b></a>
                     </div>
                 </div>
             </div>
@@ -88,7 +88,7 @@
     <br />
     <div class="vertodoseventos">
         <div class="verEventos">
-            <a class="btn btn-secondary" href="/Vaga">VER TODOS EVENTOS ...</a>
+            <a class="btn btn-secondary" href="/Evento">VER TODOS EVENTOS ...</a>
         </div>
     </div>
     <br />

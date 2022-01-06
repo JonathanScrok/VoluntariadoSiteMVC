@@ -13,7 +13,7 @@ namespace BeaHelper.Controllers {
 
         public IActionResult Index(int? page) {
             var pageNumber = page ?? 1;
-            List<Vaga> vagas = Vaga_P2.Top8UltimasVagas();
+            List<Evento> vagas = Evento_P2.Top8UltimasVagas();
 
             var resultadoPaginado = vagas.ToPagedList(pageNumber, 8);
             return View(resultadoPaginado);

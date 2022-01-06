@@ -14,14 +14,14 @@ using X.PagedList;
 namespace BeaHelper.Controllers
 {
     [Login]
-    public class VagaController : Controller
+    public class EventoController : Controller
     {
 
         public IActionResult Index(int? page)
         {
             var pageNumber = page ?? 1;
 
-            List<Vaga> vagas = Vaga_P2.TodasVagas();
+            List<Evento> vagas = Evento_P2.TodasVagas();
 
             var resultadoPaginado = vagas.ToPagedList(pageNumber, 10);
 
@@ -32,11 +32,11 @@ namespace BeaHelper.Controllers
         public IActionResult Cadastrar()
         {
             ViewBag.CadastrarAtualizar = "Cadastrar";
-            return View(new Vaga());
+            return View(new Evento());
         }
 
         [HttpPost]
-        public IActionResult Cadastrar([FromForm] Vaga vaga)
+        public IActionResult Cadastrar([FromForm] Evento evento)
         {
 
             ViewBag.CadastrarAtualizar = "Cadastrar";
@@ -48,25 +48,25 @@ namespace BeaHelper.Controllers
             if (ModelState.IsValid)
             {
 
-                Vaga_P1 vagaCadastrar = new Vaga_P1();
+                Evento_P1 vagaCadastrar = new Evento_P1();
 
                 vagaCadastrar.DataPublicacao = DateTime.Now;
-                if (vaga.SemData == true)
+                if (evento.SemData == true)
                 {
                     vagaCadastrar.DataEvento = null;
                 }
                 else
                 {
-                    vagaCadastrar.DataEvento = vaga.DataEvento;
+                    vagaCadastrar.DataEvento = evento.DataEvento;
                 }
                 
                 vagaCadastrar.IdUsuarioAdm = IdUsuarioLogado;
-                vagaCadastrar.Titulo = vaga.Titulo;
-                vagaCadastrar.Categoria = vaga.Categoria;
-                vagaCadastrar.Descricao = vaga.Descricao;
-                vagaCadastrar.CidadeEstado = vaga.Cidade_Estado;
-                vagaCadastrar.SemData = vaga.SemData;
-                vagaCadastrar.EventoRecorrente = vaga.EventoRecorrente;
+                vagaCadastrar.Titulo = evento.Titulo;
+                vagaCadastrar.Categoria = evento.Categoria;
+                vagaCadastrar.Descricao = evento.Descricao;
+                vagaCadastrar.CidadeEstado = evento.Cidade_Estado;
+                vagaCadastrar.SemData = evento.SemData;
+                vagaCadastrar.EventoRecorrente = evento.EventoRecorrente;
 
                 vagaCadastrar.Save();
 
@@ -75,35 +75,35 @@ namespace BeaHelper.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(vaga);
+            return View(evento);
         }
 
         [HttpGet]
         public IActionResult Visualizar(int Id)
         {
 
-            Vaga_P1 vaga = new Vaga_P1(Id);
-            vaga.CompleteObject();
+            Evento_P1 evento = new Evento_P1(Id);
+            evento.CompleteObject();
 
             //var IdfUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault(); //Remover ou Comentar
             int IdUsuarioLogado = GetUsuarioLogado();
 
-            List<VagaCandidatura> TodasCandidaturasUsuario = VagaCandidaturas_P1.TodasCandidaturasUsuario(IdUsuarioLogado);
-            var CandidatosBanco = TodasCandidaturasUsuario.Where(a => a.Id_Usuario == IdUsuarioLogado && a.Id_Vaga == Id).FirstOrDefault();
+            List<EventoCandidatura> TodasCandidaturasUsuario = EventoCandidaturas_P1.TodasCandidaturasUsuario(IdUsuarioLogado);
+            var CandidatosBanco = TodasCandidaturasUsuario.Where(a => a.Id_Usuario == IdUsuarioLogado && a.Id_Evento == Id).FirstOrDefault();
 
             if (CandidatosBanco != null)
             {
                 ViewBag.JaVoluntariado = true;
             }
-            if (vaga.IdUsuarioAdm == IdUsuarioLogado)
+            if (evento.IdUsuarioAdm == IdUsuarioLogado)
             {
                 ViewBag.ADMVaga = true;
             }
 
-            List<Vaga> vagasParecidas = Vaga_P2.VagasParecidasLocal(vaga.CidadeEstado, vaga.IdVaga);
+            List<Evento> vagasParecidas = Evento_P2.VagasParecidasLocal(evento.CidadeEstado, evento.IdEvento);
             ViewBag.VagasParecidas = vagasParecidas;
-            ViewBag.Local = vaga.CidadeEstado.ToUpper();
-            return View(vaga);
+            ViewBag.Local = evento.CidadeEstado.ToUpper();
+            return View(evento);
         }
 
         [HttpGet]
@@ -114,24 +114,24 @@ namespace BeaHelper.Controllers
             //var IdfUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault(); //Remover ou Comentar
             int IdUsuarioLogado = GetUsuarioLogado();
 
-            Vaga_P1 vaga = new Vaga_P1(Id);
-            vaga.CompleteObject();
+            Evento_P1 evento = new Evento_P1(Id);
+            evento.CompleteObject();
 
-            if (IdUsuarioLogado == vaga.IdUsuarioAdm)
+            if (IdUsuarioLogado == evento.IdUsuarioAdm)
             {
-                Mapper.CreateMap<Vaga_P1, Vaga>();
-                Vaga VagaEdidar = Mapper.Map<Vaga>(vaga);
+                Mapper.CreateMap<Evento_P1, Evento>();
+                Evento VagaEdidar = Mapper.Map<Evento>(evento);
 
                 ViewBag.CadastrarAtualizar = "Salvar";
                 return View("Cadastrar", VagaEdidar);
             }
 
             TempData["MensagemErro"] = "Evento inacessível com seu usuário";
-            return RedirectToAction("Index", "Vaga");
+            return RedirectToAction("Index", "Evento");
         }
 
         [HttpPost]
-        public IActionResult Editar([FromForm] Vaga vaga)
+        public IActionResult Editar([FromForm] Evento evento)
         {
 
             ViewBag.CadastrarAtualizar = "Salvar";
@@ -140,25 +140,25 @@ namespace BeaHelper.Controllers
 
             if (ModelState.IsValid)
             {
-                Vaga_P1 vagas = new Vaga_P1(vaga.Id_Vaga);
+                Evento_P1 vagas = new Evento_P1(evento.Id_Evento);
                 vagas.CompleteObject();
 
                 vagas.DataPublicacao = DateTime.Now;
-                vagas.DataEvento = vaga.DataEvento;
+                vagas.DataEvento = evento.DataEvento;
                 vagas.IdUsuarioAdm = IdUsuarioLogado;
-                vagas.Titulo = vaga.Titulo;
-                vagas.Categoria = vaga.Categoria;
-                vagas.Descricao = vaga.Descricao;
-                vagas.CidadeEstado = vaga.Cidade_Estado;
-                vagas.SemData = vaga.SemData;
-                vagas.EventoRecorrente = vaga.EventoRecorrente;
+                vagas.Titulo = evento.Titulo;
+                vagas.Categoria = evento.Categoria;
+                vagas.Descricao = evento.Descricao;
+                vagas.CidadeEstado = evento.Cidade_Estado;
+                vagas.SemData = evento.SemData;
+                vagas.EventoRecorrente = evento.EventoRecorrente;
 
                 vagas.Save();
 
                 TempData["Mensagem"] = "O evento foi atualizado com sucesso!";
-                return RedirectToAction("MinhasVagas", "Perfil");
+                return RedirectToAction("MeusEventos", "Perfil");
             }
-            return View("Cadastrar", vaga);
+            return View("Cadastrar", evento);
         }
 
         [HttpGet]
@@ -169,16 +169,16 @@ namespace BeaHelper.Controllers
 
             if (Id != 0)
             {
-                Vaga_P1 vaga = new Vaga_P1(Id);
-                vaga.CompleteObject();
+                Evento_P1 evento = new Evento_P1(Id);
+                evento.CompleteObject();
 
-                if (IdUsuarioLogado == vaga.IdUsuarioAdm)
+                if (IdUsuarioLogado == evento.IdUsuarioAdm)
                 {
-                    bool resultado = Vaga_P1.Delete(Id);
+                    bool resultado = Evento_P1.Delete(Id);
 
                 }
             }
-            return RedirectToAction("MinhasVagas", "Perfil");
+            return RedirectToAction("MeusEventos", "Perfil");
         }
 
         [HttpGet]
@@ -187,19 +187,19 @@ namespace BeaHelper.Controllers
             //var IdfUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault(); //Remover ou Comentar
             int IdUsuarioLogado = GetUsuarioLogado();
 
-            Vaga_P1 vaga = new Vaga_P1(Id);
-            vaga.CompleteObject();
+            Evento_P1 evento = new Evento_P1(Id);
+            evento.CompleteObject();
 
-            List<VagaCandidatura> TodasCandidaturasUsuario = VagaCandidaturas_P1.TodasCandidaturasUsuario(IdUsuarioLogado);
-            var CandidatosBanco = TodasCandidaturasUsuario.Where(a => a.Id_Usuario == IdUsuarioLogado && a.Id_Vaga == Id).FirstOrDefault();
+            List<EventoCandidatura> TodasCandidaturasUsuario = EventoCandidaturas_P1.TodasCandidaturasUsuario(IdUsuarioLogado);
+            var CandidatosBanco = TodasCandidaturasUsuario.Where(a => a.Id_Usuario == IdUsuarioLogado && a.Id_Evento == Id).FirstOrDefault();
 
-            if (vaga.IdUsuarioAdm != IdUsuarioLogado)
+            if (evento.IdUsuarioAdm != IdUsuarioLogado)
             {
                 if (CandidatosBanco == null)
                 {
-                    VagaCandidaturas_P1 candidatarVaga = new VagaCandidaturas_P1();
+                    EventoCandidaturas_P1 candidatarVaga = new EventoCandidaturas_P1();
                     candidatarVaga.IdUsuario = IdUsuarioLogado;
-                    candidatarVaga.IdVaga = Id;
+                    candidatarVaga.IdEvento = Id;
                     candidatarVaga.DataCadastro = DateTime.Now;
                     candidatarVaga.Save();
 
@@ -208,7 +208,7 @@ namespace BeaHelper.Controllers
                     //Usuario_P1 usuario = new Usuario_P1(IdUsuarioLogado);
                     //usuario.CompleteObject();
 
-                    //bool EmailEnviado = EnviarCandidatoParaDonoVaga(IdUsuarioLogado, vaga, usuario);
+                    //bool EmailEnviado = EnviarCandidatoParaDonoVaga(IdUsuarioLogado, evento, usuario);
                 }
                 else
                 {
@@ -219,7 +219,7 @@ namespace BeaHelper.Controllers
             return Json(Ok());
         }
 
-        public bool EnviarCandidatoParaDonoVaga(int IdUsuarioLogado, Vaga_P1 vaga, Usuario_P1 usuario)
+        public bool EnviarCandidatoParaDonoVaga(int IdUsuarioLogado, Evento_P1 evento, Usuario_P1 usuario)
         {
             try
             {
@@ -236,10 +236,10 @@ namespace BeaHelper.Controllers
                     ViewBag.UsuarioSexo = "Prefiro não declarar";
                 }
 
-                Usuario_P1 usuarioAdm = new Usuario_P1(vaga.IdUsuarioAdm);
+                Usuario_P1 usuarioAdm = new Usuario_P1(evento.IdUsuarioAdm);
                 usuarioAdm.CompleteObject();
 
-                EnviarEmail.EnviarMensagemContato(usuario, usuarioAdm.Email, vaga.IdVaga);
+                EnviarEmail.EnviarMensagemContato(usuario, usuarioAdm.Email, evento.IdEvento);
 
                 return true;
             }
@@ -253,10 +253,10 @@ namespace BeaHelper.Controllers
         public IActionResult ListaVoluntarios(int Id)
         {
             ViewBag.FooterPrecisa = false;
-            ViewBag.IdVaga = Id;
+            ViewBag.IdEvento = Id;
             int IdUsuarioLogado = GetUsuarioLogado();
 
-            List<VagaCandidatura> ListaUsuariosVoluntariados = VagaCandidaturas_P1.TodasUsuarioCandidatadosVaga(Id);
+            List<EventoCandidatura> ListaUsuariosVoluntariados = EventoCandidaturas_P1.TodasUsuarioCandidatadosEvento(Id);
 
             List<UsuarioCompleto> voluntariosCompleto = new List<UsuarioCompleto>();
             List<int> IdfVoluntarios = new List<int>();

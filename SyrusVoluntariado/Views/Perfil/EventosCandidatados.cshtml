@@ -1,13 +1,10 @@
-﻿@model X.PagedList.IPagedList<BeaHelper.BLL.Models.Vaga>
-@using X.PagedList.Mvc.Core;
-@using X.PagedList;
-
+﻿@model List<BeaHelper.BLL.BD.Evento_P1>
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @{
-    ViewBag.Title = "Eventos - Listagem";
+    ViewBag.Title = "Eventos Candidatados";
 }
 
 <div class="mt-md-3">
@@ -18,6 +15,7 @@
         </div>
     }
 </div>
+
 <div class="mt-md-3">
     @if (TempData["MensagemErro"] != null)
     {
@@ -26,11 +24,11 @@
         </div>
     }
 </div>
+
 <link href="/css/PagedList.css" rel="stylesheet" type="text/css" />
 <link href="/css/FundoPaginas.css" rel="stylesheet" type="text/css" />
 
-
-@*<span> <b>Total de Eventos:</b> @Model.TotalItemCount</span>*@
+<span> <b>Total de Eventos:</b> @Model.Count</span>
 <table class="table table-dark">
     <thead>
         <tr>
@@ -42,21 +40,23 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var vaga in Model)
+        @foreach (var evento in Model)
         {
             <tr>
-                <th scope="row">@vaga.Titulo</th>
-                <td>@vaga.Descricao</td>
-                <td>@vaga.Categoria</td>
-                <td>@vaga.Cidade_Estado</td>
+                <th scope="row">@evento.Titulo</th>
+                <td>@evento.Descricao</td>
+                <td>@evento.Categoria</td>
+                <td>@evento.CidadeEstado</td>
                 <td>
-                    <a href="/vaga/visualizar/@vaga.Id_Vaga" class="btn btn-light">Visualizar</a>
+                    <a href="/evento/visualizar/@evento.IdEvento" class="btn btn-light">Visualizar</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
 
-@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
 
-<script src="~/js/funcoes.js"></script>
+
+
+
+

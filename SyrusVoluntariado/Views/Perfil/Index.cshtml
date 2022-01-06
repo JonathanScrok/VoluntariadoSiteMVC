@@ -57,26 +57,26 @@
         </div>
         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
             <div class="row">
-                @foreach (var vaga in @ViewBag.VagasCandidatas)
+                @foreach (var evento in @ViewBag.VagasCandidatas)
                 {
-                    ViewBag.Id = vaga.Id_Vaga;
+                    ViewBag.Id = evento.Id_Evento;
                     <div class="col-sm-6 mt-md-3">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">@vaga.Titulo</h5>
-                                <p class="card-text">@vaga.Descricao</p>
-                                @if (@vaga.DataEvento == null)
+                                <h5 class="card-title">@evento.Titulo</h5>
+                                <p class="card-text">@evento.Descricao</p>
+                                @if (@evento.DataEvento == null)
                                 {
                                     <p class="card-text">Data: Não escolhida</p>
                                 }
                                 else
                                 {
-                                    <p class="card-text">Data: @vaga.DataEvento.ToString("dd/MM/yyyy")</p>
+                                    <p class="card-text">Data: @evento.DataEvento.ToString("dd/MM/yyyy")</p>
                                 }
 
-                                <a href="/vaga/listavoluntarios/@vaga.Id_Vaga" class="btn " style="background-color: #62c0a3;"><b>Lista de Voluntários</b></a>
+                                <a href="/evento/listavoluntarios/@evento.Id_Evento" class="btn " style="background-color: #62c0a3;"><b>Lista de Voluntários</b></a>
                                 <div style="float:right;">
-                                    <a class="btn btn-info" href="/vaga/editar/@vaga.Id_Vaga">Editar</a>
+                                    <a class="btn btn-info" href="/evento/editar/@evento.Id_Evento">Editar</a>
                                     <a class="btn btn-danger ms-md-2" onclick="ConfirmacaoExcluirVaga();">Excluir</a>
                                 </div>
                             </div>
@@ -98,15 +98,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var vaga in @ViewBag.MinhasVagas)
+                    @foreach (var evento in @ViewBag.MinhasVagas)
                     {
                         <tr>
-                            <th scope="row">@vaga.Titulo</th>
-                            <td>@vaga.Descricao</td>
-                            <td>@vaga.Categoria</td>
-                            <td>@vaga.CidadeEstado</td>
+                            <th scope="row">@evento.Titulo</th>
+                            <td>@evento.Descricao</td>
+                            <td>@evento.Categoria</td>
+                            <td>@evento.CidadeEstado</td>
                             <td>
-                                <a href="/vaga/visualizar/@vaga.IdVaga" class="btn btn-light">Visualizar</a>
+                                <a href="/evento/visualizar/@evento.IdEvento" class="btn btn-light">Visualizar</a>
                             </td>
                         </tr>
                     }
@@ -116,11 +116,11 @@
     </div>
 
     @*<div class="botoes-perfil">
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <a class="btn Botao-MinhasVagas btn-lg" href="/perfil/minhasvagas"><b>Meus Eventos</b></a>
-        </div>
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end ms-2">
-            <a class="btn Botao-VagasCandidatadas btn-lg" href="/perfil/vagascandidatadas"><b>Eventos Voluntariados</b></a>
-        </div>
-    </div>*@
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a class="btn Botao-MinhasVagas btn-lg" href="/perfil/meuseventos"><b>Meus Eventos</b></a>
+            </div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end ms-2">
+                <a class="btn Botao-EventosCandidatados btn-lg" href="/perfil/eventoscandidatados"><b>Eventos Voluntariados</b></a>
+            </div>
+        </div>*@
 </div>

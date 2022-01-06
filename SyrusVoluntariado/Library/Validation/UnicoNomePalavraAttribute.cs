@@ -10,10 +10,10 @@ namespace BeaHelper.Library.Validation {
     public class UnicoNomePalavraAttribute : ValidationAttribute {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext) {
 
-            Vaga vaga = validationContext.ObjectInstance as Vaga;
+            Evento evento = validationContext.ObjectInstance as Evento;
             //var _db = (DatabaseContext)validationContext.GetService(typeof(DatabaseContext));
-            List<Vaga> vagas = Vaga_P2.BuscaTitulo(vaga.Titulo);
-            var TitulosCadastrados = vagas.Where(a => a.Id_Vaga != vaga.Id_Vaga).FirstOrDefault();
+            List<Evento> vagas = Evento_P2.BuscaTitulo(evento.Titulo);
+            var TitulosCadastrados = vagas.Where(a => a.Id_Evento != evento.Id_Evento).FirstOrDefault();
 
             //Já existe no banco 1 registro:
             // - Verificar se o nome existe
@@ -22,7 +22,7 @@ namespace BeaHelper.Library.Validation {
             if (TitulosCadastrados == null) {
                 return ValidationResult.Success;
             } else {
-                return new ValidationResult("O evento com titulo '"+ vaga.Titulo+"' já está cadastrado!");
+                return new ValidationResult("O evento com titulo '"+ evento.Titulo+"' já está cadastrado!");
             }
         }
     }

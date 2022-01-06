@@ -1,4 +1,4 @@
-﻿@model List<BeaHelper.BLL.Models.Vaga>
+﻿@model List<BeaHelper.BLL.Models.Evento>
 
 
 @{
@@ -14,17 +14,17 @@
 <script src="/js/Modais.js"></script>
 
 <div class="row">
-    @foreach (var vaga in Model) {
-        ViewBag.Id = vaga.Id_Vaga;
+    @foreach (var evento in Model) {
+        ViewBag.Id = evento.Id_Evento;
         <div class="col-sm-6 mt-md-3">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">@vaga.Titulo</h5>
-                    <p class="card-text">@vaga.Descricao</p>
-                    <p class="card-text">@vaga.DataEvento.GetValueOrDefault().ToString("dd/MM/yyyy")</p>
-                    <a href="/vaga/listavoluntarios/@vaga.Id_Vaga" class="btn " style="background-color: #62c0a3;"><b>Lista de Voluntários</b></a>
+                    <h5 class="card-title">@evento.Titulo</h5>
+                    <p class="card-text">@evento.Descricao</p>
+                    <p class="card-text">@evento.DataEvento.GetValueOrDefault().ToString("dd/MM/yyyy")</p>
+                    <a href="/evento/listavoluntarios/@evento.Id_Evento" class="btn " style="background-color: #62c0a3;"><b>Lista de Voluntários</b></a>
                     <div style="float:right;">
-                        <a class="btn btn-info" href="/vaga/editar/@vaga.Id_Vaga">Editar</a>
+                        <a class="btn btn-info" href="/evento/editar/@evento.Id_Evento">Editar</a>
                         <a class="btn btn-danger ms-md-2" onclick="ConfirmacaoExcluirVaga();">Excluir</a>
                     </div>
                 </div>

@@ -1,15 +1,15 @@
-﻿using BeaHelper.BLL.Validation;
+﻿using BeaHelper.Library.Validation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BeaHelper.BLL.Models
+namespace BeaHelper.Models
 {
-    public class Vaga
+    public class Evento
     {
-        public int Id_Vaga { get; set; }
+        public int Id_Evento { get; set; }
 
         public int Id_Usuario_Adm { get; set; }
 
@@ -31,10 +31,8 @@ namespace BeaHelper.BLL.Models
         public string Cidade_Estado { get; set; }
 
         public DateTime DataPublicacao { get; set; }
-        public bool SemData { get; set; }
-        public bool EventoRecorrente { get; set; }
-
-        public DateTime? DataEvento { get; set; }
+        
+        public DateTime DataEvento { get; set; }
 
     }
 }

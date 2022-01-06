@@ -51,7 +51,7 @@ function eraseCookie(name) {
 }
 
 function share() {
-    $('#compartilhar-vaga').modal('show');
+    $('#compartilhar-evento').modal('show');
 }
 
 let mensagem = document.querySelector(".mensagem");

@@ -1,10 +1,10 @@
-﻿@model BeaHelper.BLL.BD.Vaga_P1
+﻿@model BeaHelper.BLL.BD.Evento_P1
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @{
     ViewBag.Title = "Visualizar Evento";
-    ViewBag.Id = Model.IdVaga;
+    ViewBag.Id = Model.IdEvento;
 }
 <link href="/css/FundoPaginas.css" rel="stylesheet" type="text/css" />
 
@@ -72,11 +72,11 @@
             {
                 <div id="Adm__Mensagem">
                     <div class="alert alert-danger mt-md-2" id="Adm-Mensagem" role="alert">
-                        Você é administrador desta vaga!
+                        Você é administrador desta evento!
                     </div>
                 </div>
                 <div class="AdmVisualizando mt-md-2">
-                    <a class="btn btn-info" href="/vaga/editar/@Model.IdVaga">Editar</a>
+                    <a class="btn btn-info" href="/evento/editar/@Model.IdEvento">Editar</a>
                     <a class="btn btn-danger ms-2" onclick="ConfirmacaoExcluirVaga();">Excluir</a>
                 </div>
             }
@@ -116,19 +116,19 @@
             <hr />
             <h5><strong>OUTROS EVENTOS EM @ViewBag.Local</strong></h5>
             <div class="row">
-                @foreach (var vaga in ViewBag.VagasParecidas)
+                @foreach (var evento in ViewBag.VagasParecidas)
                 {
-                    if (vaga.DataEvento != null)
+                    if (evento.DataEvento != null)
                     {
-                        var DataCompleta = (DateTime)vaga.DataEvento;
+                        var DataCompleta = (DateTime)evento.DataEvento;
                         Data = DataCompleta.ToString("dd/MM/yyyy");
                         Hora = DataCompleta.ToString("HH:mm");
                     }
                     <div class="col-sm-3">
                         <div class="card" style="max-width: 19rem;">
                             <div class="card-body">
-                                <h5 class="card-title">@vaga.Titulo</h5>
-                                @if (@vaga.DataEvento == null)
+                                <h5 class="card-title">@evento.Titulo</h5>
+                                @if (@evento.DataEvento == null)
                                 {
                                     <p class="card-text">Data do Evento: Não escolhida</p>
                                 }
@@ -137,8 +137,8 @@
                                     <p class="card-datahora">Data do Evento: @Data</p>
                                     <p class="card-text">Horário do Evento: @Hora</p>
                                 }
-                                <p class="card-text">Local: @vaga.Cidade_Estado</p>
-                                <a href="/vaga/visualizar/@vaga.Id_Vaga" class="btn " style="background-color: #62c0a3;"><b>Visualizar</b></a>
+                                <p class="card-text">Local: @evento.Cidade_Estado</p>
+                                <a href="/evento/visualizar/@evento.Id_Evento" class="btn " style="background-color: #62c0a3;"><b>Visualizar</b></a>
                             </div>
                         </div>
                     </div>
@@ -148,5 +148,5 @@
     </div>
 </div>
 <script>
-    var idVaga = @Model.IdVaga;
+    var idEvento = @Model.IdEvento;
 </script>

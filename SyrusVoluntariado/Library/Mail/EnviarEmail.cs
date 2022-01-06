@@ -12,7 +12,7 @@ namespace BeaHelper.Library.Mail {
 
         public static void EnviarMensagemContato(Usuario_P1 usuario, string emailAdm, int idVaga) {
 
-            string hrefListaVagas = "https://beahelper.herokuapp.com/vaga/listavoluntarios/" + idVaga;
+            string hrefListaVagas = "https://beahelper.herokuapp.com/evento/listavoluntarios/" + idVaga;
             string Sexo;
 
             if (usuario.Sexo == 1)
