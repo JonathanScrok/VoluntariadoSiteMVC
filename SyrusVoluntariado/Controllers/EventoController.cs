@@ -100,7 +100,17 @@ namespace BeaHelper.Controllers
                 ViewBag.ADMEvento = true;
             }
 
-            List<Evento> eventosParecidas = Evento_P2.EventosParecidosLocal(evento.CidadeEstado, evento.IdEvento);
+            List<Evento> eventos = Evento_P2.EventosParecidosLocal(evento.CidadeEstado, evento.IdEvento);
+
+            List<Evento> eventosParecidas = eventos.Where(x => x.DataEvento != null).ToList();
+
+            List<Evento> eventosParecidosSemData = eventos.Where(x => x.DataEvento == null).ToList();
+
+            foreach (var eventoNoDate in eventosParecidosSemData)
+            {
+                eventosParecidas.Add(eventoNoDate);
+            }
+
             ViewBag.EventosParecidos = eventosParecidas;
             ViewBag.Local = evento.CidadeEstado.ToUpper();
             return View(evento);
