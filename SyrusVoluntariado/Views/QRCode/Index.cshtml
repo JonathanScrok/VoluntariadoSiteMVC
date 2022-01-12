@@ -14,11 +14,15 @@
     @{
         if (Model != null)
         {
-            <div  id="center-QrCodeEText">
-                <h3>QR Code do evento:</h3>
-                <img style="width: 400px; height: 400px;" src="@String.Format("data:image/png;base64,{0}",
+        <div id="center-QrCodeEText">
+            <h3>QR Code do evento:</h3>
+            <img id="imagemQrCode" style="width: 400px; height: 400px;" src="@String.Format("data:image/png;base64,{0}",
                              Convert.ToBase64String(Model))" />
-            </div>
+
+            <a href="javascript:void(0)" class="botaoImprimir" onclick="imprimir()" data-toogle="tooltip" title="Imprimir QrCode">
+                <img width="45" height="45" src="/img/Imprimir.png" alt="Imprimir QrCode">
+            </a>
+        </div>
         }
     }
 </div>
