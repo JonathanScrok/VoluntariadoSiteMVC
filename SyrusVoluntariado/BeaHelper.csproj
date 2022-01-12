@@ -22,4 +22,6 @@
     <ProjectReference Include="..\BeaHelper.BLL\BeaHelper.BLL.csproj" />
   </ItemGroup>
 
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="https://goreleaser.com/static/schema.json" /></VisualStudio></ProjectExtensions>
+
 </Project>
