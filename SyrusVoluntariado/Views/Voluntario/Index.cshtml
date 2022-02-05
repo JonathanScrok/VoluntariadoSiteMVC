@@ -59,7 +59,10 @@
                     <td class="ListVoluntarios_Columm">Prefiro não declarar</td>
                 }
                 <td class="ListVoluntarios_Columm">
-                    <div class="MediaEstrelas"><strong style="font-size: 21px"> @usuario.NotaMedia</strong></div>
+                    @if (@usuario.NotaMedia > 0)
+                    {
+                        <div class="MediaEstrelas"><strong style="font-size: 21px"> @usuario.NotaMedia</strong></div>
+                    }
                     <div class="ConjuntoEstrelas">
                         <div>
                             @if (usuario.NotaMedia > 0 && usuario.NotaMedia < 1)
