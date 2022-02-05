@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using X.PagedList;
+using System.Text.RegularExpressions;
 
 namespace BeaHelper.Controllers
 {
@@ -290,7 +291,12 @@ namespace BeaHelper.Controllers
                 var Avaliacao = Avaliacao_P1.TodasAvaliacoesUsuario(IdUsu);
                 UsuarioCompleto.Id = Usuario.IdUsuario;
                 UsuarioCompleto.Email = Usuario.Email;
-                UsuarioCompleto.NumeroCelular = Usuario.NumeroCelular;
+
+                Regex regex = new Regex(@"\D"); //Regex para remover tudo oque não for número
+                string numeroWhatapp = regex.Replace(Usuario.NumeroCelular, @"");
+
+                UsuarioCompleto.NumeroCelular = numeroWhatapp;
+
                 UsuarioCompleto.Nome = Usuario.Nome;
                 UsuarioCompleto.Sexo = Usuario.Sexo;
 
