@@ -44,6 +44,8 @@ namespace BeaHelper.Controllers
                     var media = countNota / AvaliacaoUsuario.Count;
                     media = Math.Round(media, 1);
                     voluntarioCompleto.NotaMedia = media;
+                    bool isInt = media == (int)media; //true - é um inteiro | false - é número quebrado
+                    voluntarioCompleto.isInt = isInt;
                     voluntarioCompleto.NuncaAvaliado = false;
                 }
                 else

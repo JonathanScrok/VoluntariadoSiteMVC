@@ -62,7 +62,13 @@
                     <div class="MediaEstrelas"><strong style="font-size: 21px"> @usuario.NotaMedia</strong></div>
                     <div class="ConjuntoEstrelas">
                         <div>
-                            @if (usuario.NotaMedia > 0)
+                            @if (usuario.NotaMedia > 0 && usuario.NotaMedia < 1 && !usuario.isInt)
+                            {
+                                <a>
+                                    <img src="/img/starMetade.png" id="s1">
+                                </a>
+                            }
+                            else if (usuario.NotaMedia > 0)
                             {
                                 <a>
                                     <img src="/img/star1.png" id="s1">
@@ -71,50 +77,78 @@
                             else
                             {
                                 <p>Nenhuma Avaliação</p>
+                                <a>
+                                    <img src="/img/star0.png" id="s1">
+                                </a>
+
                             }
-                            @if (usuario.NotaMedia > 1)
+                            @if (usuario.NotaMedia > 1 && usuario.NotaMedia < 2 && !usuario.isInt)
+                            {
+                                <a>
+                                    <img src="/img/starMetade.png" id="s2">
+                                </a>
+                            }
+                            else if (usuario.NotaMedia > 1)
                             {
                                 <a>
                                     <img src="/img/star1.png" id="s2">
                                 </a>
                             }
-                            else if (usuario.NotaMedia > 0)
+                            else
                             {
                                 <a>
                                     <img src="/img/star0.png" id="s2">
                                 </a>
                             }
-                            @if (usuario.NotaMedia > 2)
+                            @if (usuario.NotaMedia > 2 && usuario.NotaMedia < 3 && !usuario.isInt)
+                            {
+                                <a>
+                                    <img src="/img/starMetade.png" id="s3">
+                                </a>
+                            }
+                            else if (usuario.NotaMedia > 2)
                             {
                                 <a>
                                     <img src="/img/star1.png" id="s3">
                                 </a>
                             }
-                            else if (usuario.NotaMedia > 0)
+                            else
                             {
                                 <a>
                                     <img src="/img/star0.png" id="s3">
                                 </a>
                             }
-                            @if (usuario.NotaMedia > 3)
+                            @if (usuario.NotaMedia > 3 && usuario.NotaMedia < 4 && !usuario.isInt)
+                            {
+                                <a>
+                                    <img src="/img/starMetade.png" id="s4">
+                                </a>
+                            }
+                            else if (usuario.NotaMedia > 3)
                             {
                                 <a>
                                     <img src="/img/star1.png" id="s4">
                                 </a>
                             }
-                            else if (usuario.NotaMedia > 0)
+                            else
                             {
                                 <a>
                                     <img src="/img/star0.png" id="s4">
                                 </a>
                             }
-                            @if (usuario.NotaMedia > 4)
+                            @if (usuario.NotaMedia > 4 && usuario.NotaMedia < 5 && !usuario.isInt)
+                            {
+                                <a>
+                                    <img src="/img/starMetade.png" id="s5">
+                                </a>
+                            }
+                            else if (usuario.NotaMedia > 4)
                             {
                                 <a>
                                     <img src="/img/star1.png" id="s5">
                                 </a>
                             }
-                            else if (usuario.NotaMedia > 0)
+                            else
                             {
                                 <a>
                                     <img src="/img/star0.png" id="s5">
