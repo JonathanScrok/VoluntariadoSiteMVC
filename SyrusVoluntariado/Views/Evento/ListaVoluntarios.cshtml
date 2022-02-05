@@ -47,7 +47,7 @@
     <tbody>
         @foreach (var usuario in Model)
         {
-            string urlWpp = "https://wa.me/" + @usuario.NumeroCelular;
+            string urlWpp = "https://wa.me/"+ "55" + @usuario.NumeroCelular;
             <tr>
                 <td class="ListVoluntarios_Columm" scope="row">@usuario.Nome</td>
                 <td class="ListVoluntarios_Columm">@usuario.Email</td>

@@ -52,7 +52,7 @@
                         @Html.ValidationMessage("email")
                     </div>
                     <div class="form-floating emailLogin">
-                        <input type="text" name="NumeroCelular" value="@Model.NumeroCelular" class="form-control logininput" id="NumeroCelular" placeholder="">
+                        <input type="text" name="NumeroCelular" value="@Model.NumeroCelular" class="form-control logininput" id="NumeroCelular" maxlength="15" placeholder="">
                         <label for="NumeroCelular">Celular:</label>
                         @Html.ValidationMessage("NumeroCelular")
                     </div>

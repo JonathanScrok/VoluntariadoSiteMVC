@@ -18,6 +18,9 @@ namespace BeaHelper.BLL.Models {
         [Required(ErrorMessage = "O Campo é Obrigatório!")]
         [EmailAddress(ErrorMessage = "O Email é inválido!")]
         public string Email { get; set; }
+
+        [MinLength(15, ErrorMessage = "Número de celular incorreto!")]
+        [MaxLength(15, ErrorMessage = "Número de celular incorreto!")]
         public string NumeroCelular { get; set; }
 
         [Required(ErrorMessage = "O Campo é Obrigatório!")]
