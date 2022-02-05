@@ -61,7 +61,7 @@ html {
 }
 
 #ConteudoSite {
-    margin-top: 70px;
+    margin-top: 90px;
 }
 
 .info-pai {
@@ -404,8 +404,4 @@ html {
     margin-top: 20px;
     display: flex;
     justify-content: center;
-}
-
-#formularioCadastroEvento {
-    margin-top: 90px;
 }

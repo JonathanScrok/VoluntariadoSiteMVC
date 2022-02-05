@@ -49,14 +49,14 @@
                                 <li class="nav-item px-2"><a class="nav-link" href="/evento">Eventos</a></li>
                                 <li class="nav-item px-2"><a class="nav-link" href="/voluntario">Voluntários</a></li>
                             </ul>
-                            <div class="dropdown d-none d-lg-block">
+                            @*<div class="dropdown d-none d-lg-block">
                                 <button class="btn bg-soft-warning ms-2" id="dropdownMenuButton1" type="submit" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-search text-warning"></i></button>
                                 <div class="dropdown-menu dropdown-menu-lg-end p-0 rounded" aria-labelledby="dropdownMenuButton1" style="top:55px">
                                     <form>
                                         <input class="form-control border-200" type="search" placeholder="Pesquisar" aria-label="Search" style="background:#FDF1DF;" />
                                     </form>
                                 </div>
-                            </div>
+                            </div>*@
                             @if (Logado == null && Login == null)
                             {
                                 <a class="btn btn-dark me-md-2 order-1 order-lg-0 ms-lg-3" href="/login">Entrar</a>
@@ -86,10 +86,6 @@
                                     </li>
                                 </ul>
                             }
-                            <form class="d-flex my-3 d-block d-lg-none">
-                                <input class="form-control me-2 border-200 bg-light" type="search" placeholder="Pesquisar" aria-label="Search" />
-                                <button class="btn btn-outline-primary" type="submit">Pesquisar</button>
-                            </form>
                         </div>
                     </div>
                 </nav>
