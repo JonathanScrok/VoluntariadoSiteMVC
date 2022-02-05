@@ -37,6 +37,7 @@
         <tr>
             <th class="ListVoluntarios_Columm" scope="col">Nome</th>
             <th class="ListVoluntarios_Columm" scope="col">Email</th>
+            <th class="ListVoluntarios_Columm" scope="col">Celular</th>
             <th class="ListVoluntarios_Columm" scope="col">Sexo</th>
             <th class="ListVoluntarios_Columm" scope="col">NotaMedia Media do Voluntário</th>
             <th></th>
@@ -46,9 +47,16 @@
     <tbody>
         @foreach (var usuario in Model)
         {
+            string urlWpp = "https://wa.me/" + @usuario.NumeroCelular;
             <tr>
                 <td class="ListVoluntarios_Columm" scope="row">@usuario.Nome</td>
                 <td class="ListVoluntarios_Columm">@usuario.Email</td>
+                <td class="ListVoluntarios_Columm">
+                    <p style="margin-bottom: 0px;">@usuario.NumeroCelular</p>
+                    <a href="@urlWpp" data-toogle="tooltip" target="_blank" title="Mensagem no WhatsApp">
+                        <img width="45" height="45" src="/img/whatsapp.png" alt="Compartilhar no WhatsApp">
+                    </a>
+                </td>
                 @if (usuario.Sexo == 1)
                 {
                     <td class="ListVoluntarios_Columm">Masculino</td>
