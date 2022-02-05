@@ -405,3 +405,7 @@ html {
     display: flex;
     justify-content: center;
 }
+
+#formularioCadastroEvento {
+    margin-top: 90px;
+}

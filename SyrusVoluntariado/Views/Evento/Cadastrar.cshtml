@@ -13,7 +13,7 @@
     </div>
 }
 <link href="/css/FundoPaginas.css" rel="stylesheet" type="text/css" />
-<section>
+<div id="formularioCadastroEvento">
     <form method="post">
         <input type="hidden" name="id_Evento" value="@Model.Id_Evento" />
         @*<input type="hidden" name="dataPublicacao" value="@Model.DataPublicacao = @DateTime.Now.ToString("dd/MM/yyyy");" />*@
@@ -95,5 +95,5 @@
             <button type="submit" class="btn btn-success mt-md-2" style="align-items:center">@ViewBag.CadastrarAtualizar</button>
         </div>
     </form>
-</section>
+</div>
 <script src="~/js/Cadastrar.js"></script>
