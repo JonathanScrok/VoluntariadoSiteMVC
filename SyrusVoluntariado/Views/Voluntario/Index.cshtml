@@ -36,9 +36,7 @@
     <thead>
         <tr>
             <th class="ListVoluntarios_Columm" scope="col">Nome</th>
-            <th class="ListVoluntarios_Columm" scope="col">Email</th>
             <th class="ListVoluntarios_Columm" scope="col">Sexo</th>
-            <th class="ListVoluntarios_Columm" scope="col">Número de Celular</th>
             <th class="ListVoluntarios_Columm" scope="col">NotaMedia Media do Voluntário</th>
         </tr>
     </thead>
@@ -48,7 +46,6 @@
         {
             <tr>
                 <td class="ListVoluntarios_Columm" scope="row">@usuario.Usuario.Nome</td>
-                <td class="ListVoluntarios_Columm">@usuario.Usuario.Email</td>
                 @if (usuario.Usuario.Sexo == 1)
                 {
                     <td class="ListVoluntarios_Columm">Masculino</td>
@@ -61,7 +58,6 @@
                 {
                     <td class="ListVoluntarios_Columm">Prefiro não declarar</td>
                 }
-                <td class="ListVoluntarios_Columm">@usuario.Usuario.NumeroCelular</td>
                 <td class="ListVoluntarios_Columm">
                     <div class="MediaEstrelas"><strong style="font-size: 21px"> @usuario.NotaMedia</strong></div>
                     <div class="ConjuntoEstrelas">
