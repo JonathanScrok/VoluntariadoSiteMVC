@@ -28,7 +28,7 @@ function id(el) {
     return document.getElementById(el);
 }
 window.onload = function () {
-    id('NumeroCelular').onkeyup = function () {
+    id('celularcadastro').onkeyup = function () {
         mascara(this, mtel);
     }
 }

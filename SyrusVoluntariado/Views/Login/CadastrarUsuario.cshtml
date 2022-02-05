@@ -31,7 +31,7 @@
                         </div>
                     }
                     <div class="form-floating emailLogin">
-                        <input type="text" name="nome" value="@Model.Nome" class="form-control logininput" id="nome" placeholder="">
+                        <input type="text" name="nome" value="@Model.Nome" class="form-control logininput" id="nomecadastro" placeholder="">
                         <label for="nome">Nome Completo:</label>
                         @Html.ValidationMessage("nome")
                     </div>
@@ -47,17 +47,17 @@
                         @Html.ValidationMessage("sexo")
                     </div>
                     <div class="form-floating emailLogin">
-                        <input type="text" name="email" value="@Model.Email" class="form-control logininput" id="email" placeholder="">
+                        <input type="text" name="email" value="@Model.Email" class="form-control logininput" id="emailcadastro" placeholder="">
                         <label for="email">Email:</label>
                         @Html.ValidationMessage("email")
                     </div>
                     <div class="form-floating emailLogin">
-                        <input type="text" name="NumeroCelular" value="@Model.NumeroCelular" class="form-control logininput" id="NumeroCelular" maxlength="15" placeholder="">
+                        <input type="text" name="NumeroCelular" value="@Model.NumeroCelular" class="form-control logininput" id="celularcadastro" maxlength="15" placeholder="">
                         <label for="NumeroCelular">Celular:</label>
                         @Html.ValidationMessage("NumeroCelular")
                     </div>
                     <div class="form-floating emailLogin">
-                        <input type="password" name="senha" value="@Model.Senha" class="form-control logininput" id="senha" placeholder="">
+                        <input type="password" name="senha" value="@Model.Senha" class="form-control logininput" id="senhacadastro" placeholder="">
                         <label for="senha">Senha:</label>
                         @Html.ValidationMessage("senha")
                     </div>
