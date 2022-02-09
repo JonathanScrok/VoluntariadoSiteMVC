@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using X.PagedList;
+using Microsoft.AspNetCore.Http;
 
 namespace BeaHelper.Controllers
 {
@@ -65,6 +66,42 @@ namespace BeaHelper.Controllers
             var resultadoPaginado = voluntariosOrdenados.ToPagedList(pageNumber, 10);
 
             return View(resultadoPaginado);
+        }
+
+        [HttpGet]
+        public IActionResult Convidar(int Id)
+        {
+            return RedirectToAction("MeusEventos", "Perfil", new { Convidando = true, IdVoluntarioConvidado = Id});
+        }
+
+        [HttpGet]
+        public IActionResult PostConvidar(int Id, int IdEvento) //Alterar para Chamar por JS, Mudar o botao para desabilitado com o texto Convidado e criar nova notificação
+        {
+            Notificacao_P1 notificacao = new Notificacao_P1();
+            notificacao.IdUsuarioNotificado = Id;
+            notificacao.IdUsuarioNotificou = GetUsuarioLogado();
+            notificacao.Descricao = "Alguém te convidou para participar de um evento! Clique aqui e saiba mais!";
+            notificacao.NotificacaoAtiva = true;
+            notificacao.UrlNotificacao = "https://localhost:44394/evento/visualizar/" + IdEvento;
+            notificacao.DataCadastro = DateTime.Now;
+            notificacao.Save();
+
+            return RedirectToAction("Index", "Voluntario");
+        }
+
+        public int GetUsuarioLogado()
+        {
+            int IdUsuarioLogado = 0;
+            try
+            {
+                IdUsuarioLogado = Int32.Parse(HttpContext.Request.Cookies["IdUsuarioLogado"]);
+            }
+            catch (Exception)
+            {
+                IdUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault();
+            }
+
+            return IdUsuarioLogado;
         }
     }
 }

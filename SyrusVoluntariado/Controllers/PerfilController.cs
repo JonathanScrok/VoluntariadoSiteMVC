@@ -63,7 +63,11 @@ namespace BeaHelper.Controllers {
         }
 
         [HttpGet]
-        public IActionResult MeusEventos() {
+        public IActionResult MeusEventos(bool Convidando = false, int IdVoluntarioConvidado = 0) {
+
+            ViewBag.ConvidarAtivado = Convidando;
+            ViewBag.IdVoluntarioConvidado = IdVoluntarioConvidado;
+
             ViewBag.FooterPrecisa = false;
             int IdUsuarioLogado = GetUsuarioLogado();
 
