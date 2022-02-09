@@ -159,7 +159,7 @@ namespace BeaHelper.BLL.BD
         private const string SELECT_TODASNOTIFICACOES = @"select * from helper.Notificacao";
         private const string SELECT_BUSCA_NOTIFICACOESID = @"select * from helper.Notificacao where Id_Notificacao = @Id_Notificacao";
         private const string SELECT_BUSCA_NOTIFICACOES_IDUSUARIO = @"select * from helper.Notificacao where Id_Usuario_Notificado = @Id_Usuario_Notificado";
-        private const string SELECT_BUSCA_NOTIFICACOES_IDUSUARIOAVALIADO_E_IDUSUARIOAVALIOU = @"select * from helper.Notificacao where Id_Usuario_Notificado = @Id_Usuario_Notificado AND Id_Usuario_Avaliou = @Id_Usuario_Avaliou";
+        private const string SELECT_BUSCA_NOTIFICACOES_IDUSUARIOAVALIADO_E_IDUSUARIOAVALIOU = @"select * from helper.Notificacao where Id_Usuario_Notificado = @Id_Usuario_Notificado AND Id_Usuario_Notificou = @Id_Usuario_Notificou";
 
         private const string UPDATE_NOTIFICACOES = @"UPDATE helper.Notificacao SET Descricao = @Descricao, Id_Usuario_Notificado = @Id_Usuario_Notificado, Id_Usuario_Notificou = @Id_Usuario_Notificou, Url_Notificacao = @Url_Notificacao, NotificacaoAtiva = @NotificacaoAtiva, DataCadastro = @DataCadastro where Id_Notificacao = @Id_Notificacao";
         private const string INSERT_NOTIFICACOES = @"INSERT INTO helper.Notificacao(Id_Usuario_Notificado, Id_Usuario_Notificou, Descricao, Url_Notificacao, NotificacaoAtiva, DataCadastro) VALUES (@Id_Usuario_Notificado, @Id_Usuario_Notificou, @Descricao, @Url_Notificacao, @NotificacaoAtiva, @DataCadastro)";
@@ -244,8 +244,8 @@ namespace BeaHelper.BLL.BD
         }
         #endregion
 
-        #region Busca as Notificações por Id_Usuario_Notificado e Id_Usuario_Avaliou
-        public static List<Notificacao> BuscaIdUsuario_AvaliouEAvaliado(int IdUsuarioNotificado, int IdUsuarioNotificou)
+        #region Busca as Notificações por Id_Usuario_Notificado e Id_Usuario_Notificou
+        public static List<Notificacao> BuscaIdUsuario_NotificouENotificado(int IdUsuarioNotificado, int IdUsuarioNotificou)
         {
             SqlConnection conn = null;
             SqlDataReader reader = null;
@@ -255,7 +255,7 @@ namespace BeaHelper.BLL.BD
             {
                 List<SqlParameter> parms = new List<SqlParameter>();
                 parms.Add(new SqlParameter("@Id_Usuario_Notificado", SqlDbType.Int, 4));
-                parms.Add(new SqlParameter("@Id_Usuario_Avaliou", SqlDbType.Int, 4));
+                parms.Add(new SqlParameter("@Id_Usuario_Notificou", SqlDbType.Int, 4));
 
                 parms[0].Value = IdUsuarioNotificado;
                 parms[1].Value = IdUsuarioNotificou;

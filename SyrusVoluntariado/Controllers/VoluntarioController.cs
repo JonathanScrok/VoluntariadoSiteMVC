@@ -16,10 +16,10 @@ namespace BeaHelper.Controllers
     {
         public IActionResult Index()
         {
-            var voluntarios = Usuario_P2.TodosUsuarios();
+            int IdUsuarioLogado = GetUsuarioLogado();
+            var voluntarios = Usuario_P2.TodosUsuarios(IdUsuarioLogado);
 
             List<UsuarioCompleto> voluntariosCompleto = new List<UsuarioCompleto>();
-
 
             foreach (var voluntario in voluntarios)
             {
@@ -57,6 +57,11 @@ namespace BeaHelper.Controllers
                     voluntarioCompleto.Usuario = voluntario;
                     voluntarioCompleto.NuncaAvaliado = true;
                 }
+                var notificacoes = Notificacao_P1.BuscaIdUsuario_NotificouENotificado(voluntario.Id_Usuario, IdUsuarioLogado);
+                if (notificacoes.Count > 0)
+                    voluntarioCompleto.JaConvidado = true;
+                else
+                    voluntarioCompleto.JaConvidado = false;
                 voluntariosCompleto.Add(voluntarioCompleto);
             }
 

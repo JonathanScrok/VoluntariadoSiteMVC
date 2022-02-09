@@ -160,9 +160,18 @@
                         </div>
                     </div>
                 </td>
-                <td class="ListVoluntarios_Columm">
-                    <a class="btn btn-info ms-md-2" href="/voluntario/convidar/?Id=@usuario.Usuario.Id_Usuario">Convidar</a>
-                </td>
+                @if (usuario.JaConvidado)
+                {
+                    <td class="ListVoluntarios_Columm">
+                        <button class="btn btn-success" disabled>Já Convidado</button>
+                    </td>
+                }
+                else
+                {
+                    <td class="ListVoluntarios_Columm">
+                        <a class="btn btn-info ms-md-2" href="/voluntario/convidar/?Id=@usuario.Usuario.Id_Usuario">Convidar</a>
+                    </td>
+                }
             </tr>
         }
     </tbody>

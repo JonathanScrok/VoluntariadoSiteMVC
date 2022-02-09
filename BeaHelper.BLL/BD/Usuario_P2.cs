@@ -126,7 +126,7 @@ namespace BeaHelper.BLL.BD
         #endregion
 
         #region Consultas
-        private const string SELECT_TODOSUSUARIOS = @"select * from helper.Usuarios";
+        private const string SELECT_TODOSUSUARIOS = @"select * from helper.Usuarios where Id_Usuario != @Id_Usuario";
         private const string SELECT_BUSCAUSUARIOID = @"select * from helper.Usuarios WITH(NOLOCK) where Id_Usuario = @Id_Usuario";
         private const string SELECT_BUSCAEMAILUSUARIO = @"select * from helper.Usuarios WITH(NOLOCK) where Email = @Email";
         #endregion
@@ -163,7 +163,7 @@ namespace BeaHelper.BLL.BD
         #endregion
 
         #region Busca todos os Usuários do Banco
-        public static List<Usuario> TodosUsuarios()
+        public static List<Usuario> TodosUsuarios(int IdUsuarioLogado)
         {
             SqlConnection conn = null;
             SqlDataReader reader = null;
@@ -171,10 +171,15 @@ namespace BeaHelper.BLL.BD
 
             try
             {
+                List<SqlParameter> parms = new List<SqlParameter>();
+                parms.Add(new SqlParameter("@Id_Usuario", SqlDbType.BigInt, 4));
+                parms[0].Value = IdUsuarioLogado;
+
                 conn = new SqlConnection(stringConnection);
                 conn.Open();
 
                 SqlCommand cmd = new SqlCommand(SELECT_TODOSUSUARIOS, conn);
+                cmd.Parameters.Add(parms[0]);
 
                 Mapper.CreateMap<IDataRecord, Usuario>();
 
