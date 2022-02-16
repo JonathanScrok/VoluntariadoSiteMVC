@@ -14,6 +14,7 @@ namespace BeaHelper.BLL.Models
         public int Id_Usuario_Notificou { get; set; }
         public string Url_Notificacao { get; set; }
         public bool NotificacaoAtiva { get; set; }
+        public bool Flg_Visualizado { get; set; }
         public DateTime DataCadastro { get; set; }
     }
 }

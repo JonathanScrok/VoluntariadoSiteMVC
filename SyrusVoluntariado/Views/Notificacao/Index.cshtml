@@ -1,0 +1,51 @@
+﻿@model List<BeaHelper.BLL.Models.Notificacao>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "Notificações";
+}
+
+<div class="mt-md-3">
+    @if (TempData["Mensagem"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            @TempData["Mensagem"]
+        </div>
+    }
+</div>
+
+<div class="mt-md-3">
+    @if (TempData["MensagemErro"] != null)
+    {
+        <div class="alert alert-danger alertemail" role="alert">
+            @TempData["MensagemErro"]
+        </div>
+    }
+</div>
+
+<link href="/css/FundoPaginas.css" rel="stylesheet" type="text/css" />
+
+<div class="TudoNotificacoes">
+    <div>
+        @foreach (var notificacao in Model)
+        {
+            <div class="card text-center">
+                @if (!notificacao.Flg_Visualizado)
+                {
+                    <div class="card-header text-muted">
+                        Nova Notificação
+                    </div>
+                }
+                <a href="@notificacao.Url_Notificacao" style="text-decoration:none">
+                    <div class="card-body">
+                        <p class="card-text">@notificacao.Descricao</p>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+</div>
+
+

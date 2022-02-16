@@ -73,3 +73,16 @@ function showMessage() {
 function hideMessage() {
     mensagem.style.display = "none";
 }
+
+var toastTrigger = document.getElementById('liveToastBtn')
+var toastLiveExample = document.getElementById('liveToast')
+var toastLiveExample2 = document.getElementById('liveToast2')
+if (toastTrigger) {
+    toastTrigger.addEventListener('click', function () {
+        var toast = new bootstrap.Toast(toastLiveExample)
+        var toast2 = new bootstrap.Toast(toastLiveExample2)
+
+        toast.show()
+        toast2.show()
+    })
+}

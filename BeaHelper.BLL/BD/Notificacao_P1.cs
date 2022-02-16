@@ -25,6 +25,7 @@ namespace BeaHelper.BLL.BD
         private int _idUsuarioNotificado;
         private int _idUsuarioNotificou;
         private bool _notificacaoAtiva;
+        private bool? _flg_Visualizado;
         private DateTime _dataCadastro;
 
         private bool _persisted;
@@ -109,7 +110,7 @@ namespace BeaHelper.BLL.BD
         }
         #endregion
 
-        #region IdNotificacao
+        #region NotificacaoAtiva
         public bool NotificacaoAtiva
         {
             get
@@ -119,6 +120,21 @@ namespace BeaHelper.BLL.BD
             set
             {
                 this._notificacaoAtiva = value;
+                this._modified = true;
+            }
+        }
+        #endregion
+
+        #region Flg_Visualizado
+        public bool? Flg_Visualizado
+        {
+            get
+            {
+                return this._flg_Visualizado;
+            }
+            set
+            {
+                this._flg_Visualizado = value;
                 this._modified = true;
             }
         }
@@ -162,8 +178,8 @@ namespace BeaHelper.BLL.BD
         private const string SELECT_BUSCA_NOTIFICACOES_IDUSUARIO_ATIVAS = @"select * from helper.Notificacao where Id_Usuario_Notificado = @Id_Usuario_Notificado and NotificacaoAtiva = @NotificacaoAtiva";
         private const string SELECT_BUSCA_NOTIFICACOES_IDUSUARIOAVALIADO_E_IDUSUARIOAVALIOU = @"select * from helper.Notificacao where Id_Usuario_Notificado = @Id_Usuario_Notificado AND Id_Usuario_Notificou = @Id_Usuario_Notificou";
 
-        private const string UPDATE_NOTIFICACOES = @"UPDATE helper.Notificacao SET Descricao = @Descricao, Id_Usuario_Notificado = @Id_Usuario_Notificado, Id_Usuario_Notificou = @Id_Usuario_Notificou, Url_Notificacao = @Url_Notificacao, NotificacaoAtiva = @NotificacaoAtiva, DataCadastro = @DataCadastro where Id_Notificacao = @Id_Notificacao";
-        private const string INSERT_NOTIFICACOES = @"INSERT INTO helper.Notificacao(Id_Usuario_Notificado, Id_Usuario_Notificou, Descricao, Url_Notificacao, NotificacaoAtiva, DataCadastro) VALUES (@Id_Usuario_Notificado, @Id_Usuario_Notificou, @Descricao, @Url_Notificacao, @NotificacaoAtiva, @DataCadastro)";
+        private const string UPDATE_NOTIFICACOES = @"UPDATE helper.Notificacao SET Descricao = @Descricao, Id_Usuario_Notificado = @Id_Usuario_Notificado, Id_Usuario_Notificou = @Id_Usuario_Notificou, Url_Notificacao = @Url_Notificacao, NotificacaoAtiva = @NotificacaoAtiva, Flg_Visualizado = @Flg_Visualizado, DataCadastro = @DataCadastro where Id_Notificacao = @Id_Notificacao";
+        private const string INSERT_NOTIFICACOES = @"INSERT INTO helper.Notificacao(Id_Usuario_Notificado, Id_Usuario_Notificou, Descricao, Url_Notificacao, NotificacaoAtiva, Flg_Visualizado, DataCadastro) VALUES (@Id_Usuario_Notificado, @Id_Usuario_Notificou, @Descricao, @Url_Notificacao, @NotificacaoAtiva, @Flg_Visualizado, @DataCadastro)";
         private const string DELETE_NOTIFICACOES = @"DELETE FROM helper.Notificacao WHERE Id_Notificacao = @Id_Notificacao";
         #endregion
 
@@ -180,6 +196,7 @@ namespace BeaHelper.BLL.BD
             parms.Add(new SqlParameter("@Id_Usuario_Notificado", SqlDbType.BigInt));
             parms.Add(new SqlParameter("@Id_Usuario_Notificou", SqlDbType.BigInt));
             parms.Add(new SqlParameter("@NotificacaoAtiva", SqlDbType.Bit, 1));
+            parms.Add(new SqlParameter("@Flg_Visualizado", SqlDbType.Bit, 1));
             parms.Add(new SqlParameter("@DataCadastro", SqlDbType.DateTime, 8));
 
             return (parms);
@@ -196,7 +213,8 @@ namespace BeaHelper.BLL.BD
             parms[3].Value = this._idUsuarioNotificado;
             parms[4].Value = this._idUsuarioNotificou;
             parms[5].Value = this._notificacaoAtiva;
-            parms[6].Value = this._dataCadastro;
+            parms[6].Value = this._flg_Visualizado;
+            parms[7].Value = this._dataCadastro;
 
         }
         #endregion
@@ -631,6 +649,12 @@ namespace BeaHelper.BLL.BD
                     objVaga._idUsuarioNotificado = Convert.ToInt32(dr["Id_Usuario_Notificado"]);
                     objVaga._idUsuarioNotificou = Convert.ToInt32(dr["Id_Usuario_Notificou"]);
                     objVaga._notificacaoAtiva = Convert.ToBoolean(dr["NotificacaoAtiva"]);
+
+                    if (dr["Flg_Visualizado"] != DBNull.Value)
+                        objVaga._flg_Visualizado = Convert.ToBoolean(dr["Flg_Visualizado"]);
+                    else
+                        objVaga._flg_Visualizado = null;
+
                     objVaga._dataCadastro = Convert.ToDateTime(dr["DataCadastro"]);
 
 

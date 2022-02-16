@@ -1,29 +1,26 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using BeaHelper.BLL.BD;
+﻿using BeaHelper.BLL.BD;
 using BeaHelper.BLL.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using X.PagedList;
 
-namespace BeaHelper.Controllers {
-    public class HomeController : Controller {
-
-        public IActionResult Index(int? page) {
-            var pageNumber = page ?? 1;
-            List<Evento> eventos = Evento_P2.Top8UltimasEventos();
-
-            var resultadoPaginado = eventos.ToPagedList(pageNumber, 8);
-
+namespace BeaHelper.Controllers
+{
+    public class NotificacaoController : Controller
+    {
+        public IActionResult Index()
+        {
             int IdUsuarioLogado = GetUsuarioLogado();
+            List<Notificacao> notificacoes = new List<Notificacao>();
+            if (IdUsuarioLogado != 0)
+            {
+                notificacoes = Notificacao_P1.TodasNotificacoesUsuarioAtiva(IdUsuarioLogado);
+            }
 
-            return View(resultadoPaginado);
-        }
-
-        public IActionResult QuemSomosNos() {
-            return View();
+            return View(notificacoes);
         }
 
         public int GetUsuarioLogado()
@@ -40,6 +37,5 @@ namespace BeaHelper.Controllers {
 
             return IdUsuarioLogado;
         }
-
     }
 }

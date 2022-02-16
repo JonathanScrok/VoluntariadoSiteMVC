@@ -48,15 +48,20 @@
                                 <li class="nav-item px-2"><a class="nav-link" href="/evento/cadastrar">Criar Evento</a></li>
                                 <li class="nav-item px-2"><a class="nav-link" href="/evento">Eventos</a></li>
                                 <li class="nav-item px-2"><a class="nav-link" href="/voluntario">Voluntários</a></li>
+                                <li class="nav-item px-2"><a class="nav-link" href="/notificacao">Notificações</a></li>
+
+                                @*<li class="nav-item px-2">
+                                        <a class="nav-link" id="liveToastBtn">Notificações</a>
+                                </li>*@
                             </ul>
                             @*<div class="dropdown d-none d-lg-block">
-                                <button class="btn bg-soft-warning ms-2" id="dropdownMenuButton1" type="submit" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-search text-warning"></i></button>
-                                <div class="dropdown-menu dropdown-menu-lg-end p-0 rounded" aria-labelledby="dropdownMenuButton1" style="top:55px">
-                                    <form>
-                                        <input class="form-control border-200" type="search" placeholder="Pesquisar" aria-label="Search" style="background:#FDF1DF;" />
-                                    </form>
-                                </div>
-                            </div>*@
+                                    <button class="btn bg-soft-warning ms-2" id="dropdownMenuButton1" type="submit" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-search text-warning"></i></button>
+                                    <div class="dropdown-menu dropdown-menu-lg-end p-0 rounded" aria-labelledby="dropdownMenuButton1" style="top:55px">
+                                        <form>
+                                            <input class="form-control border-200" type="search" placeholder="Pesquisar" aria-label="Search" style="background:#FDF1DF;" />
+                                        </form>
+                                    </div>
+                                </div>*@
                             @if (Logado == null && Login == null)
                             {
                                 <a class="btn btn-dark me-md-2 order-1 order-lg-0 ms-lg-3" href="/login">Entrar</a>
@@ -159,6 +164,34 @@
                 </div>
 
                 <!-- Fim Modais -->
+
+
+                <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+                    <div class="toast-container">
+                        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                            <div class="toast-header">
+                                <img src="/img/star1.png" class="rounded me-2" alt="...">
+                                <strong class="me-auto">Bootstrap</strong>
+                                <small>11 mins ago</small>
+                                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                            </div>
+                            <div class="toast-body">
+                                Hello, world! Segunda mensagem.
+                            </div>
+                        </div>
+                        <div id="liveToast2" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                            <div class="toast-header">
+                                <img src="/img/star1.png" class="rounded me-2" alt="...">
+                                <strong class="me-auto">Bootstrap</strong>
+                                <small>11 mins ago</small>
+                                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                            </div>
+                            <div class="toast-body">
+                                Hello, world! Primeira mensagem.
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </main>
         </div>
