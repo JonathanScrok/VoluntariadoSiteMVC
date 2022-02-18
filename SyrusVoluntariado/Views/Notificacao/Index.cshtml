@@ -27,25 +27,36 @@
 
 <link href="/css/FundoPaginas.css" rel="stylesheet" type="text/css" />
 
-<div class="TudoNotificacoes">
-    <div>
-        @foreach (var notificacao in Model)
+<div id="TudoNotificacoes">
+    <div id="NotificacaoFilho">
+        @if (ViewBag.TotalNotificacoes > 0)
         {
-            <div class="card text-center">
-                @if (!notificacao.Flg_Visualizado)
-                {
-                    <div class="card-header text-muted">
-                        Nova Notificação
-                    </div>
-                }
-                <a href="@notificacao.Url_Notificacao" style="text-decoration:none">
-                    <div class="card-body">
-                        <p class="card-text">@notificacao.Descricao</p>
-                    </div>
-                </a>
+            @foreach (var notificacao in Model)
+            {
+                <div class="card text-center" id="CardNotificacao">
+                    @if (!notificacao.Flg_Visualizado)
+                    {
+                        <div class="card-header text-muted">
+                            Nova Notificação
+                        </div>
+                    }
+                    <a href="@notificacao.Url_Notificacao" style="text-decoration:none">
+                        <div class="card-body">
+                            <p class="card-text">@notificacao.Descricao</p>
+                        </div>
+                    </a>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="card">
+                <div class="card-body" style="display: flex; justify-content: space-around;">
+                    <h5 class="card-title">
+                        <p>Nenhuma Notificação</p>
+                    </h5>
+                </div>
             </div>
         }
     </div>
 </div>
-
-

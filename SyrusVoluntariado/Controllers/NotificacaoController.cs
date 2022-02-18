@@ -20,6 +20,8 @@ namespace BeaHelper.Controllers
                 notificacoes = Notificacao_P1.TodasNotificacoesUsuarioAtiva(IdUsuarioLogado);
             }
 
+            ViewBag.TotalNotificacoes = notificacoes.Count;
+
             return View(notificacoes);
         }
 

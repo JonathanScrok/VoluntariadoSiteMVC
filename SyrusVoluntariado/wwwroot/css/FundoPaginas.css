@@ -405,3 +405,18 @@ html {
     display: flex;
     justify-content: center;
 }
+
+
+.TudoNotificacoes {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.NotificacaoFilho {
+    margin-top: 5rem;
+    width: 70%;
+}
+
+#CardNotificacao{
+}
