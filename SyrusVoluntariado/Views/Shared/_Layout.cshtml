@@ -48,11 +48,15 @@
                                 <li class="nav-item px-2"><a class="nav-link" href="/evento/cadastrar">Criar Evento</a></li>
                                 <li class="nav-item px-2"><a class="nav-link" href="/evento">Eventos</a></li>
                                 <li class="nav-item px-2"><a class="nav-link" href="/voluntario">Voluntários</a></li>
-                                <li class="nav-item px-2"><a class="nav-link" href="/notificacao">Notificações</a></li>
-
-                                @*<li class="nav-item px-2">
-                                        <a class="nav-link" id="liveToastBtn">Notificações</a>
-                                </li>*@
+                                @*<li class="nav-item px-2"><a class="nav-link" href="/notificacao">Notificações</a></li>*@
+                                <li>
+                                    <span id="group">
+                                        <a href="/notificacao" class="btn btn-info">
+                                            <i class="fa fa-envelope"></i>
+                                        </a>
+                                        <span class="popupNotify popupNotify-light">9+</span>
+                                    </span>
+                                </li>
                             </ul>
                             @*<div class="dropdown d-none d-lg-block">
                                     <button class="btn bg-soft-warning ms-2" id="dropdownMenuButton1" type="submit" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-search text-warning"></i></button>
@@ -248,6 +252,24 @@
     <script defer type="text/javascript" src="/js/Voluntariar.js"></script>
     <script src="~/js/QrCode.js"></script>
     <script defer type="text/javascript" src="/js/Login.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/js/all.min.js"></script>
+    <script>
+
+        // Use find() function to extract the badge
+        // count from '#group' container.
+        $(document).ready(function () {
+            $(".btn").click(function () {
+                var val = parseInt($('#group').find('.popupNotify').text());
+
+                // Check for the button clicked
+                if ($(this).hasClass('btn-danger')) {
+                    $('#group').find('.popupNotify').text(val - 1);
+                } else if ($(this).hasClass('btn-success')) {
+                    $('#group').find('.popupNotify').text(val + 1);
+                }
+            });
+        });
+    </script>
 
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
 </body>
