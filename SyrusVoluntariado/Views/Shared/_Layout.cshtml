@@ -58,13 +58,13 @@
                                 </li>
                             </ul>
                             @*<div class="dropdown d-none d-lg-block">
-                                    <button class="btn bg-soft-warning ms-2" id="dropdownMenuButton1" type="submit" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-search text-warning"></i></button>
-                                    <div class="dropdown-menu dropdown-menu-lg-end p-0 rounded" aria-labelledby="dropdownMenuButton1" style="top:55px">
-                                        <form>
-                                            <input class="form-control border-200" type="search" placeholder="Pesquisar" aria-label="Search" style="background:#FDF1DF;" />
-                                        </form>
-                                    </div>
-                                </div>*@
+                        <button class="btn bg-soft-warning ms-2" id="dropdownMenuButton1" type="submit" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-search text-warning"></i></button>
+                        <div class="dropdown-menu dropdown-menu-lg-end p-0 rounded" aria-labelledby="dropdownMenuButton1" style="top:55px">
+                            <form>
+                                <input class="form-control border-200" type="search" placeholder="Pesquisar" aria-label="Search" style="background:#FDF1DF;" />
+                            </form>
+                        </div>
+                    </div>*@
                             @if (Logado == null && Login == null)
                             {
                                 <a class="btn btn-dark me-md-2 order-1 order-lg-0 ms-lg-3" href="/login">Entrar</a>
@@ -167,8 +167,7 @@
                 </div>
 
                 <!-- Fim Modais -->
-
-
+                @*Notificações*@
                 <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
                     <div class="toast-container">
                         <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
@@ -195,6 +194,7 @@
                         </div>
                     </div>
                 </div>
+                @*Fim Notificações*@
 
             </main>
         </div>
@@ -233,9 +233,7 @@
             </section>
         </footer>
     </div>
-    <!-- ===============================================-->
-    <!--    End of Main Content-->
-    <!-- ===============================================-->
+     
     <!-- ===============================================-->
     <!--    JavaScripts-->
     <!-- ===============================================-->
@@ -253,6 +251,9 @@
     <script defer type="text/javascript" src="/js/Login.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/js/all.min.js"></script>
     <script src="/js/funcoes.js"></script>
+    <!-- ===============================================-->
+    <!--  FIM  JavaScripts-->
+    <!-- ===============================================-->
 
 </body>
 
