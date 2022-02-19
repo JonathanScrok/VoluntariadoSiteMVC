@@ -10,7 +10,11 @@
         method: "GET",
         url: "/Notificacao/QtdNotificacao"
     }).done(function (result) {
-        $('#group').find('.popupNotify').text(result);
+        if (result > 0) {
+            $('#group').find('.popupNotify').text(result);
+        } else {
+            $('#nPopup').hide();
+        }
     });
 
     //$(".btn").click(function () {

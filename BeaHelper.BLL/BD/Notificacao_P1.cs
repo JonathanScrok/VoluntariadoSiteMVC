@@ -176,6 +176,7 @@ namespace BeaHelper.BLL.BD
         private const string SELECT_BUSCA_NOTIFICACOESID = @"select * from helper.Notificacao where Id_Notificacao = @Id_Notificacao";
         private const string SELECT_BUSCA_NOTIFICACOES_IDUSUARIO = @"select * from helper.Notificacao where Id_Usuario_Notificado = @Id_Usuario_Notificado";
         private const string SELECT_BUSCA_NOTIFICACOES_IDUSUARIO_ATIVAS = @"select * from helper.Notificacao where Id_Usuario_Notificado = @Id_Usuario_Notificado and NotificacaoAtiva = @NotificacaoAtiva";
+        private const string SELECT_BUSCA_NOTIFICACOES_IDUSUARIO_ATIVASCOUNT = @"select Count(*) from helper.Notificacao where Id_Usuario_Notificado = @Id_Usuario_Notificado and NotificacaoAtiva = @NotificacaoAtiva and Flg_Visualizado = @Flg_Visualizado or Flg_Visualizado is null";
         private const string SELECT_BUSCA_NOTIFICACOES_IDUSUARIOAVALIADO_E_IDUSUARIOAVALIOU = @"select * from helper.Notificacao where Id_Usuario_Notificado = @Id_Usuario_Notificado AND Id_Usuario_Notificou = @Id_Usuario_Notificou";
 
         private const string UPDATE_NOTIFICACOES = @"UPDATE helper.Notificacao SET Descricao = @Descricao, Id_Usuario_Notificado = @Id_Usuario_Notificado, Id_Usuario_Notificou = @Id_Usuario_Notificou, Url_Notificacao = @Url_Notificacao, NotificacaoAtiva = @NotificacaoAtiva, Flg_Visualizado = @Flg_Visualizado, DataCadastro = @DataCadastro where Id_Notificacao = @Id_Notificacao";
@@ -340,6 +341,49 @@ namespace BeaHelper.BLL.BD
                     CandidaturasUsuario = Mapper.Map<List<Notificacao>>(reader);
                     return CandidaturasUsuario;
                 }
+            }
+            finally
+            {
+
+                if (reader != null)
+                {
+                    reader.Close();
+                }
+
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+        }
+        #endregion
+
+        #region Conta todas as Notificações por Id_Usuario_Notificado, ATIVA e Não Visualizada
+        public static int CountTodasNotificacoesUsuarioAtiva(int IdUsuarioNotificado)
+        {
+            SqlConnection conn = null;
+            SqlDataReader reader = null;
+
+            try
+            {
+                List<SqlParameter> parms = new List<SqlParameter>();
+                parms.Add(new SqlParameter("@Id_Usuario_Notificado", SqlDbType.Int, 4));
+                parms.Add(new SqlParameter("@NotificacaoAtiva", SqlDbType.Bit, 1));
+                parms.Add(new SqlParameter("@Flg_Visualizado", SqlDbType.Bit, 1));
+
+                parms[0].Value = IdUsuarioNotificado;
+                parms[1].Value = 1;
+                parms[2].Value = 0;
+
+                conn = new SqlConnection(stringConnection);
+                conn.Open();
+
+                SqlCommand cmd = new SqlCommand(SELECT_BUSCA_NOTIFICACOES_IDUSUARIO_ATIVASCOUNT, conn);
+                cmd.Parameters.Add(parms[0]);
+                cmd.Parameters.Add(parms[1]);
+                cmd.Parameters.Add(parms[2]);
+
+                return Convert.ToInt32(cmd.ExecuteScalar());
             }
             finally
             {
