@@ -5,6 +5,17 @@
     if (aceitaCookie == null) {
         $('#exampleModal').modal('show');
     }
+
+    $(".btn").click(function () {
+        var val = parseInt($('#group').find('.popupNotify').text());
+
+        // Check for the button clicked
+        if ($(this).hasClass('btn-danger')) {
+            $('#group').find('.popupNotify').text(val - 1);
+        } else if ($(this).hasClass('btn-success')) {
+            $('#group').find('.popupNotify').text(val + 1);
+        }
+    });
 });
 
 function SalvarConcordancia() {
