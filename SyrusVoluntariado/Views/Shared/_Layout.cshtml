@@ -48,14 +48,17 @@
                                 <li class="nav-item px-2"><a class="nav-link" href="/evento/cadastrar">Criar Evento</a></li>
                                 <li class="nav-item px-2"><a class="nav-link" href="/evento">Eventos</a></li>
                                 <li class="nav-item px-2"><a class="nav-link" href="/voluntario">Voluntários</a></li>
-                                <li>
-                                    <span id="group">
-                                        <a href="/notificacao" class="btn btn-info">
-                                            <i class="fa fa-envelope"></i>
-                                        </a>
-                                        <span id="nPopup" class="popupNotify popupNotify-light">0</span>
-                                    </span>
-                                </li>
+                                @if (Logado != null || Login != null)
+                                {
+                                    <li>
+                                        <span id="group">
+                                            <a href="/notificacao" class="btn btn-info">
+                                                <i class="fa fa-envelope"></i>
+                                            </a>
+                                            <span id="nPopup" class="popupNotify popupNotify-light">0</span>
+                                        </span>
+                                    </li>
+                                }
                             </ul>
                             @*<div class="dropdown d-none d-lg-block">
                         <button class="btn bg-soft-warning ms-2" id="dropdownMenuButton1" type="submit" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-search text-warning"></i></button>
