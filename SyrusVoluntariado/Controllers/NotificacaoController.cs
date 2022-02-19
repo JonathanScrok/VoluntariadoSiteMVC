@@ -25,6 +25,17 @@ namespace BeaHelper.Controllers
             return View(notificacoes);
         }
 
+        public int QtdNotificacao()
+        {
+            int IdUsuarioLogado = GetUsuarioLogado();
+            List<Notificacao> notificacoes = new List<Notificacao>();
+            if (IdUsuarioLogado != 0)
+            {
+                notificacoes = Notificacao_P1.TodasNotificacoesUsuarioAtiva(IdUsuarioLogado);
+            }
+            return notificacoes.Count;
+        }
+
         public int GetUsuarioLogado()
         {
             int IdUsuarioLogado = 0;
