@@ -688,6 +688,7 @@ namespace BeaHelper.BLL.BD
                     objVaga._idNotificacao = Convert.ToInt32(dr["Id_Notificacao"]);
                     objVaga._descricao = Convert.ToString(dr["Descricao"]);
                     objVaga._idUsuarioNotificado = Convert.ToInt32(dr["Id_Usuario_Notificado"]);
+                    objVaga._urlNotificacao = Convert.ToString(dr["Url_Notificacao"]);
                     objVaga._idUsuarioNotificou = Convert.ToInt32(dr["Id_Usuario_Notificou"]);
                     objVaga._notificacaoAtiva = Convert.ToBoolean(dr["NotificacaoAtiva"]);
 

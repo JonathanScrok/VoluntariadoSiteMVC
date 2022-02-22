@@ -34,6 +34,16 @@ namespace BeaHelper.Controllers
                 return 0;
         }
 
+        [HttpPost]
+        public string NotificacaoVisualizada(int idNotificacao)
+        {
+            Notificacao_P1 notificacao = new Notificacao_P1(idNotificacao);
+            notificacao.CompleteObject();
+            notificacao.Flg_Visualizado = true;
+            notificacao.Save();
+            return notificacao.UrlNotificacao;
+        }
+
         public int GetUsuarioLogado()
         {
             int IdUsuarioLogado = 0;
