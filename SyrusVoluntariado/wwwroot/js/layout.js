@@ -14,6 +14,7 @@
             $('#group').find('.popupNotify').text(result);
             var img = document.querySelector("#imgNotificacao");
             img.setAttribute('src', '/img/NotificacaoComFundo.png');
+            $('#nPopup').show();
         } else {
             $('#nPopup').hide();
         }
