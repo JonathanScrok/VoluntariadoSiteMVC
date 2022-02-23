@@ -423,15 +423,19 @@ html {
 
 .popupNotify {
     position: relative;
-    top: -20px;
-    left: -25px;
-    border: 1px solid black;
+    top: -19px;
+    left: -15px;
+    /*top: -20px;*/
+    /*left: -25px;*/
+    border: 1px solid #ffffff;
     border-radius: 50%;
 }
 
 .popupNotify-light {
-    color: #212529;
-    background-color: #f8f9fa;
+    /*color: #212529;*/
+    /*background-color: #f8f9fa;*/
+    color: #ffffff;
+    background-color: #ff0000;
 }
 
 .popupNotify {
