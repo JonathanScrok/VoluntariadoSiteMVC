@@ -23,7 +23,7 @@ namespace BeaHelper.BLL.BD
         private string _descricao;
         private string _urlNotificacao;
         private int _idUsuarioNotificado;
-        private int _idUsuarioNotificou;
+        private int? _idUsuarioNotificou;
         private bool _notificacaoAtiva;
         private bool? _flg_Visualizado;
         private DateTime _dataCadastro;
@@ -96,7 +96,7 @@ namespace BeaHelper.BLL.BD
         #endregion
 
         #region IdUsuarioNotificou
-        public int IdUsuarioNotificou
+        public int? IdUsuarioNotificou
         {
             get
             {
@@ -212,9 +212,19 @@ namespace BeaHelper.BLL.BD
             parms[1].Value = this._descricao;
             parms[2].Value = this._urlNotificacao;
             parms[3].Value = this._idUsuarioNotificado;
-            parms[4].Value = this._idUsuarioNotificou;
+
+            if (this._idUsuarioNotificou == null)
+                parms[4].Value = DBNull.Value;
+            else
+                parms[4].Value = this._idUsuarioNotificou;
+
             parms[5].Value = this._notificacaoAtiva;
-            parms[6].Value = this._flg_Visualizado;
+            
+            if (this._flg_Visualizado == null)
+                parms[6].Value = DBNull.Value;
+            else
+                parms[6].Value = this._flg_Visualizado;
+
             parms[7].Value = this._dataCadastro;
 
         }
@@ -689,8 +699,12 @@ namespace BeaHelper.BLL.BD
                     objVaga._descricao = Convert.ToString(dr["Descricao"]);
                     objVaga._idUsuarioNotificado = Convert.ToInt32(dr["Id_Usuario_Notificado"]);
                     objVaga._urlNotificacao = Convert.ToString(dr["Url_Notificacao"]);
-                    objVaga._idUsuarioNotificou = Convert.ToInt32(dr["Id_Usuario_Notificou"]);
                     objVaga._notificacaoAtiva = Convert.ToBoolean(dr["NotificacaoAtiva"]);
+
+                    if (dr["Id_Usuario_Notificou"] != DBNull.Value)
+                        objVaga._idUsuarioNotificou = Convert.ToInt32(dr["Id_Usuario_Notificou"]);
+                    else
+                        objVaga._idUsuarioNotificou = null;
 
                     if (dr["Flg_Visualizado"] != DBNull.Value)
                         objVaga._flg_Visualizado = Convert.ToBoolean(dr["Flg_Visualizado"]);
