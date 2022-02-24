@@ -423,11 +423,11 @@ html {
 
 .popupNotify {
     position: relative;
-    top: -19px;
-    left: -15px;
+    top: -10px;
+    left: -14px;
     /*top: -20px;*/
     /*left: -25px;*/
-    border: 1px solid #ffffff;
+    /*border: 1px solid #ffffff;*/
     border-radius: 50%;
 }
 

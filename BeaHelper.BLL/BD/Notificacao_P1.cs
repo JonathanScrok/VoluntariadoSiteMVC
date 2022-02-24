@@ -176,6 +176,7 @@ namespace BeaHelper.BLL.BD
         private const string SELECT_BUSCA_NOTIFICACOESID = @"select * from helper.Notificacao where Id_Notificacao = @Id_Notificacao";
         private const string SELECT_BUSCA_NOTIFICACOES_IDUSUARIO = @"select * from helper.Notificacao where Id_Usuario_Notificado = @Id_Usuario_Notificado";
         private const string SELECT_BUSCA_NOTIFICACOES_IDUSUARIO_ATIVAS = @"select * from helper.Notificacao where Id_Usuario_Notificado = @Id_Usuario_Notificado and NotificacaoAtiva = @NotificacaoAtiva";
+        private const string SELECT_NOTIFICACOES_RECENTES_ATIVAS = @"select top 3 * from helper.Notificacao where Id_Usuario_Notificado = @Id_Usuario_Notificado and NotificacaoAtiva = @NotificacaoAtiva order by DataCadastro asc";
         private const string SELECT_BUSCA_NOTIFICACOES_IDUSUARIO_ATIVASCOUNT = @"select Count(*) from helper.Notificacao where Id_Usuario_Notificado = @Id_Usuario_Notificado and NotificacaoAtiva = @NotificacaoAtiva and Flg_Visualizado is null";
         private const string SELECT_BUSCA_NOTIFICACOES_IDUSUARIOAVALIADO_E_IDUSUARIOAVALIOU = @"select * from helper.Notificacao where Id_Usuario_Notificado = @Id_Usuario_Notificado AND Id_Usuario_Notificou = @Id_Usuario_Notificou";
 
@@ -395,6 +396,52 @@ namespace BeaHelper.BLL.BD
             finally
             {
 
+                if (reader != null)
+                {
+                    reader.Close();
+                }
+
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+        }
+        #endregion
+
+        #region Busca Top 3 Notificações por Id_Usuario_Notificado, ATIVA e 
+        public async static Task<List<Notificacao>> NotificacoesRecentes(int IdUsuarioNotificado)
+        {
+            SqlConnection conn = null;
+            SqlDataReader reader = null;
+            List<Notificacao> CandidaturasUsuario = new List<Notificacao>();
+
+            try
+            {
+                List<SqlParameter> parms = new List<SqlParameter>();
+                parms.Add(new SqlParameter("@Id_Usuario_Notificado", SqlDbType.Int, 4));
+                parms.Add(new SqlParameter("@NotificacaoAtiva", SqlDbType.Bit, 1));
+
+                parms[0].Value = IdUsuarioNotificado;
+                parms[1].Value = 1;
+
+                conn = new SqlConnection(stringConnection);
+                conn.Open();
+
+                SqlCommand cmd = new SqlCommand(SELECT_NOTIFICACOES_RECENTES_ATIVAS, conn);
+                cmd.Parameters.Add(parms[0]);
+                cmd.Parameters.Add(parms[1]);
+
+                Mapper.CreateMap<IDataRecord, Notificacao>();
+
+                using (reader = await cmd.ExecuteReaderAsync())
+                {
+                    CandidaturasUsuario = Mapper.Map<List<Notificacao>>(reader);
+                    return CandidaturasUsuario;
+                }
+            }
+            finally
+            {
                 if (reader != null)
                 {
                     reader.Close();

@@ -11,13 +11,25 @@
         url: "/Notificacao/QtdNotificacao"
     }).done(function (result) {
         if (result > 0) {
-            $('#group').find('.popupNotify').text(result);
+            if (result > 9) {
+                $('#group').find('.popupNotify').text('9+');
+            } else {
+                $('#group').find('.popupNotify').text(result);
+            }
+
             var img = document.querySelector("#imgNotificacao");
             img.setAttribute('src', '/img/NotificacaoComFundo.png');
             $('#nPopup').show();
         } else {
             $('#nPopup').hide();
         }
+    });
+
+    $.ajax({
+        method: "GET",
+        url: "/Notificacao/NotificacoesRecentes"
+    }).done(function (result) {
+        console.log(result);
     });
 
     //$(".btn").click(function () {

@@ -25,6 +25,7 @@ namespace BeaHelper.Controllers
             return View(notificacoes);
         }
 
+        [HttpGet]
         public int QtdNotificacao()
         {
             int IdUsuarioLogado = GetUsuarioLogado();
@@ -42,6 +43,25 @@ namespace BeaHelper.Controllers
             notificacao.Flg_Visualizado = true;
             notificacao.Save();
             return notificacao.UrlNotificacao;
+        }
+
+        [HttpGet]
+        public async Task<bool> NotificacoesRecentes()
+        {
+            int IdUsuarioLogado = GetUsuarioLogado();
+            if (IdUsuarioLogado > 0)
+            {
+                var notificacoesRecentes = await Notificacao_P1.NotificacoesRecentes(IdUsuarioLogado);
+                var UmaSemanaAtras = DateTime.Now.AddDays(-7);
+
+                var listaNotifiRecentes = notificacoesRecentes.Where(x => x.DataCadastro >= UmaSemanaAtras).ToList();
+                ViewData["ListaNotificacoesRecentes"] = listaNotifiRecentes;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public int GetUsuarioLogado()
