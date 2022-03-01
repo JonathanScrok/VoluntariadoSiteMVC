@@ -23,15 +23,17 @@
     <!--    Favicons-->
     <!-- ===============================================-->
     <link rel="apple-touch-icon" sizes="180x180" href="/templateboot/public/assets/img/favicons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/templateboot/public/assets/img/favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/templateboot/public/assets/img/favicons/favicon-16x16.png">
+    @*<link rel="icon" type="image/png" sizes="32x32" href="/templateboot/public/assets/img/favicons/favicon-32x32.png">*@
+    @*<link rel="icon" type="image/png" sizes="16x16" href="/templateboot/public/assets/img/favicons/favicon-16x16.png">*@
+    <link rel="icon" type="image/png" sizes="32x32" href="/templateboot/public/assets/img/favicons/beahelper-favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/templateboot/public/assets/img/favicons/beahelper-favicon-16x16.png">
     <link rel="shortcut icon" type="image/x-icon" href="/templateboot/public/assets/img/favicons/favicon.ico">
     <link rel="manifest" href="/templateboot/public/assets/img/favicons/manifest.json">
     <meta name="msapplication-TileImage" content="/templateboot/public/assets/img/favicons/mstile-150x150.png">
     <meta name="theme-color" content="#62c0a3">
     <link href="/templateboot/public/assets/css/theme.css" rel="stylesheet" />
     <link href="/css/FundoPaginas.css" rel="stylesheet" type="text/css" />
-    <script src="/js/funcoes.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
 </head>
 
 
@@ -48,11 +50,17 @@
                                 <li class="nav-item px-2"><a class="nav-link" href="/evento/cadastrar">Criar Evento</a></li>
                                 <li class="nav-item px-2"><a class="nav-link" href="/evento">Eventos</a></li>
                                 <li class="nav-item px-2"><a class="nav-link" href="/voluntario">Voluntários</a></li>
-                                <li class="nav-item px-2"><a class="nav-link" href="/notificacao">Notificações</a></li>
-
-                                @*<li class="nav-item px-2">
-                                        <a class="nav-link" id="liveToastBtn">Notificações</a>
-                                </li>*@
+                                @if (Logado != null || Login != null)
+                                {
+                                    <li>
+                                        <span id="group">
+                                            <a class="btn" href="/notificacao">
+                                                <img id="imgNotificacao" width="30" height="30" src="/img/NotificacaoSemFundo.png" alt="Notificação" />
+                                            </a>
+                                            <span id="nPopup" class="popupNotify popupNotify-light" style="display:none">0</span>
+                                        </span>
+                                    </li>
+                                }
                             </ul>
                             @*<div class="dropdown d-none d-lg-block">
                                     <button class="btn bg-soft-warning ms-2" id="dropdownMenuButton1" type="submit" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-search text-warning"></i></button>
@@ -162,36 +170,7 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- Fim Modais -->
-
-
-                <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-                    <div class="toast-container">
-                        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                            <div class="toast-header">
-                                <img src="/img/star1.png" class="rounded me-2" alt="...">
-                                <strong class="me-auto">Bootstrap</strong>
-                                <small>11 mins ago</small>
-                                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                            </div>
-                            <div class="toast-body">
-                                Hello, world! Segunda mensagem.
-                            </div>
-                        </div>
-                        <div id="liveToast2" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                            <div class="toast-header">
-                                <img src="/img/star1.png" class="rounded me-2" alt="...">
-                                <strong class="me-auto">Bootstrap</strong>
-                                <small>11 mins ago</small>
-                                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                            </div>
-                            <div class="toast-body">
-                                Hello, world! Primeira mensagem.
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
             </main>
         </div>
@@ -230,9 +209,7 @@
             </section>
         </footer>
     </div>
-    <!-- ===============================================-->
-    <!--    End of Main Content-->
-    <!-- ===============================================-->
+
     <!-- ===============================================-->
     <!--    JavaScripts-->
     <!-- ===============================================-->
@@ -248,8 +225,13 @@
     <script defer type="text/javascript" src="/js/Voluntariar.js"></script>
     <script src="~/js/QrCode.js"></script>
     <script defer type="text/javascript" src="/js/Login.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/js/all.min.js"></script>
+    <script src="/js/funcoes.js"></script>
+    <script src="/js/layout.js"></script>
+    <!-- ===============================================-->
+    <!--  FIM  JavaScripts-->
+    <!-- ===============================================-->
 
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
 </body>
 
 </html>

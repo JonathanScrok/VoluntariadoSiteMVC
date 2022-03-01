@@ -25,16 +25,67 @@ namespace BeaHelper.Controllers
             return View(notificacoes);
         }
 
+        [HttpGet]
+        public int QtdNotificacao()
+        {
+            int IdUsuarioLogado = GetUsuarioLogado();
+            if (IdUsuarioLogado > 0)
+                return Notificacao_P1.CountTodasNotificacoesUsuarioAtiva(IdUsuarioLogado);
+            else
+                return 0;
+        }
+
+        [HttpPost]
+        public string NotificacaoVisualizada(int idNotificacao)
+        {
+            Notificacao_P1 notificacao = new Notificacao_P1(idNotificacao);
+            notificacao.CompleteObject();
+            notificacao.Flg_Visualizado = true;
+            notificacao.Save();
+            return notificacao.UrlNotificacao;
+        }
+
+        [HttpGet]
+        public async Task<bool> NotificacoesRecentes()
+        {
+            int IdUsuarioLogado = GetUsuarioLogado();
+            if (IdUsuarioLogado > 0)
+            {
+                var notificacoesRecentes = await Notificacao_P1.NotificacoesRecentes(IdUsuarioLogado);
+                var UmaSemanaAtras = DateTime.Now.AddDays(-7);
+
+                var listaNotifiRecentes = notificacoesRecentes.Where(x => x.DataCadastro >= UmaSemanaAtras).ToList();
+                ViewBag.ListaNotificacoesRecentes = listaNotifiRecentes;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public int GetUsuarioLogado()
         {
             int IdUsuarioLogado = 0;
+
             try
             {
-                IdUsuarioLogado = Int32.Parse(HttpContext.Request.Cookies["IdUsuarioLogado"]);
+                if (HttpContext.Request.Cookies["IdUsuarioLogado"] != null)
+                {
+                    IdUsuarioLogado = Int32.Parse(HttpContext.Request.Cookies["IdUsuarioLogado"]);
+                }
+                else if (HttpContext.Session.GetInt32("IdUsuarioLogado") != null)
+                {
+                    IdUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault();
+                }
+                else
+                {
+                    IdUsuarioLogado = 0;
+                }
             }
             catch (Exception)
             {
-                IdUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault();
+                IdUsuarioLogado = 0;
             }
 
             return IdUsuarioLogado;

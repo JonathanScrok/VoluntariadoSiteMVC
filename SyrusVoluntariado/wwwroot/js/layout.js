@@ -5,6 +5,37 @@
     if (aceitaCookie == null) {
         $('#exampleModal').modal('show');
     }
+
+    $.ajax({
+        method: "GET",
+        url: "/Notificacao/QtdNotificacao"
+    }).done(function (result) {
+        if (result > 0) {
+            if (result > 9) {
+                $('#group').find('.popupNotify').text('9+');
+            } else {
+                $('#group').find('.popupNotify').text(result);
+            }
+
+            var img = document.querySelector("#imgNotificacao");
+            img.setAttribute('src', '/img/NotificacaoComFundo.png');
+            $('#nPopup').show();
+        } else {
+            $('#nPopup').hide();
+        }
+    });
+
+
+    //$(".btn").click(function () {
+    //    var val = parseInt($('#group').find('.popupNotify').text());
+
+    //    // Check for the button clicked
+    //    if ($(this).hasClass('btn-danger')) {
+    //        $('#group').find('.popupNotify').text(val - 1);
+    //    } else if ($(this).hasClass('btn-success')) {
+    //        $('#group').find('.popupNotify').text(val + 1);
+    //    }
+    //});
 });
 
 function SalvarConcordancia() {
@@ -15,7 +46,7 @@ function SalvarConcordancia() {
 }
 
 function ConfirmacaoExcluirEvento() {
-    
+
     $('#confirmar-excluir').modal('show');
 }
 

@@ -39,12 +39,20 @@
                         <div class="card-header text-muted">
                             Nova Notificação
                         </div>
+                        <a href="#" onclick="NotificacaoVisualizada(@notificacao.Id_Notificacao)" style="text-decoration:none">
+                            <div class="card-body">
+                                <p class="card-text">@notificacao.Descricao</p>
+                            </div>
+                        </a>
                     }
-                    <a href="@notificacao.Url_Notificacao" style="text-decoration:none">
-                        <div class="card-body">
-                            <p class="card-text">@notificacao.Descricao</p>
-                        </div>
-                    </a>
+                    else
+                    {
+                        <a href="@notificacao.Url_Notificacao" style="text-decoration:none">
+                            <div class="card-body">
+                                <p class="card-text">@notificacao.Descricao</p>
+                            </div>
+                        </a>
+                    }
                 </div>
             }
         }
@@ -60,3 +68,18 @@
         }
     </div>
 </div>
+<script>
+    function NotificacaoVisualizada(idNotify) {
+        let SITE_URL = window.location.origin;
+        $.ajax({
+            method: "POST",
+            url: SITE_URL + "/notificacao/notificacaoVisualizada/?idNotificacao=" + idNotify,
+            contentType: "application/json"
+        }).done(function (result) {
+            //window.location.href = SITE_URL + result;
+            window.location.href = result;
+        }).fail(function (err) {
+            console.log(err);
+        });
+    }
+</script>

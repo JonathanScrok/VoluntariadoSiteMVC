@@ -1,4 +1,5 @@
-﻿
+﻿let Dominio = window.location.origin;
+
 function validaCheckManterConectado() {
     var chkManterConectado = document.getElementById('ManterConectado');
 
@@ -27,8 +28,12 @@ function mtel(v) {
 function id(el) {
     return document.getElementById(el);
 }
-window.onload = function () {
-    id('celularcadastro').onkeyup = function () {
-        mascara(this, mtel);
+
+if (window.location.href == Dominio + "/login/cadastrarusuario") {
+    console.log(window.location.href);
+    window.onload = function () {
+        id('celularcadastro').onkeyup = function () {
+            mascara(this, mtel);
+        }
     }
 }
