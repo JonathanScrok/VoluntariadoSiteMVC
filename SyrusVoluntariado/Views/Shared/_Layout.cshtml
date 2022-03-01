@@ -61,13 +61,13 @@
                                 }
                             </ul>
                             @*<div class="dropdown d-none d-lg-block">
-                        <button class="btn bg-soft-warning ms-2" id="dropdownMenuButton1" type="submit" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-search text-warning"></i></button>
-                        <div class="dropdown-menu dropdown-menu-lg-end p-0 rounded" aria-labelledby="dropdownMenuButton1" style="top:55px">
-                            <form>
-                                <input class="form-control border-200" type="search" placeholder="Pesquisar" aria-label="Search" style="background:#FDF1DF;" />
-                            </form>
-                        </div>
-                    </div>*@
+                                    <button class="btn bg-soft-warning ms-2" id="dropdownMenuButton1" type="submit" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-search text-warning"></i></button>
+                                    <div class="dropdown-menu dropdown-menu-lg-end p-0 rounded" aria-labelledby="dropdownMenuButton1" style="top:55px">
+                                        <form>
+                                            <input class="form-control border-200" type="search" placeholder="Pesquisar" aria-label="Search" style="background:#FDF1DF;" />
+                                        </form>
+                                    </div>
+                                </div>*@
                             @if (Logado == null && Login == null)
                             {
                                 <a class="btn btn-dark me-md-2 order-1 order-lg-0 ms-lg-3" href="/login">Entrar</a>
@@ -168,31 +168,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
                 <!-- Fim Modais -->
-                @*Notificações*@
-                @if (ViewData["ListaNotificacoesRecentes"] != null)
-                {
-                    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-                        @foreach (var notificacao in ViewBag.ListaNotificacoesRecentes)
-                        {
-                            <div class="toast-container">
-                                <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                                    <div class="toast-header">
-                                        <img src="/img/star1.png" class="rounded me-2" alt="...">
-                                        <strong class="me-auto">Bootstrap</strong>
-                                        <small>11 mins ago</small>
-                                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                                    </div>
-                                    <div class="toast-body">
-                                        @notificacao.Descricao
-                                    </div>
-                                </div>
-                            </div>
-                        }
-                    </div>
-                }
-                @*Fim Notificações*@
 
             </main>
         </div>

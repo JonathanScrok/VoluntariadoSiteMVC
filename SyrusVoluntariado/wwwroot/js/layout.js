@@ -25,12 +25,6 @@
         }
     });
 
-    $.ajax({
-        method: "GET",
-        url: "/Notificacao/NotificacoesRecentes"
-    }).done(function (result) {
-        console.log(result);
-    });
 
     //$(".btn").click(function () {
     //    var val = parseInt($('#group').find('.popupNotify').text());
@@ -52,7 +46,7 @@ function SalvarConcordancia() {
 }
 
 function ConfirmacaoExcluirEvento() {
-    
+
     $('#confirmar-excluir').modal('show');
 }
 

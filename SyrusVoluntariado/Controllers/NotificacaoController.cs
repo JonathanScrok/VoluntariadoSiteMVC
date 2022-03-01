@@ -55,7 +55,7 @@ namespace BeaHelper.Controllers
                 var UmaSemanaAtras = DateTime.Now.AddDays(-7);
 
                 var listaNotifiRecentes = notificacoesRecentes.Where(x => x.DataCadastro >= UmaSemanaAtras).ToList();
-                ViewData["ListaNotificacoesRecentes"] = listaNotifiRecentes;
+                ViewBag.ListaNotificacoesRecentes = listaNotifiRecentes;
                 return true;
             }
             else
