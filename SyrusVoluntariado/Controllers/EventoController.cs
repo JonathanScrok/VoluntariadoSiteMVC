@@ -14,7 +14,6 @@ using System.Text.RegularExpressions;
 
 namespace BeaHelper.Controllers
 {
-    [Login]
     public class EventoController : Controller
     {
 
@@ -29,6 +28,7 @@ namespace BeaHelper.Controllers
             return View(resultadoPaginado);
         }
 
+        [Login]
         [HttpGet]
         public IActionResult Cadastrar()
         {
@@ -117,6 +117,7 @@ namespace BeaHelper.Controllers
             return View(evento);
         }
 
+        [Login]
         [HttpGet]
         public IActionResult Editar(int Id)
         {
@@ -172,6 +173,7 @@ namespace BeaHelper.Controllers
             return View("Cadastrar", evento);
         }
 
+        [Login]
         [HttpGet]
         public IActionResult Excluir(int Id)
         {
@@ -192,6 +194,7 @@ namespace BeaHelper.Controllers
             return RedirectToAction("MeusEventos", "Perfil");
         }
 
+        [Login]
         [HttpGet]
         public IActionResult Voluntariar(int Id)
         {
@@ -260,6 +263,7 @@ namespace BeaHelper.Controllers
             }
         }
 
+        [Login]
         [HttpGet]
         public IActionResult ListaVoluntarios(int Id)
         {

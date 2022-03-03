@@ -1,6 +1,11 @@
 ﻿@model BeaHelper.BLL.BD.Evento_P1
+@using Microsoft.AspNetCore.Http;
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    string Login = Context.Session.GetString("Login"); //Session
+    string Logado = Context.Request.Cookies["Logado"]; //Cookie
+
 }
 @{
     ViewBag.Title = "Visualizar Evento";
@@ -68,36 +73,45 @@
                 </div>
             }
 
-            @if (ViewBag.ADMEvento == true)
+            @if (Logado != null || Login != null)
             {
-                <div id="Adm__Mensagem">
-                    <div class="alert alert-danger mt-md-2" id="Adm-Mensagem" role="alert">
-                        Você é administrador desta evento!
-                    </div>
-                </div>
-                <div class="AdmVisualizando mt-md-2">
-                    <a class="btn btn-info" href="/evento/editar/@Model.IdEvento">Editar</a>
-                    <a class="btn btn-danger ms-2" onclick="ConfirmacaoExcluirEvento();">Excluir</a>
-                </div>
-            }
-            else if (ViewBag.JaVoluntariado == true)
-            {
-                @if (TempData["MensagemErro"] != null)
+                @if (ViewBag.ADMEvento == true)
                 {
-                    <div id="Adm__Mensagem" class="mt-md-2">
-                        <div class="alert alert-danger alertemail" role="alert">
-                            @TempData["MensagemErro"]
+                    <div id="Adm__Mensagem">
+                        <div class="alert alert-danger mt-md-2" id="Adm-Mensagem" role="alert">
+                            Você é administrador desta evento!
                         </div>
                     </div>
+                    <div class="AdmVisualizando mt-md-2">
+                        <a class="btn btn-info" href="/evento/editar/@Model.IdEvento">Editar</a>
+                        <a class="btn btn-danger ms-2" onclick="ConfirmacaoExcluirEvento();">Excluir</a>
+                    </div>
                 }
-                <div class="botao-voluntariar">
-                    <button class="btn btn-success" disabled>Já Voluntariado</button>
-                </div>
+                else if (ViewBag.JaVoluntariado == true)
+                {
+                    @if (TempData["MensagemErro"] != null)
+                    {
+                        <div id="Adm__Mensagem" class="mt-md-2">
+                            <div class="alert alert-danger alertemail" role="alert">
+                                @TempData["MensagemErro"]
+                            </div>
+                        </div>
+                    }
+                    <div class="botao-voluntariar">
+                        <button class="btn btn-success" disabled>Já Voluntariado</button>
+                    </div>
+                }
+                else
+                {
+                    <div class="botao-voluntariar">
+                        <button class="btn btn-success" id="BotaoVoluntatiarMe" onclick="voluntariarNoEvento();">Voluntariar-me</button>
+                    </div>
+                }
             }
             else
             {
                 <div class="botao-voluntariar">
-                    <button class="btn btn-success" id="BotaoVoluntatiarMe" onclick="voluntariarNoEvento();">Voluntariar-me</button>
+                    <button class="btn btn-success" disabled>Voluntariar-me</button>
                 </div>
             }
         </div>
