@@ -1,10 +1,5 @@
 ﻿$(document).ready(function () {
-    //var aceitacaoCookies = sessionStorage.getItem("Cookies");
-    var aceitaCookie = getCookie('AceitaCookies');
 
-    if (aceitaCookie == null) {
-        $('#exampleModal').modal('show');
-    }
 
     $.ajax({
         method: "GET",
@@ -26,24 +21,9 @@
     });
 
 
-    //$(".btn").click(function () {
-    //    var val = parseInt($('#group').find('.popupNotify').text());
-
-    //    // Check for the button clicked
-    //    if ($(this).hasClass('btn-danger')) {
-    //        $('#group').find('.popupNotify').text(val - 1);
-    //    } else if ($(this).hasClass('btn-success')) {
-    //        $('#group').find('.popupNotify').text(val + 1);
-    //    }
-    //});
 });
 
-function SalvarConcordancia() {
-    //sessionStorage.setItem("Cookies", "True")
-    setCookie('AceitaCookies', 'True', 2);
 
-    $('#exampleModal').modal('hide');
-}
 
 function ConfirmacaoExcluirEvento() {
 

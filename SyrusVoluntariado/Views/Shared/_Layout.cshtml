@@ -33,6 +33,7 @@
     <meta name="theme-color" content="#62c0a3">
     <link href="/templateboot/public/assets/css/theme.css" rel="stylesheet" />
     <link href="/css/FundoPaginas.css" rel="stylesheet" type="text/css" />
+    <link href="/css/cookies.css" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
 </head>
 
@@ -63,13 +64,13 @@
                                 }
                             </ul>
                             @*<div class="dropdown d-none d-lg-block">
-                                    <button class="btn bg-soft-warning ms-2" id="dropdownMenuButton1" type="submit" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-search text-warning"></i></button>
-                                    <div class="dropdown-menu dropdown-menu-lg-end p-0 rounded" aria-labelledby="dropdownMenuButton1" style="top:55px">
-                                        <form>
-                                            <input class="form-control border-200" type="search" placeholder="Pesquisar" aria-label="Search" style="background:#FDF1DF;" />
-                                        </form>
-                                    </div>
-                                </div>*@
+                        <button class="btn bg-soft-warning ms-2" id="dropdownMenuButton1" type="submit" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-search text-warning"></i></button>
+                        <div class="dropdown-menu dropdown-menu-lg-end p-0 rounded" aria-labelledby="dropdownMenuButton1" style="top:55px">
+                            <form>
+                                <input class="form-control border-200" type="search" placeholder="Pesquisar" aria-label="Search" style="background:#FDF1DF;" />
+                            </form>
+                        </div>
+                    </div>*@
                             @if (Logado == null && Login == null)
                             {
                                 <a class="btn btn-dark me-md-2 order-1 order-lg-0 ms-lg-3" href="/login">Entrar</a>
@@ -141,6 +142,15 @@
                                 <a class="btn btn-secondary" onclick="SalvarConcordancia();">Concordo</a>
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                <div class="cookies-container" style="display:none">
+                    <div class="cookies-content">
+                        <div class="cookies-pref">
+                            <b>Cookies</b>: Guardamos estatísticas de visitas para melhorar sua experiência de navegação. Ao continuar, você concorda com nossa <a href="#"><strong>política de privacidade</strong></a>.
+                        </div>
+                        <button class="btn btn-secondary" onclick="SalvarConcordancia();">Concordo</button>
                     </div>
                 </div>
 

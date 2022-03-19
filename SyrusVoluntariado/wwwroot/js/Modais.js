@@ -6,7 +6,23 @@
     document.getElementById("GerarQrcode").href = window.location.origin + "/qrcode/?qrtexto=" + window.location.href;
 
     if (aceitaCookie == null) {
-        $('#exampleModal').modal('show');
+        //$('#exampleModal').modal('show');
+        console.log("Ainda não aceitou cookies");
+        var divCookies = document.querySelector(".cookies-container");
+
+        if (divCookies.style.display === "none") {
+            console.log("Div ta invisivel");
+            divCookies.style.display = "block";
+        }
+
+    } else {
+        console.log("Cookies aceitos");
+        var divCookies = document.querySelector(".cookies-container");
+
+        if (divCookies.style.display === "block") {
+            console.log("Div ta aparecendo");
+            divCookies.style.display = "none";
+        }
     }
 });
 
@@ -15,6 +31,14 @@ function SalvarConcordancia() {
     setCookie('AceitaCookies', 'True', 2);
 
     $('#exampleModal').modal('hide');
+
+    var divCookies = document.querySelector(".cookies-container");
+
+    if (divCookies.style.display === "none") {
+        divCookies.style.display = "block";
+    } else {
+        divCookies.style.display = "none";
+    }
 }
 
 function ConfirmacaoExcluirEvento() {
