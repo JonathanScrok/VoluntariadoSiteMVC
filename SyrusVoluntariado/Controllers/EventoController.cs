@@ -16,16 +16,30 @@ namespace BeaHelper.Controllers
 {
     public class EventoController : Controller
     {
-
-        public IActionResult Index(int? page)
+        [HttpGet]
+        public IActionResult Index(int? page, List<Evento> listeventos = null)
         {
-            var pageNumber = page ?? 1;
+            int pageNumber = page ?? 1;
+
+            if (listeventos != null && listeventos.Count > 0)
+            {
+                var resultadoPagFiltrado = listeventos.ToPagedList(pageNumber, 10);
+                return View(resultadoPagFiltrado);
+            }
 
             List<Evento> eventos = Evento_P2.TodosEventos();
 
             var resultadoPaginado = eventos.ToPagedList(pageNumber, 10);
 
             return View(resultadoPaginado);
+        }
+
+        [HttpGet]
+        public IActionResult FiltrarEvento(string Titulo = null, string Descricao = null, string Categoria = null, string Local = null, bool NuncaVoluntariado = false, bool JaVoluntariado = false)
+        {
+            List<Evento> eventos = Evento_P2.FiltrarEventos(Titulo, Descricao, Categoria, Local, NuncaVoluntariado, JaVoluntariado);
+
+            return RedirectToAction("Index", "Evento", new { page = 1, listeventos = eventos });
         }
 
         [Login]

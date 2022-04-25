@@ -10,7 +10,8 @@ using System.Threading.Tasks;
 
 namespace BeaHelper.BLL.BD
 {
-    public class Evento_P2 {
+    public class Evento_P2
+    {
 
         #region StringConnection
         //private const string stringConnection = "Data Source=mssql-49550-0.cloudclusters.net,11255;Initial Catalog=be_helper;Integrated Security=False;User Id=AdminBeaHelper;Password=B3ah3lper#2021;MultipleActiveResultSets=True";
@@ -199,6 +200,7 @@ namespace BeaHelper.BLL.BD
         private const string SELECT_TODASVAGAS = @"select * from helper.Eventos order by DataPublicacao desc";
         private const string SELECT_ULTIMASVAGAS_TOP8 = @"select top 8 * from helper.Eventos order by DataEvento desc";
         private const string SELECT_MEUSEVENTOS = @"select * from helper.Eventos WHERE Id_Usuario_Adm = @Id_Usuario_Adm";
+        private const string SELECT_FILTROEVENTOS = @"select * from helper.Eventos WHERE Titulo like @Titulo and Descricao like @Descricao and Categoria like @Categoria and Cidade_Estado like @Cidade_Estado ";
         private const string SELECT_TITULOS = @"select * from helper.Eventos WHERE Titulo = @Titulo";
         #endregion
 
@@ -317,6 +319,67 @@ namespace BeaHelper.BLL.BD
         }
         #endregion
 
+        #region FiltrarEventos por ID
+        public static List<Evento> FiltrarEventos(string Titulo = null, string Descricao = null, string Categoria = null, string Local = null, bool NuncaVoluntariado = false, bool JaVoluntariado = false)
+        {
+            SqlConnection conn = null;
+            SqlDataReader reader = null;
+            List<Evento> eventos = new List<Evento>();
+
+            List<SqlParameter> parms = new List<SqlParameter>();
+            parms.Add(new SqlParameter("@Titulo", SqlDbType.VarChar, 150));
+            parms.Add(new SqlParameter("@Descricao", SqlDbType.VarChar, 250));
+            parms.Add(new SqlParameter("@Categoria", SqlDbType.VarChar, 100));
+            parms.Add(new SqlParameter("@Cidade_Estado", SqlDbType.VarChar, 50));
+
+            if (Titulo != null)
+                parms[0].Value = "%"+ Titulo+"%";
+            else
+                parms[0].Value = "%%";
+
+            if (Descricao != null)
+                parms[1].Value = "%" + Descricao + "%";
+            else
+                parms[1].Value = "%%";
+
+            if (Categoria != null)
+                parms[2].Value = "%" + Categoria + "%";
+            else
+                parms[2].Value = "%%";
+
+            if (Local != null)
+                parms[3].Value = "%" + Local + "%";
+            else
+                parms[3].Value = "%%";
+
+            conn = new SqlConnection(stringConnection);
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand(SELECT_FILTROEVENTOS, conn);
+
+            foreach (var parametro in parms)
+            {
+                cmd.Parameters.Add(parametro);
+            }
+
+            Mapper.CreateMap<IDataRecord, Evento>();
+            try
+            {
+                using (reader = cmd.ExecuteReader())
+                {
+                    eventos = Mapper.Map<List<Evento>>(reader);
+                    return eventos;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+        }
+        #endregion
+
         #region MeusEventos por ID
         public static List<Evento> MeusEventos(int IdUsuarioAdm)
         {
@@ -381,7 +444,7 @@ namespace BeaHelper.BLL.BD
             conn = new SqlConnection(stringConnection);
             conn.Open();
 
-            string query = "select top 4 * from helper.Eventos where Cidade_Estado like '%"+ local + "%' and Id_Evento != " + idEvento + "Order by DataEvento asc";
+            string query = "select top 4 * from helper.Eventos where Cidade_Estado like '%" + local + "%' and Id_Evento != " + idEvento + "Order by DataEvento asc";
 
             SqlCommand cmd = new SqlCommand(query, conn);
 

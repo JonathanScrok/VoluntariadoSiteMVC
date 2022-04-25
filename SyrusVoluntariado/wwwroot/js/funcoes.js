@@ -113,3 +113,31 @@ function Avaliar(estrela) {
 function ModalAvaliar() {
     $('#avaliar-voluntario').modal('show');
 }
+
+
+function FuncFiltrar() {
+    var titulo = document.getElementById("filtroTitulo").value;
+    var descricao = document.getElementById("filtroDescricao").value;
+    var categoria = document.getElementById("filtroCategoria").value;
+    var local = document.getElementById("filtroLocal").value;
+
+    var chknuncaVoluntariado = document.getElementById("filtroNuncaVoluntariado");
+    let chkNV = false;
+    if (chknuncaVoluntariado.checked) {
+        chkNV = true;
+    }
+
+    var chkjaVoluntariado = document.getElementById("filtroJaVoluntariado");
+    let chkJV = false;
+    if (chkjaVoluntariado.checked) {
+        chkJV = true;
+    }
+
+    var select = document.getElementById("filtroCategoria");
+    var variavel = '';
+    variavel = select.value;
+    console.log("Valor submit categoria: " + variavel);
+    console.log("URL: " + "evento/filtrarevento/?Titulo=" + titulo + "&Descricao=" + descricao + "&Categoria=" + variavel + "&Local=" + local + "&NuncaVoluntariado=" + chkNV + "&JaVoluntariado=" + chkJV);
+
+    window.location.href = "evento/filtrarevento/?Titulo=" + titulo + "&Descricao=" + descricao + "&Categoria=" + variavel + "&Local=" + local + "&NuncaVoluntariado=" + chkNV + "&JaVoluntariado=" + chkJV;
+}
