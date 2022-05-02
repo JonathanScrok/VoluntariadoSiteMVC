@@ -34,45 +34,47 @@
         <div>
             <div>Filtrar por</div>
             <form action="/Evento/FiltrarEvento" method="post">
-                <div style="width: 100%; display: flex; flex-direction: column; justify-content: space-between;">
-                    <div class="form-group" id="CamposForm" style="display: flex; flex-direction: row; max-width: 300px; margin: 10px; ">
-                        <label class="control-label" id="labelsAddMeme" style="margin-right: 10px;">Titulo</label>
-                        <input type="text" name="titulo" id="filtroTitulo" value="" />
-                    </div>
-                    <div class="form-group" id="CamposForm" style="display: flex; flex-direction: row; max-width: 300px; margin: 10px; ">
-                        <label class="control-label" id="labelsAddMeme" style="margin-right: 10px;">Descrição</label>
-                        <input type="text" name="descricao" id="filtroDescricao" value="" />
-                    </div>
-                    <div class="form-group" id="CamposForm" style="display: flex; flex-direction: row; max-width: 300px; margin: 10px; ">
-                        <label class="control-label" id="labelsAddMeme" style="margin-right: 10px;">Categoria</label>
-                        <div class="options">
-                            <select class="form-select" id="filtroCategoria" aria-label="Default select example">
-                                <option value="" selected>Selecione</option>
-                                <option value="Nenhum">Nenhum</option>
-                                <option value="Alimentação">Alimentação</option>
-                                <option value="Tecnologia">Tecnologia</option>
-                                <option value="Entrega">Entrega</option>
-                                <option value="Serviços Gerais">Serviços Gerais</option>
-                                <option value="Outro">Outro</option>
-                            </select>
+                @foreach (var evento in Model.Take(1))
+                {
+                    <div style="width: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div class="form-group" id="CamposForm" style="display: flex; flex-direction: row; max-width: 300px; margin: 10px; ">
+                            <label class="control-label" id="labelsAddMeme" style="margin-right: 10px;">Titulo</label>
+                            <input type="text" name="titulo" id="filtroTitulo" value="@evento.Filtros.Titulo" />
+                        </div>
+                        <div class="form-group" id="CamposForm" style="display: flex; flex-direction: row; max-width: 300px; margin: 10px; ">
+                            <label class="control-label" id="labelsAddMeme" style="margin-right: 10px;">Descrição</label>
+                            <input type="text" name="descricao" id="filtroDescricao" value="@evento.Filtros.Descricao" />
+                        </div>
+                        <div class="form-group" id="CamposForm" style="display: flex; flex-direction: row; max-width: 300px; margin: 10px; ">
+                            <label class="control-label" id="labelsAddMeme" style="margin-right: 10px;">Categoria</label>
+                            <div class="options">
+                                <select class="form-select" id="filtroCategoria" aria-label="Default select example" name="Categoria">
+                                    <option value="" selected="@(evento.Filtros.Categoria == null)">Selecione</option>
+                                    <option value="Alimentação" selected="@(evento.Filtros.Categoria == "Alimentação")">Alimentação</option>
+                                    <option value="Tecnologia" selected="@(evento.Filtros.Categoria == "Tecnologia")">Tecnologia</option>
+                                    <option value="Entrega" selected="@(evento.Filtros.Categoria == "Entrega")">Entrega</option>
+                                    <option value="Serviços Gerais" selected="@(evento.Filtros.Categoria == "Serviços Gerais")">Serviços Gerais</option>
+                                    <option value="Outro" selected="@(evento.Filtros.Categoria == "Outro")">Outro</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group" id="CamposForm" style="display: flex; flex-direction: row; max-width: 300px; margin: 10px; ">
+                            <label class="control-label" id="labelsAddMeme" style="margin-right: 10px;">Local</label>
+                            <input type="text" name="local" id="local" value="@evento.Filtros.Local" />
+                        </div>
+                        <div class="form-group" id="CamposForm" style="display: flex; flex-direction: row; max-width: 300px; margin: 10px; ">
+                            <label class="control-label" id="labelsAddMeme" style="margin-right: 10px;">Eventos Nunca Voluntariados</label>
+                            <input type="checkbox" name="FiltroNuncaVoluntariado" id="filtroNuncaVoluntariado" value="@evento.Filtros.FiltroNuncaVoluntariado" />
+                        </div>
+                        <div class="form-group" id="CamposForm" style="display: flex; flex-direction: row; max-width: 300px; margin: 10px; ">
+                            <label class="control-label" id="labelsAddMeme" style="margin-right: 10px;">Eventos Já Voluntariados</label>
+                            <input type="checkbox" name="FiltroJaVoluntariado" id="filtroJaVoluntariado" value="@evento.Filtros.FiltroJaVoluntariado" />
+                        </div>
+                        <div class="form-group" id="CamposForm" style="display: flex; flex-direction: row; max-width: 300px; margin: 10px; ">
+                            <button class="btn btn-info" type="submit">Filtrar</button>
                         </div>
                     </div>
-                    <div class="form-group" id="CamposForm" style="display: flex; flex-direction: row; max-width: 300px; margin: 10px; ">
-                        <label class="control-label" id="labelsAddMeme" style="margin-right: 10px;">Local</label>
-                        <input type="text" name="local" id="filtroLocal" value="" />
-                    </div>
-                    <div class="form-group" id="CamposForm" style="display: flex; flex-direction: row; max-width: 300px; margin: 10px; ">
-                        <label class="control-label" id="labelsAddMeme" style="margin-right: 10px;">Eventos Nunca Voluntariados</label>
-                        <input type="checkbox" name="local" id="filtroNuncaVoluntariado" value="" />
-                    </div>
-                    <div class="form-group" id="CamposForm" style="display: flex; flex-direction: row; max-width: 300px; margin: 10px; ">
-                        <label class="control-label" id="labelsAddMeme" style="margin-right: 10px;">Eventos Já Voluntariados</label>
-                        <input type="checkbox" name="local" id="filtroJaVoluntariado" value="" />
-                    </div>
-                    <div class="form-group" id="CamposForm" style="display: flex; flex-direction: row; max-width: 300px; margin: 10px; ">
-                        <button class="btn btn-info" onclick="FuncFiltrar();">Filtrar</button>
-                    </div>
-                </div>
+                }
             </form>
         </div>
     </div>

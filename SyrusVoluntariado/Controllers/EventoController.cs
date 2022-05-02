@@ -17,29 +17,28 @@ namespace BeaHelper.Controllers
     public class EventoController : Controller
     {
         [HttpGet]
-        public IActionResult Index(int? page, List<Evento> listeventos = null)
+        public IActionResult Index(int? page)
         {
             int pageNumber = page ?? 1;
 
-            if (listeventos != null && listeventos.Count > 0)
-            {
-                var resultadoPagFiltrado = listeventos.ToPagedList(pageNumber, 10);
-                return View(resultadoPagFiltrado);
-            }
-
             List<Evento> eventos = Evento_P2.TodosEventos();
-
+            eventos[0].Filtros = new Filtro();
             var resultadoPaginado = eventos.ToPagedList(pageNumber, 10);
 
             return View(resultadoPaginado);
         }
 
-        [HttpGet]
-        public IActionResult FiltrarEvento(string Titulo = null, string Descricao = null, string Categoria = null, string Local = null, bool NuncaVoluntariado = false, bool JaVoluntariado = false)
+        [HttpPost]
+        public IActionResult FiltrarEvento(Filtro Filtro)
         {
-            List<Evento> eventos = Evento_P2.FiltrarEventos(Titulo, Descricao, Categoria, Local, NuncaVoluntariado, JaVoluntariado);
-
-            return RedirectToAction("Index", "Evento", new { page = 1, listeventos = eventos });
+            List<Evento> eventos = Evento_P2.FiltrarEventos(Filtro.Titulo, Filtro.Descricao, Filtro.Categoria, Filtro.Local, Filtro.FiltroNuncaVoluntariado, Filtro.FiltroJaVoluntariado);
+            if (eventos.Count == 0)
+            {
+                eventos.Add(new Evento());
+            }
+            eventos[0].Filtros = new Filtro();
+            var resultadoPaginado = eventos.ToPagedList(1, 10);
+            return View("Index", resultadoPaginado);
         }
 
         [Login]

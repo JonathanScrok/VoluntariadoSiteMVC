@@ -35,6 +35,7 @@ namespace BeaHelper.BLL.Models
         public bool EventoRecorrente { get; set; }
 
         public DateTime? DataEvento { get; set; }
+        public Filtro Filtros { get; set; }
 
     }
 }
