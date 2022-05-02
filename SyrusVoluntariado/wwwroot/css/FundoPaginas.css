@@ -451,3 +451,26 @@ html {
     border-radius: .25rem;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
+
+#paiDeTodos {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-areas: 'form table';
+}
+
+#PaiFiltro {
+    grid-area: form;
+}
+
+#PaiTabEventos {
+    grid-area: table;
+}
+
+@media screen and (max-width: 900px) {
+    #paiDeTodos {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-areas: 'form' 'table';
+    }
+
+}

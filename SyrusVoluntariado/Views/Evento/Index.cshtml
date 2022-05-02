@@ -30,23 +30,23 @@
 <link href="/css/PagedList.css" rel="stylesheet" type="text/css" />
 <link href="/css/FundoPaginas.css" rel="stylesheet" type="text/css" />
 
-<div>
-    <div id="PaiFiltro">
+<div id="paiDeTodos">
+    <div id="PaiFiltro" class="">
         <div>
             <div>Filtrar por</div>
             <form action="/Evento/FiltrarEvento" method="post">
                 @foreach (var evento in Model.Take(1))
                 {
                     <div style="width: 100%; display: flex; flex-direction: column; justify-content: space-between;">
-                        <div class="form-group" id="CamposForm" style="display: flex; flex-direction: row; max-width: 300px; margin: 10px; ">
+                        <div class="form-group" id="CamposForm" style="display: flex; flex-direction: column; max-width: 300px; margin: 10px; ">
                             <label class="control-label" id="labelsAddMeme" style="margin-right: 10px;">Titulo</label>
                             <input type="text" name="titulo" id="filtroTitulo" value="@evento.Filtros.Titulo" />
                         </div>
-                        <div class="form-group" id="CamposForm" style="display: flex; flex-direction: row; max-width: 300px; margin: 10px; ">
+                        <div class="form-group" id="CamposForm" style="display: flex; flex-direction: column; max-width: 300px; margin: 10px; ">
                             <label class="control-label" id="labelsAddMeme" style="margin-right: 10px;">Descrição</label>
                             <input type="text" name="descricao" id="filtroDescricao" value="@evento.Filtros.Descricao" />
                         </div>
-                        <div class="form-group" id="CamposForm" style="display: flex; flex-direction: row; max-width: 300px; margin: 10px; ">
+                        <div class="form-group" id="CamposForm" style="display: flex; flex-direction: column; max-width: 300px; margin: 10px; ">
                             <label class="control-label" id="labelsAddMeme" style="margin-right: 10px;">Categoria</label>
                             <div class="options">
                                 <select class="form-select" id="filtroCategoria" aria-label="Default select example" name="Categoria">
@@ -59,15 +59,15 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group" id="CamposForm" style="display: flex; flex-direction: row; max-width: 300px; margin: 10px; ">
+                        <div class="form-group" id="CamposForm" style="display: flex; flex-direction: column; max-width: 300px; margin: 10px; ">
                             <label class="control-label" id="labelsAddMeme" style="margin-right: 10px;">Local</label>
                             <input type="text" name="local" id="local" value="@evento.Filtros.Local" />
                         </div>
-                        <div class="form-group" id="CamposForm" style="display: flex; flex-direction: row; max-width: 300px; margin: 10px; ">
+                        <div class="form-group" id="CamposForm" style="display: flex; flex-direction: column; max-width: 300px; margin: 10px; ">
                             <label class="control-label" id="labelsAddMeme" style="margin-right: 10px;">Eventos Nunca Voluntariados</label>
                             <input type="checkbox" name="FiltroNuncaVoluntariado" id="filtroNuncaVoluntariado" value="@evento.Filtros.FiltroNuncaVoluntariado" />
                         </div>
-                        <div class="form-group" id="CamposForm" style="display: flex; flex-direction: row; max-width: 300px; margin: 10px; ">
+                        <div class="form-group" id="CamposForm" style="display: flex; flex-direction: column; max-width: 300px; margin: 10px; ">
                             <label class="control-label" id="labelsAddMeme" style="margin-right: 10px;">Eventos Já Voluntariados</label>
                             <input type="checkbox" name="FiltroJaVoluntariado" id="filtroJaVoluntariado" value="@evento.Filtros.FiltroJaVoluntariado" />
                         </div>
