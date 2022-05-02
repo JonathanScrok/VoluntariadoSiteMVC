@@ -8,6 +8,7 @@
 }
 @{
     ViewBag.Title = "Eventos - Listagem";
+    var eventoVal = Model[0];
 }
 
 <div class="mt-md-3">
@@ -81,31 +82,49 @@
 
     <div id="PaiTabEventos">
         <div>
-            <table class="table table-dark">
-                <thead>
-                    <tr>
-                        <th scope="col">Titulo</th>
-                        <th scope="col">Descrição</th>
-                        <th scope="col">Categoria</th>
-                        <th scope="col">Local</th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var evento in Model)
-                    {
+            @if (eventoVal.Titulo == null && eventoVal.Descricao == null)
+            {
+                <table class="table table-dark">
+                    <thead>
                         <tr>
-                            <th scope="row">@evento.Titulo</th>
-                            <td>@evento.Descricao</td>
-                            <td>@evento.Categoria</td>
-                            <td>@evento.Cidade_Estado</td>
-                            <td>
-                                <a href="/evento/visualizar/@evento.Id_Evento" class="btn btn-light">Visualizar</a>
-                            </td>
+                            <th scope="col"></th>
                         </tr>
-                    }
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row" style="display: flex;justify-content: center;">Nenhum evento encontrado!</th>
+                        </tr>
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <table class="table table-dark">
+                    <thead>
+                        <tr>
+                            <th scope="col">Titulo</th>
+                            <th scope="col">Descrição</th>
+                            <th scope="col">Categoria</th>
+                            <th scope="col">Local</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var evento in Model)
+                        {
+                            <tr>
+                                <th scope="row">@evento.Titulo</th>
+                                <td>@evento.Descricao</td>
+                                <td>@evento.Categoria</td>
+                                <td>@evento.Cidade_Estado</td>
+                                <td>
+                                    <a href="/evento/visualizar/@evento.Id_Evento" class="btn btn-light">Visualizar</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
         </div>
     </div>
 </div>
