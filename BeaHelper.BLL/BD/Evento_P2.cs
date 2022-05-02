@@ -200,7 +200,7 @@ namespace BeaHelper.BLL.BD
         private const string SELECT_TODASVAGAS = @"select * from helper.Eventos order by DataPublicacao desc";
         private const string SELECT_ULTIMASVAGAS_TOP8 = @"select top 8 * from helper.Eventos order by DataEvento desc";
         private const string SELECT_MEUSEVENTOS = @"select * from helper.Eventos WHERE Id_Usuario_Adm = @Id_Usuario_Adm";
-        private const string SELECT_FILTROEVENTOS = @"select * from helper.Eventos WHERE Titulo like @Titulo and Descricao like @Descricao and Categoria like @Categoria and Cidade_Estado like @Cidade_Estado ";
+        private const string SELECT_FILTROEVENTOS = @"select * from helper.Eventos WHERE Titulo like @Titulo and Descricao like @Descricao and Categoria like @Categoria and Cidade_Estado like @Cidade_Estado";
         private const string SELECT_TITULOS = @"select * from helper.Eventos WHERE Titulo = @Titulo";
         #endregion
 
@@ -332,26 +332,6 @@ namespace BeaHelper.BLL.BD
             parms.Add(new SqlParameter("@Categoria", SqlDbType.VarChar, 100));
             parms.Add(new SqlParameter("@Cidade_Estado", SqlDbType.VarChar, 50));
 
-            if (Titulo != null)
-                parms[0].Value = "%"+ Titulo+"%";
-            else
-                parms[0].Value = "%%";
-
-            if (Descricao != null)
-                parms[1].Value = "%" + Descricao + "%";
-            else
-                parms[1].Value = "%%";
-
-            if (Categoria != null)
-                parms[2].Value = "%" + Categoria + "%";
-            else
-                parms[2].Value = "%%";
-
-            if (Local != null)
-                parms[3].Value = "%" + Local + "%";
-            else
-                parms[3].Value = "%%";
-
             conn = new SqlConnection(stringConnection);
             conn.Open();
 
@@ -361,6 +341,11 @@ namespace BeaHelper.BLL.BD
             {
                 cmd.Parameters.Add(parametro);
             }
+
+            cmd.Parameters["@Titulo"].Value = "%" + Titulo + "%";
+            cmd.Parameters["@Descricao"].Value = "%" + Descricao + "%";
+            cmd.Parameters["@Categoria"].Value = "%" + Categoria + "%";
+            cmd.Parameters["@Cidade_Estado"].Value = "%" + Local + "%";
 
             Mapper.CreateMap<IDataRecord, Evento>();
             try
@@ -376,7 +361,6 @@ namespace BeaHelper.BLL.BD
 
                 throw;
             }
-
         }
         #endregion
 
