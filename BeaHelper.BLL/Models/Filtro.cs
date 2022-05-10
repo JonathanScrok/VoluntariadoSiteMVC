@@ -11,7 +11,5 @@ namespace BeaHelper.BLL.Models
         public string Descricao { get; set; }
         public string Categoria { get; set; }
         public string Local { get; set; }
-        public bool FiltroNuncaVoluntariado { get; set; }
-        public bool FiltroJaVoluntariado { get; set; }
     }
 }

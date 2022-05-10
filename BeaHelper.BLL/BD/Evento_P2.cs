@@ -320,7 +320,7 @@ namespace BeaHelper.BLL.BD
         #endregion
 
         #region FiltrarEventos por ID
-        public static List<Evento> FiltrarEventos(string Titulo = null, string Descricao = null, string Categoria = null, string Local = null, bool NuncaVoluntariado = false, bool JaVoluntariado = false)
+        public static List<Evento> FiltrarEventos(string Titulo = null, string Descricao = null, string Categoria = null, string Local = null)
         {
             SqlConnection conn = null;
             SqlDataReader reader = null;
@@ -348,19 +348,12 @@ namespace BeaHelper.BLL.BD
             cmd.Parameters["@Cidade_Estado"].Value = "%" + Local + "%";
 
             Mapper.CreateMap<IDataRecord, Evento>();
-            try
-            {
                 using (reader = cmd.ExecuteReader())
                 {
                     eventos = Mapper.Map<List<Evento>>(reader);
                     return eventos;
                 }
-            }
-            catch (Exception ex)
-            {
 
-                throw;
-            }
         }
         #endregion
 

@@ -31,13 +31,19 @@ namespace BeaHelper.Controllers
         [HttpPost]
         public IActionResult FiltrarEvento(Filtro Filtro)
         {
-            List<Evento> eventos = Evento_P2.FiltrarEventos(Filtro.Titulo, Filtro.Descricao, Filtro.Categoria, Filtro.Local, Filtro.FiltroNuncaVoluntariado, Filtro.FiltroJaVoluntariado);
+            List<Evento> eventos = new List<Evento>();
+            IPagedList<Evento> resultadoPaginado;
+            eventos = Evento_P2.FiltrarEventos(Filtro.Titulo, Filtro.Descricao, Filtro.Categoria, Filtro.Local);
+
             if (eventos.Count == 0)
             {
-                eventos.Add(new Evento());
+                Evento evento = new Evento();
+                evento.Filtros = Filtro;
+                eventos.Add(evento);
             }
-            eventos[0].Filtros = new Filtro();
-            var resultadoPaginado = eventos.ToPagedList(1, 10);
+
+            eventos[0].Filtros = Filtro;
+            resultadoPaginado = eventos.ToPagedList(1, 10);
             return View("Index", resultadoPaginado);
         }
 
