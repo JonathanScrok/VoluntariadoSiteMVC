@@ -27,6 +27,7 @@ namespace BeaHelper.BLL.BD
         private string _cidadeEstado;
         private DateTime _dataPublicacao;
         private DateTime? _dataEvento;
+        private Filtro _filtros;
         private bool _semData;
         private bool _eventoRecorrente;
 
@@ -68,7 +69,6 @@ namespace BeaHelper.BLL.BD
         #endregion
 
         #region Titulo
-
         public string Titulo
         {
             get
@@ -188,6 +188,21 @@ namespace BeaHelper.BLL.BD
             set
             {
                 this._eventoRecorrente = value;
+                this._modified = true;
+            }
+        }
+        #endregion
+
+        #region Filtros
+        public Filtro Filtros
+        {
+            get
+            {
+                return this._filtros;
+            }
+            set
+            {
+                this._filtros = value;
                 this._modified = true;
             }
         }

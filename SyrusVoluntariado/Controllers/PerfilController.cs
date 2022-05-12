@@ -8,11 +8,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BeaHelper.Controllers {
+namespace BeaHelper.Controllers
+{
     [Login]
-    public class PerfilController : Controller {
+    public class PerfilController : Controller
+    {
 
-        public IActionResult Index() {
+        public IActionResult Index()
+        {
 
             //int IdfUsuario = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault(); //Remover ou Comentar
             int IdUsuarioLogado = GetUsuarioLogado();
@@ -63,7 +66,8 @@ namespace BeaHelper.Controllers {
         }
 
         [HttpGet]
-        public IActionResult MeusEventos(bool Convidando = false, int IdVoluntarioConvidado = 0) {
+        public IActionResult MeusEventos(bool Convidando = false, int IdVoluntarioConvidado = 0)
+        {
 
             ViewBag.ConvidarAtivado = Convidando;
             ViewBag.IdVoluntarioConvidado = IdVoluntarioConvidado;
@@ -77,18 +81,23 @@ namespace BeaHelper.Controllers {
         }
 
         [HttpGet]
-        public IActionResult EventosCandidatados() {
+        public IActionResult EventosCandidatados()
+        {
             ViewBag.FooterPrecisa = false;
 
-            //int IdfUsuario = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault(); //Remover ou Comentar
-            int IdUsuarioLogado = GetUsuarioLogado();
+            List<Evento_P1> MinhasCandidaturas = CarregaEventosCandidatados();
 
+            MinhasCandidaturas[0].Filtros = new Filtro();
+            return View(MinhasCandidaturas);
+        }
+
+        private List<Evento_P1> CarregaEventosCandidatados()
+        {
+            int IdUsuarioLogado = GetUsuarioLogado();
             List<EventoCandidatura> EventosCandidatados = EventoCandidaturas_P1.TodasCandidaturasUsuario(IdUsuarioLogado);
 
             List<Evento_P1> MinhasCandidaturas = new List<Evento_P1>();
             List<int> Idfvagas = new List<int>();
-
-            //List<Evento> vagas = Evento_P1.TodosEventos();
 
             for (int i = 0; i < EventosCandidatados.Count; i++)
             {
@@ -103,7 +112,45 @@ namespace BeaHelper.Controllers {
                 MinhasCandidaturas.Add(evento);
             }
 
-            return View(MinhasCandidaturas);
+            return MinhasCandidaturas;
+        }
+
+        [HttpPost]
+        public IActionResult FiltroEventosCandidatados(Filtro filtros)
+        {
+            List<Evento_P1> MinhasCandidaturas = new List<Evento_P1>();
+            List<Evento_P1> FiltroMinhasCandidaturas = new List<Evento_P1>();
+
+            MinhasCandidaturas = CarregaEventosCandidatados();
+
+            FiltroMinhasCandidaturas = FiltroCadidaturas(MinhasCandidaturas, filtros);
+
+            FiltroMinhasCandidaturas[0].Filtros = filtros;
+            return View("EventosCandidatados", FiltroMinhasCandidaturas);
+        }
+
+        private List<Evento_P1> FiltroCadidaturas(List<Evento_P1> MinhasCandidaturas, Filtro filtros)
+        {
+            List<Evento_P1> CandidatosBanco = new List<Evento_P1>();
+
+            if (filtros.Titulo != null)
+            {
+                MinhasCandidaturas = MinhasCandidaturas.Where(a => a.Titulo.Contains(filtros.Titulo)).ToList();
+            }
+            if (filtros.Descricao != null)
+            {
+                MinhasCandidaturas = MinhasCandidaturas.Where(a => a.Descricao.Contains(filtros.Descricao)).ToList();
+            }
+            if (filtros.Categoria != null)
+            {
+                MinhasCandidaturas = MinhasCandidaturas.Where(a => a.Categoria.Contains(filtros.Categoria)).ToList();
+            }
+            if (filtros.Local != null)
+            {
+                MinhasCandidaturas = MinhasCandidaturas.Where(a => a.CidadeEstado.Contains(filtros.Local)).ToList();
+            }
+
+            return MinhasCandidaturas;
         }
 
         public int GetUsuarioLogado()
