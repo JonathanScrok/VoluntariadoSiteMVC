@@ -5,6 +5,8 @@
 }
 @{
     ViewBag.Title = "Eventos Candidatados";
+
+    var Filtros = ViewBag.Filtro;
 }
 
 <div class="mt-md-3">
@@ -32,47 +34,44 @@
         <div>
             <div style="margin-left: 10px; "><b>Filtrar por</b></div>
             <form action="/Perfil/FiltroEventosCandidatados" method="post">
-                @foreach (var evento in Model.Take(1))
-                {
-                    <div style="width: 100%; display: flex; flex-direction: column; justify-content: space-between;">
-                        <div style="display: flex; flex-direction: row; justify-content: center;">
-                            <div class="form-group" id="CamposForm" style="display: flex; flex-direction: column; max-width: 300px; margin: 10px; width: 100%;">
-                                <label class="control-label" id="labelsAddMeme" style="margin-right: 10px;">Titulo</label>
-                                <input type="text" name="titulo" id="filtroTitulo" value="@evento.Filtros.Titulo" />
-                            </div>
-                        </div>
-                        <div style="display: flex; flex-direction: row; justify-content: center;">
-                            <div class="form-group" id="CamposForm" style="display: flex; flex-direction: column; max-width: 300px; margin: 10px; width: 100%;">
-                                <label class="control-label" id="labelsAddMeme" style="margin-right: 10px;">Descrição</label>
-                                <input type="text" name="descricao" id="filtroDescricao" value="@evento.Filtros.Descricao" />
-                            </div>
-                        </div>
-                        <div style="display: flex; flex-direction: row; justify-content: center;">
-                            <div class="form-group" id="CamposForm" style="display: flex; flex-direction: column; max-width: 300px; margin: 10px; width: 100%;">
-                                <label class="control-label" id="labelsAddMeme" style="margin-right: 10px;">Categoria</label>
-                                <div class="options">
-                                    <select class="form-select" id="filtroCategoria" aria-label="Default select example" name="Categoria">
-                                        <option value="" selected="@(evento.Filtros.Categoria == null)">Selecione</option>
-                                        <option value="Alimentação" selected="@(evento.Filtros.Categoria == " Alimentação")">Alimentação</option>
-                                        <option value="Tecnologia" selected="@(evento.Filtros.Categoria == " Tecnologia")">Tecnologia</option>
-                                        <option value="Entrega" selected="@(evento.Filtros.Categoria == " Entrega")">Entrega</option>
-                                        <option value="Serviços Gerais" selected="@(evento.Filtros.Categoria == " Serviços Gerais")">Serviços Gerais</option>
-                                        <option value="Outro" selected="@(evento.Filtros.Categoria == " Outro")">Outro</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div style="display: flex; flex-direction: row; justify-content: center;">
-                            <div class="form-group" id="CamposForm" style="display: flex; flex-direction: column; max-width: 300px; margin: 10px; width: 100%;">
-                                <label class="control-label" id="labelsAddMeme" style="margin-right: 10px;">Local</label>
-                                <input type="text" name="local" id="local" value="@evento.Filtros.Local" />
-                            </div>
-                        </div>
-                        <div class="form-group" id="CamposForm" style="display: flex; flex-direction: row; max-width: 300px; margin: 10px; justify-content: center;">
-                            <button class="btn btn-info" type="submit">Filtrar</button>
+                <div style="width: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div style="display: flex; flex-direction: row; justify-content: center;">
+                        <div class="form-group" id="CamposForm" style="display: flex; flex-direction: column; max-width: 300px; margin: 10px; width: 100%;">
+                            <label class="control-label" id="labelsAddMeme" style="margin-right: 10px;">Titulo</label>
+                            <input type="text" name="titulo" id="filtroTitulo" value="@Filtros.Titulo" />
                         </div>
                     </div>
-                }
+                    <div style="display: flex; flex-direction: row; justify-content: center;">
+                        <div class="form-group" id="CamposForm" style="display: flex; flex-direction: column; max-width: 300px; margin: 10px; width: 100%;">
+                            <label class="control-label" id="labelsAddMeme" style="margin-right: 10px;">Descrição</label>
+                            <input type="text" name="descricao" id="filtroDescricao" value="@Filtros.Descricao" />
+                        </div>
+                    </div>
+                    <div style="display: flex; flex-direction: row; justify-content: center;">
+                        <div class="form-group" id="CamposForm" style="display: flex; flex-direction: column; max-width: 300px; margin: 10px; width: 100%;">
+                            <label class="control-label" id="labelsAddMeme" style="margin-right: 10px;">Categoria</label>
+                            <div class="options">
+                                <select class="form-select" id="filtroCategoria" aria-label="Default select example" name="Categoria">
+                                    <option value="" selected="@(Filtros.Categoria == null)">Selecione</option>
+                                    <option value="Alimentação" selected="@(Filtros.Categoria == " Alimentação")">Alimentação</option>
+                                    <option value="Tecnologia" selected="@(Filtros.Categoria == " Tecnologia")">Tecnologia</option>
+                                    <option value="Entrega" selected="@(Filtros.Categoria == " Entrega")">Entrega</option>
+                                    <option value="Serviços Gerais" selected="@(Filtros.Categoria == " Serviços Gerais")">Serviços Gerais</option>
+                                    <option value="Outro" selected="@(Filtros.Categoria == " Outro")">Outro</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display: flex; flex-direction: row; justify-content: center;">
+                        <div class="form-group" id="CamposForm" style="display: flex; flex-direction: column; max-width: 300px; margin: 10px; width: 100%;">
+                            <label class="control-label" id="labelsAddMeme" style="margin-right: 10px;">Local</label>
+                            <input type="text" name="local" id="local" value="@Filtros.Local" />
+                        </div>
+                    </div>
+                    <div class="form-group" id="CamposForm" style="display: flex; flex-direction: row; max-width: 300px; margin: 10px; justify-content: center;">
+                        <button class="btn btn-info" type="submit">Filtrar</button>
+                    </div>
+                </div>
             </form>
         </div>
     </div>

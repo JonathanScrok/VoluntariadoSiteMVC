@@ -59,6 +59,7 @@ namespace BeaHelper.Controllers
                 evento.CompleteObject();
                 MinhasCandidaturas.Add(evento);
             }
+            ViewBag.Filtro = new Filtro();
             ViewBag.EventosCandidatados = MinhasCandidaturas;
             // --------------------------------------------------
 
@@ -125,7 +126,7 @@ namespace BeaHelper.Controllers
 
             FiltroMinhasCandidaturas = FiltroCadidaturas(MinhasCandidaturas, filtros);
 
-            FiltroMinhasCandidaturas[0].Filtros = filtros;
+            ViewBag.Filtro = filtros;
             return View("EventosCandidatados", FiltroMinhasCandidaturas);
         }
 
