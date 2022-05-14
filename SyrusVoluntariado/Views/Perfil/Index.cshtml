@@ -12,25 +12,6 @@
 <link href="/css/FundoPaginas.css" rel="stylesheet" type="text/css" />
 
 <div class="perfil-tudo">
-    @*<div class="perfil-infos">
-            <table class="table table-borderless" id="fontePerfil">
-                <tbody>
-                    <tr>
-                        <th scope="row">Nome</th>
-                        <td>@Model.Nome</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Email</th>
-                        <td>@Model.Email</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Sexo</th>
-                        <td>@ViewBag.UsuarioSexo</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>*@
-
     <nav>
         <div class="nav nav-tabs CorTabs" id="nav-tab" role="tablist">
             <button class="nav-link CorTabs active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true"><strong>Meus Dados</strong></button>
@@ -38,7 +19,7 @@
             <button class="nav-link CorTabs" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false"><strong>Eventos Voluntariados</strong></button>
         </div>
     </nav>
-    <div class="tab-content" id="nav-tabContent">
+    <div class="tab-content" id="nav-tabContent" style="margin-top: 10px;">
         <div class="tab-pane fade show active perfil-infos" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
             <table class="table table-borderless" id="fontePerfil">
                 <tbody>
@@ -58,32 +39,77 @@
             </table>
         </div>
         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-            <div class="row">
-                @foreach (var evento in @ViewBag.MeusEventosCriados)
-                {
-                    ViewBag.Id = evento.Id_Evento;
-                    <div class="col-sm-6 mt-md-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">@evento.Titulo</h5>
-                                <p class="card-text">@evento.Descricao</p>
-                                @if (@evento.DataEvento == null)
-                                {
-                                    <p class="card-text">Data: Não escolhida</p>
-                                }
-                                else
-                                {
-                                    <p class="card-text">Data: @evento.DataEvento.ToString("dd/MM/yyyy")</p>
-                                }
+            @*<div class="row">
+            @foreach (var evento in @ViewBag.MeusEventosCriados)
+            {
+                ViewBag.Id = evento.Id_Evento;
+                <div class="col-sm-6 mt-md-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">@evento.Titulo</h5>
+                            <p class="card-text">@evento.Descricao</p>
+                            @if (@evento.DataEvento == null)
+                            {
+                                <p class="card-text">Data: Não escolhida</p>
+                            }
+                            else
+                            {
+                                <p class="card-text">Data: @evento.DataEvento.ToString("dd/MM/yyyy")</p>
+                            }
 
-                                <a href="/evento/listavoluntarios/@evento.Id_Evento" class="btn " style="background-color: #62c0a3;"><b>Lista de Voluntários</b></a>
-                                <div style="float:right;">
-                                    <a class="btn btn-info" href="/evento/editar/@evento.Id_Evento">Editar</a>
-                                    <a class="btn btn-danger ms-md-2" onclick="ConfirmacaoExcluirEvento();">Excluir</a>
-                                </div>
+                            <a href="/evento/listavoluntarios/@evento.Id_Evento" class="btn " style="background-color: #62c0a3;"><b>Lista de Voluntários</b></a>
+                            <div style="float:right;">
+                                <a class="btn btn-info" href="/evento/editar/@evento.Id_Evento">Editar</a>
+                                <a class="btn btn-danger ms-md-2" onclick="ConfirmacaoExcluirEvento();">Excluir</a>
                             </div>
                         </div>
                     </div>
+                </div>
+            }
+        </div>*@
+            <div>
+                @if (@ViewBag.MeusEventosCriados.Count == 0 || @ViewBag.MeusEventosCriados == null)
+                {
+                    <table class="table table-dark">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row" style="display: flex;justify-content: center;">Nenhum evento encontrado!</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <table class="table table-dark">
+                        <thead>
+                            <tr>
+                                <th scope="col">Titulo</th>
+                                <th scope="col">Descrição</th>
+                                <th scope="col">Categoria</th>
+                                <th scope="col">Local</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var evento in @ViewBag.MeusEventosCriados)
+                            {
+                                <tr>
+                                    <th scope="row">@evento.Titulo</th>
+                                    <td>@evento.Descricao</td>
+                                    <td>@evento.Categoria</td>
+                                    <td>@evento.Cidade_Estado</td>
+                                    <td>
+                                        <a href="/evento/visualizar/@evento.Id_Evento" class="btn btn-light">Visualizar</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
                 }
             </div>
         </div>

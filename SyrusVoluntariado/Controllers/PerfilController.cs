@@ -88,7 +88,7 @@ namespace BeaHelper.Controllers
 
             List<Evento_P1> MinhasCandidaturas = CarregaEventosCandidatados();
 
-            MinhasCandidaturas[0].Filtros = new Filtro();
+            ViewBag.Filtro = new Filtro();
             return View(MinhasCandidaturas);
         }
 
