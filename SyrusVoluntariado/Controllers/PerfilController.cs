@@ -72,6 +72,7 @@ namespace BeaHelper.Controllers
 
             ViewBag.ConvidarAtivado = Convidando;
             ViewBag.IdVoluntarioConvidado = IdVoluntarioConvidado;
+            ViewBag.Filtro = new Filtro();
 
             ViewBag.FooterPrecisa = false;
             int IdUsuarioLogado = GetUsuarioLogado();
@@ -122,12 +123,27 @@ namespace BeaHelper.Controllers
             List<Evento_P1> MinhasCandidaturas = new List<Evento_P1>();
             List<Evento_P1> FiltroMinhasCandidaturas = new List<Evento_P1>();
 
-            MinhasCandidaturas = CarregaEventosCandidatados();
-
             FiltroMinhasCandidaturas = FiltroCadidaturas(MinhasCandidaturas, filtros);
 
             ViewBag.Filtro = filtros;
             return View("EventosCandidatados", FiltroMinhasCandidaturas);
+        }
+
+        [HttpPost]
+        public IActionResult FiltroMeusEventos(Filtro filtros)
+        {
+
+            List<Evento> FiltroMeusEventos = new List<Evento>();
+            int IdUsuarioLogado = GetUsuarioLogado();
+
+            List<Evento> MeusEventos = Evento_P2.MeusEventos(IdUsuarioLogado);
+
+            FiltroMeusEventos = FiltrarMeusEventos(MeusEventos, filtros);
+
+            ViewBag.ConvidarAtivado = false;
+            ViewBag.IdVoluntarioConvidado = 0;
+            ViewBag.Filtro = filtros;
+            return View("MeusEventos", FiltroMeusEventos);
         }
 
         private List<Evento_P1> FiltroCadidaturas(List<Evento_P1> MinhasCandidaturas, Filtro filtros)
@@ -152,6 +168,30 @@ namespace BeaHelper.Controllers
             }
 
             return MinhasCandidaturas;
+        }
+
+        private List<Evento> FiltrarMeusEventos(List<Evento> MeusEventos, Filtro filtros)
+        {
+            List<Evento_P1> CandidatosBanco = new List<Evento_P1>();
+
+            if (filtros.Titulo != null)
+            {
+                MeusEventos = MeusEventos.Where(a => a.Titulo.Contains(filtros.Titulo)).ToList();
+            }
+            if (filtros.Descricao != null)
+            {
+                MeusEventos = MeusEventos.Where(a => a.Descricao.Contains(filtros.Descricao)).ToList();
+            }
+            if (filtros.Categoria != null)
+            {
+                MeusEventos = MeusEventos.Where(a => a.Categoria.Contains(filtros.Categoria)).ToList();
+            }
+            if (filtros.Local != null)
+            {
+                MeusEventos = MeusEventos.Where(a => a.Cidade_Estado.Contains(filtros.Local)).ToList();
+            }
+
+            return MeusEventos;
         }
 
         public int GetUsuarioLogado()

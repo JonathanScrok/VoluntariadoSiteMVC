@@ -82,31 +82,33 @@
 
     <div id="PaiTabEventos">
         <div>
-            <div class="column">
+            <div class="column" style=" display: flex; flex-direction: column; align-items: center;">
                 @foreach (var evento in Model)
                 {
                     ViewBag.Id = evento.Id_Evento;
-                    <div class="col-sm-6 mt-md-3">
+                    <div class="col-sm-6 mt-md-3" style="width: 70%;">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">@evento.Titulo</h5>
-                                <p class="card-text">@evento.Descricao</p>
+                                <h5 class="card-title" style="display: flex; flex-direction: row; justify-content: center; max-width: 100%;">@evento.Titulo</h5>
+                                <p class="card-text" style="display: flex; flex-direction: row; justify-content: center;">@evento.Descricao</p>
                                 @if (@evento.DataEvento == null)
                                 {
-                                    <p class="card-text">Data: Não escolhida</p>
+                                    <p class="card-text" style="display: flex; flex-direction: row; justify-content: center;">Data: Não escolhida</p>
                                 }
                                 else
                                 {
-                                    <p class="card-text">Data: @evento.DataEvento</p>
+                                    <p class="card-text" style="display: flex; flex-direction: row; justify-content: center;">Data: @evento.DataEvento</p>
                                 }
 
-                                <a href="/evento/visualizar/@evento.Id_Evento" class="btn " style="background-color: #62c0a3;"><b>Visualizar</b></a>
+                                <a href="/evento/visualizar/@evento.Id_Evento" class="btn " style="background-color: #62c0a3; display: flex; flex-direction: row; justify-content: center;"><b>Visualizar</b></a>
                             </div>
                         </div>
                     </div>
                 }
             </div>
-            @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
+            <div style="margin-top:10px">
+                @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
+            </div>
         </div>
     </div>
 </div>
