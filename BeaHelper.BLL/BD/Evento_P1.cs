@@ -264,7 +264,6 @@ namespace BeaHelper.BLL.BD
             parms.Add(new SqlParameter("@DataEvento", SqlDbType.SmallDateTime, 8));
             parms.Add(new SqlParameter("@SemData", SqlDbType.Bit));
             parms.Add(new SqlParameter("@EventoRecorrente", SqlDbType.Bit));
-            parms.Add(new SqlParameter("@StatusEvento", SqlDbType.VarChar, 100));
 
             return (parms);
         }
@@ -293,11 +292,6 @@ namespace BeaHelper.BLL.BD
 
             parms[8].Value = this._semData;
             parms[9].Value = this._eventoRecorrente;
-
-            if (_statusEvento == null)
-                parms[10].Value = DBNull.Value;
-            else
-                parms[10].Value = this._statusEvento;
         }
         #endregion
 
@@ -606,7 +600,6 @@ namespace BeaHelper.BLL.BD
                     }
                     objEvento._semData = Convert.ToBoolean(dr["SemData"]);
                     objEvento._eventoRecorrente = Convert.ToBoolean(dr["EventoRecorrente"]);
-                    objEvento._statusEvento = Convert.ToString(dr["StatusEvento"]);
 
                     return true;
                 }

@@ -21,7 +21,7 @@ namespace BeaHelper.Controllers
         {
             int pageNumber = page ?? 1;
 
-            List<Evento> eventos = Evento_P2.TodosEventos();
+            List<Evento> eventos = Evento_P2.TodosEventos(); //Alterar para buscar eventos que não ocorreram ainda
             eventos[0].Filtros = new Filtro();
             var resultadoPaginado = eventos.ToPagedList(pageNumber, 10);
 
@@ -87,7 +87,6 @@ namespace BeaHelper.Controllers
                 eventoCadastrar.CidadeEstado = evento.Cidade_Estado;
                 eventoCadastrar.SemData = evento.SemData;
                 eventoCadastrar.EventoRecorrente = evento.EventoRecorrente;
-                eventoCadastrar.StatusEvento = "Ativo";
 
                 eventoCadastrar.Save();
 

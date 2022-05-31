@@ -38,11 +38,23 @@ namespace BeaHelper.Controllers
 
             // Meus Eventos
             List<Evento> meuseventos = Evento_P2.MeusEventos(IdUsuarioLogado);
-            ViewBag.MeusEventosCriados = meuseventos;
+
+            Parallel.ForEach(meuseventos, evento =>
+            {
+                if (evento.DataEvento < DateTime.Now)
+                    evento.StatusEvento = "Inativo";
+                else if (evento.DataEvento == DateTime.Now)
+                    evento.StatusEvento = "Ocorrendo";
+                else
+                    evento.StatusEvento = "Ativo";
+            });
+            var meuseventosOrdenado = meuseventos.OrderByDescending(x => x.DataEvento).ToList();
+
+            ViewBag.MeusEventosCriados = meuseventosOrdenado;
             // -------------------------------------------------
 
             // Eventos Candidatadas
-            List<EventoCandidatura> EventosCandidatados = EventoCandidaturas_P1.TodasCandidaturasUsuario(IdUsuarioLogado);
+            List<EventoCandidatura> EventosCandidatados = EventoCandidaturas_P1.TodasCandidaturasUsuario(IdUsuarioLogado); //Alterar para buscar eventos que não ocorreram ainda
 
             List<Evento_P1> MinhasCandidaturas = new List<Evento_P1>();
             List<int> Idfvagas = new List<int>();
