@@ -87,6 +87,7 @@ namespace BeaHelper.Controllers
                 eventoCadastrar.CidadeEstado = evento.Cidade_Estado;
                 eventoCadastrar.SemData = evento.SemData;
                 eventoCadastrar.EventoRecorrente = evento.EventoRecorrente;
+                eventoCadastrar.StatusEvento = "Ativo";
 
                 eventoCadastrar.Save();
 

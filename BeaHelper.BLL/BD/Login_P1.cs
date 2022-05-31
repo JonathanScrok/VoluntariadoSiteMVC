@@ -13,7 +13,6 @@ namespace BeaHelper.BLL.BD
     public partial class Login_P1
     {
         #region StringConnection
-        //private const string stringConnection = "Data Source=mssql-49550-0.cloudclusters.net,11255;Initial Catalog=be_helper;Integrated Security=False;User Id=AdminBeaHelper;Password=B3ah3lper#2021;MultipleActiveResultSets=True";
         private static string stringConnection = DbAcess.GetConnection();
         #endregion
 
