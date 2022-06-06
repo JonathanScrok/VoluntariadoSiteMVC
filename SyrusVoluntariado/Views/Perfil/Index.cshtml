@@ -36,6 +36,10 @@
                         <th scope="row">Sexo</th>
                         <td>@ViewBag.UsuarioSexo</td>
                     </tr>
+                    <tr>
+                        <th scope="row">Telefone</th>
+                        <td>@Model.NumeroCelular</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -114,6 +118,7 @@
                                         <th scope="col">Local</th>
                                         <th scope="col">Status</th>
                                         <th scope="col"></th>
+                                        <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -127,6 +132,9 @@
                                             <td>@evento.StatusEvento</td>
                                             <td>
                                                 <a href="/evento/visualizar/@evento.Id_Evento" class="btn btn-light">Visualizar</a>
+                                            </td>
+                                            <td>
+                                                <a href="/evento/ListaVoluntarios/@evento.Id_Evento" class="btn btn-light">Voluntários</a>
                                             </td>
                                         </tr>
                                     }

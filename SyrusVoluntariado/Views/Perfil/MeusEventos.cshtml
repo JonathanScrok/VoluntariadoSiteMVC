@@ -88,7 +88,15 @@
                                 <th scope="col">Descrição</th>
                                 <th scope="col">Categoria</th>
                                 <th scope="col">Local</th>
-                                <th scope="col"></th>
+                                @if (Convidando)
+                                {
+                                    <th scope="col"></th>
+                                }
+                                else
+                                {
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
+                                }
                             </tr>
                         </thead>
                         <tbody>
@@ -109,6 +117,9 @@
                                     {
                                         <td>
                                             <a href="/evento/visualizar/@evento.Id_Evento" class="btn btn-light">Visualizar</a>
+                                        </td>
+                                        <td>
+                                            <a href="/evento/ListaVoluntarios/@evento.Id_Evento" class="btn btn-light">Voluntários</a>
                                         </td>
                                     }
                                 </tr>
