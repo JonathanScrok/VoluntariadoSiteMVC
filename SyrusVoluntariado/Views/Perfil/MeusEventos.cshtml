@@ -2,12 +2,12 @@
 
 
 @{
-    //Layout = "_Layout";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @{
     ViewBag.Title = "Meus Eventos";
     int IdVoluntarioConvidado = ViewBag.IdVoluntarioConvidado;
+    bool Convidando = ViewBag.ConvidarAtivado;
     var filtro = @ViewBag.Filtro;
 }
 
@@ -99,9 +99,18 @@
                                     <td>@evento.Descricao</td>
                                     <td>@evento.Categoria</td>
                                     <td>@evento.Cidade_Estado</td>
-                                    <td>
-                                        <a href="/evento/visualizar/@evento.Id_Evento" class="btn btn-light">Visualizar</a>
-                                    </td>
+                                    @if (Convidando)
+                                    {
+                                        <td>
+                                            <a href="/voluntario/postconvidar/?Id=@IdVoluntarioConvidado&IdEvento=@evento.Id_Evento" class="btn btn-light">Convidar</a>
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            <a href="/evento/visualizar/@evento.Id_Evento" class="btn btn-light">Visualizar</a>
+                                        </td>
+                                    }
                                 </tr>
                             }
                         </tbody>

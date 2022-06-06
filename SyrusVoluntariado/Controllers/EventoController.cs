@@ -61,8 +61,6 @@ namespace BeaHelper.Controllers
 
             ViewBag.CadastrarAtualizar = "Cadastrar";
 
-            //var ValorUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado"); //Remover ou Comentar
-            //int IdUsuarioLog = ValorUsuarioLogado.GetValueOrDefault(); //Remover ou Comentar
             int IdUsuarioLogado = GetUsuarioLogado();
 
             if (ModelState.IsValid)
@@ -105,7 +103,6 @@ namespace BeaHelper.Controllers
             Evento_P1 evento = new Evento_P1(Id);
             evento.CompleteObject();
 
-            //var IdfUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault(); //Remover ou Comentar
             int IdUsuarioLogado = GetUsuarioLogado();
 
             List<EventoCandidatura> TodasCandidaturasUsuario = EventoCandidaturas_P1.TodasCandidaturasUsuario(IdUsuarioLogado);
@@ -141,8 +138,6 @@ namespace BeaHelper.Controllers
         public IActionResult Editar(int Id)
         {
 
-            //ViewBag.Nivel = niveis;
-            //var IdfUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault(); //Remover ou Comentar
             int IdUsuarioLogado = GetUsuarioLogado();
 
             Evento_P1 evento = new Evento_P1(Id);
@@ -166,7 +161,6 @@ namespace BeaHelper.Controllers
         {
 
             ViewBag.CadastrarAtualizar = "Salvar";
-            //var IdfUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault(); //Remover ou Comentar
             int IdUsuarioLogado = GetUsuarioLogado();
 
             if (ModelState.IsValid)
@@ -196,7 +190,6 @@ namespace BeaHelper.Controllers
         [HttpGet]
         public IActionResult Excluir(int Id)
         {
-            //var IdfUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault(); //Remover ou Comentar
             int IdUsuarioLogado = GetUsuarioLogado();
 
             if (Id != 0)
@@ -217,7 +210,6 @@ namespace BeaHelper.Controllers
         [HttpGet]
         public IActionResult Voluntariar(int Id)
         {
-            //var IdfUsuarioLogado = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault(); //Remover ou Comentar
             int IdUsuarioLogado = GetUsuarioLogado();
 
             Evento_P1 evento = new Evento_P1(Id);
@@ -315,7 +307,7 @@ namespace BeaHelper.Controllers
                 UsuarioCompleto.Id = Usuario.IdUsuario;
                 UsuarioCompleto.Email = Usuario.Email;
 
-                Regex regex = new Regex(@"\D"); //Regex para remover tudo oque não for número
+                Regex regex = new Regex(@"\D");
                 string numeroWhatapp = regex.Replace(Usuario.NumeroCelular, @"");
 
                 UsuarioCompleto.NumeroCelular = numeroWhatapp;

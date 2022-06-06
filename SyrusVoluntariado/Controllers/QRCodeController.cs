@@ -42,7 +42,6 @@ namespace BeaHelper.Controllers
 
         public void DeleteArquivo(string arquivo)
         {
-            //arquivo = "wwwroot/qrr/arquivo-1254.qrr";
             ValidaArquivo.DeletaArquivo(arquivo);
         }
 

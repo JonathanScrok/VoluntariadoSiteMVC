@@ -16,8 +16,6 @@ namespace BeaHelper.Controllers
 
         public IActionResult Index()
         {
-
-            //int IdfUsuario = HttpContext.Session.GetInt32("IdUsuarioLogado").GetValueOrDefault(); //Remover ou Comentar
             int IdUsuarioLogado = GetUsuarioLogado();
 
             Usuario_P1 Usuario = new Usuario_P1(IdUsuarioLogado);

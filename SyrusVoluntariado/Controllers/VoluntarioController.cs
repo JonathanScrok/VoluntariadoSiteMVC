@@ -80,7 +80,7 @@ namespace BeaHelper.Controllers
         }
 
         [HttpGet]
-        public IActionResult PostConvidar(int Id, int IdEvento) //Alterar para Chamar por JS, Mudar o botao para desabilitado com o texto Convidado e criar nova notificação
+        public IActionResult PostConvidar(int Id, int IdEvento)
         {
             Notificacao_P1 notificacao = new Notificacao_P1();
             notificacao.IdUsuarioNotificado = Id;

@@ -19,7 +19,7 @@ namespace BeaHelper.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            string LoginSession = HttpContext.Session.GetString("Login"); //Remover ou Comentar
+            string LoginSession = HttpContext.Session.GetString("Login");
             var LogadoCookie = HttpContext.Request.Cookies["Logado"];
 
             if (LoginSession == "true" || LogadoCookie == "true")
@@ -109,7 +109,7 @@ namespace BeaHelper.Controllers
         [HttpGet]
         public IActionResult CadastrarUsuario()
         {
-            string LoginSession = HttpContext.Session.GetString("Login"); //Remover ou Comentar
+            string LoginSession = HttpContext.Session.GetString("Login");
             var LogadoCookie = HttpContext.Request.Cookies["Logado"];
 
             if (LoginSession == "true" || LogadoCookie == "true")
