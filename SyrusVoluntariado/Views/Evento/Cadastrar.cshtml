@@ -28,7 +28,14 @@
             </div>
             <div class="col-md">
                 <div class="form-floating">
-                    <input type="text" name="categoria" value="@Model.Categoria" class="form-control" id="categoria" placeholder="">
+                    <select asp-for="categoria" type="text" class="form-select marginesquerda-99" id="" name="categoria" placeholder="">
+                        <option value="" selected="@(Model.Categoria == null)">Selecione...</option>
+                        <option value="Alimentação" selected="@(Model.Categoria == "Alimentação")">Alimentação</option>
+                        <option value="Tecnologia" selected="@(Model.Categoria == "Tecnologia")">Tecnologia </option>
+                        <option value="Entrega" selected="@(Model.Categoria == "Entrega")">Entrega</option>
+                        <option value="Serviços Gerais" selected="@(Model.Categoria == "Serviços Gerais")">Serviços Gerais</option>
+                        <option value="Outro" selected="@(Model.Categoria == "Outro")">Outro</option>
+                    </select>
                     <label for="categoria">Categoria:</label>
                     @Html.ValidationMessage("categoria")
                 </div>
