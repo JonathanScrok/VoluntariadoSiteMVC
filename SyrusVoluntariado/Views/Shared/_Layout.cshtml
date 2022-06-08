@@ -27,7 +27,7 @@
     @*<link rel="icon" type="image/png" sizes="16x16" href="/templateboot/public/assets/img/favicons/favicon-16x16.png">*@
     <link rel="icon" type="image/png" sizes="32x32" href="/templateboot/public/assets/img/favicons/beahelper-favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/templateboot/public/assets/img/favicons/beahelper-favicon-16x16.png">
-    <link rel="shortcut icon" type="image/x-icon" href="/templateboot/public/assets/img/favicons/favicon.ico">
+    @*<link rel="shortcut icon" type="image/x-icon" href="/templateboot/public/assets/img/favicons/favicon.ico">*@
     <link rel="manifest" href="/templateboot/public/assets/img/favicons/manifest.json">
     <meta name="msapplication-TileImage" content="/templateboot/public/assets/img/favicons/mstile-150x150.png">
     <meta name="theme-color" content="#62c0a3">
@@ -64,13 +64,13 @@
                                 }
                             </ul>
                             @*<div class="dropdown d-none d-lg-block">
-                        <button class="btn bg-soft-warning ms-2" id="dropdownMenuButton1" type="submit" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-search text-warning"></i></button>
-                        <div class="dropdown-menu dropdown-menu-lg-end p-0 rounded" aria-labelledby="dropdownMenuButton1" style="top:55px">
-                            <form>
-                                <input class="form-control border-200" type="search" placeholder="Pesquisar" aria-label="Search" style="background:#FDF1DF;" />
-                            </form>
-                        </div>
-                    </div>*@
+                                    <button class="btn bg-soft-warning ms-2" id="dropdownMenuButton1" type="submit" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-search text-warning"></i></button>
+                                    <div class="dropdown-menu dropdown-menu-lg-end p-0 rounded" aria-labelledby="dropdownMenuButton1" style="top:55px">
+                                        <form>
+                                            <input class="form-control border-200" type="search" placeholder="Pesquisar" aria-label="Search" style="background:#FDF1DF;" />
+                                        </form>
+                                    </div>
+                                </div>*@
                             @if (Logado == null && Login == null)
                             {
                                 <a class="btn btn-dark me-md-2 order-1 order-lg-0 ms-lg-3" href="/login" style="margin-right: 0 !important;">Entrar</a>
@@ -94,7 +94,7 @@
                                         <ul class="dropdown-menu" id="dropItens" aria-labelledby="dropdownMenuLink">
                                             <li><a class="dropdown-item" id="MeuPerfilButton" href="/perfil">Meu Perfil</a></li>
                                             @*<li><a class="dropdown-item" id="MeuPerfilButton" href="/perfil/meuseventos ">Meus Eventos</a></li>
-                                            <li><a class="dropdown-item" id="MeuPerfilButton" href="/perfil/eventoscandidatados ">Eventos Voluntariádos</a></li>*@
+                                                <li><a class="dropdown-item" id="MeuPerfilButton" href="/perfil/eventoscandidatados ">Eventos Voluntariádos</a></li>*@
                                             <li><a class="dropdown-item" id="sairButton" href="/Login/logout">Sair</a></li>
                                         </ul>
                                     </li>

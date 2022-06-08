@@ -54,7 +54,8 @@
         <div class="row g-2 mt-md-2">
             <div class="col-md">
                 <div class="form-floating">
-                    <input type="text" name="Cidade_Estado" value="@Model.Cidade_Estado" class="form-control" id="Cidade_Estado" placeholder="">
+                    <input type="text" name="Cidade_Estado" value="@Model.Cidade_Estado" class="form-control" id="Cidade_Estado" autocomplete="off" placeholder="">
+                    <ul id="optionsAutComplet" class="sugestoes"></ul>
                     <label for="Cidade_Estado">Local:</label>
                     @Html.ValidationMessage("Cidade_Estado")
                 </div>
@@ -85,7 +86,7 @@
                         <label class="form-check-label" for="SemData">Não possui data</label>
                     </div>
 
-                    <div class="form-check form-switch chk2">
+                    @*<div class="form-check form-switch chk2">
                         @if (@Model.EventoRecorrente == true)
                         {
                             <input class="form-check-input" type="checkbox" checked onclick="validaCheckEventoRecorrente();" name="EventoRecorrente" value="@Model.EventoRecorrente" id="EventoRecorrente">
@@ -95,7 +96,7 @@
                             <input class="form-check-input" type="checkbox" onclick="validaCheckEventoRecorrente();" name="EventoRecorrente" value="@Model.EventoRecorrente" id="EventoRecorrente">
                         }
                         <label class="form-check-label" for="EventoRecorrente">Evento recorrente</label>
-                    </div>
+                    </div>*@
                 </div>
             </div>
 
