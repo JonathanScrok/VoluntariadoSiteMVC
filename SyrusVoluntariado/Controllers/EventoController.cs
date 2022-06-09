@@ -21,7 +21,7 @@ namespace BeaHelper.Controllers
         {
             int pageNumber = page ?? 1;
 
-            List<Evento> eventos = Evento_P2.TodosEventos(); //Alterar para buscar eventos que não ocorreram ainda
+            List<Evento> eventos = Evento_P2.TodosEventos();
             eventos[0].Filtros = new Filtro();
             var resultadoPaginado = eventos.ToPagedList(pageNumber, 10);
 
