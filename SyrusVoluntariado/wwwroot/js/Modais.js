@@ -16,7 +16,6 @@
         }
 
     } else {
-        console.log("Cookies aceitos");
         var divCookies = document.querySelector(".cookies-container");
 
         if (divCookies.style.display === "block") {
