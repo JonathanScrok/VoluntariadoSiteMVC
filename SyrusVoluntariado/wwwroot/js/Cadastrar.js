@@ -70,3 +70,10 @@ function valorEscolhido(valor) {
     document.querySelector('.sugestoes').innerHTML = '';
     coutValorEscolhido = true;
 }
+
+function ValidaCampos() {
+    console.log(coutValorEscolhido);
+    if (!coutValorEscolhido) {
+        campo.value = "";
+    }
+}

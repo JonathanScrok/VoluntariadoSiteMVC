@@ -27,7 +27,6 @@ namespace BeaHelper.BLL.Models
         public string Descricao { get; set; }
 
         [Required(ErrorMessage = "O Campo é Obrigatório!")]
-        [MaxLength(10, ErrorMessage = "O Campo deve possuir no máximo 10 caracteres!")]
         public string Cidade_Estado { get; set; }
 
         public DateTime DataPublicacao { get; set; }
