@@ -68,7 +68,7 @@ namespace BeaHelper.Controllers
 
                 Evento_P1 eventoCadastrar = new Evento_P1();
 
-                eventoCadastrar.DataPublicacao = DateTime.Now;              
+                eventoCadastrar.DataPublicacao = DateTime.Now;
                 eventoCadastrar.IdUsuarioAdm = IdUsuarioLogado;
                 eventoCadastrar.Titulo = evento.Titulo;
                 eventoCadastrar.Categoria = evento.Categoria;
@@ -153,9 +153,14 @@ namespace BeaHelper.Controllers
             {
                 Mapper.CreateMap<Evento_P1, Evento>();
                 Evento EventoEdidar = Mapper.Map<Evento>(evento);
-                EventoEdidar.DataEvento = null;
                 ViewBag.CadastrarAtualizar = "Salvar";
                 ViewBag.LocalEsolhido = "true";
+                if (reativando)
+                {
+                    EventoEdidar.DataEvento = null;
+                    ModelState.AddModelError("DataEvento", "Informe a nova data do evento!");
+                }
+
                 return View("Cadastrar", EventoEdidar);
             }
 
@@ -181,9 +186,9 @@ namespace BeaHelper.Controllers
                 eventos.Categoria = evento.Categoria;
                 eventos.Descricao = evento.Descricao;
                 eventos.CidadeEstado = evento.Cidade_Estado;
-                eventos.SemData = evento.SemData;                
+                eventos.SemData = evento.SemData;
                 eventos.EventoRecorrente = evento.EventoRecorrente;
-                
+
                 if (evento.SemData)
                 {
                     eventos.DataEvento = null;
@@ -325,7 +330,7 @@ namespace BeaHelper.Controllers
                 Usuario.CompleteObject();
 
                 var JaAvaliado = Avaliacao_P1.BuscaIdUsuario_AvaliouEAvaliado(IdUsu, IdUsuarioLogado);
-                
+
                 var Avaliacao = Avaliacao_P1.TodasAvaliacoesUsuario(IdUsu);
                 UsuarioCompleto.Id = Usuario.IdUsuario;
                 UsuarioCompleto.Email = Usuario.Email;
