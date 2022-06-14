@@ -30,7 +30,6 @@ function id(el) {
 }
 
 if (window.location.href == Dominio + "/login/cadastrarusuario") {
-    console.log(window.location.href);
     window.onload = function () {
         id('celularcadastro').onkeyup = function () {
             mascara(this, mtel);

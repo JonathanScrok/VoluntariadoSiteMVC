@@ -7,11 +7,9 @@
 
     if (aceitaCookie == null) {
         //$('#exampleModal').modal('show');
-        console.log("Ainda não aceitou cookies");
         var divCookies = document.querySelector(".cookies-container");
 
         if (divCookies.style.display === "none") {
-            console.log("Div ta invisivel");
             divCookies.style.display = "block";
         }
 
@@ -19,7 +17,6 @@
         var divCookies = document.querySelector(".cookies-container");
 
         if (divCookies.style.display === "block") {
-            console.log("Div ta aparecendo");
             divCookies.style.display = "none";
         }
     }

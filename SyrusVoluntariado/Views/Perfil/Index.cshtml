@@ -133,9 +133,18 @@
                                             <td>
                                                 <a href="/evento/visualizar/@evento.Id_Evento" class="btn btn-light">Visualizar</a>
                                             </td>
-                                            <td>
-                                                <a href="/evento/ListaVoluntarios/@evento.Id_Evento" class="btn btn-light">Voluntários</a>
-                                            </td>
+                                            @if (@evento.StatusEvento == "Inativo")
+                                            {
+                                                <td>
+                                                    <a href="/evento/editar/?Id=@evento.Id_Evento&reativando=true" class="btn btn-light">Reativar</a>
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                <td>
+                                                    <a href="/evento/ListaVoluntarios/@evento.Id_Evento" class="btn btn-light">Voluntários</a>
+                                                </td>
+                                            }
                                         </tr>
                                     }
                                 </tbody>

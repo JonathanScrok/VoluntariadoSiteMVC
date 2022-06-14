@@ -13,7 +13,6 @@ function voluntariarNoEvento() {
         $("#BotaoVoluntatiarMe").html('Já Voluntariado');
         $('#BotaoVoluntatiarMe').prop('disabled', true);
     }).fail(function (err) {
-        console.log(err);
     });
 }
 

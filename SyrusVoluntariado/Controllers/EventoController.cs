@@ -60,7 +60,7 @@ namespace BeaHelper.Controllers
         {
 
             ViewBag.CadastrarAtualizar = "Cadastrar";
-
+            ViewBag.LocalEsolhido = "false";
             int IdUsuarioLogado = GetUsuarioLogado();
 
             if (ModelState.IsValid)
@@ -68,23 +68,30 @@ namespace BeaHelper.Controllers
 
                 Evento_P1 eventoCadastrar = new Evento_P1();
 
-                eventoCadastrar.DataPublicacao = DateTime.Now;
-                if (evento.SemData == true)
-                {
-                    eventoCadastrar.DataEvento = null;
-                }
-                else
-                {
-                    eventoCadastrar.DataEvento = evento.DataEvento;
-                }
-                
+                eventoCadastrar.DataPublicacao = DateTime.Now;              
                 eventoCadastrar.IdUsuarioAdm = IdUsuarioLogado;
                 eventoCadastrar.Titulo = evento.Titulo;
                 eventoCadastrar.Categoria = evento.Categoria;
                 eventoCadastrar.Descricao = evento.Descricao;
                 eventoCadastrar.CidadeEstado = evento.Cidade_Estado;
-                eventoCadastrar.SemData = evento.SemData;
                 eventoCadastrar.EventoRecorrente = evento.EventoRecorrente;
+
+                if (evento.SemData)
+                {
+                    eventoCadastrar.DataEvento = null;
+                }
+                else
+                {
+                    if (evento.DataEvento == null)
+                    {
+                        ModelState.AddModelError("DataEvento", "Data do evento necessária!");
+                        return View("Cadastrar", evento);
+                    }
+                    else
+                    {
+                        eventoCadastrar.DataEvento = evento.DataEvento;
+                    }
+                }
 
                 eventoCadastrar.Save();
 
@@ -135,9 +142,8 @@ namespace BeaHelper.Controllers
 
         [Login]
         [HttpGet]
-        public IActionResult Editar(int Id)
+        public IActionResult Editar(int Id, bool reativando = false)
         {
-
             int IdUsuarioLogado = GetUsuarioLogado();
 
             Evento_P1 evento = new Evento_P1(Id);
@@ -147,8 +153,9 @@ namespace BeaHelper.Controllers
             {
                 Mapper.CreateMap<Evento_P1, Evento>();
                 Evento EventoEdidar = Mapper.Map<Evento>(evento);
-
+                EventoEdidar.DataEvento = null;
                 ViewBag.CadastrarAtualizar = "Salvar";
+                ViewBag.LocalEsolhido = "true";
                 return View("Cadastrar", EventoEdidar);
             }
 
@@ -169,14 +176,30 @@ namespace BeaHelper.Controllers
                 eventos.CompleteObject();
 
                 eventos.DataPublicacao = DateTime.Now;
-                eventos.DataEvento = evento.DataEvento;
                 eventos.IdUsuarioAdm = IdUsuarioLogado;
                 eventos.Titulo = evento.Titulo;
                 eventos.Categoria = evento.Categoria;
                 eventos.Descricao = evento.Descricao;
                 eventos.CidadeEstado = evento.Cidade_Estado;
-                eventos.SemData = evento.SemData;
+                eventos.SemData = evento.SemData;                
                 eventos.EventoRecorrente = evento.EventoRecorrente;
+                
+                if (evento.SemData)
+                {
+                    eventos.DataEvento = null;
+                }
+                else
+                {
+                    if (evento.DataEvento == null)
+                    {
+                        ModelState.AddModelError("DataEvento", "Data do evento necessária!");
+                        return View("Cadastrar", evento);
+                    }
+                    else
+                    {
+                        eventos.DataEvento = evento.DataEvento;
+                    }
+                }
 
                 eventos.Save();
 

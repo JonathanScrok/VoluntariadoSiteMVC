@@ -136,8 +136,5 @@ function FuncFiltrar() {
     var select = document.getElementById("filtroCategoria");
     var variavel = '';
     variavel = select.value;
-    console.log("Valor submit categoria: " + variavel);
-    console.log("URL: " + "evento/filtrarevento/?Titulo=" + titulo + "&Descricao=" + descricao + "&Categoria=" + variavel + "&Local=" + local + "&NuncaVoluntariado=" + chkNV + "&JaVoluntariado=" + chkJV);
-
     window.location.href = "evento/filtrarevento/?Titulo=" + titulo + "&Descricao=" + descricao + "&Categoria=" + variavel + "&Local=" + local + "&NuncaVoluntariado=" + chkNV + "&JaVoluntariado=" + chkJV;
 }

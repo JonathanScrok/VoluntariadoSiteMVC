@@ -72,6 +72,7 @@
                     }
                     <label for="DataEvento">Data e Hora inicial do Evento:</label>
                     @TempData["DataEvento"]
+                    @Html.ValidationMessage("DataEvento")
                 </div>
                 <div class="CheckBox_DataEvento">
                     <div class="form-check form-switch">
@@ -104,4 +105,8 @@
         </div>
     </form>
 </div>
+<script>
+    let coutValorEscolhido = false;
+    coutValorEscolhido = @ViewBag.LocalEsolhido
+</script>
 <script src="~/js/Cadastrar.js"></script>
