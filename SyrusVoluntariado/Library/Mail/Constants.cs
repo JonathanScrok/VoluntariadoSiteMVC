@@ -11,7 +11,7 @@ namespace BeaHelper.Library.Mail {
 
         //Autenticação - Gmail
         public readonly static string Usuario = "jonathanwsck@gmail.com";
-        public readonly static string Senha = "Jonathan@2000";
+        public readonly static string Senha = "senha";
 
         //Servidor SMTP
         public readonly static string ServidorSMTP = "smtp.gmail.com";

@@ -288,7 +288,7 @@ namespace BeaHelper.Controllers
 
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return false;
             }

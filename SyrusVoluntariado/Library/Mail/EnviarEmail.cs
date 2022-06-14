@@ -53,7 +53,7 @@ namespace BeaHelper.Library.Mail {
             //string link = "";
             string link = "https://localhost:44394/login/novasenha/"+ usuario.IdUsuario;
 
-            string conteudo = string.Format("<p>Olá Senhor(a): {0}<br/>Verificamos que solicitou a recuperação de senha em nosso site. <br/>Para recuperar sua senha clique no link a baixo <br/>" + link, usuario.Nome);
+            string conteudo = string.Format("<p>Olá Senhor(a): {0}<br/>Verificamos que solicitou a recuperação de senha em nosso site. <br/>Para recuperar sua senha clique no link a baixo. <br/>" + link, usuario.Nome);
 
             using (MailMessage mail = new MailMessage())
             {
