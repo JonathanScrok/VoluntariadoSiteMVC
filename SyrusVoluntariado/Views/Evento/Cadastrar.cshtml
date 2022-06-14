@@ -4,14 +4,19 @@
 }
 @{
     ViewBag.Title = "Cadastrar Evento";
+    var localescolhido = "false";
+    if (ViewBag.LocalEsolhido != null)
+    {
+        localescolhido = ViewBag.LocalEsolhido;
+    }
 }
 
 @*@if (TempData["Mensagem"] != null)
-{
-    <div class="alert alert-success mt-md-2" role="alert">
-        @TempData["Mensagem"]
-    </div>
-}*@
+    {
+        <div class="alert alert-success mt-md-2" role="alert">
+            @TempData["Mensagem"]
+        </div>
+    }*@
 <link href="/css/FundoPaginas.css" rel="stylesheet" type="text/css" />
 <div>
     <form method="post">
@@ -60,7 +65,7 @@
                     @Html.ValidationMessage("Cidade_Estado")
                 </div>
             </div>
-            <div class="col-md">
+            <div class="col-md" style="min-height: 98px">
                 <div class="form-floating">
                     @if (Model.DataEvento.GetValueOrDefault().ToString("yyyy'-'MM'-'dd'T'HH':'mm") == "0001-01-01T00:00")
                     {
@@ -86,18 +91,19 @@
                         }
                         <label class="form-check-label" for="SemData">Não possui data</label>
                     </div>
+                    <p id="msgNaopossuidata" style="color: darkred; padding-left: 5px; display: none "><b>O Evento ficará disponível por 2 mêses!</b></p>
 
                     @*<div class="form-check form-switch chk2">
-                        @if (@Model.EventoRecorrente == true)
-                        {
-                            <input class="form-check-input" type="checkbox" checked onclick="validaCheckEventoRecorrente();" name="EventoRecorrente" value="@Model.EventoRecorrente" id="EventoRecorrente">
-                        }
-                        else
-                        {
-                            <input class="form-check-input" type="checkbox" onclick="validaCheckEventoRecorrente();" name="EventoRecorrente" value="@Model.EventoRecorrente" id="EventoRecorrente">
-                        }
-                        <label class="form-check-label" for="EventoRecorrente">Evento recorrente</label>
-                    </div>*@
+                            @if (@Model.EventoRecorrente == true)
+                            {
+                                <input class="form-check-input" type="checkbox" checked onclick="validaCheckEventoRecorrente();" name="EventoRecorrente" value="@Model.EventoRecorrente" id="EventoRecorrente">
+                            }
+                            else
+                            {
+                                <input class="form-check-input" type="checkbox" onclick="validaCheckEventoRecorrente();" name="EventoRecorrente" value="@Model.EventoRecorrente" id="EventoRecorrente">
+                            }
+                            <label class="form-check-label" for="EventoRecorrente">Evento recorrente</label>
+                        </div>*@
                 </div>
             </div>
 
@@ -107,6 +113,6 @@
 </div>
 <script>
     let coutValorEscolhido = false;
-    coutValorEscolhido = @ViewBag.LocalEsolhido
+    coutValorEscolhido = @localescolhido;
 </script>
 <script src="~/js/Cadastrar.js"></script>

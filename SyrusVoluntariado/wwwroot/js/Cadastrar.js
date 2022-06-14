@@ -3,14 +3,16 @@
 
 function validaCheckSemData() {
     var chkSemData = document.getElementById('SemData');
-    var chkEventoRecorrente = document.getElementById('EventoRecorrente');
+    //var chkEventoRecorrente = document.getElementById('EventoRecorrente');
 
     if (chkSemData.checked) {
         document.getElementById("SemData").value = true;
-        chkEventoRecorrente.checked = false;
-        document.getElementById("EventoRecorrente").value = false;
+        document.getElementById('msgNaopossuidata').style.display = "block";
+        //chkEventoRecorrente.checked = false;
+        //document.getElementById("EventoRecorrente").value = false;
     }
     else {
+        document.getElementById('msgNaopossuidata').style.display = "none";
         document.getElementById("SemData").value = false;
     }
 }
