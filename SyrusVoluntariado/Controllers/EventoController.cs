@@ -22,8 +22,26 @@ namespace BeaHelper.Controllers
             int pageNumber = page ?? 1;
 
             List<Evento> eventos = Evento_P2.TodosEventos();
-            eventos[0].Filtros = new Filtro();
-            var resultadoPaginado = eventos.ToPagedList(pageNumber, 10);
+            List<Evento> eventosFinal = new List<Evento>();
+            Parallel.ForEach(eventos, evento =>
+            {
+                eventosFinal.Add(evento);
+            });
+
+            foreach (var evento in eventos)
+            {
+                if (evento.SemData)
+                {
+                    var dataMais2Meses = evento.DataPublicacao.AddMonths(2);
+                    if (evento.DataPublicacao.AddMonths(2) < DateTime.Now)
+                    {
+                        eventosFinal.Remove(evento);
+                    }
+                }
+            }
+
+            eventosFinal[0].Filtros = new Filtro();
+            var resultadoPaginado = eventosFinal.ToPagedList(pageNumber, 10);
 
             return View(resultadoPaginado);
         }
@@ -75,6 +93,7 @@ namespace BeaHelper.Controllers
                 eventoCadastrar.Descricao = evento.Descricao;
                 eventoCadastrar.CidadeEstado = evento.Cidade_Estado;
                 eventoCadastrar.EventoRecorrente = evento.EventoRecorrente;
+                eventoCadastrar.SemData = evento.SemData;
 
                 if (evento.SemData)
                 {

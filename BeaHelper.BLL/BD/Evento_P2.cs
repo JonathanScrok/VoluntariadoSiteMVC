@@ -197,7 +197,7 @@ namespace BeaHelper.BLL.BD
 
         #region Consultas
         private const string SELECT_TODASVAGAS = @"select * from helper.Eventos WHERE DataEvento > GetDate() or DataEvento is NULL order by DataPublicacao asc";
-        private const string SELECT_ULTIMASVAGAS_TOP8 = @"select top 8 * from helper.Eventos  WHERE DataEvento > GetDate() or DataEvento is NULL order by DataEvento asc";
+        private const string SELECT_ULTIMASVAGAS_TOP8 = @"select top 8 * from helper.Eventos WHERE DataEvento > GetDate() order by DataEvento asc";
         private const string SELECT_MEUSEVENTOS = @"select * from helper.Eventos WHERE Id_Usuario_Adm = @Id_Usuario_Adm";
         private const string SELECT_FILTROEVENTOS = @"select * from helper.Eventos WHERE Titulo like @Titulo and Descricao like @Descricao and Categoria like @Categoria and Cidade_Estado like @Cidade_Estado";
         private const string SELECT_TITULOS = @"select * from helper.Eventos WHERE Titulo = @Titulo";
