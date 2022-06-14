@@ -28,7 +28,7 @@ namespace BeaHelper.Controllers
                 eventosFinal.Add(evento);
             });
 
-            foreach (var evento in eventos)
+            Parallel.ForEach(eventos, evento =>
             {
                 if (evento.SemData)
                 {
@@ -38,7 +38,8 @@ namespace BeaHelper.Controllers
                         eventosFinal.Remove(evento);
                     }
                 }
-            }
+            });
+
 
             eventosFinal[0].Filtros = new Filtro();
             var resultadoPaginado = eventosFinal.ToPagedList(pageNumber, 10);

@@ -88,7 +88,15 @@ namespace BeaHelper.Controllers
             int IdUsuarioLogado = GetUsuarioLogado();
 
             List<Evento> meuseventos = Evento_P2.MeusEventos(IdUsuarioLogado);
-
+            Parallel.ForEach(meuseventos, evento =>
+            {
+                if (evento.DataEvento < DateTime.Now)
+                    evento.StatusEvento = "Inativo";
+                else if (evento.DataEvento == DateTime.Now)
+                    evento.StatusEvento = "Ocorrendo";
+                else
+                    evento.StatusEvento = "Ativo";
+            });
             return View(meuseventos);
         }
 
