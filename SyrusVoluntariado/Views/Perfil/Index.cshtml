@@ -22,15 +22,18 @@
     </nav>
     <div class="tab-content" id="nav-tabContent" style="margin-top: 10px;">
         <div class="tab-pane fade show active perfil-infos" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-            <table class="table table-borderless" id="fontePerfil">
+            <div style="display: flex; flex-direction: row; justify-content: flex-end;">
+                <button id="editarPerfil" style="padding-right: 1px; padding-left: 1px; padding-top: 1px;"><img src="/img/84380.png" width="40" height="40" alt="Editar Perfil" /></button>
+            </div>
+            <table class="table table-borderless" style="margin-top: -40px;" id="fontePerfil">
                 <tbody>
                     <tr>
                         <th scope="row">Nome</th>
-                        <td>@Model.Nome</td>
+                        <td id="campoNome">@Model.Nome</td>
                     </tr>
                     <tr>
                         <th scope="row">Email</th>
-                        <td>@Model.Email</td>
+                        <td id="campoEmail">@Model.Email</td>
                     </tr>
                     <tr>
                         <th scope="row">Sexo</th>
@@ -38,10 +41,13 @@
                     </tr>
                     <tr>
                         <th scope="row">Telefone</th>
-                        <td>@Model.NumeroCelular</td>
+                        <td id="campoCelular">@Model.NumeroCelular</td>
                     </tr>
                 </tbody>
             </table>
+            <div style="display: flex; flex-direction: row; justify-content: flex-end;">
+                <button id="SalvarPerfil" class="btn btn-success" style="display:none">Salvar</button>
+            </div>
         </div>
         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
             <div id="paiDeTodos">
@@ -241,3 +247,53 @@
             </div>
         </div>*@
 </div>
+<script>
+    let campoNome = "";
+    let campoEmail = "";
+    let campoCelular = "";
+
+    var el = document.getElementById('editarPerfil');
+    if (el) {
+        el.addEventListener('click', event => {
+
+            document.querySelector('#campoNome').innerHTML = `<input id="icampoNome" type="type" name="nome" value="${"@Model.Nome"}"/>`;
+            document.querySelector('#campoEmail').innerHTML = `<input id="icampoEmail" type="type" name="nome" value="${"@Model.Email"}"/>`;
+            document.querySelector('#campoCelular').innerHTML = `<input id="icampoCelular" type="type" name="nome" value="${"@Model.NumeroCelular"}"/>`;
+
+            document.getElementById('SalvarPerfil').style.display = "block";
+        })
+    }
+
+    
+    
+    var el = document.getElementById('SalvarPerfil');
+    if (el) {
+        el.addEventListener('click', event => {
+            
+            campoNome = document.querySelector('#icampoNome').value;
+            campoEmail = document.querySelector('#icampoEmail').value;
+            campoCelular = document.querySelector('#icampoCelular').value;
+
+            document.getElementById('SalvarPerfil').style.display = "none";
+            document.querySelector('#campoNome').innerHTML = `<td id="campoNome">${campoNome}</td>`;
+            document.querySelector('#campoEmail').innerHTML = `<td id="campoEmail">${campoEmail}</td>`;
+            document.querySelector('#campoCelular').innerHTML = `<td id="campoCelular">${campoCelular}</td>`;
+
+            let SITE_URL = window.location.origin;
+            var _usuario = { Nome: campoNome, Email: campoEmail, NumeroCelular: campoCelular };
+
+            $.ajax({
+                type: "POST",
+                url: SITE_URL + "/perfil/editardadosperfil",
+                dataType: "json",
+                data: { usuario: _usuario },
+                sucess: function (data) {
+                    
+                },
+                error: function () {
+                    
+                }
+            });
+        })
+    }
+</script>

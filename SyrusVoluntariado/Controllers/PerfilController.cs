@@ -211,6 +211,31 @@ namespace BeaHelper.Controllers
 
             return MeusEventos;
         }
+        
+        [HttpPost]
+        public IActionResult EditarDadosPerfil(Usuario usuario) {
+
+            try
+            {
+                Usuario_P1 usu = new Usuario_P1(usuario.Id_Usuario);
+                usu.Nome = usuario.Nome;
+                usu.Email = usuario.Email;
+                usu.NumeroCelular = usuario.NumeroCelular;
+                usu.Save();
+
+                Login_P1 login = new Login_P1();
+                login.CompleteObject();
+                login.Email = usuario.Email;
+                login.Save();
+
+                return Json("Ok");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+                throw;
+            }
+        }
 
         public int GetUsuarioLogado()
         {

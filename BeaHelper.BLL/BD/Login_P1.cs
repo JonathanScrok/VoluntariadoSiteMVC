@@ -115,9 +115,14 @@ namespace BeaHelper.BLL.BD
         {
             this._persisted = false;
         }
-        public Login_P1(int IdLogin)
+        //public Login_P1(int IdLogin)
+        //{
+        //    this._idLogin = IdLogin;
+        //    this._persisted = true;
+        //}
+        public Login_P1(int IdUsuario)
         {
-            this._idLogin = IdLogin;
+            this._idUsuario = IdLogin;
             this._persisted = true;
         }
         #endregion
@@ -430,6 +435,14 @@ namespace BeaHelper.BLL.BD
                 return SetInstance(dr, this);
             }
         }
+
+        public bool CompleteObject(int idUsuario)
+        {
+            using (IDataReader dr = LoadDataReader(idUsuario))
+            {
+                return SetInstance(dr, this);
+            }
+        }
         /// <summary>
         /// Método utilizado para completar uma instância de Usuario a partir do banco de dados, dentro de uma transação.
         /// </summary>
@@ -465,6 +478,23 @@ namespace BeaHelper.BLL.BD
             conn.Open();
 
             SqlCommand cmd = new SqlCommand(SELECT_BUSCALOGINID, conn);
+            cmd.Parameters.Add(parms[0]);
+
+            return cmd.ExecuteReader();
+        }
+
+        private static IDataReader LoadDataReader(int IdUsuario, string nome = null)
+        {
+            List<SqlParameter> parms = new List<SqlParameter>();
+            parms.Add(new SqlParameter("@Id_Usuario", SqlDbType.Int, 4));
+
+            parms[0].Value = IdUsuario;
+
+            SqlConnection conn = null;
+            conn = new SqlConnection(stringConnection);
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand(SELECT_BUSCALOGIN_IDUSUARIO, conn);
             cmd.Parameters.Add(parms[0]);
 
             return cmd.ExecuteReader();
