@@ -24,6 +24,23 @@
         @*<input type="hidden" name="dataPublicacao" value="@Model.DataPublicacao = @DateTime.Now.ToString("dd/MM/yyyy");" />*@
 
         <div class="row g-2 mt-md-2">
+            <div class="form-check form-switch" style="display: flex; flex-direction: row; justify-content: center;">
+                <div>
+                    @if (@Model.Privado == true)
+                    {
+                        <input class="form-check-input" type="checkbox" checked onclick="validaCheckEventoPrivado();" name="Privado" value="@Model.Privado" id="Privado">
+                        <label class="form-check-label" for="Privado" id="labelPrivado">Evento Privado</label>
+                    }
+                    else
+                    {
+                        <input class="form-check-input" type="checkbox" onclick="validaCheckEventoPrivado();" name="Privado" value="@Model.Privado" id="Privado">
+                        <label class="form-check-label" for="Privado" id="labelPrivado">Evento Publico</label>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-2 mt-md-2">
             <div class="col-md">
                 <div class="form-floating">
                     <input type="text" name="titulo" value="@Model.Titulo" class="form-control" id="titulo" placeholder="">
@@ -57,27 +74,31 @@
         </div>
 
         <div class="row g-2 mt-md-2">
-            <div class="col-md">
-                <div class="form-floating">
-                    <input type="text" name="Cidade_Estado" value="@Model.Cidade_Estado" class="form-control" id="Cidade_Estado" autocomplete="off" placeholder="">
-                    <ul id="optionsAutComplet" class="sugestoes"></ul>
-                    <label for="Cidade_Estado">Local:</label>
-                    @Html.ValidationMessage("Cidade_Estado")
+            <div class="col-md" style="min-height: 98px">
+                <div class="col-md">
+                    <div class="form-floating">
+                        <input type="text" name="Cidade_Estado" value="@Model.Cidade_Estado" class="form-control" id="Cidade_Estado" autocomplete="off" placeholder="">
+                        <ul id="optionsAutComplet" class="sugestoes"></ul>
+                        <label for="Cidade_Estado">Local:</label>
+                        @Html.ValidationMessage("Cidade_Estado")
+                    </div>
                 </div>
             </div>
             <div class="col-md" style="min-height: 98px">
-                <div class="form-floating">
-                    @if (Model.DataEvento.GetValueOrDefault().ToString("yyyy'-'MM'-'dd'T'HH':'mm") == "0001-01-01T00:00")
-                    {
-                        <input id="DataEvento" type="datetime-local" class="form-control" name="DataEvento" value="@Model.DataEvento" placeholder="">
-                    }
-                    else
-                    {
-                        <input id="DataEvento" type="datetime-local" class="form-control" name="DataEvento" value="@Model.DataEvento.GetValueOrDefault().ToString("yyyy'-'MM'-'dd'T'HH':'mm")" placeholder="">
-                    }
-                    <label for="DataEvento">Data e Hora inicial do Evento:</label>
-                    @TempData["DataEvento"]
-                    @Html.ValidationMessage("DataEvento")
+                <div class="col-md">
+                    <div class="form-floating">
+                        @if (Model.DataEvento.GetValueOrDefault().ToString("yyyy'-'MM'-'dd'T'HH':'mm") == "0001-01-01T00:00")
+                        {
+                            <input id="DataEvento" type="datetime-local" class="form-control" name="DataEvento" value="@Model.DataEvento" placeholder="">
+                        }
+                        else
+                        {
+                            <input id="DataEvento" type="datetime-local" class="form-control" name="DataEvento" value="@Model.DataEvento.GetValueOrDefault().ToString("yyyy'-'MM'-'dd'T'HH':'mm")" placeholder="">
+                        }
+                        <label for="DataEvento">Data e Hora inicial do Evento:</label>
+                        @TempData["DataEvento"]
+                        @Html.ValidationMessage("DataEvento")
+                    </div>
                 </div>
                 <div class="CheckBox_DataEvento">
                     <div class="form-check form-switch">
@@ -92,23 +113,22 @@
                         <label class="form-check-label" for="SemData">Não possui data</label>
                     </div>
                     <p id="msgNaopossuidata" style="color: darkred; padding-left: 5px; display: none "><b>O Evento ficará disponível por 2 mêses!</b></p>
-
-                    @*<div class="form-check form-switch chk2">
-                            @if (@Model.EventoRecorrente == true)
-                            {
-                                <input class="form-check-input" type="checkbox" checked onclick="validaCheckEventoRecorrente();" name="EventoRecorrente" value="@Model.EventoRecorrente" id="EventoRecorrente">
-                            }
-                            else
-                            {
-                                <input class="form-check-input" type="checkbox" onclick="validaCheckEventoRecorrente();" name="EventoRecorrente" value="@Model.EventoRecorrente" id="EventoRecorrente">
-                            }
-                            <label class="form-check-label" for="EventoRecorrente">Evento recorrente</label>
-                        </div>*@
                 </div>
             </div>
-
             <button type="submit" class="btn btn-success mt-md-2" onclick="ValidaCampos();" style="align-items:center">@ViewBag.CadastrarAtualizar</button>
         </div>
+
+        @*<div class="form-check form-switch chk2">
+                @if (@Model.EventoRecorrente == true)
+                {
+                    <input class="form-check-input" type="checkbox" checked onclick="validaCheckEventoRecorrente();" name="EventoRecorrente" value="@Model.EventoRecorrente" id="EventoRecorrente">
+                }
+                else
+                {
+                    <input class="form-check-input" type="checkbox" onclick="validaCheckEventoRecorrente();" name="EventoRecorrente" value="@Model.EventoRecorrente" id="EventoRecorrente">
+                }
+                <label class="form-check-label" for="EventoRecorrente">Evento recorrente</label>
+            </div>*@
     </form>
 </div>
 <script>

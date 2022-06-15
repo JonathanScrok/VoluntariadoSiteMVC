@@ -17,6 +17,19 @@ function validaCheckSemData() {
     }
 }
 
+function validaCheckEventoPrivado() {
+    var chkPrivado = document.getElementById('Privado');
+
+    if (chkPrivado.checked) {
+        document.getElementById('labelPrivado').textContent = "Evento Privado";
+        document.getElementById("Privado").value = true;
+    }
+    else {
+        document.getElementById('labelPrivado').textContent = "Evento Publico";
+        document.getElementById("Privado").value = false;
+    }
+}
+
 function validaCheckEventoRecorrente() {
     var chkEventoRecorrente = document.getElementById('EventoRecorrente');
     var chkSemData = document.getElementById('SemData');

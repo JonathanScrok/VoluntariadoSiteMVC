@@ -31,6 +31,7 @@ namespace BeaHelper.BLL.Models
 
         public DateTime DataPublicacao { get; set; }
         public bool SemData { get; set; }
+        public bool Privado { get; set; }
         public bool EventoRecorrente { get; set; }
         public string StatusEvento { get; set; }
 

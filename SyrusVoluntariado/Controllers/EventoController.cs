@@ -95,6 +95,7 @@ namespace BeaHelper.Controllers
                 eventoCadastrar.CidadeEstado = evento.Cidade_Estado;
                 eventoCadastrar.EventoRecorrente = evento.EventoRecorrente;
                 eventoCadastrar.SemData = evento.SemData;
+                eventoCadastrar.Privado = evento.Privado;
 
                 if (evento.SemData)
                 {

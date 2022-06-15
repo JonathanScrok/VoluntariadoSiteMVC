@@ -28,6 +28,7 @@ namespace BeaHelper.BLL.BD
         private DateTime? _dataEvento;
         private Filtro _filtros;
         private bool _semData;
+        private bool _privado;
         private bool _eventoRecorrente;
         private string _statusEvento;
 
@@ -178,6 +179,21 @@ namespace BeaHelper.BLL.BD
         }
         #endregion
 
+        #region Privado
+        public bool Privado
+        {
+            get
+            {
+                return this._privado;
+            }
+            set
+            {
+                this._privado = value;
+                this._modified = true;
+            }
+        }
+        #endregion
+
         #region EventoRecorrente
         public bool EventoRecorrente
         {
@@ -242,8 +258,8 @@ namespace BeaHelper.BLL.BD
         private const string SELECT_ULTIMASEVENTOS_TOP8 = @"select top 8 * from helper.Eventos order by DataEvento desc";
         private const string SELECT_BUSCAEVENTOID = @"select * from helper.Eventos where Id_Evento = @Id_Evento";
 
-        private const string UPDATE_EVENTO = @"UPDATE helper.Eventos SET Id_Usuario_Adm = @Id_Usuario_Adm, Titulo = @Titulo, Categoria = @Categoria, Descricao = @Descricao, Cidade_Estado = @Cidade_Estado, DataPublicacao = @DataPublicacao, DataEvento = @DataEvento, SemData = @SemData, EventoRecorrente = @EventoRecorrente WHERE Id_Evento = @Id_Evento";
-        private const string INSERT_EVENTO = @"INSERT INTO helper.Eventos(Id_Usuario_Adm, Titulo, Categoria ,Descricao, Cidade_Estado, DataPublicacao, DataEvento, SemData, EventoRecorrente) VALUES (@Id_Usuario_Adm, @Titulo, @Categoria, @Descricao, @Cidade_Estado, @DataPublicacao, @DataEvento, @SemData, @EventoRecorrente)";
+        private const string UPDATE_EVENTO = @"UPDATE helper.Eventos SET Id_Usuario_Adm = @Id_Usuario_Adm, Titulo = @Titulo, Categoria = @Categoria, Descricao = @Descricao, Cidade_Estado = @Cidade_Estado, DataPublicacao = @DataPublicacao, DataEvento = @DataEvento, SemData = @SemData, EventoRecorrente = @EventoRecorrente, Privado = @Privado WHERE Id_Evento = @Id_Evento";
+        private const string INSERT_EVENTO = @"INSERT INTO helper.Eventos(Id_Usuario_Adm, Titulo, Categoria ,Descricao, Cidade_Estado, DataPublicacao, DataEvento, SemData, EventoRecorrente, Privado) VALUES (@Id_Usuario_Adm, @Titulo, @Categoria, @Descricao, @Cidade_Estado, @DataPublicacao, @DataEvento, @SemData, @EventoRecorrente, @Privado)";
         private const string DELETE_EVENTO = @"DELETE FROM helper.eventos WHERE Id_Evento = @Id_Evento";
         #endregion
 
@@ -264,6 +280,7 @@ namespace BeaHelper.BLL.BD
             parms.Add(new SqlParameter("@DataEvento", SqlDbType.SmallDateTime, 8));
             parms.Add(new SqlParameter("@SemData", SqlDbType.Bit));
             parms.Add(new SqlParameter("@EventoRecorrente", SqlDbType.Bit));
+            parms.Add(new SqlParameter("@Privado", SqlDbType.Bit));
 
             return (parms);
         }
@@ -292,6 +309,7 @@ namespace BeaHelper.BLL.BD
 
             parms[8].Value = this._semData;
             parms[9].Value = this._eventoRecorrente;
+            parms[10].Value = this._privado;
         }
         #endregion
 
@@ -600,6 +618,7 @@ namespace BeaHelper.BLL.BD
                     }
                     objEvento._semData = Convert.ToBoolean(dr["SemData"]);
                     objEvento._eventoRecorrente = Convert.ToBoolean(dr["EventoRecorrente"]);
+                    objEvento._privado = Convert.ToBoolean(dr["Privado"]);
 
                     return true;
                 }
