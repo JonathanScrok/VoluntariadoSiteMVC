@@ -49,6 +49,7 @@ namespace BeaHelper.Controllers
             var meuseventosOrdenado = meuseventos.OrderByDescending(x => x.DataEvento).ToList();
 
             ViewBag.MeusEventosCriados = meuseventosOrdenado;
+            ViewBag.IdUsuario = IdUsuarioLogado;
             // -------------------------------------------------
 
             // Eventos Candidatadas
@@ -218,13 +219,14 @@ namespace BeaHelper.Controllers
             try
             {
                 Usuario_P1 usu = new Usuario_P1(usuario.Id_Usuario);
+                usu.CompleteObject();
                 usu.Nome = usuario.Nome;
                 usu.Email = usuario.Email;
                 usu.NumeroCelular = usuario.NumeroCelular;
                 usu.Save();
 
                 Login_P1 login = new Login_P1();
-                login.CompleteObject();
+                login.CompleteObject(usuario.Id_Usuario);
                 login.Email = usuario.Email;
                 login.Save();
 

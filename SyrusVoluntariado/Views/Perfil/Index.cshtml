@@ -8,6 +8,8 @@
 
     var filtro = @ViewBag.Filtro;
     var MeusEventosCriados = @ViewBag.MeusEventosCriados;
+    var idusu = 0;
+    idusu = @ViewBag.idusuario;
 }
 
 <link href="/css/FundoPaginas.css" rel="stylesheet" type="text/css" />
@@ -264,12 +266,12 @@
         })
     }
 
-    
-    
+
+
     var el = document.getElementById('SalvarPerfil');
     if (el) {
         el.addEventListener('click', event => {
-            
+
             campoNome = document.querySelector('#icampoNome').value;
             campoEmail = document.querySelector('#icampoEmail').value;
             campoCelular = document.querySelector('#icampoCelular').value;
@@ -280,7 +282,7 @@
             document.querySelector('#campoCelular').innerHTML = `<td id="campoCelular">${campoCelular}</td>`;
 
             let SITE_URL = window.location.origin;
-            var _usuario = { Nome: campoNome, Email: campoEmail, NumeroCelular: campoCelular };
+            var _usuario = { Id_Usuario: @idusu, Nome: campoNome, Email: campoEmail, NumeroCelular: campoCelular };
 
             $.ajax({
                 type: "POST",
@@ -288,10 +290,10 @@
                 dataType: "json",
                 data: { usuario: _usuario },
                 sucess: function (data) {
-                    
+
                 },
                 error: function () {
-                    
+
                 }
             });
         })
