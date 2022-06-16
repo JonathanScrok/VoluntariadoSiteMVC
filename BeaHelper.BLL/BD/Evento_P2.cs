@@ -28,6 +28,7 @@ namespace BeaHelper.BLL.BD
         private DateTime _dataPublicacao;
         private DateTime? _dataEvento;
         private bool _semData;
+        private bool _privado;
         private bool _eventoRecorrente;
 
         private bool _persisted;
@@ -178,6 +179,21 @@ namespace BeaHelper.BLL.BD
         }
         #endregion
 
+        #region Privado
+        public bool Privado
+        {
+            get
+            {
+                return this._privado;
+            }
+            set
+            {
+                this._privado = value;
+                this._modified = true;
+            }
+        }
+        #endregion
+
         #region EventoRecorrente
         public bool EventoRecorrente
         {
@@ -196,8 +212,8 @@ namespace BeaHelper.BLL.BD
         #endregion
 
         #region Consultas
-        private const string SELECT_TODASVAGAS = @"select * from helper.Eventos WHERE DataEvento > GetDate() or DataEvento is NULL order by DataPublicacao asc";
-        private const string SELECT_ULTIMASVAGAS_TOP8 = @"select top 8 * from helper.Eventos WHERE DataEvento > GetDate() order by DataEvento asc";
+        private const string SELECT_TODASVAGAS = @"select * from helper.Eventos WHERE DataEvento > GetDate() and Privado = 0 or DataEvento is NULL and Privado = 0 order by DataPublicacao asc";
+        private const string SELECT_ULTIMASVAGAS_TOP8 = @"select top 8 * from helper.Eventos WHERE DataEvento > GetDate() and Privado = 0 order by DataEvento asc";
         private const string SELECT_MEUSEVENTOS = @"select * from helper.Eventos WHERE Id_Usuario_Adm = @Id_Usuario_Adm";
         private const string SELECT_FILTROEVENTOS = @"select * from helper.Eventos WHERE Titulo like @Titulo and Descricao like @Descricao and Categoria like @Categoria and Cidade_Estado like @Cidade_Estado";
         private const string SELECT_TITULOS = @"select * from helper.Eventos WHERE Titulo = @Titulo";
@@ -220,6 +236,7 @@ namespace BeaHelper.BLL.BD
             parms.Add(new SqlParameter("@DataEvento", SqlDbType.SmallDateTime, 8));
             parms.Add(new SqlParameter("@SemData", SqlDbType.Bit));
             parms.Add(new SqlParameter("@EventoRecorrente", SqlDbType.Bit));
+            parms.Add(new SqlParameter("@Privado", SqlDbType.Bit));
 
             return (parms);
         }
@@ -239,6 +256,7 @@ namespace BeaHelper.BLL.BD
             parms[7].Value = this._dataEvento;
             parms[8].Value = this._semData;
             parms[9].Value = this._eventoRecorrente;
+            parms[10].Value = this._privado;
         }
         #endregion
 
@@ -458,8 +476,9 @@ namespace BeaHelper.BLL.BD
                     objEvento._cidadeEstado = Convert.ToString(dr["Cidade_Estado"]);
                     objEvento._dataPublicacao = Convert.ToDateTime(dr["DataPublicacao"]);
                     objEvento._dataEvento = Convert.ToDateTime(dr["DataEvento"]);
-                    objEvento._semData = Convert.ToBoolean(dr["DataEvento"]);
-                    objEvento._eventoRecorrente = Convert.ToBoolean(dr["DataEvento"]);
+                    objEvento._semData = Convert.ToBoolean(dr["SemData"]);
+                    objEvento._privado = Convert.ToBoolean(dr["Privado"]);
+                    objEvento._eventoRecorrente = Convert.ToBoolean(dr["EventoRecorrente"]);
 
                     return true;
                 }
