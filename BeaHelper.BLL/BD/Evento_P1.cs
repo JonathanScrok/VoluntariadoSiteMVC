@@ -254,7 +254,7 @@ namespace BeaHelper.BLL.BD
         #endregion
 
         #region Consultas
-        private const string SELECT_TODASEVENTOS = @"select * from helper.Eventos order by DataPublicacao desc";
+        private const string SELECT_TODASEVENTOS = @"select * from helper.Eventos where DataEvento > GetDate() or DataEvento is NULL order by DataPublicacao asc";
         private const string SELECT_ULTIMASEVENTOS_TOP8 = @"select top 8 * from helper.Eventos order by DataEvento desc";
         private const string SELECT_BUSCAEVENTOID = @"select * from helper.Eventos where Id_Evento = @Id_Evento";
 
