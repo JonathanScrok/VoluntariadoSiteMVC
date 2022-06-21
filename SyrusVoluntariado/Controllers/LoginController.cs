@@ -130,7 +130,7 @@ namespace BeaHelper.Controllers
 
             if (usuario.Email != null)
             {
-                ExistenciaEmail = ExisteEmail(usuario);
+                ExistenciaEmail = ExisteEmail(usuario.Email);
 
                 if (ExistenciaEmail == true)
                 {
@@ -254,10 +254,10 @@ namespace BeaHelper.Controllers
             return View();
         }
 
-        public bool ExisteEmail(Usuario usuario)
+        public bool ExisteEmail(string Email)
         {
 
-            int? emails = Login_P1.BuscaLogin_Email(usuario.Email).Count;
+            int? emails = Login_P1.BuscaLogin_Email(Email).Count;
 
             if (emails == 0 || emails == null)
             {

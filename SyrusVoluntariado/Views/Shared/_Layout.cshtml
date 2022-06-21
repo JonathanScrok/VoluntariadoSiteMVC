@@ -129,6 +129,31 @@
                     </div>
                 </div>
 
+                <div class="modal fade" id="adicionar-administrador" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header" style="display: flex; justify-content: center; flex-direction: row;">
+                                <h5 class="modal-title" id="exampleModalLabel">Adicionar Administrador ao Evento</h5>
+                            </div>
+                            <div class="modal-body">
+                                <input type="text" id="emailAdmAdicionar" class="form-control" name="name" value="" />
+                                <p id="mensagemEmailNE" style="color:red; display:none">Email inválido ou inexistente!</p>
+
+                            <table>
+                                <tr>
+                                    <td id="listEmailsAdicionar"></td>
+                                </tr>
+                            </table>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" onclick="LimpaEmailAdm();" data-bs-dismiss="modal">Cancelar</button>
+                                <a class="btn btn-danger" href="javascript:void(0)" onclick="ValidaEmailAdm();">Adicionar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">

@@ -402,6 +402,31 @@ namespace BeaHelper.Controllers
 
         }
 
+        public bool ExisteEmail(string Email)
+        {
+            int IdUsuLogado = GetUsuarioLogado();
+            Usuario_P1 usuario = new Usuario_P1(IdUsuLogado);
+            usuario.CompleteObject();
+
+            if (usuario.Email.Equals(Email))
+            {
+                return false;
+            }
+            else
+            {
+                int? emails = Login_P1.BuscaLogin_Email(Email).Count;
+
+                if (emails == 0 || emails == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+        }
+
         public int GetUsuarioLogado()
         {
             int IdUsuarioLogado = 0;

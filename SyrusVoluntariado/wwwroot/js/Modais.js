@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
     //var aceitacaoCookies = sessionStorage.getItem("Cookies");
     var aceitaCookie = getCookie('AceitaCookies');
-    document.getElementById("CompartilharWpp").href = "https://api.whatsapp.com/send?text="+ window.location.href;
+    document.getElementById("CompartilharWpp").href = "https://api.whatsapp.com/send?text=" + window.location.href;
     document.getElementById("CompartilharFacebook").href = "https://www.facebook.com/sharer/sharer.php?u=" + window.location.href;
     document.getElementById("GerarQrcode").href = window.location.origin + "/qrcode/?qrtexto=" + window.location.href;
 
@@ -39,6 +39,11 @@ function SalvarConcordancia() {
 
 function ConfirmacaoExcluirEvento() {
     $('#confirmar-excluir').modal('show');
+}
+
+
+function ConfirmacaoAdicionarAdministrador() {
+    $('#adicionar-administrador').modal('show');
 }
 
 function FecharModal() {
@@ -105,4 +110,61 @@ if (toastTrigger) {
         toast.show()
         toast2.show()
     })
+}
+
+function ValidaEmailAdm() {
+    var email = document.getElementById('emailAdmAdicionar').value;
+    var mensagemEmailNE = document.querySelector("#mensagemEmailNE");
+    let SITE_URL = window.location.origin;
+    if (email != null && email != "") {
+        $.ajax({
+            method: "GET",
+            url: SITE_URL + "/evento/ExisteEmail/?Email=" + email,
+            contentType: "application/json"
+        }).done(function (result) {
+            if (!result) {
+                mensagemEmailNE.style.display = "block";
+            } else {
+                mensagemEmailNE.style.display = "none";
+
+                var administradoresStorage = localStorage.getItem("administrador");
+
+                if (administradoresStorage == null || administradoresStorage == "") {
+                    let valor = email + ",";
+                    localStorage.setItem("administrador", valor);
+                } else {
+                    if (!administradoresStorage.includes(email)) {
+                        let valor = email + ",";
+                        let valorFinal = administradoresStorage + valor;
+                        localStorage.setItem("administrador", valorFinal);
+                    }
+                }
+            }
+        }).fail(function (err) {
+            if (!err) {
+                mensagemEmailNE.style.display = "block";
+            } else {
+                mensagemEmailNE.style.display = "none";
+
+                var administradoresStorage = localStorage.getItem("administrador");
+
+                if (administradoresStorage == null || administradoresStorage == "") {
+                    let valor = email + ",";
+                    localStorage.setItem("administrador", valor);
+                } else {
+                    if (!administradoresStorage.includes(email)) {
+                        let valor = email + ",";
+                        let valorFinal = administradoresStorage + valor;
+                        localStorage.setItem("administrador", valorFinal);
+                    }
+                }
+            }
+        });
+    }
+}
+
+function LimpaEmailAdm() {
+    document.getElementById('emailAdmAdicionar').value = "";
+    var mensagemEmailNE = document.querySelector("#mensagemEmailNE");
+    mensagemEmailNE.style.display = "none";
 }
