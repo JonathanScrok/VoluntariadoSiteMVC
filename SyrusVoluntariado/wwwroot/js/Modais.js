@@ -126,38 +126,14 @@ function ValidaEmailAdm() {
                 mensagemEmailNE.style.display = "block";
             } else {
                 mensagemEmailNE.style.display = "none";
-
-                var administradoresStorage = localStorage.getItem("administrador");
-
-                if (administradoresStorage == null || administradoresStorage == "") {
-                    let valor = email + ",";
-                    localStorage.setItem("administrador", valor);
-                } else {
-                    if (!administradoresStorage.includes(email)) {
-                        let valor = email + ",";
-                        let valorFinal = administradoresStorage + valor;
-                        localStorage.setItem("administrador", valorFinal);
-                    }
-                }
+                AdicionaEmailLista();
             }
         }).fail(function (err) {
             if (!err) {
                 mensagemEmailNE.style.display = "block";
             } else {
                 mensagemEmailNE.style.display = "none";
-
-                var administradoresStorage = localStorage.getItem("administrador");
-
-                if (administradoresStorage == null || administradoresStorage == "") {
-                    let valor = email + ",";
-                    localStorage.setItem("administrador", valor);
-                } else {
-                    if (!administradoresStorage.includes(email)) {
-                        let valor = email + ",";
-                        let valorFinal = administradoresStorage + valor;
-                        localStorage.setItem("administrador", valorFinal);
-                    }
-                }
+                AdicionaEmailLista();
             }
         });
     }
@@ -167,4 +143,20 @@ function LimpaEmailAdm() {
     document.getElementById('emailAdmAdicionar').value = "";
     var mensagemEmailNE = document.querySelector("#mensagemEmailNE");
     mensagemEmailNE.style.display = "none";
+}
+
+function AdicionaEmailLista() {
+    var email = document.getElementById('emailAdmAdicionar').value;
+    var administradoresStorage = localStorage.getItem("administrador");
+
+    if (administradoresStorage == null || administradoresStorage == "") {
+        let valor = email + ",";
+        localStorage.setItem("administrador", valor);
+    } else {
+        if (!administradoresStorage.includes(email)) {
+            let valor = email + ",";
+            let valorFinal = administradoresStorage + valor;
+            localStorage.setItem("administrador", valorFinal);
+        }
+    }
 }
