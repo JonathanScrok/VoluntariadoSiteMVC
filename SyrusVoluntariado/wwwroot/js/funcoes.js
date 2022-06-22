@@ -138,3 +138,10 @@ function FuncFiltrar() {
     variavel = select.value;
     window.location.href = "evento/filtrarevento/?Titulo=" + titulo + "&Descricao=" + descricao + "&Categoria=" + variavel + "&Local=" + local + "&NuncaVoluntariado=" + chkNV + "&JaVoluntariado=" + chkJV;
 }
+
+var select = document.getElementById("ordenar");
+var variavel = '';
+select.onchange = function () {
+    variavel = this.value;
+    window.location.href = "/evento/ordenareventos/?ordenarpor=" + variavel
+}

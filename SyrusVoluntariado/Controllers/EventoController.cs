@@ -66,6 +66,45 @@ namespace BeaHelper.Controllers
             return View("Index", resultadoPaginado);
         }
 
+        [HttpGet]
+        public IActionResult OrdenarEventos(string ordenarPor)
+        {
+            int pageNumber = 1;
+
+            List<Evento> eventos = Evento_P2.TodosEventos();
+            List<Evento> eventosFinal = new List<Evento>();
+            Parallel.ForEach(eventos, evento =>
+            {
+                eventosFinal.Add(evento);
+            });
+
+            Parallel.ForEach(eventos, evento =>
+            {
+                if (evento.SemData)
+                {
+                    var dataMais2Meses = evento.DataPublicacao.AddMonths(2);
+                    if (evento.DataPublicacao.AddMonths(2) < DateTime.Now)
+                    {
+                        eventosFinal.Remove(evento);
+                    }
+                }
+            });
+
+            if (ordenarPor == "DataMenor")
+            {
+                eventosFinal = eventosFinal.OrderBy(x => x.DataEvento).ToList();
+            }
+            else if (ordenarPor == "DataMaior")
+            {
+                eventosFinal = eventosFinal.OrderByDescending(x => x.DataEvento).ToList();
+            }
+
+            eventosFinal[0].Filtros = new Filtro();
+            var resultadoPaginado = eventosFinal.ToPagedList(pageNumber, 10);
+
+            return View("Index", resultadoPaginado);
+        }
+
         [Login]
         [HttpGet]
         public IActionResult Cadastrar()
