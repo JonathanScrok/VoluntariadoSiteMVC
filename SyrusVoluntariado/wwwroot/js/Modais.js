@@ -44,6 +44,7 @@ function ConfirmacaoExcluirEvento() {
 
 function ConfirmacaoAdicionarAdministrador() {
     $('#adicionar-administrador').modal('show');
+    ListarEmailsTela();
 }
 
 function FecharModal() {
@@ -149,14 +150,45 @@ function AdicionaEmailLista() {
     var email = document.getElementById('emailAdmAdicionar').value;
     var administradoresStorage = localStorage.getItem("administrador");
 
+
     if (administradoresStorage == null || administradoresStorage == "") {
         let valor = email + ",";
         localStorage.setItem("administrador", valor);
+        document.querySelector('#listEmailsAdicionar').innerHTML = `<td id="EmailsAdicionar">${email}</td>`;
     } else {
         if (!administradoresStorage.includes(email)) {
             let valor = email + ",";
             let valorFinal = administradoresStorage + valor;
             localStorage.setItem("administrador", valorFinal);
+
+            var emails = administradoresStorage.split(',');
+
+            let camposEmails = '';
+
+            emails.forEach(function (eml) {
+                if (eml != null && eml != '') {
+                    camposEmails = camposEmails + `<td id="EmailsAdicionar">${eml}</td>`;
+                }
+            })
+            camposEmails = camposEmails + `<td id="EmailsAdicionar">${email}</td>`;
+            document.querySelector('#listEmailsAdicionar').innerHTML = camposEmails;
         }
+    }
+}
+
+function ListarEmailsTela() {
+    var administradoresStorage = localStorage.getItem("administrador");
+
+    if (administradoresStorage != null || administradoresStorage != "") {
+            var emails = administradoresStorage.split(',');
+
+            let camposEmails = '';
+            emails.forEach(function (eml) {
+                if (eml != null && eml != '') {
+                    camposEmails = camposEmails + `<td id="EmailsAdicionar">${eml}</td>`;
+                }
+            })
+            document.querySelector('#listEmailsAdicionar').innerHTML = camposEmails;
+        
     }
 }
