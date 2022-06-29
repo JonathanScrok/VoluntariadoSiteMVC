@@ -483,3 +483,10 @@ html {
 ul {
     list-style-type: none;
 }
+
+#descricaoTabMeusEventos {
+    white-space: nowrap;
+    width: 12em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

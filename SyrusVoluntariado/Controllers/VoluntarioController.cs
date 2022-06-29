@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using X.PagedList;
 using Microsoft.AspNetCore.Http;
+using BeaHelper.BLL.Database;
 
 namespace BeaHelper.Controllers
 {
@@ -87,7 +88,7 @@ namespace BeaHelper.Controllers
             notificacao.IdUsuarioNotificou = GetUsuarioLogado();
             notificacao.Descricao = "Alguém te convidou para participar de um evento! Clique aqui e saiba mais!";
             notificacao.NotificacaoAtiva = true;
-            notificacao.UrlNotificacao = "https://localhost:44394/evento/visualizar/" + IdEvento;
+            notificacao.UrlNotificacao = DbAcess.GetUrlOrigem() + "evento/visualizar/" + IdEvento;
             notificacao.DataCadastro = DateTime.Now;
             notificacao.Save();
 

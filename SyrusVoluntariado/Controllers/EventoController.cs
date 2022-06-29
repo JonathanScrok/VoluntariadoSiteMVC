@@ -11,6 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using X.PagedList;
 using System.Text.RegularExpressions;
+using BeaHelper.BLL.Database;
 
 namespace BeaHelper.Controllers
 {
@@ -39,7 +40,6 @@ namespace BeaHelper.Controllers
                     }
                 }
             });
-
 
             eventosFinal[0].Filtros = new Filtro();
             var resultadoPaginado = eventosFinal.ToPagedList(pageNumber, 10);
@@ -247,6 +247,7 @@ namespace BeaHelper.Controllers
                 eventos.Descricao = evento.Descricao;
                 eventos.CidadeEstado = evento.Cidade_Estado;
                 eventos.SemData = evento.SemData;
+                eventos.Privado = evento.Privado;
                 eventos.EventoRecorrente = evento.EventoRecorrente;
 
                 if (evento.SemData)
@@ -317,6 +318,15 @@ namespace BeaHelper.Controllers
                     candidatarEvento.Save();
 
                     ViewBag.JaVoluntariado = true;
+
+                    Notificacao_P1 notificacao = new Notificacao_P1();
+                    notificacao.IdUsuarioNotificado = evento.IdUsuarioAdm;
+                    notificacao.IdUsuarioNotificou = IdUsuarioLogado;
+                    notificacao.Descricao = "Alguém voluntariou-se em um evento seu! Clique aqui e saiba mais!";
+                    notificacao.NotificacaoAtiva = true;
+                    notificacao.UrlNotificacao = DbAcess.GetUrlOrigem() + "evento/visualizar/" + Id;
+                    notificacao.DataCadastro = DateTime.Now;
+                    notificacao.Save();
 
                     //Usuario_P1 usuario = new Usuario_P1(IdUsuarioLogado);
                     //usuario.CompleteObject();

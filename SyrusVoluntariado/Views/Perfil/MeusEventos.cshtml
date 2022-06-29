@@ -88,6 +88,7 @@
                                 <th scope="col">Descrição</th>
                                 <th scope="col">Categoria</th>
                                 <th scope="col">Local</th>
+                                <th scope="col"></th>
                                 @if (Convidando)
                                 {
                                     <th scope="col"></th>
@@ -104,9 +105,17 @@
                             {
                                 <tr>
                                     <th scope="row">@evento.Titulo</th>
-                                    <td>@evento.Descricao</td>
+                                    <td><p id="descricaoTabMeusEventos">@evento.Descricao</p></td>
                                     <td>@evento.Categoria</td>
                                     <td>@evento.Cidade_Estado</td>
+                                    @if (@evento.Privado)
+                                    {
+                                        <td style="color:red">Privado</td>
+                                    }
+                                    else
+                                    {
+                                        <td style="color:forestgreen">Publico</td>
+                                    }
                                     @if (Convidando)
                                     {
                                         <td>

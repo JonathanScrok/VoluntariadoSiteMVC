@@ -1,4 +1,5 @@
 ﻿using BeaHelper.BLL.BD;
+using BeaHelper.BLL.Database;
 using BeaHelper.BLL.Models;
 using System;
 using System.Collections.Generic;
@@ -51,7 +52,7 @@ namespace BeaHelper.Library.Mail {
         public static void EnviarRecuperacaoSenha(Usuario_P1 usuario)
         {
             //string link = "";
-            string link = "https://localhost:44394/login/novasenha/"+ usuario.IdUsuario;
+            string link = DbAcess.GetUrlOrigem() + "login/novasenha/" + usuario.IdUsuario;
 
             string conteudo = string.Format("<p>Olá Senhor(a): {0}<br/>Verificamos que solicitou a recuperação de senha em nosso site. <br/>Para recuperar sua senha clique no link a baixo. <br/>" + link, usuario.Nome);
 

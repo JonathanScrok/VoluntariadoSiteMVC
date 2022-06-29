@@ -16,5 +16,10 @@ namespace BeaHelper.BLL.Database
             return connString;
         }
 
+        public static string GetUrlOrigem()
+        {
+            var connString = DbAcess.Configuration["UrlOrigem"];
+            return connString;
+        }
     }
 }
