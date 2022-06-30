@@ -40,10 +40,10 @@ namespace BeaHelper.Controllers
                     }
                 }
             });
-
             eventosFinal[0].Filtros = new Filtro();
             var resultadoPaginado = eventosFinal.ToPagedList(pageNumber, 10);
 
+            ViewBag.idusuario = GetUsuarioLogado();
             return View(resultadoPaginado);
         }
 
@@ -61,6 +61,7 @@ namespace BeaHelper.Controllers
                 eventos.Add(evento);
             }
 
+            ViewBag.idusuario = GetUsuarioLogado();
             eventos[0].Filtros = Filtro;
             resultadoPaginado = eventos.ToPagedList(1, 10);
             return View("Index", resultadoPaginado);
@@ -89,7 +90,7 @@ namespace BeaHelper.Controllers
                     }
                 }
             });
-
+            ViewBag.idusuario = GetUsuarioLogado();
             if (ordenarPor == "DataMenor")
             {
                 eventosFinal = eventosFinal.OrderBy(x => x.DataEvento).ToList();

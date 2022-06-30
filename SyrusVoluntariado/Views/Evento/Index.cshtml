@@ -9,24 +9,10 @@
 @{
     ViewBag.Title = "Eventos - Listagem";
     var eventoVal = Model[0];
+    var idusu = 0;
+    idusu = ViewBag.idusuario;
 }
 
-@*<div class="mt-md-3">
-    @if (TempData["Mensagem"] != null)
-    {
-        <div class="alert alert-success" role="alert">
-            @TempData["Mensagem"]
-        </div>
-    }
-</div>
-<div class="mt-md-3">
-    @if (TempData["MensagemErro"] != null)
-    {
-        <div class="alert alert-danger alertemail" role="alert">
-            @TempData["MensagemErro"]
-        </div>
-    }
-</div>*@
 <link href="/css/PagedList.css" rel="stylesheet" type="text/css" />
 <link href="/css/FundoPaginas.css" rel="stylesheet" type="text/css" />
 
@@ -99,22 +85,45 @@
                 {
                     ViewBag.Id = evento.Id_Evento;
                     <div class="col-sm-6 mt-md-3" style="width: 70%;">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title" style="display: flex; flex-direction: row; justify-content: center; max-width: 100%;">@evento.Titulo</h5>
-                                <p class="card-text" style="display: flex; flex-direction: row; justify-content: center;">@evento.Descricao</p>
-                                @if (@evento.DataEvento == null)
-                                {
-                                    <p class="card-text" style="display: flex; flex-direction: row; justify-content: center;">Data: Não informada</p>
-                                }
-                                else
-                                {
-                                    <p class="card-text" style="display: flex; flex-direction: row; justify-content: center;">Data: @evento.DataEvento</p>
-                                }
+                        @if (evento.Id_Usuario_Adm == idusu)
+                        {
+                            <div class="card" style="border: 10px solid; border-color: #3ecb36;">
+                                <div class="card-body">
+                                    <h5 class="card-title" style="display: flex; flex-direction: row; justify-content: center; max-width: 100%;">@evento.Titulo</h5>
+                                    <p class="card-text" style="display: flex; flex-direction: row; justify-content: center;">@evento.Descricao</p>
+                                    @if (@evento.DataEvento == null)
+                                    {
+                                        <p class="card-text" style="display: flex; flex-direction: row; justify-content: center;">Data: Não informada</p>
+                                    }
+                                    else
+                                    {
+                                        <p class="card-text" style="display: flex; flex-direction: row; justify-content: center;">Data: @evento.DataEvento</p>
+                                    }
 
-                                <a href="/evento/visualizar/@evento.Id_Evento" class="btn " style="background-color: #62c0a3; display: flex; flex-direction: row; justify-content: center;"><b>Visualizar</b></a>
+                                    <a href="/evento/visualizar/@evento.Id_Evento" class="btn " style="background-color: #62c0a3; display: flex; flex-direction: row; justify-content: center;"><b>Visualizar</b></a>
+                                </div>
                             </div>
-                        </div>
+                        }
+                        else
+                        {
+                            <div class="card" style="border: 10px solid; border-color: #283dab; ">
+                                <div class="card-body">
+                                    <h5 class="card-title" style="display: flex; flex-direction: row; justify-content: center; max-width: 100%;">@evento.Titulo</h5>
+                                    <p class="card-text" style="display: flex; flex-direction: row; justify-content: center;">@evento.Descricao</p>
+                                    @if (@evento.DataEvento == null)
+                                    {
+                                        <p class="card-text" style="display: flex; flex-direction: row; justify-content: center;">Data: Não informada</p>
+                                    }
+                                    else
+                                    {
+                                        <p class="card-text" style="display: flex; flex-direction: row; justify-content: center;">Data: @evento.DataEvento</p>
+                                    }
+
+                                    <a href="/evento/visualizar/@evento.Id_Evento" class="btn " style="background-color: #62c0a3; display: flex; flex-direction: row; justify-content: center;"><b>Visualizar</b></a>
+                                </div>
+                            </div>
+                        }
+
                     </div>
                 }
             </div>
