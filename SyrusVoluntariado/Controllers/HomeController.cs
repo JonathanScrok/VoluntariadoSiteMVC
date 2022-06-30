@@ -17,8 +17,7 @@ namespace BeaHelper.Controllers {
 
             var resultadoPaginado = eventos.ToPagedList(pageNumber, 8);
 
-            int IdUsuarioLogado = GetUsuarioLogado();
-
+            ViewBag.idusuario = GetUsuarioLogado();
             return View(resultadoPaginado);
         }
 

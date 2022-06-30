@@ -9,6 +9,8 @@
 }
 @{
     ViewBag.Title = "Be a Helper";
+    var idusu = 0;
+    idusu = ViewBag.idusuario;
 }
 
 <link href="/css/PagedList.css" rel="stylesheet" type="text/css" />
@@ -65,22 +67,45 @@
         @foreach (var evento in Model)
         {
             <div class="col-sm-3">
-                <div class="card" style="max-width: 19rem;">
-                    <div class="card-body">
-                        <h5 class="card-title">@evento.Titulo</h5>
-                        @if (@evento.DataEvento == null)
-                        {
-                            <p class="card-text">Data do Evento: Não informada</p>
-                        }
-                        else
-                        {
-                            <p class="card-text">Data do Evento: @evento.DataEvento.GetValueOrDefault().ToString("dd/MM/yyyy")</p>
+                @if (evento.Id_Usuario_Adm == idusu)
+                {
+                    <div class="card" style="max-width: 19rem; border: 4px solid; border-color: #3ecb36;">
+                        <div class="card-body">
+                            <h5 class="card-title">@evento.Titulo</h5>
+                            @if (@evento.DataEvento == null)
+                            {
+                                <p class="card-text">Data do Evento: Não informada</p>
+                            }
+                            else
+                            {
+                                <p class="card-text">Data do Evento: @evento.DataEvento.GetValueOrDefault().ToString("dd/MM/yyyy")</p>
 
-                        }
-                        <p class="card-text">Local: @evento.Cidade_Estado</p>
-                        <a href="/evento/visualizar/@evento.Id_Evento" class="btn " style="background-color: #62c0a3;"><b>Visualizar</b></a>
+                            }
+                            <p class="card-text">Local: @evento.Cidade_Estado</p>
+                            <a href="/evento/visualizar/@evento.Id_Evento" class="btn " style="background-color: #62c0a3;"><b>Visualizar</b></a>
+                        </div>
                     </div>
-                </div>
+                }
+                else
+                {
+                    <div class="card" style="max-width: 19rem; border: 4px solid; border-color: #283dab;">
+                        <div class="card-body">
+                            <h5 class="card-title">@evento.Titulo</h5>
+                            @if (@evento.DataEvento == null)
+                            {
+                                <p class="card-text">Data do Evento: Não informada</p>
+                            }
+                            else
+                            {
+                                <p class="card-text">Data do Evento: @evento.DataEvento.GetValueOrDefault().ToString("dd/MM/yyyy")</p>
+
+                            }
+                            <p class="card-text">Local: @evento.Cidade_Estado</p>
+                            <a href="/evento/visualizar/@evento.Id_Evento" class="btn " style="background-color: #62c0a3;"><b>Visualizar</b></a>
+                        </div>
+                    </div>
+                }
+
             </div>
         }
     </div>
