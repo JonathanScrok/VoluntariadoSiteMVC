@@ -8,9 +8,9 @@
 }
 @{
     ViewBag.Title = "Eventos - Listagem";
-    var eventoVal = Model[0];
     var idusu = 0;
     idusu = ViewBag.idusuario;
+    var filtro = @ViewBag.Filtro;
 }
 
 <link href="/css/PagedList.css" rel="stylesheet" type="text/css" />
@@ -33,19 +33,17 @@
         <div style="background-color: #222132; color: white; margin-right: 20px; border-radius: 15px; border-color: #ffffff87; border-style: dashed; ">
             <div style="margin-left: 10px; "><b>Filtrar por</b></div>
             <form action="/Evento/FiltrarEvento" method="post">
-                @foreach (var evento in Model.Take(1))
-                {
                     <div style="width: 100%; display: flex; flex-direction: column; justify-content: space-between;">
                         <div style="display: flex; flex-direction: row; justify-content: center;">
                             <div class="form-group" id="CamposForm" style="display: flex; flex-direction: column; max-width: 300px; margin: 10px; width: 100%;">
                                 <label class="control-label" id="labelsAddMeme" style="margin-right: 10px;">Titulo</label>
-                                <input type="text" name="titulo" id="filtroTitulo" value="@evento.Filtros.Titulo" />
+                                <input type="text" name="titulo" id="filtroTitulo" value="@filtro.Titulo" />
                             </div>
                         </div>
                         <div style="display: flex; flex-direction: row; justify-content: center;">
                             <div class="form-group" id="CamposForm" style="display: flex; flex-direction: column; max-width: 300px; margin: 10px; width: 100%;">
                                 <label class="control-label" id="labelsAddMeme" style="margin-right: 10px;">Descrição</label>
-                                <input type="text" name="descricao" id="filtroDescricao" value="@evento.Filtros.Descricao" />
+                                <input type="text" name="descricao" id="filtroDescricao" value="@filtro.Descricao" />
                             </div>
                         </div>
                         <div style="display: flex; flex-direction: row; justify-content: center;">
@@ -53,12 +51,12 @@
                                 <label class="control-label" id="labelsAddMeme" style="margin-right: 10px;">Categoria</label>
                                 <div class="options">
                                     <select class="form-select" id="filtroCategoria" aria-label="Default select example" name="Categoria">
-                                        <option value="" selected="@(evento.Filtros.Categoria == null)">Selecione</option>
-                                        <option value="Alimentação" selected="@(evento.Filtros.Categoria == " Alimentação")">Alimentação</option>
-                                        <option value="Tecnologia" selected="@(evento.Filtros.Categoria == " Tecnologia")">Tecnologia</option>
-                                        <option value="Entrega" selected="@(evento.Filtros.Categoria == " Entrega")">Entrega</option>
-                                        <option value="Serviços Gerais" selected="@(evento.Filtros.Categoria == " Serviços Gerais")">Serviços Gerais</option>
-                                        <option value="Outro" selected="@(evento.Filtros.Categoria == " Outro")">Outro</option>
+                                        <option value="" selected="@(filtro.Categoria == null)">Selecione</option>
+                                        <option value="Alimentação" selected="@(filtro.Categoria == " Alimentação")">Alimentação</option>
+                                        <option value="Tecnologia" selected="@(filtro.Categoria == " Tecnologia")">Tecnologia</option>
+                                        <option value="Entrega" selected="@(filtro.Categoria == " Entrega")">Entrega</option>
+                                        <option value="Serviços Gerais" selected="@(filtro.Categoria == " Serviços Gerais")">Serviços Gerais</option>
+                                        <option value="Outro" selected="@(filtro.Categoria == " Outro")">Outro</option>
                                     </select>
                                 </div>
                             </div>
@@ -66,14 +64,14 @@
                         <div style="display: flex; flex-direction: row; justify-content: center;">
                             <div class="form-group" id="CamposForm" style="display: flex; flex-direction: column; max-width: 300px; margin: 10px; width: 100%;">
                                 <label class="control-label" id="labelsAddMeme" style="margin-right: 10px;">Local</label>
-                                <input type="text" name="local" id="local" value="@evento.Filtros.Local" />
+                                <input type="text" name="local" id="Cidade_Estado" value="@filtro.Local" />
+                                <ul id="optionsAutComplet" class="sugestoes"></ul>
                             </div>
                         </div>
                         <div class="form-group" id="CamposForm" style="display: flex; flex-direction: row; max-width: 300px; margin: 10px; justify-content: center;">
                             <button class="btn btn-info" type="submit">Filtrar</button>
                         </div>
                     </div>
-                }
             </form>
         </div>
     </div>
@@ -134,6 +132,8 @@
     </div>
 </div>
 
+<script src="~/js/Cadastrar.js"></script>
 
 <script src="~/js/funcoes.js"></script>
+
 

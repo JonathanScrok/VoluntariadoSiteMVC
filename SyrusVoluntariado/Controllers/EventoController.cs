@@ -40,7 +40,9 @@ namespace BeaHelper.Controllers
                     }
                 }
             });
-            eventosFinal[0].Filtros = new Filtro();
+
+            ViewBag.Filtro = new Filtro();
+
             var resultadoPaginado = eventosFinal.ToPagedList(pageNumber, 10);
 
             ViewBag.idusuario = GetUsuarioLogado();
@@ -54,15 +56,10 @@ namespace BeaHelper.Controllers
             IPagedList<Evento> resultadoPaginado;
             eventos = Evento_P2.FiltrarEventos(Filtro.Titulo, Filtro.Descricao, Filtro.Categoria, Filtro.Local);
 
-            if (eventos.Count == 0)
-            {
-                Evento evento = new Evento();
-                evento.Filtros = Filtro;
-                eventos.Add(evento);
-            }
-
+            
+            ViewBag.Filtro = Filtro;
             ViewBag.idusuario = GetUsuarioLogado();
-            eventos[0].Filtros = Filtro;
+
             resultadoPaginado = eventos.ToPagedList(1, 10);
             return View("Index", resultadoPaginado);
         }
@@ -90,6 +87,7 @@ namespace BeaHelper.Controllers
                     }
                 }
             });
+
             ViewBag.idusuario = GetUsuarioLogado();
             if (ordenarPor == "DataMenor")
             {
@@ -100,7 +98,7 @@ namespace BeaHelper.Controllers
                 eventosFinal = eventosFinal.OrderByDescending(x => x.DataEvento).ToList();
             }
 
-            eventosFinal[0].Filtros = new Filtro();
+            ViewBag.Filtro = new Filtro();
             var resultadoPaginado = eventosFinal.ToPagedList(pageNumber, 10);
 
             return View("Index", resultadoPaginado);
